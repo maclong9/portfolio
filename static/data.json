@@ -46,6 +46,11 @@
       "title": "Recreating ls with Swift",
       "date": "2024-04-08",
       "path": "swift-recreating-ls"
+    },
+    {
+      "title": "My Experience Running Vim with Zero Plugins",
+      "date": "2024-04-08",
+      "path": "vim-zero-plugins"
     }
   ]
 }
