@@ -1,54 +1,59 @@
 {
   "posts": [
-   {
-      "title": "Why I Rebuilt my Portfolio Site with No Framework",
-      "date": "2024-03-25",
-      "path": "portfolio-no-framework"  
-    },
     {
       "title": "Configure a New Computer Instantly with POSIX Shell",
       "date": "2024-03-27",
       "path": "posix-sh-configuration"
     },
     {
-      "title": "Using Deno Fresh to Build Efficient Web Applications",
+      "title": "My Experience Running Vim with Zero Plugins",
       "date": "2024-03-29",
-      "path": "efficient-web-apps-deno-fresh"
+      "path": "vim-zero-plugins"
     },
     {
-      "title": "Building Reusable Components with Vanilla CSS",
+      "title": "Why I Rebuilt my Portfolio Site with No Framework",
       "date": "2024-03-31",
-      "path": "reusable-components-vanilla-css"
-    },
-    {
-      "title": "Hosting Your Portfolio on GitHub Pages",
-      "date": "2024-03-02",
-      "path": "hosting-on-github-pages"
-    },
-    {
-      "title": "Reusable Components with Web Components",
-      "date": "2024-03-04",
-      "path": "reusable-components-web-components"
+      "path": "portfolio-no-framework"
     },
     {
       "title": "What You Need in Your Head Tags",
-      "date": "2024-04-06",
+      "date": "2024-04-02",
       "path": "html-head-tags"
     },
     {
       "title": "Convenient Color Schemes with oklch",
-      "date": "2024-04-08",
+      "date": "2024-04-04",
       "path": "color-schemes-oklch"
     },
     {
-      "title": "Recreating the ls Command with Swift",
-      "date": "2024-04-10",
-      "path": "swift-recreating-ls"
+      "title": "Fluid Typography to Ensure Your Website Looks Good on All Devices ",
+      "date": "2024-04-06",
+      "path": "reusable-components-vanilla-css"
     },
     {
-      "title": "My Experience Running Vim with Zero Plugins",
+      "title": "Building Reusable Components with Vanilla CSS",
+      "date": "2024-04-08",
+      "path": "reusable-components-vanilla-css"
+    },
+    {
+      "title": "Hosting Your Portfolio on GitHub Pages",
+      "date": "2024-04-10",
+      "path": "hosting-on-github-pages"
+    },
+    {
+      "title": "Reusable Components with Web Components",
       "date": "2024-04-12",
-      "path": "vim-zero-plugins"
+      "path": "reusable-components-web-components"
+    },
+    {
+      "title": "Using Deno Fresh to Build Efficient Web Applications",
+      "date": "2024-04-14",
+      "path": "efficient-web-apps-deno-fresh"
+    },
+    {
+      "title": "Recreating the ls Command with Swift",
+      "date": "2024-04-16",
+      "path": "swift-recreating-ls"
     }
   ]
 }
