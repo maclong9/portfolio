@@ -4,7 +4,6 @@ window.addEventListener("scroll", function () {
   let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
   let header = document.querySelector("header");
   let span = document.querySelector("#tagline");
-  console.log(currentScroll);
 
   if (currentScroll > lastScrollTop && currentScroll > 500) {
     header.classList.add("hidden");
@@ -17,7 +16,8 @@ window.addEventListener("scroll", function () {
     span.classList.add("scrolled");
   } else {
     header.classList.remove("scrolled");
-    span.classList.remove("scrolled");
+
+    if(span !== null) span.classList.remove("scrolled");
   }
 
   lastScrollTop = currentScroll;

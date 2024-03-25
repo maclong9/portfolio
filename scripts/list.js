@@ -16,7 +16,7 @@ function renderList(items, list) {
     const listItem = document.createElement("a");
 
     listItem.classList.add("list-item");
-    listItem.href = `./posts/${path}`;
+    listItem.href = `./posts/${path}.html`;
     listItem.innerHTML = `
       <h2>${title}</h2>
       <span>
