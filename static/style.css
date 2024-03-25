@@ -104,9 +104,10 @@
 
   a {
     color: inherit;
+    transition: color .3s ease-in-out;
 
     &:hover {
-      color: var(--color-primary);
+      color: var(--color-primary-hover);
     }
   }
 
@@ -135,7 +136,7 @@
 
   hr {
     border: 0;
-    border-top: 0.1rem solid oklch(var(--color-dark-oklch) / 20%);
+    border-top: 0.1rem solid oklch(var(--color-dark-oklch) / 10%);
     margin: var(--space-4) 0;
   }
 
@@ -188,7 +189,7 @@
     }
 
     nav {
-      width: 250px;
+      width: 275px;
       height: 45px;
       display: flex;
       align-items: center;
@@ -202,15 +203,18 @@
       margin: var(--space-md) auto 0;
 
       * {
-        margin: 0 0.15rem;
+        margin: 0 0.2rem;
       }
 
       a {
         text-decoration: none;
 
         &:has(svg) {
+          display: grid;
+          place-items: center;
           width: 1.5rem;
           height: 1.5rem;
+          margin: 0;
         }
       }
     }
@@ -221,6 +225,15 @@
 
     @media (min-width: 640px) {
       max-width: 60ch;
+    }
+  }
+
+  footer {
+    display: grid;
+    place-items: center;
+
+    a {
+      text-decoration: none;
     }
   }
 }
