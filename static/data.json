@@ -1,54 +1,54 @@
 {
   "posts": [
+   {
+      "title": "Why I Rebuilt my Portfolio Site with No Framework",
+      "date": "2024-03-25",
+      "path": "portfolio-no-framework"  
+    },
     {
       "title": "Configure a New Computer Instantly with POSIX Shell",
-      "date": "2024-03-25",
+      "date": "2024-03-27",
       "path": "posix-sh-configuration"
     },
     {
       "title": "Using Deno Fresh to Build Efficient Web Applications",
-      "date": "2024-03-27",
+      "date": "2024-03-29",
       "path": "efficient-web-apps-deno-fresh"
     },
     {
       "title": "Building Reusable Components with Vanilla CSS",
-      "date": "2024-03-29",
+      "date": "2024-03-31",
       "path": "reusable-components-vanilla-css"
     },
     {
       "title": "Hosting Your Portfolio on GitHub Pages",
-      "date": "2024-03-31",
+      "date": "2024-03-02",
       "path": "hosting-on-github-pages"
     },
     {
       "title": "Reusable Components with Web Components",
-      "date": "2024-03-02",
+      "date": "2024-03-04",
       "path": "reusable-components-web-components"
     },
     {
       "title": "What You Need in Your Head Tags",
-      "date": "2024-04-04",
+      "date": "2024-04-06",
       "path": "html-head-tags"
     },
     {
       "title": "Convenient Color Schemes with oklch",
-      "date": "2024-04-06",
+      "date": "2024-04-08",
       "path": "color-schemes-oklch"
     },
     {
       "title": "Recreating the ls Command with Swift",
-      "date": "2024-04-08",
+      "date": "2024-04-10",
       "path": "swift-recreating-ls"
     },
     {
       "title": "My Experience Running Vim with Zero Plugins",
-      "date": "2024-04-10",
-      "path": "vim-zero-plugins"
-    },
-    {
-      "title": "Why I Rebuilt my Portfolio Site with No Framework",
       "date": "2024-04-12",
-      "path": "portfolio-no-framework"  
+      "path": "vim-zero-plugins"
     }
   ]
 }
