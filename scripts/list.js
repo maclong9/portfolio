@@ -1,8 +1,8 @@
 fetch("./static/data.json")
   .then((res) => res.json())
   .then((data) => {
-    renderList(data.projects, "project-list");
-    renderList(data.posts, "blog-list");
+    const sortedPosts = data.posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    renderList(sortedPosts, "blog-list");
   });
 
 function renderList(items, list) {
@@ -10,37 +10,22 @@ function renderList(items, list) {
 
   itemList.innerHTML = "";
 
-  items.forEach(({ title, date, image, path, link }) => {
-    const listItem = document.createElement("div");
-    const isPost = date !== undefined;
+  items.forEach(({ title, date, path }) => {
+    const listItem = document.createElement("a");
 
+    listItem.classList.add("list-item");
+    listItem.href = `./posts/${path}`;
     listItem.innerHTML = `
-            <a 
-              class="list-item" 
-              href="${isPost ? `./posts/${path}` : link}"
-              target="${!isPost ? "_blank" : ""}"
-            >
-              ${
-                image !== undefined
-                  ? `<img src="${image}" alt="${title} Image" width="266.67" height="150" />`
-                  : ""
-              }
-              <h2>${title}</h2>
-              ${
-                date !== undefined
-                  ? `
-                <span>
-                  ${new Date(date).toLocaleString("en-US", {
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                </span>
-              `
-                  : ""
-              }
-            </a>
-          `;
+      <h2>${title}</h2>
+      <span>
+        ${new Date(date).toLocaleString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        })}
+      </span>
+    `;
     itemList.appendChild(listItem);
   });
 }
+
