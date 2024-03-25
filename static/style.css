@@ -66,6 +66,7 @@
     font-weight: 300;
     line-height: 1.6;
     max-width: 100vw;
+    scroll-snap-type: y mandatory;
   }
 }
 
