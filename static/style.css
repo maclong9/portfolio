@@ -101,12 +101,12 @@
 
   h5 {
     font-size: var(--text-2xl);
-    line-height: 1.5;
+    line-height: 1.4;
   }
 
   h6 {
     font-size: var(--text-xl);
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
   a {
