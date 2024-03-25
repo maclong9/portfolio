@@ -4,57 +4,47 @@
       "title": "dotfiles",
       "image": "./static/projects/dotfiles.webp",
       "link": "https://github.com/maclong9/dotfiles"
-    },
-    {
-      "title": "QuickChat",
-      "image": "./static/projects/quick-chat.webp",
-      "link": "https://quick-chat.deno.com"
-    },
-    {
-      "title": "GuestList",
-      "image": "./static/projects/guest-list.webp",
-      "link": "https://guest-list.deno.com"
     }
   ],
   "posts": [
     {
       "title": "Configure a New Computer Instantly with POSIX Shell",
-      "date": "26th March, 2024",
+      "date": "2024-03-25",
       "path": "posix-sh-configuration"
     },
     {
       "title": "Using Deno Fresh to Build Efficient Web Applications",
-      "date": "28th March, 2024",
+      "date": "2024-03-27",
       "path": "efficient-web-apps-deno-fresh"
     },
     {
       "title": "Building Reusable Components with Vanilla CSS",
-      "date": "30th March, 2024",
+      "date": "2024-03-29",
       "path": "reusable-components-vanilla-css"
     },
     {
       "title": "Hosting Your Portfolio on GitHub Pages",
-      "date": "1st April, 2024",
+      "date": "2024-03-31",
       "path": "hosting-on-github-pages"
     },
     {
       "title": "Reusable Components with Web Components",
-      "date": "3rd April, 2024",
+      "date": "2024-03-02",
       "path": "reusable-components-web-components"
     },
     {
       "title": "What You Need in Your Head Tags",
-      "date": "5th April 2024",
+      "date": "2024-04-04",
       "path": "html-head-tags"
     },
     {
       "title": "Convenient Color Schemes with oklch",
-      "date": "7th April, 2024",
+      "date": "2024-04-06",
       "path": "color-schemes-oklch"
     },
     {
       "title": "Recreating ls with Swift",
-      "date": "9th April, 2024",
+      "date": "2024-04-08",
       "path": "swift-recreating-ls"
     }
   ]

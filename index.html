@@ -7,19 +7,31 @@
     <link rel="shortcut icon" href="./static/favicon.ico" />
     <link rel="stylesheet" href="./style.css" />
     <title>Mac Long | Software Engineer</title>
-    <meta name="description" content="Passionate software engineer creating innovative solutions." /> 
+    <meta
+      name="description"
+      content="Passionate software engineer creating innovative solutions."
+    />
 
     <meta property="og:url" content="https://maclong9.github.io/portfolio" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Mac Long | Software Engineer" />
-    <meta property="og:description" content="Passionate software engineer creating innovative solutions."  />
+    <meta
+      property="og:description"
+      content="Passionate software engineer creating innovative solutions."
+    />
     <meta property="og:image" content="/static/space.webp" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta property="twitter:domain" content="https://maclong9.github.io" />
-    <meta property="twitter:url" content="https://maclong9.github.io/portfolio" />
+    <meta
+      property="twitter:url"
+      content="https://maclong9.github.io/portfolio"
+    />
     <meta name="twitter:title" content="Mac Long | Software Engineer" />
-    <meta name="twitter:description" content="Passionate software engineer creating innovative solutions." />
+    <meta
+      name="twitter:description"
+      content="Passionate software engineer creating innovative solutions."
+    />
     <meta name="twitter:image" content="/static/space.webp" />
   </head>
 
@@ -41,30 +53,32 @@
 
     <section id="about">
       <h2>About</h2>
-       
+
       <p>
-        I began my journey reverse engineering templates and popular tech company websites
-        until I understood <b>HTML</b>, <b>CSS</b> and <b>JavaScript</b> worked. From there
-        I taught myself to use <b>React</b>, <b>Next.js</b>, <b>TailwindCSS</b> as well as
-        various data storage systems inaluding <b>Redis</b> for key value storage and <b>SQL</b>
+        I began my journey reverse engineering templates and popular tech
+        company websites until I understood <b>HTML</b>, <b>CSS</b> and
+        <b>JavaScript</b> worked. From there I taught myself to use
+        <b>React</b>, <b>Next.js</b>, <b>TailwindCSS</b> as well as various data
+        storage systems inaluding <b>Redis</b> for key value storage and
+        <b>SQL</b>
         for relational datbases.
       </p>
 
       <p>
-        When not at my computer writing lines of code, I can be found perfecting a variety 
-        of skateboard tricks. Skateboarding is a sport that has taught me a great deal about
-        resilience and self belief.
+        When not at my computer writing lines of code, I can be found perfecting
+        a variety of skateboard tricks. Skateboarding is a sport that has taught
+        me a great deal about resilience and self belief.
       </p>
     </section>
 
     <section id="projects">
       <h2>Projects</h2>
-      <div id="project-list" />
+      <div id="project-list" class="list" />
     </section>
 
     <section id="blog">
       <h2>Blog</h2>
-      <div id="blog-list" />
+      <div id="blog-list" class="list" />
     </section>
 
     <hr />
@@ -72,6 +86,50 @@
       <small><a href="#home">Mac Long</a></small>
     </footer>
 
-    <script src="./index.js" />
+    <script>
+      fetch("./data.json")
+        .then((res) => res.json())
+        .then((data) => {
+          renderList(data.projects, "project-list");
+          renderList(data.posts, "blog-list");
+        });
+
+      function renderList(items, list) {
+        const itemList = document.getElementById(list);
+
+        itemList.innerHTML = "";
+
+        items.forEach(({ title, date, image, path, link }) => {
+          const listItem = document.createElement("div");
+          const isPost = date !== undefined;
+
+          listItem.innerHTML = `
+            <a 
+              class="list-item" 
+              href="${isPost ? `./posts/${path}` : link}"
+              target="${!isPost ? "_blank" : ""}"
+            >
+              ${image !== undefined ? `<img src="${image}" alt="${title} Image" width="266.67" height="150" />` : ""}
+              <h2>${title}</h2>
+              ${
+                date !== undefined
+                  ? `
+                <span>
+                  ${new Date(date).toLocaleString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </span>
+              `
+                  : ""
+              }
+            </a>
+          `;
+          itemList.appendChild(listItem);
+        });
+      }
+    </script>
   </body>
 </html>
+
