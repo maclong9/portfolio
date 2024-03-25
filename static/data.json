@@ -2,11 +2,6 @@
   "posts": [
     {
       "title": "Configure a New Computer Instantly with POSIX Shell",
-      "date": "2024-03-20",
-      "path": "posix-sh-configuration"
-    },
-    {
-      "title": "Configure a New Computer Instantly with POSIX Shell",
       "date": "2024-03-27",
       "path": "posix-sh-configuration"
     },
