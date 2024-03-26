@@ -16,8 +16,7 @@ window.addEventListener("scroll", function () {
     span.classList.add("scrolled");
   } else {
     header.classList.remove("scrolled");
-
-    if(span !== null) span.classList.remove("scrolled");
+    span.classList.remove("scrolled");
   }
 
   lastScrollTop = currentScroll;
