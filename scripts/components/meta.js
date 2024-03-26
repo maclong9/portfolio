@@ -5,6 +5,7 @@ export class CustomMeta extends HTMLElement {
     this.createMetaTag('charset', 'UTF-8');
     this.createMetaTag('name', 'viewport', 'content', 'width=device-width, initial-scale=1.0');
     this.createMetaTag('title', title);
+    this.createMetaTag('link', 'rel=stylesheet', 'href=/static/style.css')
 
     this.createMetaTag('og:title', title);
     this.createMetaTag('og:description', description);
@@ -15,7 +16,7 @@ export class CustomMeta extends HTMLElement {
     this.createMetaTag('twitter:title', title);
     this.createMetaTag('twitter:description', description);
     this.createMetaTag('twitter:image', image);
-    this.createMetaTag('twitter:card', type);
+    this.createMetaTag('twitter:card', 'large_summary');
     this.createMetaTag('twitter:url', url);
   }
 
