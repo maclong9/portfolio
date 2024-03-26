@@ -211,11 +211,8 @@
     place-items: center;
     transition: transform 0.3s ease-in-out;
     margin-bottom: var(--space-6);
-
-    &.scrolled {
-      position: fixed;
-      top: var(--space-1);
-    }
+    position: sticky;
+    top: var(--space-1);
 
     &.hidden {
       transform: translateY(-120%);
