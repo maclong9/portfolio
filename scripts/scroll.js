@@ -4,7 +4,7 @@ window.addEventListener("scroll", function () {
   let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
   let header = document.querySelector("header");
 
-  if (currentScroll > lastScrollTop && currentScroll > 500) {
+  if (currentScroll > lastScrollTop && currentScroll > window.innerHeight / .9) {
     header.classList.add("hidden");
   } else {
     header.classList.remove("hidden");
