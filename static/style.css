@@ -172,7 +172,7 @@
   }
 
   blockquote {
-    border-left: var(--spcae-1) solid var(--color-primary);
+    border-left: var(--space-1) solid var(--color-primary);
     margin: var(--space-4) 0;
     padding: var(--space-4) var(--space-5);
 
