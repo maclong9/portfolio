@@ -1,23 +1,7 @@
 class LayoutHeader extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-      <header class="index">
-        <nav>
-          <div id="links">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#blog">Blog</a>
-          </div>
-          <div id="icons">
-            <a href="https://sciences.social/@mac" target="_blank">
-              <!-- Mastodon SVG -->
-            </a>
-            <a href="https://github.com/maclong9" target="_blank">
-              <!-- GitHub SVG -->
-            </a>
-          </div>
-        </nav>
-      </header>
+
     `;
   }
 }
