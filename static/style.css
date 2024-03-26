@@ -16,6 +16,7 @@
 
     --text-body: system-ui;
     --text-heading: system-ui;
+    
     --text-xs: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);
     --text-sm: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);
     --text-md: clamp(1rem, 0.9986rem + 0.163vi, 1.125rem);
