@@ -1,10 +1,6 @@
 export class CustomMeta extends HTMLElement {
   connectedCallback() {
-    const title = this.getAttribute('title');
-    const description = this.getAttribute('description');
-    const image = this.getAttribute('image');
-    const type = this.getAttribute('type');
-    const url = this.getAttribute('url');
+    const { title, description, image, type, url } = this.getAttributes();
 
     this.createMetaTag('charset', 'UTF-8');
     this.createMetaTag('name', 'viewport', 'content', 'width=device-width, initial-scale=1.0');
