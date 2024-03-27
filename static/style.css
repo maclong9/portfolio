@@ -125,9 +125,9 @@
     color: var(--color-light);
     border-radius: var(--rounding-item);
     padding: var(--space-1) var(--space-2);
-    min-width: 69px;
     text-decoration: none;
     transition: background 0.3s ease-in-out;
+		border: transparent;
 
     &:hover {
       background: var(--color-surface-hover);
@@ -209,14 +209,10 @@
   header {
     display: grid;
     place-items: center;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.3s ease-in-out;
     margin-bottom: var(--space-6);
     position: sticky;
     top: var(--space-1);
-
-		&.index {
-			padding-bottom: 48vh;
-		}
 
     &.hidden {
 			transform: translateY(-120%);
@@ -318,6 +314,12 @@
       }
     }
   }
+
+	@layer about {
+		#about {
+			padding-top: 48vh;
+		}
+	}
 
   @layer blog {
     .list {
