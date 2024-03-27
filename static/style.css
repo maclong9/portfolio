@@ -128,9 +128,10 @@
     text-decoration: none;
     transition: background 0.3s ease-in-out;
 		border: transparent;
+		cursor: pointer;
 
     &:hover {
-      background: var(--color-surface-hover);
+      background: var(--color-primary);
     }
 
     &.primary {
@@ -301,7 +302,7 @@
       }
 
       span {
-				max-width: 60ch;
+				max-width: 45ch;
         margin-bottom: var(--space-4);
 
         &.scrolled {
@@ -309,14 +310,14 @@
         }
 
         @media (min-width: 640px) {
-          max-width: auto;
+          max-width: 50ch;
         }
       }
     }
   }
 
 	@layer about {
-		#about {
+		#about-section {
 			padding-top: 48vh;
 		}
 	}
@@ -355,6 +356,26 @@
         }
       }
     }
+
+		.pagination {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+
+			.page-numbers button {
+				min-width: auto;
+				padding: 0 var(--space-1);
+				font-size: var(--text-md);
+				font-weight: bold;
+				background: transparent;
+				color: var(--color-dark);
+
+
+				&.current-page, &:hover {
+					color: var(--color-primary);
+				}
+			}
+		}
   }
 }
 

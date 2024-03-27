@@ -52,7 +52,27 @@ function handlePagination(data) {
     }
   });
 
+  const pageNumberContainer = document.createElement("div");
+  pageNumberContainer.classList.add("page-numbers");
+
+  // Page numbers
+  for (let i = 1; i <= totalPages; i++) {
+    const pageNumberButton = document.createElement("button");
+    pageNumberButton.textContent = i;
+    pageNumberButton.addEventListener("click", () => {
+      currentPage = i;
+      renderList(data.posts, "blog-list", (currentPage - 1) * postsPerPage, currentPage * postsPerPage);
+      updatePaginationContainer();
+    });
+		if (i === currentPage) {
+			pageNumberButton.classList.add("current-page");
+		}
+    pageNumberContainer.appendChild(pageNumberButton);
+  }
+
+
   paginationContainer.appendChild(prevButton);
+  paginationContainer.appendChild(pageNumberContainer);
   paginationContainer.appendChild(nextButton);
 
   document.getElementById("blog").appendChild(paginationContainer);
