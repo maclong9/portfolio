@@ -1,7 +1,7 @@
 {
   "posts": [
     {
-      "title": "Configure a New Computer Instantly with POSIX Shell",
+			"title": "Configure a New Computer Instantly with a Convenient Posix Shell Script",
       "date": "2024-03-27",
       "path": "posix-sh-configuration"
     },

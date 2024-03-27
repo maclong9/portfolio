@@ -2,9 +2,10 @@ fetch("./static/data.json")
   .then((res) => res.json())
   .then((data) => {
     const currentDate = new Date();
-    const sortedPosts = data.posts.filter(post => new Date(post.date) <= currentDate)
-                                   .sort((a, b) => new Date(b.date) - new Date(a.date));
-    renderList(sortedPosts, "blog-list");
+    const sortedPosts = data.posts
+			.filter(post => new Date(post.date) <= currentDate)
+			.sort((a, b) => new Date(b.date) - new Date(a.date));		
+    renderList(data.posts, "blog-list");
   });
 
 function renderList(items, list) {
