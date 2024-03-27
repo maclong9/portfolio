@@ -1,14 +1,18 @@
-fetch("./static/data.json")
-  .then((res) => res.json())
-  .then((data) => {
+async function fetchDataAndRender() {
+  try {
+    const response = await fetch("./static/data.json");
+    const data = await response.json();
     const currentDate = new Date();
     const sortedPosts = data.posts
-			.filter(post => new Date(post.date) <= currentDate)
-			.sort((a, b) => new Date(b.date) - new Date(a.date));		
+      .filter((post) => new Date(post.date) <= currentDate)
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
     renderList(data.posts, "blog-list");
-  });
+  } catch (error) {
+    console.error("Error fetching or parsing data:", error);
+  }
+}
 
-function renderList(items, list) {
+function renderList(items, list, start, end) {
   const itemList = document.getElementById(list);
 
   itemList.innerHTML = "";
@@ -33,3 +37,5 @@ function renderList(items, list) {
     itemList.appendChild(listItem);
   });
 }
+
+fetchDataAndRender();
