@@ -16,7 +16,7 @@
 
     --text-body: system-ui;
     --text-heading: system-ui;
-    
+
     --text-xs: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);
     --text-sm: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);
     --text-md: clamp(1rem, 0.9986rem + 0.163vi, 1.125rem);
@@ -127,8 +127,8 @@
     padding: var(--space-1) var(--space-2);
     text-decoration: none;
     transition: background 0.3s ease-in-out;
-		border: transparent;
-		cursor: pointer;
+    border: transparent;
+    cursor: pointer;
 
     &:hover {
       background: var(--color-primary);
@@ -216,7 +216,7 @@
     top: var(--space-1);
 
     &.hidden {
-			transform: translateY(-120%);
+      transform: translateY(-120%);
     }
 
     nav {
@@ -295,14 +295,14 @@
       justify-content: center;
       text-align: center;
       min-height: 20vh;
-			padding-top: 15rem;
+      padding-top: 15rem;
 
       h1 {
         margin-bottom: var(--space-2);
       }
 
       span {
-				max-width: 45ch;
+        max-width: 45ch;
         margin-bottom: var(--space-4);
 
         &.scrolled {
@@ -316,18 +316,18 @@
     }
   }
 
-	@layer about {
-		#about-section {
-			padding-top: 48vh;
-		}
-	}
+  @layer about {
+    #about-section {
+      padding-top: 48vh;
+    }
+  }
 
   @layer blog {
     .list {
       display: flex;
       flex-direction: column;
       align-items: center;
-			padding-bottom: 1rem;
+      padding-bottom: 1rem;
 
       .list-item {
         width: 100%;
@@ -354,25 +354,24 @@
       }
     }
 
-		.pagination {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-			.page-numbers button {
-				min-width: auto;
-				padding: 0 var(--space-1);
-				font-size: var(--text-md);
-				font-weight: 400;
-				background: transparent;
-				color: var(--color-dark);
+      .page-numbers button {
+        min-width: auto;
+        padding: 0 var(--space-1);
+        font-size: var(--text-sm);
+        font-weight: 400;
+        background: transparent;
+        color: var(--color-dark);
 
-
-				&.current-page, &:hover {
-					color: var(--color-primary);
-				}
-			}
-		}
+        &.current-page,
+        &:hover {
+          color: var(--color-primary);
+        }
+      }
+    }
   }
 }
-
