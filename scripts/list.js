@@ -12,12 +12,12 @@ function renderList(items, list, start, end) {
       <h2>${title}</h2>
       <span>
         ${
-      new Date(date).toLocaleString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      })
-    }
+          new Date(date).toLocaleString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })
+        }
       </span>
     `;
     itemList.appendChild(listItem);
@@ -37,6 +37,11 @@ function handlePagination(data) {
     (currentPage - 1) * postsPerPage,
     currentPage * postsPerPage,
   );
+
+  // Check if there are less than 10 posts, hide pagination
+  if (totalPosts <= postsPerPage) {
+    return;
+  }
 
   const paginationContainer = document.createElement("div");
   paginationContainer.classList.add("pagination");
@@ -131,5 +136,9 @@ function handlePagination(data) {
 fetch("./static/data.json")
   .then((res) => res.json())
   .then((data) => {
+    // Filter posts before today's date
+    const currentDate = new Date();
+    data.posts = data.posts.filter(({ date }) => new Date(date) < currentDate);
     handlePagination(data);
   });
+

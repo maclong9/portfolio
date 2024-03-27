@@ -295,7 +295,7 @@
       justify-content: center;
       text-align: center;
       min-height: 20vh;
-      padding-top: 15rem;
+      padding-top: 10rem;
 
       h1 {
         margin-bottom: var(--space-2);
@@ -308,10 +308,14 @@
         &.scrolled {
           padding-bottom: var(--space-12);
         }
+      }
 
-        @media (min-width: 640px) {
-          max-width: 50ch;
-        }
+      @media (min-width: 640px) {
+				padding-top: 15rem;
+
+      	span {
+			 		max-width: 50ch;
+  			}
       }
     }
   }
