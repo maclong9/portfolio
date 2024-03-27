@@ -327,6 +327,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+			padding-bottom: 1rem;
 
       .list-item {
         width: 100%;
@@ -335,10 +336,6 @@
         margin: var(--space-1) 0;
         border-bottom: 1px solid var(--color-dark-fade);
         padding: var(--space-2) 0;
-
-        &:last-child {
-          border: 0;
-        }
 
         h2,
         span {
@@ -366,7 +363,7 @@
 				min-width: auto;
 				padding: 0 var(--space-1);
 				font-size: var(--text-md);
-				font-weight: bold;
+				font-weight: 400;
 				background: transparent;
 				color: var(--color-dark);
 

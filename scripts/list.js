@@ -11,11 +11,13 @@ function renderList(items, list, start, end) {
     listItem.innerHTML = `
       <h2>${title}</h2>
       <span>
-        ${new Date(date).toLocaleString("en-US", {
-          month: "long",
-          day: "numeric",
-          year: "numeric",
-        })}
+        ${
+      new Date(date).toLocaleString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })
+    }
       </span>
     `;
     itemList.appendChild(listItem);
@@ -29,7 +31,12 @@ function handlePagination(data) {
   const totalPosts = data.posts.length;
   const totalPages = Math.ceil(totalPosts / postsPerPage);
 
-  renderList(data.posts, "blog-list", (currentPage - 1) * postsPerPage, currentPage * postsPerPage);
+  renderList(
+    data.posts,
+    "blog-list",
+    (currentPage - 1) * postsPerPage,
+    currentPage * postsPerPage,
+  );
 
   const paginationContainer = document.createElement("div");
   paginationContainer.classList.add("pagination");
@@ -39,7 +46,13 @@ function handlePagination(data) {
   prevButton.addEventListener("click", () => {
     if (currentPage > 1) {
       currentPage--;
-      renderList(data.posts, "blog-list", (currentPage - 1) * postsPerPage, currentPage * postsPerPage);
+      renderList(
+        data.posts,
+        "blog-list",
+        (currentPage - 1) * postsPerPage,
+        currentPage * postsPerPage,
+      );
+      updatePaginationContainer();
     }
   });
 
@@ -48,7 +61,13 @@ function handlePagination(data) {
   nextButton.addEventListener("click", () => {
     if (currentPage < totalPages) {
       currentPage++;
-      renderList(data.posts, "blog-list", (currentPage - 1) * postsPerPage, currentPage * postsPerPage);
+      renderList(
+        data.posts,
+        "blog-list",
+        (currentPage - 1) * postsPerPage,
+        currentPage * postsPerPage,
+      );
+      updatePaginationContainer();
     }
   });
 
@@ -61,21 +80,52 @@ function handlePagination(data) {
     pageNumberButton.textContent = i;
     pageNumberButton.addEventListener("click", () => {
       currentPage = i;
-      renderList(data.posts, "blog-list", (currentPage - 1) * postsPerPage, currentPage * postsPerPage);
+      renderList(
+        data.posts,
+        "blog-list",
+        (currentPage - 1) * postsPerPage,
+        currentPage * postsPerPage,
+      );
       updatePaginationContainer();
     });
-		if (i === currentPage) {
-			pageNumberButton.classList.add("current-page");
-		}
+    if (i === currentPage) {
+      pageNumberButton.classList.add("current-page");
+    }
     pageNumberContainer.appendChild(pageNumberButton);
   }
-
 
   paginationContainer.appendChild(prevButton);
   paginationContainer.appendChild(pageNumberContainer);
   paginationContainer.appendChild(nextButton);
 
   document.getElementById("blog").appendChild(paginationContainer);
+
+  // Run updatePaginationContainer initially to hide the previous button if not applicable
+  updatePaginationContainer();
+
+  // Function to update the class of the current page button and manage button visibility
+  function updatePaginationContainer() {
+    const pageNumberButtons = pageNumberContainer.querySelectorAll("button");
+    pageNumberButtons.forEach((button, index) => {
+      if (index + 1 === currentPage) {
+        button.classList.add("current-page");
+      } else {
+        button.classList.remove("current-page");
+      }
+    });
+
+    // Show or hide previous and next buttons based on current page
+    if (currentPage === 1) {
+      prevButton.style.visibility = "hidden";
+    } else {
+      prevButton.style.visibility = "visible";
+    }
+    if (currentPage === totalPages) {
+      nextButton.style.visibility = "hidden";
+    } else {
+      nextButton.style.visibility = "visible";
+    }
+  }
 }
 
 fetch("./static/data.json")
@@ -83,4 +133,3 @@ fetch("./static/data.json")
   .then((data) => {
     handlePagination(data);
   });
-
