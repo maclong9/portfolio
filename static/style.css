@@ -214,8 +214,12 @@
     position: sticky;
     top: var(--space-1);
 
+		&.index {
+			padding-bottom: 48vh;
+		}
+
     &.hidden {
-      transform: translateY(-120%);
+			transform: translateY(-120%);
     }
 
     nav {
@@ -293,14 +297,15 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      min-height: 95vh;
+      min-height: 20vh;
+			padding-top: 15rem;
 
       h1 {
         margin-bottom: var(--space-2);
       }
 
       span {
-        max-width: 24ch;
+				max-width: 60ch;
         margin-bottom: var(--space-4);
 
         &.scrolled {
