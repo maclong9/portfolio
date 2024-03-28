@@ -16,10 +16,11 @@ class PageSection extends HTMLElement {
 
     this.innerHTML = `
 		<section id="${title.toLowerCase()}-section">
-			<slot />
+			<h2>${title}</h2>
+			<slot></slot>
 		</section>
     `;
   }
 }
 
-customElements.define('page-head', PageHead);
+customElements.define('page-section', PageSection);

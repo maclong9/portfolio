@@ -7,6 +7,12 @@
 		type="website"
 		image="/static/space.webp"
 	></page-head>
+    <script src="./scripts/scroll.js"></script>
+    <script src="./scripts/list.js"></script>
+		<script src="./scripts/components/head.js"></script>
+		<script src="./scripts/components/header.js"></script>
+		<script src="./scripts/components/section.js"></script>
+		<script src="./scripts/components/footer.js"></script>
   <body>
     <section id="home">
       <h1>Mac Long</h1>
@@ -18,8 +24,7 @@
 		<page-header is="page-header" index></page-header>
 
     <main>
-      <section id="about-section">
-        <h2 id="about">About</h2>
+      <page-section title="About">
         <p>
 					I am a <b>driven</b> software engineer who enjoys developing highly 
 					efficient applications and thrive on experimenting with various 
@@ -56,21 +61,15 @@
           I use the tools mentioned above, then check out
           <a href="#blog">my blog</a>, it's at the bottom of this page.
         </p>
-      </section>
+      </page-section>
 
-      <section id="blog">
-        <h2>Blog</h2>
+      <page-section title="Blog">
         <div id="blog-list" class="list" />
-      </section>
+      </page-section>
     </main>
 
 		<page-footer></page-footer>
 
-    <script src="./scripts/scroll.js"></script>
-    <script src="./scripts/list.js"></script>
-		<script src="./scripts/components/head.js"></script>
-		<script src="./scripts/components/header.js"></script>
-		<script src="./scripts/components/footer.js"></script>
   </body>
 </html>
 
