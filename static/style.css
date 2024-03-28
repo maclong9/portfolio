@@ -279,10 +279,6 @@
     section {
       scroll-snap-align: start;
       padding: var(--space-2) 0;
-
-      &#about {
-        padding-top: 0;
-      }
     }
   }
 
@@ -336,7 +332,7 @@
 
   @layer about {
     #about-section {
-      padding-top: 48vh;
+      padding-top: 36vh;
     }
   }
 

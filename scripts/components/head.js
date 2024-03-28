@@ -24,6 +24,7 @@ class PageHead extends HTMLElement {
     const url = `https://maclong9.github.io/portfolio/${path}`;
 
     this.innerHTML = `
+		<head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width" />
 
@@ -45,6 +46,7 @@ class PageHead extends HTMLElement {
       <meta name="twitter:title" content="${title}" />
       <meta name="twitter:description" content="${description}" />
       <meta name="twitter:image" content="${image}" />
+		</head>
     `;
   }
 }
