@@ -204,6 +204,12 @@
       white-space: pre;
     }
   }
+
+	@media(height: 653px) {
+		b {
+			font-weight: 700;
+		}
+	}
 }
 
 @layer layout {
@@ -220,7 +226,7 @@
     }
 
     nav {
-      width: 220px;
+      min-width: 220px;
       height: 45px;
       display: flex;
       align-items: center;
@@ -234,7 +240,7 @@
       padding: 0 var(--space-2);
 
       @media (min-width: 640px) {
-        width: 250px;
+       min-width: 250px;
       }
 
       * {
@@ -266,6 +272,10 @@
       max-width: 72ch;
     }
 
+		@media(height: 653px) {
+			max-width: 55ch;
+		}
+
     section {
       scroll-snap-align: start;
       padding: var(--space-2) 0;
@@ -295,7 +305,7 @@
       justify-content: center;
       text-align: center;
       min-height: 20vh;
-      padding-top: 10rem;
+      padding-top: 15rem;
 
       h1 {
         margin-bottom: var(--space-2);
@@ -317,6 +327,10 @@
 			 		max-width: 50ch;
   			}
       }
+
+			@media(height: 653px) {
+				padding-top: 5rem;
+			}
     }
   }
 
