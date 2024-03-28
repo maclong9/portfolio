@@ -16,7 +16,7 @@ class PageHeader extends HTMLElement {
     	     <a href="#blog">Blog</a>
     	   </div>
     	   <div id="icons">
-    	     <a href="https://sciences.social/@mac" target="_blank" name="Mastodon">
+    	     <a href="https://sciences.social/@mac" target="_blank" aria-label="Mastodon Profile">
     	       <svg
     	         xmlns="http://www.w3.org/2000/svg"
     	         fill="none"
@@ -37,7 +37,7 @@ class PageHeader extends HTMLElement {
     	         ></path>
     	       </svg>
     	     </a>
-    	     <a href="https://github.com/maclong9" target="_blank" name="GitHub">
+    	     <a href="https://github.com/maclong9" target="_blank" aria-label="GitHub Profile">
     	       <svg
     	         xmlns="http://www.w3.org/2000/svg"
     	         fill="none"
