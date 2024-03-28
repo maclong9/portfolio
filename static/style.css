@@ -330,11 +330,6 @@
     }
   }
 
-  @layer about {
-    #about-section {
-      padding-top: 36vh;
-    }
-  }
 
   @layer blog {
     .list {
@@ -388,4 +383,10 @@
       }
     }
   }
+}
+
+@layer utilities {
+#index-spacer {
+	padding: 18vh 0;
+}
 }
