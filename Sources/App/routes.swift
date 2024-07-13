@@ -1,11 +1,20 @@
+import Redis
+import SwiftHtml
 import Vapor
 
 func routes(_ app: Application) throws {
-    app.get { req async in
-        "It works!"
-    }
-
-    app.get("hello") { req async -> String in
-        "Hello, world!"
-    }
+  app.get { req -> Response in
+    return req.templates.renderHtml(
+      LayoutView(.init(
+        title: "Mac  | Software Engineer",
+        description: "Passionate software engineer creating innovative solutions.",
+        url: "https://maclong.tech",
+        body: HomeView(.init(
+          skills: skills,
+          projects: projects
+        )).build()
+      )),
+      minify: true
+    )
+  }
 }

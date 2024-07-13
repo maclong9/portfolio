@@ -1,0 +1,65 @@
+@layer reset {
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+    
+    img,
+    picture,
+    video,
+    canvas,
+    svg {
+        display: block;
+        max-width: 100%;
+    }
+    
+    input,
+    button,
+    textarea,
+    select {
+        font: inherit;
+    }
+    
+    @media print {
+        body {
+            font-size: 12pt;
+        }
+        
+        header,
+        footer {
+            display: none;
+        }
+        
+        main {
+            width: 100%;
+            max-width: none;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--color-dark);
+        }
+        
+        h1,
+        h2,
+        h3 {
+            page-break-after: avoid;
+        }
+        
+        img {
+            max-width: 100% !important;
+        }
+        
+        @page {
+            margin: 2cm;
+        }
+    }
+}
