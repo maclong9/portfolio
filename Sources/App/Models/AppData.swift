@@ -71,6 +71,6 @@ let projects = [
     summary: "UNIX ls written in pure Swift",
     tag: "Command Line",
     url: "https://github.com/maclong9/swift-list",
-    new: true
+    new: false
   ),
 ]

@@ -1,11 +1,13 @@
-@layer reset, base, components;
+@layer reset, base, layout, components;
 
 @layer base {
     :root {
         --color-primary: oklch(55% .2 240);
         --color-secondary: oklch(51.98% 0.094 223.13);
-        --color-dark: oklch(15% .02 240);
+        --color-dark: oklch(0% 0 0);
+        --color-surface: oklch(25% 0.01 240);
         --color-light: oklch(90% .03 240);
+        --color-lighter: oklch(60% .01 240);
         --color-faded: oklch(32% .07 240);
         --color-shadow: oklch(10% .1 240 / .5);
         
