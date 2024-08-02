@@ -1,5 +1,5 @@
 {
-  "originHash" : "a48593c6c897d48051fc7c704b7e3978406236f3fc9a5c792a931bd7053f4f32",
+  "originHash" : "cffc5953ee6e7e4c5968de66070be41861fa2f9303d9ce9b7875b42813edbb9a",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -35,24 +35,6 @@
       "state" : {
         "revision" : "a31236f24bfd2ea2f520a74575881f6731d7ae68",
         "version" : "4.7.0"
-      }
-    },
-    {
-      "identity" : "redis",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/redis.git",
-      "state" : {
-        "revision" : "383ed57e5b5acd4dd447c2967aa665dc3bbe5be9",
-        "version" : "4.11.0"
-      }
-    },
-    {
-      "identity" : "redistack",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swift-server/RediStack.git",
-      "state" : {
-        "revision" : "622ce440f90d79b58e45f3a3efdd64c51d1dfd17",
-        "version" : "1.6.2"
       }
     },
     {
@@ -98,6 +80,15 @@
       "state" : {
         "revision" : "46072478ca365fe48370993833cb22de9b41567f",
         "version" : "3.5.2"
+      }
+    },
+    {
+      "identity" : "swift-css",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/binarybirds/swift-css",
+      "state" : {
+        "revision" : "c5a1741c83ca7eb6dcd0aec0eeefb7a0ca5d8d43",
+        "version" : "1.0.1"
       }
     },
     {
