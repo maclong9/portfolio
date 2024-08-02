@@ -16,16 +16,6 @@ struct StylesheetGenerator {
   }
   
   mutating func render() -> String {
-    stylesheets.insert(Stylesheet {
-      Media {
-        Selector("html, body") {
-          Background(context.colors.background)
-          Color(context.colors.foreground)
-          FontFamily(context.fonts.body)
-        }
-      }
-    }, at: 0)
-    
     let renderedStylesheets = stylesheets.map {
       StylesheetRenderer(minify: true).render($0)
     }
@@ -34,7 +24,7 @@ struct StylesheetGenerator {
   }
 }
 
-var stylesheet = StylesheetGenerator(
+var stylesheetGenerator = StylesheetGenerator(
   StylesContext(
     colors: StylesContext.Colors(
       background: "#1c1c1c",
@@ -51,6 +41,6 @@ var stylesheet = StylesheetGenerator(
   )
 )
 
-let colors = stylesheet.context.colors
-let fonts = stylesheet.context.fonts
-let radius = stylesheet.context.radius
+let colors = stylesheetGenerator.context.colors
+let fonts = stylesheetGenerator.context.fonts
+let radius = stylesheetGenerator.context.radius

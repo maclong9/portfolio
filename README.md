@@ -2,6 +2,8 @@
 
 ## Todo
 
-- [ ] Implement Design System
-- [ ] Create `.yaml` with Page Content
+- [x] Implement Basic Design System
+- [ ] Implement JavaScript via Swift
+- [ ] Create `.yml` with Page Content for CMS Integration
+- [ ] Render Markdown Content
 - [ ] Add Tranlsations

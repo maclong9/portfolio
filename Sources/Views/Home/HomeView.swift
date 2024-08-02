@@ -7,6 +7,7 @@ struct HomeView: TagRepresentable {
   
   init(_ props: HomeProps) {
     self.props = props
+    stylesheetGenerator.addModules([HomeStyles])
   }
   
   func build() -> Tag {    
