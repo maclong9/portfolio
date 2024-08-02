@@ -30,17 +30,21 @@ var stylesheetGenerator = StylesheetGenerator(
       background: "#1c1c1c",
       foreground: "#fefefe",
       primary: "#0099ff",
-      secondary: "#0e7490"
+      secondary: "#0e7490",
+      faded: "#80ccff"
     ),
-    fonts: StylesContext.Fonts(
+    typography: StylesContext.Typography(
       heading: "system-ui",
       body: "system-ui",
-      monospaced: "ui-monospaced"
+      monospaced: "ui-monospaced",
+      size: .medium,
+      lineHeight: .number(1.6),
+      letterSpacing: .normal
     ),
     radius: .medium
   )
 )
 
 let colors = stylesheetGenerator.context.colors
-let fonts = stylesheetGenerator.context.fonts
+let typography = stylesheetGenerator.context.typography
 let radius = stylesheetGenerator.context.radius

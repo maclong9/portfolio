@@ -1,4 +1,5 @@
 import SwiftHtml
+import SwiftCss
 
 struct StylesContext {
   struct Colors {
@@ -6,12 +7,16 @@ struct StylesContext {
     let foreground: String
     let primary: String
     let secondary: String
+    let faded: String
   }
   
-  struct Fonts {
+  struct Typography {
     let heading: String
     let body: String
     let monospaced: String
+    let size: FontSizeValue
+    let lineHeight: LineHeightValue
+    let letterSpacing: LetterSpacingValue
   }
   
   enum RadiusValue {
@@ -19,7 +24,7 @@ struct StylesContext {
   }
   
   let colors: Colors
-  let fonts: Fonts
+  let typography: Typography
   let radius: RadiusValue
 }
 

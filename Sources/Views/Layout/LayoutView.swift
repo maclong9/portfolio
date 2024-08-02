@@ -6,7 +6,7 @@ struct LayoutView: TemplateRepresentable {
   
   init(_ context: LayoutContext) {
     self.context = context
-    stylesheetGenerator.addModules([LayoutStyles])
+    stylesheetGenerator.addModules([BaseStyles, ResetStyles, LayoutStyles])
   }
   
   func render(_ req: Request) -> Tag {
@@ -48,8 +48,26 @@ struct LayoutView: TemplateRepresentable {
         Footer {
           Span("Copyright © 2024 Mac Long. All rights reserved.")
         }
-        Script().src("main.js")
+        Script {
+          Text("""
+            const nav = document.querySelector('nav');
+            const menuButton = document.querySelector('#nav-button');
+            
+            const toggleMenu = () => {
+                [nav, menuButton].forEach(el => el.dataset.active = true);
+                
+                document.addEventListener('click', (event) => {
+                    if (!nav.contains(event.target) && !menuButton.contains(event.target)) {
+                        [nav, menuButton].forEach(el => el.dataset.active = false);
+                    }
+                });
+            }
+            
+            menuButton.addEventListener('click', toggleMenu);
+          """)
+        }
       }
     }
   }
 }
+

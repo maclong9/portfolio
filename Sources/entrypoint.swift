@@ -3,7 +3,6 @@ import Logging
 import NIOCore
 import NIOPosix
 
-
 @main
 enum Entrypoint {
   static func main() async throws {

@@ -10,7 +10,7 @@ struct HomeView: TagRepresentable {
     stylesheetGenerator.addModules([HomeStyles])
   }
   
-  func build() -> Tag {    
+  func build() -> Tag {
     return Main {
       Section {
         H1("Mac Long")
@@ -65,6 +65,31 @@ struct HomeView: TagRepresentable {
           }
         }.class("projects")
       }.id("projects")
+      Script {
+        Text("""
+          const skills = document.querySelector('.skills');
+          const details = document.querySelector('.details');
+          const firstSkill = document.querySelector("li button");
+          
+          skills.style.setProperty("--active", 0);
+          details.querySelector("h3").innerText = firstSkill.dataset.skill;
+          details.querySelector("p").innerText = firstSkill.dataset.description;
+          
+          skills.querySelectorAll("li button").forEach((item, index) => {
+              item.addEventListener("click", e => {
+                  document.documentElement.querySelectorAll("[data-active]").forEach(el => {
+                      el.removeAttribute("data-active")
+                  });
+                  
+                  skills.style.setProperty("--active", index);
+                  item.setAttribute("data-active", true);
+                  
+                  details.querySelector("h3").innerText = item.dataset.skill;
+                  details.querySelector("p").innerText = item.dataset.description;
+              });
+          });
+        """)
+      }
     }
   }
 }
