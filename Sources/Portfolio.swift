@@ -1,6 +1,10 @@
 import Foundation
 import WebUI
 
+// TODO: Create content for pages
+// TODO: Create 2–5 blog posts
+// TODO: Figure out the best way to map articles across multiple pages, below is fine but the links don't need to be `Document`.
+
 @main
 struct Portfolio {
   static func main() async throws {

@@ -5,9 +5,9 @@ import PackageDescription
 
 let package = Package(
   name: "Portfolio",
-  platforms: [.macOS(.v15)],
+  platforms: [.macOS(.v13)],
   dependencies: [
-    .package(url: "https://github.com/maclong9/web-ui", from: "0.0.3")
+    .package(url: "https://github.com/maclong9/web-ui", from: "0.0.4")
   ],
   targets: [
     .executableTarget(
