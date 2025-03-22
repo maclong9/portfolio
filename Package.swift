@@ -12,6 +12,9 @@ let package = Package(
   targets: [
     .executableTarget(
       name: "Portfolio",
-      dependencies: [.product(name: "WebUI", package: "web-ui")])
+      dependencies: [.product(name: "WebUI", package: "web-ui")],
+      resources: [
+        .copy("Public")
+      ])
   ]
 )
