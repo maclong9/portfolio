@@ -1,0 +1,221 @@
+{
+  "": {
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/master.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Behavior/Actions.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Actions.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Actions.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Actions~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Actions.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Behavior/Behavior.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Behavior.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Behavior.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Behavior~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Behavior.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Behavior/Targets.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Targets.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Targets.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Targets~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Targets.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Core/Application.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Application.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Application.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Application~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Application.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Core/Document.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Document.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Document.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Document~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Document.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Core/Metadata.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Metadata.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Metadata.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Metadata~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Metadata.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Elements/Base/Button.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Button.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Button.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Button~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Button.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Elements/Base/Element.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Element.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Element.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Element~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Element.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Elements/Base/List.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/List.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/List.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/List~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/List.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Elements/Base/Media.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Media.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Media.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Media~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Media.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Elements/Base/Text.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Text.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Text.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Text~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Text.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Elements/Form/Form.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Form.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Form.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Form~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Form.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Elements/Form/Input.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Input.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Input.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Input~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Input.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Elements/Form/Label.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Label.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Label.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Label~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Label.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Elements/Form/Progress.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Progress.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Progress.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Progress~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Progress.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Elements/Form/TextArea.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/TextArea.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/TextArea.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/TextArea~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/TextArea.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Elements/Layout/Layout.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Layout.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Layout.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Layout~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Layout.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Elements/Layout/Structure.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Structure.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Structure.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Structure~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Structure.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/HTML/HTML.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/HTML.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/HTML.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/HTML~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/HTML.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/HTML/HTMLBuilder.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/HTMLBuilder.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/HTMLBuilder.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/HTMLBuilder~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/HTMLBuilder.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Styles/Appearance/Border.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Border.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Border.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Border~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Border.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Styles/Appearance/Color.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Color.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Color.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Color~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Color.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Styles/Appearance/Display.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Display.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Display.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Display~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Display.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Styles/Appearance/Opacity.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Opacity.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Opacity.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Opacity~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Opacity.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Styles/Base/Cursor.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Cursor.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Cursor.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Cursor~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Cursor.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Styles/Base/Sizing.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Sizing.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Sizing.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Sizing~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Sizing.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Styles/Base/Spacing.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Spacing.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Spacing.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Spacing~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Spacing.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Styles/Base/Typography.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Typography.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Typography.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Typography~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Typography.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Styles/Base/Utilities.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Utilities.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Utilities.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Utilities~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Utilities.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Styles/Positioning/Overflow.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Overflow.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Overflow.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Overflow~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Overflow.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Styles/Positioning/Position.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Position.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Position.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Position~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Position.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Styles/Positioning/Transform.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Transform.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Transform.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Transform~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Transform.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Styles/Positioning/Transition.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Transition.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Transition.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Transition~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Transition.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Styles/Positioning/ZIndex.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/ZIndex.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/ZIndex.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/ZIndex~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/ZIndex.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Utilities/Date+Year.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Date+Year.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Date+Year.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Date+Year~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/Date+Year.swiftdeps"
+  },
+  "/Users/maclong/Developer/web-ui/Sources/WebUI/Utilities/String+HTML.swift": {
+    "dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/String+HTML.d",
+    "object": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/String+HTML.swift.o",
+    "swiftmodule": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/String+HTML~partial.swiftmodule",
+    "swift-dependencies": "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/String+HTML.swiftdeps"
+  }
+}

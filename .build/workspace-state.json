@@ -1,0 +1,24 @@
+{
+  "object" : {
+    "artifacts" : [
+
+    ],
+    "dependencies" : [
+      {
+        "basedOn" : null,
+        "packageRef" : {
+          "identity" : "web-ui",
+          "kind" : "fileSystem",
+          "location" : "/Users/maclong/Developer/web-ui",
+          "name" : "WebUI"
+        },
+        "state" : {
+          "name" : "fileSystem",
+          "path" : "/Users/maclong/Developer/web-ui"
+        },
+        "subpath" : "web-ui"
+      }
+    ]
+  },
+  "version" : 6
+}

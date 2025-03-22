@@ -1,0 +1,4 @@
+module WebUI {
+    header "/Users/maclong/Developer/portfolio/.build/arm64-apple-macosx/debug/WebUI.build/WebUI-Swift.h"
+    requires objc
+}
