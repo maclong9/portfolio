@@ -10,7 +10,8 @@ struct Articles: HTML {
           "All of my long-form thoughts on programming, leadership, product design, and more, collected in chronological order."
       )
       Section {
-        List {  // for loop of article
+        List {
+          // for loop of articles
         }
       }
     }.render()

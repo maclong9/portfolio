@@ -18,7 +18,7 @@ struct Projects: HTML {
           List {
             // for loop of experience
           }
-          Link(to: "/download") { "Download CV ↓" }
+          Link(to: "/mac-long-swe-cv") { "Download CV ↓" }
         }
       }
     }.render()
