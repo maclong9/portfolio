@@ -1,10 +1,12 @@
 import Foundation
 import WebUI
- 
-struct Layout: HTML {
+
+struct RootLayout: HTML {
+  let isHome: Bool
   let children: [any HTML]
 
-  init(@HTMLBuilder children: @escaping () -> [any HTML]) {
+  init(isHome: Bool = false, @HTMLBuilder children: @escaping () -> [any HTML]) {
+    self.isHome = isHome
     self.children = children()
   }
 
@@ -18,7 +20,9 @@ struct Layout: HTML {
   func render() -> String {
     Fragment {
       Header {
+        if !isHome { Avatar() }
         NavigationLinks
+        Button { "🍎" }
       }
 
       Main {

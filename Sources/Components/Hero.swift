@@ -2,11 +2,6 @@ import Foundation
 import WebUI
 
 struct Hero: HTML {
-  struct Avatar {
-    let src: String
-    let description: String
-  }
-
   struct Social {
     let icon: String
     let url: String
@@ -31,9 +26,7 @@ struct Hero: HTML {
 
   func render() -> String {
     Section {
-      if let image {
-        Image(sources: [image.src], description: image.description)
-      }
+      if let image { Avatar() }
       Heading(level: .one) { heading }
       Text { text }
       if let socials {
