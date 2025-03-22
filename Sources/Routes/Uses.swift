@@ -3,11 +3,11 @@ import WebUI
 
 struct Uses: HTML {
   func render() -> String {
-    Fragment {
+    RootLayout {
       Hero(
         heading: "Software I use, gadgets I love, and other things I recommend.",
         text:
-          "I get asked a lot about the things I use to build software, stay productive, or buy to fool myself into thinking I’m being productive when I’m really just procrastinating. Here’s a big list of all of my favorite stuff."
+          "I have spent a fair amount of time improving my work process, and I've compiled a list of the things I use to stay productive and enjoy my work."
       )
       Section {
         List {  // for loop of article

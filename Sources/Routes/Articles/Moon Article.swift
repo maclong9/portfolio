@@ -1,7 +1,7 @@
 import Foundation
 import WebUI
 
-struct ExampleArticle: HTML {
+struct MoonArticle: HTML {
   func render() -> String {
     Fragment {
       Text { "Hello, World!" }

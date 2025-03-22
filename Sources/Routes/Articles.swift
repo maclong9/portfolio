@@ -3,7 +3,7 @@ import WebUI
 
 struct Articles: HTML {
   func render() -> String {
-    Fragment {
+    RootLayout {
       Hero(
         heading: "Writing on software, productivity, and personal growth",
         text:
