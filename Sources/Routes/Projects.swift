@@ -13,13 +13,6 @@ struct Projects: HTML {
         List {
           // for loop of projects
         }
-        Aside {
-          Text { "💼 Work" }
-          List {
-            // for loop of experience
-          }
-          Link(to: "/mac-long-swe-cv") { "Download CV ↓" }
-        }
       }
     }.render()
   }

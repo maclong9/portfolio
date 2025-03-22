@@ -7,13 +7,13 @@ struct Hero: HTML {
     let url: String
   }
 
-  let image: Avatar?
+  let image: Bool
   let heading: String
   let text: String
   let socials: [Social]?
 
   init(
-    image: Avatar? = nil,
+    image: Bool = false,
     heading: String,
     text: String,
     socials: [Social]? = nil
@@ -26,7 +26,7 @@ struct Hero: HTML {
 
   func render() -> String {
     Section {
-      if let image { Avatar() }
+      if  image { Avatar() }
       Heading(level: .one) { heading }
       Text { text }
       if let socials {
