@@ -1,13 +1,13 @@
 {
-  "originHash" : "f4db592e8c484b31f0db472c55e42979b5251a18c52795bb684a70e646a3b160",
+  "originHash" : "4d1fe1c6c352891d12575edd849b6726d9446547a2fe3db674a5202421760a8f",
   "pins" : [
     {
-      "identity" : "swift-argument-parser",
+      "identity" : "web-ui",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-argument-parser",
+      "location" : "https://github.com/maclong9/web-ui",
       "state" : {
-        "revision" : "41982a3656a71c768319979febd796c6fd111d5c",
-        "version" : "1.5.0"
+        "revision" : "4fa2fc183baeb8c37403ebf150d5cf20638741d9",
+        "version" : "0.0.4"
       }
     }
   ],
