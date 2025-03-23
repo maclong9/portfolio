@@ -6,9 +6,12 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: write # Grant write access to repository contents
+
 jobs:
   build-and-deploy:
-    runs-on: macos-latest
+    runs-on: macos-15
     steps:
       # Check out the repository code
       - uses: actions/checkout@v4
