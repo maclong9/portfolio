@@ -26,7 +26,7 @@ struct Hero: HTML {
 
   func render() -> String {
     Section {
-      if  image { Avatar() }
+      if image { Avatar() }
       Heading(level: .one) { heading }
       Text { text }
       if let socials {

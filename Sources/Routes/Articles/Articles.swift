@@ -1,6 +1,17 @@
 import Foundation
 import WebUI
 
+@MainActor let articles: [ArticleData] = [
+  .init(
+    date: Date(), title: "Hello, World!", description: "My first post.", image: "/articles/example.png",
+    content: ExampleArticle()
+  ),
+  .init(
+    date: Date(), title: "Hello, Moon!", description: "My moon post.", image: "/articles/example.png",
+    content: MoonArticle()
+  ),
+]
+
 struct Articles: HTML {
   func render() -> String {
     RootLayout {

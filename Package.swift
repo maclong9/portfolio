@@ -7,14 +7,19 @@ let package = Package(
   name: "Portfolio",
   platforms: [.macOS(.v13)],
   dependencies: [
-    .package(url: "https://github.com/maclong9/web-ui", from: "0.0.4")
+    .package(path: "../web-ui"),
+    .package(url: "https://github.com/apple/swift-argument-parser", from: "1.3.0"),
   ],
   targets: [
     .executableTarget(
       name: "Portfolio",
-      dependencies: [.product(name: "WebUI", package: "web-ui")],
+      dependencies: [
+        .product(name: "WebUI", package: "web-ui"),
+        .product(name: "ArgumentParser", package: "swift-argument-parser"),
+      ],
       resources: [
         .copy("Public")
-      ])
+      ]
+    )
   ]
 )

@@ -10,7 +10,7 @@ struct Uses: HTML {
           "I have spent a fair amount of time improving my work process, and I've compiled a list of the things I use to stay productive and enjoy my work."
       )
       Section {
-        // list of gear and software with explanationsw
+        // list of gear and software with explanations
       }
     }.render()
   }
