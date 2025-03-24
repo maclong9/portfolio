@@ -16,7 +16,7 @@ struct Portfolio {
       ("uses", "Uses", "A collection of tools and technologies I use in my work.", Uses()),
     ].map { (path: String, title: String, description: String, content: HTML) in
       Document(
-        path: "/portfolio/\(path)",
+        path: "\(path)",
         metadata: .init(title: title, description: description),
         content: { content }
       )
@@ -28,7 +28,7 @@ struct Portfolio {
         article.date, article.title, article.description, article.image, article.content
       )
       return Document(
-        path: "/portfolio/articles/\(title.slugified())",
+        path: "articles/\(title.slugified())",
         metadata: .init(title: title, description: description, image: image),
         content: {
           ArticleLayout(
