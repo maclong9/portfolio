@@ -2,6 +2,28 @@ import Foundation
 import WebUI
 
 struct Projects: HTML {
+  struct Project {
+    let icon: String
+    let title: String
+    let description: String;
+    let link: String
+  }
+
+  let projects: [Project] = [
+    Project(
+      icon: "I", title: "List",
+      description: "Quickly list files found in your operating system, Swift recreation of the UNIX command ls.",
+      link: "https://github.com/maclong9/list"),
+    Project(
+      icon: "I", title: "WebUI",
+      description: "Render web pages and static sites in Swift, using a SwiftUI like pattern.",
+      link: "https://github.com/maclong9/web-ui"),
+    Project(
+      icon: "I", title: "Todos",
+      description: "Full stack todo list application with authentication, built using Swift Hummingbird and WebUI.",
+      link: "https://github.com/maclong9/todos"),
+  ]
+
   func render() -> String {
     RootLayout {
       Hero(
@@ -11,7 +33,14 @@ struct Projects: HTML {
       )
       Section {
         List {
-          // for loop of projects
+          for project in projects {
+            Card(
+              icon: project.icon,
+              title: project.title,
+              description: project.description,
+              url: project.link
+            )
+          }
         }
       }
     }.render()

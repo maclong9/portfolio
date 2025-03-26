@@ -8,8 +8,16 @@ struct Card: HTML {
   let date: Date?
   let url: String?
 
+  init(icon: String? = nil, title: String, description: String, date: Date? = nil, url: String? = nil) {
+    self.icon = icon
+    self.title = title
+    self.description = description
+    self.date = date
+    self.url = url
+  }
+
   func render() -> String {
-    Stack {
+    Item {
       if let icon { icon }
       Stack {
         if let date { Time(datetime: date.formatted()) { date.formatted() } }
@@ -17,10 +25,15 @@ struct Card: HTML {
       }
       Text { description }
       if let url {
-        Link(to: url) { "🔗 Learn more" }
+        Link(to: url) {
+          "🔗 Learn more"
+          Stack().position(.absolute, edges: .all)
+        }
       } else {
         Link(to: "/articles\(title.slugified())") { "Read article ›" }
       }
-    }.render()
+    }
+    .position(.relative)
+    .render()
   }
 }

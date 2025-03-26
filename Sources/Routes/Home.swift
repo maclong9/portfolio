@@ -2,6 +2,31 @@ import Foundation
 import WebUI
 
 struct Home: HTML {
+  struct Experience {
+    let icon: String
+    let title: String
+    let position: String
+    let startDate: String
+    let endDate: String
+  }
+
+  let experience: [Experience] = [
+    Experience(
+      icon: "I",
+      title: "3 Sided Cube",
+      position: "Software Engineer",
+      startDate: "2022-10-16",
+      endDate: "2024-06-31"
+    ),
+    Experience(
+      icon: "I",
+      title: "Quantum",
+      position: "Software Engineer",
+      startDate: "2024-07-12",
+      endDate: "present"
+    ),
+  ]
+
   func render() -> String {
     RootLayout(isHome: true) {
       Hero(
@@ -15,13 +40,21 @@ struct Home: HTML {
         ]
       )
       Section {
-        List {
-          // for loop with blog posts
-        }
+        ArticlesList()
         Aside {
           Text { "💼 Work" }
           List {
-            // for loop of experience
+            for job in experience {
+              job.icon
+              Stack {
+                job.title
+                job.position
+              }
+              Text {
+                "\(job.startDate) – \(job.endDate)"
+              }
+
+            }
           }
           Link(to: "/mac-long-swe-cv.pdf") { "Download CV ↓" }
         }

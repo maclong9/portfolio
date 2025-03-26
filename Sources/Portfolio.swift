@@ -23,7 +23,7 @@ struct Portfolio {
     }
 
     // Create article routes with date, title, description, image and content
-    let articleRoutes: [Document] = articles.map { article in
+    let articleRoutes: [Document] = Articles().articles.map { article in
       let (date, title, description, image, content) = (
         article.date, article.title, article.description, article.image, article.content
       )
