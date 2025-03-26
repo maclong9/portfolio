@@ -11,17 +11,23 @@ struct Projects: HTML {
 
   let projects: [Project] = [
     Project(
-      icon: "I", title: "List",
+      icon: "I",
+      title: "List",
       description: "Quickly list files found in your operating system, Swift recreation of the UNIX command ls.",
-      link: "https://github.com/maclong9/list"),
+      link: "https://github.com/maclong9/list"
+    ),
     Project(
-      icon: "I", title: "WebUI",
+      icon: "I",
+      title: "WebUI",
       description: "Render web pages and static sites in Swift, using a SwiftUI like pattern.",
-      link: "https://github.com/maclong9/web-ui"),
+      link: "https://github.com/maclong9/web-ui"
+    ),
     Project(
-      icon: "I", title: "Todos",
+      icon: "I",
+      title: "Todos",
       description: "Full stack todo list application with authentication, built using Swift Hummingbird and WebUI.",
-      link: "https://github.com/maclong9/todos"),
+      link: "https://github.com/maclong9/todos"
+    ),
   ]
 
   func render() -> String {

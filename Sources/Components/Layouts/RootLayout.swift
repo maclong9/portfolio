@@ -16,23 +16,30 @@ struct RootLayout: HTML {
     Link(to: "/projects") { "Projects" }
     Link(to: "/uses") { "Uses" }
   }
+  .shadow(size: .lg)
+  .flex(direction: .row, justify: .around, align: .center)
+  .border(radius: (side: .all, size: .md))
 
   func render() -> String {
     Fragment {
       Header {
-        if !isHome { Avatar() }
+        if !isHome { Avatar() } else { "" }
         NavigationLinks
         Button { "🍎" }
+          .border(radius: (side: .all, size: .lg))
       }
+      .flex(justify: .evenly, align: .center)
 
       Main {
         children.map { $0.render() }.joined()
       }
 
       Footer {
-        Text { "© \(Date().formattedYear()) Mac Long" }
         NavigationLinks
+        Text { "© \(Date().formattedYear()) Mac Long" }
       }
+      .font(size: .sm)
+      .flex(justify: .evenly, align: .center)
     }.render()
   }
 }
