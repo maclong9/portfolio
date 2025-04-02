@@ -4,6 +4,10 @@ import WebUI
 struct Articles: HTML {
   let articles: [ArticleData] = [
     .init(
+      date: Date(), title: "Personal Setup", description: "My first post.", image: "/articles/example.png",
+      content: PersonalSetup()
+    ),
+    .init(
       date: Date(), title: "Hello, World!", description: "My first post.", image: "/articles/example.png",
       content: ExampleArticle()
     ),
@@ -14,12 +18,11 @@ struct Articles: HTML {
   ]
 
   func render() -> String {
-    RootLayout {
-      Hero(
-        heading: "Writing on software, productivity, and personal growth",
-        text:
-          "All of my long-form thoughts on programming, leadership, product design, and more, collected in chronological order."
-      )
+    Layout(
+      heading: "Writing on software, productivity, and personal growth",
+      description:
+        "All of my long-form thoughts on programming, leadership, product design, and more, collected in chronological order."
+    ) {
       Section {
         ArticlesList()
       }

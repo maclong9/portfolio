@@ -1,15 +1,14 @@
 import Foundation
 import WebUI
 
-struct Uses: HTML {
+struct PersonalSetup: HTML {
   func render() -> String {
-    RootLayout {
+    Layout(
+      heading: "Software, Gadgets, and Recommendations for Productivity and Enjoyment",
+      description:
+        "Over the years, I’ve refined my workflow to maximize efficiency and satisfaction in my professional endeavors. Below, I’ve curated a selection of tools, hardware, and resources that I rely on daily to stay productive and engaged. While I frequently leverage macOS’s built-in applications—like Terminal, Notes and Reminders—for their simplicity and seamless integration, they’re straightforward enough not to warrant detailed discussion here. For Swift development, I turn to Xcode, which offers a robust suite of features tailored to the language."
+    ) {
       Article {
-        Hero(
-          heading: "Software, Gadgets, and Recommendations for Productivity and Enjoyment",
-          text:
-            "Over the years, I’ve refined my workflow to maximize efficiency and satisfaction in my professional endeavors. Below, I’ve curated a selection of tools, hardware, and resources that I rely on daily to stay productive and engaged. While I frequently leverage macOS’s built-in applications—like Terminal, Notes and Reminders—for their simplicity and seamless integration, they’re straightforward enough not to warrant detailed discussion here. For Swift development, I turn to Xcode, which offers a robust suite of features tailored to the language."
-        )
         Section {
           Aside {
             Heading(level: .two) { "Workstation" }

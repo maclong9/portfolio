@@ -25,12 +25,12 @@ struct Card: HTML {
       }
       Text { description }
       if let url {
-        Link(to: url) {
+        Anchor(to: url) {
           "🔗 Learn more"
           Stack().position(.absolute, edges: .all)
         }
       } else {
-        Link(to: "/articles\(title.slugified())") { "Read article ›" }
+        Anchor(to: "/articles\(title.slugified())") { "Read article ›" }
       }
     }
     .position(.relative)

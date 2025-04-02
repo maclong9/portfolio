@@ -28,17 +28,15 @@ struct Home: HTML {
   ]
 
   func render() -> String {
-    RootLayout(isHome: true) {
-      Hero(
-        image: true,
-        heading: "Software engineer, skater, and amateur musician.",
-        text:
-          "I’m Mac, a software engineer based out of the United Kingdom. I enjoy working on open source projects and building things that make people’s lives easier.",
-        socials: [
-          .init(icon: "I", url: "https://instagram.com/mac9sb/"),
-          .init(icon: "G", url: "https://github.com/maclong9"),
-        ]
-      )
+    Layout(
+      heading: "Software engineer, skater, and amateur musician.",
+      description:
+        "I’m Mac, a software engineer based out of the United Kingdom. I enjoy working on open source projects and building things that make people’s lives easier.",
+      socials: [
+        .init(icon: .instagram, url: "https://instagram.com/mac9sb/"),
+        .init(icon: .github, url: "https://github.com/maclong9"),
+      ]
+    ) {
       Section {
         ArticlesList()
         Aside {
@@ -56,7 +54,7 @@ struct Home: HTML {
 
             }
           }
-          Link(to: "/mac-long-swe-cv.pdf") { "Download CV ↓" }
+          Anchor(to: "/mac-long-swe-cv.pdf") { "Download CV ↓" }
         }
       }
     }.render()
