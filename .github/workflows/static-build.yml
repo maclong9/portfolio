@@ -13,7 +13,6 @@ jobs:
   build-and-deploy:
     runs-on: macos-15
     steps:
-      # Check out the repository code
       - uses: actions/checkout@v4
       
       # Set up Swift 6.0
@@ -33,6 +32,20 @@ jobs:
       # Run the static site generator
       - name: Generate Site
         run: swift run
+      
+      # Set up Node.js for Prettier
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # You can adjust the version as needed
+      
+      # Install Prettier
+      - name: Install Prettier
+        run: npm install --global prettier
+      
+      # Run Prettier on output directory
+      - name: Run Prettier
+        run: prettier --write ".output/**/*.{html,css,js,json}"
       
       # Deploy to GitHub Pages (only on push to main)
       - name: Deploy to GitHub Pages
