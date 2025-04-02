@@ -7,8 +7,8 @@ let package = Package(
   name: "Portfolio",
   platforms: [.macOS(.v13)],
   dependencies: [
-    //    .package(url: "https://github.com/maclong9/web-ui", from: "0.0.4")
-    .package(path: "../web-ui")
+        .package(url: "https://github.com/maclong9/web-ui", from: "0.0.6")
+//    .package(path: "../web-ui")
   ],
   targets: [
     .executableTarget(
