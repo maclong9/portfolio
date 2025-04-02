@@ -13,6 +13,7 @@ jobs:
   build-and-deploy:
     runs-on: macos-15
     steps:
+      # Check out the repository code
       - uses: actions/checkout@v4
       
       # Set up Swift 6.0
@@ -33,19 +34,15 @@ jobs:
       - name: Generate Site
         run: swift run
       
-      # Set up Node.js for Prettier
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      # Set up Deno
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
         with:
-          node-version: '20' # You can adjust the version as needed
+          deno-version: v1.x # You can specify a specific version like 'v1.40.0' if needed
       
-      # Install Prettier
-      - name: Install Prettier
-        run: npm install --global prettier
-      
-      # Run Prettier on output directory
-      - name: Run Prettier
-        run: prettier --write ".output/**/*.{html,css,js,json}"
+      # Run Deno fmt on output directory
+      - name: Run Deno Format
+        run: deno fmt .output/**/*.{html,css,js}
       
       # Deploy to GitHub Pages (only on push to main)
       - name: Deploy to GitHub Pages
