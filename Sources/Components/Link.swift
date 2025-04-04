@@ -2,23 +2,30 @@ import WebUI
 
 struct Link: HTML {
   let href: String
-  let label: String
+  let label: String?
   let newTab: Bool
-  let bold: Bool
+  let full: Bool
 
-  init(to href: String, label: String, newTab: Bool = false, bold: Bool = false) {
+  init(to href: String, label: String? = nil, newTab: Bool = false, full: Bool = false) {
     self.href = href
     self.label = label
     self.newTab = newTab
-    self.bold = bold
+    self.full = full
   }
 
   func render() -> String {
-    Anchor(to: href, newTab: newTab) { label }
+    let anchor = Anchor(to: href, newTab: newTab) { label ?? "" }
       .cursor(.pointer)
       .transition(property: .colors, duration: 300)
-      .font(weight: bold ? .bold : .normal)
       .font(color: .teal(._600), on: .hover)
-      .render()
+
+    if full {
+      return Stack {
+        anchor.render()
+        Stack().position(.absolute, edges: .all)
+      }.render()
+    }
+
+    return anchor.render()
   }
 }

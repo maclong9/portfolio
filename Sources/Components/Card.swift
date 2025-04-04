@@ -17,7 +17,7 @@ struct Card: HTML {
   }
 
   func render() -> String {
-    Item {
+    Article {
       if let icon { icon }
       Stack {
         if let date { Time(datetime: date.formatted()) { date.formatted() } }
@@ -25,10 +25,7 @@ struct Card: HTML {
       }
       Text { description }
       if let url {
-        Anchor(to: url) {
-          "🔗 Learn more"
-          Stack().position(.absolute, edges: .all)
-        }
+        Link(to: url, label: "Learn more ›", full: true)
       } else {
         Anchor(to: "/articles\(title.slugified())") { "Read article ›" }
       }
