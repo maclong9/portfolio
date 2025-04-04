@@ -1,0 +1,15 @@
+{
+  "originHash" : "65c054f21ea4cff91e3156db9aca1a97c1bab4f5b4764694f167f19d9745bf60",
+  "pins" : [
+    {
+      "identity" : "web-ui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/maclong9/web-ui",
+      "state" : {
+        "branch" : "main",
+        "revision" : "d85b0b8ec09f24600769f841ccdba7b50ca59919"
+      }
+    }
+  ],
+  "version" : 3
+}
