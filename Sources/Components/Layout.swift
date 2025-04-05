@@ -38,13 +38,14 @@ struct Layout: HTML {
       Main {
         Section {
           if let date = date {
-            Time(datetime: date.formatted()) { date.formatted() }
+            Time(datetime: date.formatted()) { date.formatted(date: .long, time: .shortened) }
           }
           Heading(level: .one) { heading }.styled(size: .xl4)
             .margins(.bottom)
           if let image = image {
             Image(source: image, description: "\(heading) cover")
               .frame(width: .full, height: .fixed(52))
+              .frame(width: .full, height: .fixed(80), on: .sm)
           }
           Text { description }.margins(.top)
         }

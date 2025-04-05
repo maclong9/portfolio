@@ -23,7 +23,7 @@ public struct Portfolio {
         title: article.title,
         description: article.description,
         date: article.date,
-        image: "/articles/\(article.slug)/cover.jpg",
+        image: "/articles/\(article.slug).jpg",
         author: author,
         type: .article
       ),

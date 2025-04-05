@@ -6,6 +6,15 @@ struct PersonalSetup: HTML {
     Article {
       Section {
         Header {
+          Heading(level: .two) { "Introduction" }.styled(size: .xl3)
+          Text {
+            "This is a collection of tools and software that I find indispensable for my daily work as a software engineer. A couple of notes on things I have chosen not to go into detail about: I use Terminal.app from Apple for my terminal emulator, it's simple effective and doesn't need to be configured. I also utilise the standard Apple Calendar, Notes and Reminders apps for my personal productivity, they do an excellent job of keeping me organised and on track."
+          }
+        }
+      }
+
+      Section {
+        Header {
           Heading(level: .two) { "Workstation" }.styled(size: .xl3)
         }
         Main {
@@ -26,7 +35,7 @@ struct PersonalSetup: HTML {
           Stack {
             Heading(level: .three) { "Vim" }.styled(size: .lg)
             Text {
-              "Vim is my text editor of choice, prized for its speed, flexibility, and extensive customization options. Its lightweight design accelerates my coding workflow, while its vibrant community provides invaluable support for troubleshooting and optimization. Pre-installed on macOS and widely available across server environments, Vim ensures I have a consistent, reliable editing experience wherever I work."
+              "Vim is my text editor of choice, prized for its speed, flexibility, and extensive customization options. Its lightweight design accelerates my coding workflow. Pre-installed on macOS and widely available across server environments, Vim ensures I have a consistent, reliable editing experience wherever I work–especially since I started focusing on using it without any plugins."
             }
           }.spaced()
           Stack {
@@ -37,6 +46,7 @@ struct PersonalSetup: HTML {
           }.spaced()
         }
       }.spaced()
+
     }.render()
   }
 }
