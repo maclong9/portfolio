@@ -6,7 +6,7 @@ struct Home: HTML {
     return Layout(
       heading: "Software engineer, skater, & musician.",
       description:
-        "I'm Mac, a software engineer based out of the United Kingdom. I enjoy working on open source projects and building things that make people's lives easier. Read some of my articles below.",
+        "I'm Mac, a software engineer based out of the United Kingdom. I enjoy working on open source projects and building things that make people's lives easier. Read some of my articles below."
     ) {
       Stack {
         for article in Portfolio.articleRoutes {
@@ -15,7 +15,7 @@ struct Home: HTML {
               Heading(level: .two) { article.metadata.title }.styled(size: .lg)
 
               Text { article.metadata.description }
-                .font(size: .sm, )
+                .font(size: .sm)
                 .margins(.top, length: 2)
                 .margins(.bottom, length: 3)
 
