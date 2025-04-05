@@ -4,10 +4,8 @@ import WebUI
 struct Layout: HTML {
   let heading: String
   let description: String
-  // Optional Article properties
   let date: Date?
   let image: String?
-
   let children: [any HTML]
 
   init(
@@ -27,9 +25,9 @@ struct Layout: HTML {
   public func render() -> String {
     Stack {
       Header {
-        Link(to: "/", label: "Mac Long")
+        Anchor(to: "/") { "Mac Long" }.styled(bold: true)
         Navigation {
-          Link(to: "https://github.com/maclong9", label: Icon.github.rawValue)
+          Anchor(to: "https://github.com/maclong9", newTab: true) { Icon.github.rawValue }.styled()
         }
       }
       .flex(justify: .between, align: .center)
@@ -38,44 +36,32 @@ struct Layout: HTML {
       .padding()
 
       Main {
-        if let date = date {
-          Section {
+        Section {
+          if let date = date {
             Time(datetime: date.formatted()) { date.formatted() }
-            Heading(level: .one) { heading }
-              .font(size: .xl4, weight: .bold, tracking: .tight, color: .zinc(._100))
-              .border(radius: (side: .all, size: .full))
-            Text { description }.margins(.vertical)
-            Image(source: image ?? "/placeholder.png", description: "\(heading) cover")
           }
-          .margins(.bottom)
-        } else {
-          Section {
-            Heading(level: .one) { heading }
-              .font(size: .xl4, weight: .bold, tracking: .tight, color: .zinc(._100))
-              .border(radius: (side: .all, size: .full))
-            Text { description }.margins(.vertical)
+          Heading(level: .one) { heading }.styled(size: .xl4)
+            .margins(.bottom)
+          if let image = image {
+            Image(source: image, description: "\(heading) cover")
+              .frame(width: .full, height: .fixed(52))
           }
-          .margins(.bottom)
+          Text { description }.margins(.top)
         }
+        .margins(.bottom, length: 10)
 
         children.map { $0.render() }.joined()
       }
       .flex(grow: .one)
       .margins(.horizontal, auto: true)
       .frame(maxWidth: .character(64))
+      .font(wrapping: .pretty)
       .padding()
 
       Footer {
-        if date != nil {
-          Stack {
-            Text { "Mac Long" }
-          }
-          Anchor(to: "/articles") { "Read more" }
-        } else {
-          Text {
-            "© \(Date().formattedYear()) "
-            Link(to: "/", label: "Mac Long")
-          }
+        Text {
+          "© \(Date().formattedYear()) "
+          Anchor(to: "/") { "Mac Long" }.styled()
         }
       }
       .font(size: .sm, color: .zinc(._600))

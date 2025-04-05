@@ -2,43 +2,35 @@ import Foundation
 import WebUI
 
 struct Home: HTML {
-  struct Experience {
-    let title: String
-    let position: String
-    let startDate: String
-    let endDate: String
-  }
-
   func render() -> String {
-    Layout(
+    return Layout(
       heading: "Software engineer, skater, & musician.",
       description:
-        "I’m Mac, a software engineer based out of the United Kingdom. I enjoy working on open source projects and building things that make people’s lives easier.",
+        "I'm Mac, a software engineer based out of the United Kingdom. I enjoy working on open source projects and building things that make people's lives easier. Read some of my articles below.",
     ) {
       Stack {
         for article in Portfolio.articleRoutes {
           Anchor(to: "/articles/\(article.metadata.title.slugified())") {
             Article {
-              Time(datetime: "\(String(describing: article.metadata.date))") {
-                "\(String(describing: article.metadata.date))"
-              }
-              .opacity(50)
-              .border(width: 2, edges: .leading, color: .zinc(._300, opacity: 0.5))
-              .font(weight: .light)
-              .padding(.leading, length: 2)
-
-              Heading(level: .two) { article.metadata.title }
-                .font(size: .base, weight: .bold, tracking: .tight, color: .zinc(._100))
-                .margins(.bottom, length: 2)
+              Heading(level: .two) { article.metadata.title }.styled(size: .lg)
 
               Text { article.metadata.description }
-                .font(size: .sm)
+                .font(size: .sm, )
+                .margins(.top, length: 2)
+                .margins(.bottom, length: 3)
+
+              Text { "Read more ›" }
+                .font(size: .sm, weight: .semibold, color: .teal(._600))
             }
+            .cursor(.pointer)
+            .flex(direction: .column, align: .start)
+            .border(edges: .all, radius: (side: .all, size: .lg))
+            .background(color: .zinc(._700), on: .hover)
+            .transition(property: .colors, duration: 300, easing: .inOut)
+            .padding()
           }
-          .position(.relative)
-          .flex(direction: .column, align: .start)
         }
-      }
+      }.flex(direction: .column)
     }.render()
   }
 }
