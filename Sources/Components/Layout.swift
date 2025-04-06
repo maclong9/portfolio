@@ -38,7 +38,7 @@ struct Layout: HTML {
       Main {
         Section {
           if let date = date {
-            Time(datetime: date.formatted()) { date.formatted(date: .long, time: .shortened) }
+            Time(datetime: date.formatted()) { "\(date.formatted(date: .long, time: .shortened).dropLast(2))" }
           }
           Heading(level: .one) { heading }.styled(size: .xl4)
             .margins(.bottom)
