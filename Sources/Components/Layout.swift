@@ -43,7 +43,7 @@ struct Layout: HTML {
           Heading(level: .one) { heading }.styled(size: .xl4)
             .margins(.bottom)
           if let image = image {
-            Image(source: "\(image)", description: "\(heading) cover", classes: ["w-[120%] max-w-none absolute left-1/2 -translate-x-1/2 aspect-4/3 rounded-lg shadow-lg"])
+            Image(source: "\(image)", description: "\(heading) cover", classes: ["w-[120%] max-w-none -mx-[20%] aspect-4/3 rounded-lg shadow-lg"])
           }
           Text { description }.margins(.top)
         }
