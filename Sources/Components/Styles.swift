@@ -21,6 +21,6 @@ extension Anchor {
 extension Heading {
   public func styled(size: TextSize) -> Element {
     self
-      .font(size: size, weight: .bold, tracking: .tight, color: .zinc(._100))
+      .font(size: size, weight: .bold, tracking: .tight, wrapping: .balance, color: .zinc(._100))
   }
 }
