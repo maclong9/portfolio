@@ -38,12 +38,12 @@ struct Layout: HTML {
       Main {
         Section {
           if let date = date {
-            Time(datetime: date.formatted()) { "\(date.formatted(date: .long, time: .shortened).dropLast(2))" }
+            Time(datetime: date.formatted()) { "\(date.formatted(date: .long, time: .shortened)))" }
           }
           Heading(level: .one) { heading }.styled(size: .xl4)
             .margins(.bottom)
           if let image = image {
-            Image(source: "\(image)", description: "\(heading) cover", classes: ["w-[120%] max-w-none -ml-[10%] aspect-4/3 rounded-lg shadow-lg"])
+            Image(source: "\(image)", description: "\(heading) cover", classes: ["w-full aspect-4/3 rounded-lg shadow-lg sm:w-[120%] sm:max-w-none sm:-ml-[10%]"])
           }
           Text { description }.margins(.top)
         }
