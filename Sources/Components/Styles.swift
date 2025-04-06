@@ -1,22 +1,13 @@
 import WebUI
 
+let temporaryLinkStyles = "cursor-pointer transition-colors duration-300 hover:text-teal-600"
+
 extension Element {
   public func spaced() -> Element {
     self
       .margins(.vertical)
   }
 }
-
-extension Anchor {
-  public func styled(bold: Bool = false) -> Element {
-    self
-      .cursor(.pointer)
-      .transition(property: .colors, duration: 300)
-      .font(weight: bold ? .bold : .normal)
-      .font(color: .teal(._600), on: .hover)
-  }
-}
-
 
 extension Heading {
   public func styled(size: TextSize) -> Element {
