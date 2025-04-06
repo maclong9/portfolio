@@ -44,6 +44,8 @@ struct Layout: HTML {
             .margins(.bottom)
           if let image = image {
             Image(source: image, description: "\(heading) cover", classes: ["w-full h-52 sm:h-80"])
+              .border(edges: .all, radius: (side: .all, size: .lg))
+              .shadow(size: .lg)
           }
           Text { description }.margins(.top)
         }
