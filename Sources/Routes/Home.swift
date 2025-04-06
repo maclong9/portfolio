@@ -10,7 +10,7 @@ struct Home: HTML {
     ) {
       Stack {
         for article in Portfolio.articleRoutes {
-          Anchor(to: "/articles/\(article.metadata.title.slugified())") {
+          Anchor(to: "/portfolio/articles/\(article.metadata.title.slugified())") {
             Article {
               Heading(level: .two) { article.metadata.title }.styled(size: .lg)
 
