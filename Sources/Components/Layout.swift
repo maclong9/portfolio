@@ -63,7 +63,7 @@ struct Layout: HTML {
           Anchor(to: "/") { "Mac Long" }.styled()
         }
       }
-      .font(size: .sm, color: .zinc(._600))
+      .font(size: .sm, color: .zinc(._500))
       .flex(justify: .center, align: .center)
       .padding()
     }
