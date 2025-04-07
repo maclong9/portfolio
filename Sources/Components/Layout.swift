@@ -25,7 +25,7 @@ struct Layout: HTML {
   public func render() -> String {
     Stack {
       Header {
-        Anchor(to: "/", classes: [temporaryLinkStyles, "font-bold"]) { "Mac Long" }
+        Anchor(to: "/portfolio", classes: [temporaryLinkStyles, "font-bold"]) { "Mac Long" }
         Navigation {
           Anchor(to: "https://github.com/maclong9", newTab: true) { Icon.github.rawValue }
         }
@@ -60,7 +60,7 @@ struct Layout: HTML {
       Footer {
         Text {
           "© \(Date().formattedYear()) "
-          Anchor(to: "/") { "Mac Long" }
+          Anchor(to: "/portfolio") { "Mac Long" }
         }
       }
       .font(size: .sm, color: .zinc(._500))
