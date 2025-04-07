@@ -3,7 +3,7 @@ import WebUI
 
 struct PersonalSetup: HTML {
   func render() -> String {
-    Article {
+    Article(classes: ["font-serif"]) {
       Section {
         Header {
           Heading(level: .two) { "Introduction" }.styled(size: .xl3)
@@ -46,7 +46,6 @@ struct PersonalSetup: HTML {
           }.spaced()
         }
       }.spaced()
-
     }.render()
   }
 }
