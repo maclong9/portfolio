@@ -69,7 +69,7 @@ struct Layout: HTML {
     }
     .frame(minHeight: .screen)
     .font(color: .zinc(._400))
-    .background(color: .zinc((._900)))
+    .background(color: .zinc((._950)))
     .flex(direction: .column)
     .render()
   }
