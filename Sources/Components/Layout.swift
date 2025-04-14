@@ -65,7 +65,7 @@ struct Layout: HTML {
           Anchor(to: "/portfolio") { "Mac Long" }
         }
       }
-      .font(size: .sm, color: .zinc(._500))
+      .font(size: .sm, color: .zinc(._400, opacity: 0.9))
       .flex(justify: .center, align: .center)
       .padding()
     }
