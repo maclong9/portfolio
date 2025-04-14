@@ -18,7 +18,7 @@ let package = Package(
       name: "Portfolio",
       dependencies: [
         .product(name: "WebUI", package: "web-ui")
-      ],
+      ]
     )
   ]
 )
