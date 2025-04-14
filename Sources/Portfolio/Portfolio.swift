@@ -40,7 +40,7 @@ public struct Portfolio: Sendable {
 
   // Fetch a single article for a given slug
   private static func fetchArticle(for slug: String) async throws -> Document? {
-    let urlString = "https://api.swiftinit.org/render/maclong9.portfolio/portfolio/\(slug)"
+    let urlString = "https://api.swiftinit.org/render/maclong9.portfolio:main/portfolio/\(slug)"
     guard let url = URL(string: urlString) else {
       print("Invalid URL for slug: \(slug)")
       return nil
