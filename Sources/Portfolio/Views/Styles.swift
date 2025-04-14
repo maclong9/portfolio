@@ -90,11 +90,12 @@ let typographyStyles = """
       strong, b {
         font-weight: 700;  /* Bold */
       }
-
-      p strong {
-        margin: 1rem 0;
+  
+      a.source {
+        margin-block-end: 1rem;
+        display: block; 
       }
-
+  
       em, i {
         font-style: italic;
         font-weight: 400;  /* Regular */
@@ -122,8 +123,8 @@ let typographyStyles = """
         border-radius: 0.5rem; /* Smooth rounding */
         box-shadow: 0 4px 8px oklch(0% 0 0 / 0.2); /* Subtle shadow for depth */
         padding: 1rem;
-        margin-block-start: .25rem;
-        margin-block-end: .25rem;
+        margin-block-start: .4rem;
+        margin-block-end: .4rem;
         margin-inline: 0;
         max-width: 64ch; /* Match main's max-width */
         overflow-x: auto; /* Horizontal scroll for long code */
