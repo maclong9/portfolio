@@ -1,9 +1,5 @@
 # Personal Setup
 
-Over the years, I’ve refined my workflow to maximize efficiency and enjoyment. In this article I go over some of the choices.
-
-## Introduction
-
 This is a collection of tools and software that I find indispensable for my daily work as a software engineer. A couple of notes on things I have chosen not to go into detail about: I use Terminal.app from Apple for my terminal emulator, it's simple effective and doesn't need to be configured. I also utilise the standard Apple Calendar, Notes and Reminders apps for my personal productivity, they do an excellent job of keeping me organised and on track.
 
 ## Workstation
