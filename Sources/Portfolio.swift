@@ -16,6 +16,7 @@ public struct Portfolio {
   }
 
   public static let articleRoutes: [Document] = articles.map { article in
+		let image = "/portfolio/public/articles/\(article.slug).jpeg"
     return Document(
       path: "articles/\(article.slug)",
       metadata: .init(
@@ -23,7 +24,7 @@ public struct Portfolio {
         title: article.title,
         description: article.description,
         date: article.date,
-        image: "/portfolio/public/articles/\(article.slug).jpeg",
+        image: image,
         author: author,
         type: .article
       ),
@@ -32,7 +33,7 @@ public struct Portfolio {
           heading: article.title,
           description: article.description,
           date: article.date,
-          image: "/portfolio/public/articles/\(article.slug).jpeg",
+          image: image,
           children: { article.content }
         )
       }

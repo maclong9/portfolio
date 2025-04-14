@@ -29,4 +29,3 @@ struct WebUIIntroduction: HTML {
     }.render()
   }
 }
-
