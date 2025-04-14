@@ -48,3 +48,51 @@ func createArticleDocument(
     }
   )
 }
+
+struct ArticleSection: HTML {
+  let title: String
+  let children: [any HTML]
+
+  init(
+    title: String,
+    @HTMLBuilder children: @escaping () -> [any HTML]
+  ) {
+    self.title = title
+    self.children = children()
+  }
+
+  func render() -> String {
+    Section {
+      Header {
+        Heading(level: .two) { title }.styled(size: .xl3)
+      }
+      Main {
+        children.map { $0.render() }.joined()
+      }
+    }
+    .spaced()
+    .render()
+  }
+}
+
+struct ContentStack: HTML {
+  let title: String
+  let children: [any HTML]
+
+  init(
+    title: String,
+    @HTMLBuilder children: @escaping () -> [any HTML]
+  ) {
+    self.title = title
+    self.children = children()
+  }
+
+  func render() -> String {
+    Stack {
+      Heading(level: .three) { title }.styled(size: .lg)
+      children.map { $0.render() }.joined()
+    }
+    .spaced()
+    .render()
+  }
+}
