@@ -15,10 +15,7 @@ public struct Portfolio {
     )
   }
 
-  public static let articleRoutes: [Document] = [
-    WebUIIntroduction.document,
-    PersonalSetup.document
-  ]
+  public static let articleRoutes: [Document] = []
 
   static func main() async throws {
     try Application(routes: staticRoutes + articleRoutes).build()

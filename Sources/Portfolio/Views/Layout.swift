@@ -48,7 +48,8 @@ struct Layout: HTML {
           if let image = image {
             Image(
               source: "\(image)", description: "\(heading) cover",
-              config: .init(classes: ["w-full aspect-16/10 rounded-lg shadow-lg sm:w-[120%] sm:max-w-none sm:-ml-[10%]"]))
+              config: .init(classes: ["w-full aspect-16/10 rounded-lg shadow-lg sm:w-[120%] sm:max-w-none sm:-ml-[10%]"]
+              ))
           }
           Text { description }.margins(.top)
         }
