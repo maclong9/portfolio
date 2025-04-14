@@ -26,6 +26,13 @@ let typographyStyles = """
           max-width: 64ch; /* Match main's max-width */
         }
       }
+  
+      ul {
+        display: block;
+        list-style-type: disc;
+        padding: 0 0 0 40px;
+      }
+  
       /* Headings */
       h1, h2, h3, h4, h5, h6 {
         color: oklch(96.7% 0.001 286.375);
@@ -83,6 +90,10 @@ let typographyStyles = """
       strong, b {
         font-weight: 700;  /* Bold */
       }
+  
+      p strong {
+        margin: 1rem 0;
+      }
 
       em, i {
         font-style: italic;
@@ -111,8 +122,8 @@ let typographyStyles = """
         border-radius: 0.5rem; /* Smooth rounding */
         box-shadow: 0 4px 8px oklch(0% 0 0 / 0.2); /* Subtle shadow for depth */
         padding: 1rem;
-        margin-block-start: 1.5rem;
-        margin-block-end: 1.5rem;
+        margin-block-start: .25rem;
+        margin-block-end: .25rem;
         margin-inline: 0;
         max-width: 64ch; /* Match main's max-width */
         overflow-x: auto; /* Horizontal scroll for long code */
@@ -157,5 +168,5 @@ let typographyStyles = """
       code .xz { color: oklch(80% 0.12 260); } /* Class: Same as actor */
       code .xt { color: oklch(80% 0.12 260); } /* Type: Same as actor */
       code .xu { color: oklch(80% 0.12 260); } /* Typealias: Same as actor */
-      code .xi { color: transparent; } /* Indent: No color, spacing handled by pre */
+      code .xi { color: transparent; } /* Indent: No color, spacing handled by pre */  
   """

@@ -7,7 +7,7 @@ struct Home: HTML {
       Heading(level: .one) { "Software engineer, skater, & musician." }.styled(size: .xl4).margins(.bottom)
       Text {
         "I'm Mac, a software engineer based out of the United Kingdom. I enjoy working on open source projects and building things that make people's lives easier. Read some of my articles below."
-      }.margins(.top)
+      }
       Stack {
         /*for article in Portfolio.articleRoutes {
             Anchor(to: "/portfolio/articles/\(article.metadata.title.slugified())") {
@@ -30,7 +30,7 @@ struct Home: HTML {
         }*/
         // Temporary placeholder to avoid empty Stack
         Text { "No articles available yet." }
-      }.flex(direction: .column)
+      }.flex(direction: .column).spaced()
     }.render()
   }
 }
