@@ -1,10 +1,6 @@
 import Foundation
 import WebUI
 
-#if os(Linux)
-import FoundationNetworking
-#endif
-
 let author = "Mac Long"
 
 @main
