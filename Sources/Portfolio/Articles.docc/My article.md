@@ -2,6 +2,14 @@
 
 This is a simple article that demonstrates how to use snippets in documentation.
 
+**Benefits**
+
+- Syntax highlighting
+- Hover information
+- Type safety and completion
+
+## Example Snippets
+
 **Simple Snippet:**
 @Snippet(path: "Portfolio/Snippets/SnippetsExample_I")
 
