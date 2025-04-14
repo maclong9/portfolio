@@ -32,7 +32,7 @@ jobs:
       
       # Run the static site generator
       - name: Generate Site
-        run: swift run
+        run: swift run Portfolio
 
       # Deploy to GitHub Pages (only on push to main)
       - name: Deploy to GitHub Pages
