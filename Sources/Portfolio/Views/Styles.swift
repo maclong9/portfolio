@@ -17,9 +17,12 @@ extension Heading {
 }
 
 let typographyStyles = """
+  p { text-wrap: pretty; }
+  
   /* Headings */
   h1, h2, h3, h4, h5, h6 {
     color: oklch(96.7% 0.001 286.375);
+    text-wrap: balance;
   }
 
   h1 {
@@ -43,7 +46,7 @@ let typographyStyles = """
     font-weight: 600;  /* Semi-bold */
     line-height: 1.4;  /* 140% */
     margin-block-start: 1.5rem;
-    margin-block-end: 0.75rem;
+    margin-block-end: 0.25rem;
   }
 
   h4 {
@@ -95,4 +98,4 @@ let typographyStyles = """
     margin-inline-start: 2rem;
     margin-inline-end: 2rem;
   }
-  """
+"""
