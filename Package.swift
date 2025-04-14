@@ -19,6 +19,6 @@ let package = Package(
       resources: [
         .copy("Public")
       ]
-    ),
+    )
   ]
 )
