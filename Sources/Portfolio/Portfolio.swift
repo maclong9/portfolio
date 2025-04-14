@@ -56,9 +56,10 @@ public struct Portfolio: Sendable {
       return nil
     }
 
-    // Extract title and description (simplified, assuming title is in <h1> and description is first <p>)
+    // Extract title, description, and cover image
     let title = extractTitle(from: htmlString) ?? slug.capitalized
     let description = extractDescription(from: htmlString) ?? "Article about \(slug)"
+    let coverImage = extractCoverImage(from: htmlString)
 
     return Document(
       path: "articles/\(slug)",
@@ -69,7 +70,12 @@ public struct Portfolio: Sendable {
         author: author,
         type: .article
       ),
-      content: { htmlString }
+      content: {
+        Layout(heading: title, description: description, image: coverImage) {
+          "\(htmlString)"
+          Style { typographyStyles }
+        }
+      }
     )
   }
 
@@ -97,15 +103,20 @@ public struct Portfolio: Sendable {
     return String(html[range])
   }
 
-  static func printSlugs() {
-    for article in slugs {
-      print("Slug: \(article)")
+  // Helper to extract cover image from HTML (first <img> tag's src attribute)
+  private static func extractCoverImage(from html: String) -> String? {
+    let pattern = "<img[^>]+src=[\"'](.*?)['\"]"
+    guard let regex = try? NSRegularExpression(pattern: pattern),
+      let match = regex.firstMatch(in: html, range: NSRange(html.startIndex..., in: html)),
+      let range = Range(match.range(at: 1), in: html)
+    else {
+      return nil
     }
+    return String(html[range])
   }
 
   static func main() async throws {
     let portfolioInstance = try await Portfolio()
-    printSlugs()
     let allRoutes = staticRoutes + portfolioInstance.articles
     try Application(routes: allRoutes).build()
   }

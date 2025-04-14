@@ -39,22 +39,6 @@ struct Layout: HTML {
       .padding()
 
       Main {
-        Section {
-          if let date = date {
-            Time(datetime: date.formatted()) { "\(date.formatted(date: .long, time: .shortened))" }
-          }
-          Heading(level: .one) { heading }.styled(size: .xl4)
-            .margins(.bottom)
-          if let image = image {
-            Image(
-              source: "\(image)", description: "\(heading) cover",
-              config: .init(classes: ["w-full aspect-16/10 rounded-lg shadow-lg sm:w-[120%] sm:max-w-none sm:-ml-[10%]"]
-              ))
-          }
-          Text { description }.margins(.top)
-        }
-        .margins(.bottom, length: 10)
-
         children.map { $0.render() }.joined()
       }
       .flex(grow: .one)
