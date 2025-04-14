@@ -48,4 +48,22 @@ struct PersonalSetup: HTML {
       }.spaced()
     }.render()
   }
+
+  static var document: Document {
+    let title = "Personal Setup"
+    let slug = title.slugified()
+    let description =
+      "Over the years, I’ve refined my workflow to maximize efficiency and enjoyment. In this article I go over some of the choices."
+    let date = ISO8601DateFormatter().date(from: "2025-03-31T09:00:00Z") ?? Date()
+    let image = "/portfolio/public/articles/\(slug).jpeg"
+
+    return createArticleDocument(
+      slug: slug,
+      title: title,
+      description: description,
+      date: date,
+      image: image,
+      content: PersonalSetup()
+    )
+  }
 }

@@ -15,30 +15,9 @@ public struct Portfolio {
     )
   }
 
-  public static let articleRoutes: [Document] = articles.map { article in
-		let image = "/portfolio/public/articles/\(article.slug).jpeg"
-    return Document(
-      path: "articles/\(article.slug)",
-      metadata: .init(
-        site: author,
-        title: article.title,
-        description: article.description,
-        date: article.date,
-        image: image,
-        author: author,
-        type: .article
-      ),
-      content: {
-        Layout(
-          heading: article.title,
-          description: article.description,
-          date: article.date,
-          image: image,
-          children: { article.content }
-        )
-      }
-    )
-  }
+  public static let articleRoutes: [Document] = [
+    PersonalSetup.document
+  ]
 
   static func main() async throws {
     try Application(routes: staticRoutes + articleRoutes).build()

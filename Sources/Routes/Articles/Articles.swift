@@ -18,13 +18,33 @@ struct ArticleData {
   }
 }
 
-let articles: [ArticleData] = [
-  ArticleData(
-    slug: "personal-setup",
-    title: "Personal Setup",
-    description:
-      "Over the years, I’ve refined my workflow to maximize efficiency and enjoyment. In this article I go over some of the choices.",
-    date: "2025-03-31T09:00:00Z",
-    content: PersonalSetup()
+func createArticleDocument(
+  slug: String,
+  title: String,
+  description: String,
+  date: Date,
+  image: String,
+  content: any HTML
+) -> Document {
+  return Document(
+    path: "articles/\(slug)",
+    metadata: .init(
+      site: author,
+      title: title,
+      description: description,
+      date: date,
+      image: image,
+      author: author,
+      type: .article
+    ),
+    content: {
+      Layout(
+        heading: title,
+        description: description,
+        date: date,
+        image: image,
+        children: { content }
+      )
+    }
   )
-]
+}
