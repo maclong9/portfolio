@@ -17,6 +17,15 @@ extension Heading {
 }
 
 let typographyStyles = """
+      section {
+        box-sizing: border-box; /* Include padding/margins in width */
+        margin-inline: auto; /* Center within parent */
+        max-width: 90vw;
+  
+        @media(min-width: 640px) {
+          max-width: 64ch; /* Match main's max-width */
+        }
+      }
       /* Headings */
       h1, h2, h3, h4, h5, h6 {
         color: oklch(96.7% 0.001 286.375);
@@ -105,10 +114,12 @@ let typographyStyles = """
         margin-block-start: 1.5rem;
         margin-block-end: 1.5rem;
         margin-inline: 0;
+        max-width: 64ch; /* Match main's max-width */
         overflow-x: auto; /* Horizontal scroll for long code */
         font-size: 0.875rem; /* 14px, readable */
         line-height: 1.5; /* Comfortable line spacing */
         white-space: pre; /* Preserve whitespace and line breaks */
+        box-sizing: border-box; /* Ensure padding doesn't cause overflow */
       }
 
       code {

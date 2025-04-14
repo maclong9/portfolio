@@ -13,7 +13,7 @@ This is a simple article that demonstrates how to use snippets in documentation.
 **Simple Snippet:**
 @Snippet(path: "Portfolio/Snippets/SnippetsExample_I")
 
-**Snippet with Caption:**
+**Snippet with Hide and Show**
 @Snippet(path: "Portfolio/Snippets/SnippetsExample_II")
 
 **Snippet with Slices:**
@@ -23,3 +23,6 @@ This is a simple article that demonstrates how to use snippets in documentation.
 
 2. Then call it:
 @Snippet(path: "Portfolio/Snippets/SnippetsExample_III", slice: USAGE)
+
+**Snippet with Caption:**
+@Snippet(path: "Portfolio/Snippets/SnippetsExample_IV")

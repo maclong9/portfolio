@@ -75,7 +75,7 @@ public struct Portfolio: Sendable {
         type: .article
       ),
       content: {
-        Layout(heading: title, description: description, image: coverImage) {
+        Layout(image: coverImage) {
           "\(htmlString)"
           Style { typographyStyles }
         }

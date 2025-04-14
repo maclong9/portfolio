@@ -2,21 +2,15 @@ import Foundation
 import WebUI
 
 struct Layout: HTML {
-  let heading: String
-  let description: String
   let date: Date?
   let image: String?
   let children: [any HTML]
 
   init(
-    heading: String,
-    description: String,
     date: Date? = nil,
     image: String? = nil,
     @HTMLBuilder children: @escaping () -> [any HTML]
   ) {
-    self.heading = heading
-    self.description = description
     self.date = date
     self.image = image
     self.children = children()

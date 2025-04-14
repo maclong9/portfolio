@@ -56,8 +56,6 @@ func createArticleDocument(
     ),
     content: {
       Layout(
-        heading: title,
-        description: description,
         date: date,
         image: image,
         children: { content }
