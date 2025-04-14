@@ -25,9 +25,11 @@ struct Layout: HTML {
   public func render() -> String {
     Stack {
       Header {
-        Anchor(to: "/portfolio", classes: [temporaryLinkStyles, "font-bold"]) { "Mac Long" }
+        Anchor(to: "/portfolio", config: .init(classes: [temporaryLinkStyles, "font-bold"])) { "Mac Long" }
         Navigation {
-          Anchor(to: "https://github.com/maclong9", newTab: true) { Icon.github.rawValue }
+          Anchor(
+            to: "https://github.com/maclong9", newTab: true, config: .init(label: "Visit Mac Long's GitHub profile")
+          ) { Icon.github.rawValue }
         }
       }
       .flex(justify: .between, align: .center)
@@ -45,7 +47,7 @@ struct Layout: HTML {
           if let image = image {
             Image(
               source: "\(image)", description: "\(heading) cover",
-              classes: ["w-full aspect-4/3 rounded-lg shadow-lg sm:w-[120%] sm:max-w-none sm:-ml-[10%]"])
+              config: .init(classes: ["w-full aspect-4/3 rounded-lg shadow-lg sm:w-[120%] sm:max-w-none sm:-ml-[10%]"]))
           }
           Text { description }.margins(.top)
         }
