@@ -16,6 +16,7 @@ public struct Portfolio {
   }
 
   public static let articleRoutes: [Document] = [
+    WebUIIntroduction.document,
     PersonalSetup.document
   ]
 
