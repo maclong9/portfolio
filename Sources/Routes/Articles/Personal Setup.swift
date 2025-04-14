@@ -46,7 +46,6 @@ struct PersonalSetup: HTML {
           }.spaced()
         }
       }.spaced()
-
     }.render()
   }
 }
