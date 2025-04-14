@@ -1,7 +1,5 @@
 # Personal Setup
 
-![Setup Cover Photo](public/articles/personal-setup.jpeg)
-
 Over the years, I’ve refined my workflow to maximize efficiency and enjoyment. In this article I go over some of the choices.
 
 ## Introduction
