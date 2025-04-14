@@ -6,12 +6,6 @@ import PackageDescription
 let package = Package(
   name: "Portfolio",
   platforms: [.macOS(.v13)],
-  products: [
-    .library(
-      name: "Portfolio",
-      targets: ["Portfolio"]
-    )
-  ],
   dependencies: [
     .package(url: "https://github.com/maclong9/web-ui", branch: "main"),
     .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.3.0"),
