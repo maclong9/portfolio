@@ -21,18 +21,18 @@ let typographyStyles = """
         box-sizing: border-box; /* Include padding/margins in width */
         margin-inline: auto; /* Center within parent */
         max-width: 90vw;
-  
+
         @media(min-width: 640px) {
           max-width: 64ch; /* Match main's max-width */
         }
       }
-  
+
       ul {
         display: block;
         list-style-type: disc;
         padding: 0 0 0 40px;
       }
-  
+
       /* Headings */
       h1, h2, h3, h4, h5, h6 {
         color: oklch(96.7% 0.001 286.375);
@@ -43,7 +43,7 @@ let typographyStyles = """
         font-weight: 700;  /* Bold */
         line-height: 1.2;  /* 120% */
         margin-block-start: 2.5rem;
-        margin-block-end: 1.25rem;
+        margin-block-end: 0.5rem;
       }
 
       h2 {
@@ -51,7 +51,7 @@ let typographyStyles = """
         font-weight: 600;  /* Semi-bold */
         line-height: 1.3;  /* 130% */
         margin-block-start: 2rem;
-        margin-block-end: 1rem;
+        margin-block-end: 0.5rem;
       }
 
       h3 {
@@ -59,7 +59,7 @@ let typographyStyles = """
         font-weight: 600;  /* Semi-bold */
         line-height: 1.4;  /* 140% */
         margin-block-start: 1.5rem;
-        margin-block-end: 0.75rem;
+        margin-block-end: 0.5rem;
       }
 
       h4 {
@@ -67,7 +67,7 @@ let typographyStyles = """
         font-weight: 500;   /* Medium */
         line-height: 1.5;   /* 150% */
         margin-block-start: 1.25rem;
-        margin-block-end: 0.625rem;
+        margin-block-end: 0.5rem;
       }
 
       h5 {
@@ -83,14 +83,14 @@ let typographyStyles = """
         font-weight: 500;    /* Medium */
         line-height: 1.6;    /* 160% */
         margin-block-start: 0.875rem;
-        margin-block-end: 0.4375rem;
+        margin-block-end: 0.5rem;
       }
 
       /* Text Markers */
       strong, b {
         font-weight: 700;  /* Bold */
       }
-  
+
       p strong {
         margin: 1rem 0;
       }
