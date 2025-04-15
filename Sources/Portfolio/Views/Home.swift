@@ -7,7 +7,7 @@ struct Home: HTML {
       Heading(level: .one) { "Software engineer, skater, & musician." }.styled(size: .xl4).margins(.bottom)
       Text {
         "I'm Mac, a software engineer based out of the United Kingdom. I enjoy working on open source projects and building things that make people's lives easier. Read some of my articles below."
-      }
+      }.font(family: "ui-serif")
       Stack {
         Anchor(to: "/portfolio/articles/personal-setup") {
           Article {
@@ -15,7 +15,7 @@ struct Home: HTML {
             Text {
               "This is a collection of tools and software that I find indispensable for my daily work as a software engineer."
             }
-            .font(size: .sm)
+            .font(size: .sm, family: "ui-serif")
             .margins(.top, length: 2)
             .margins(.bottom, length: 3)
             Text { "Read more ›" }
