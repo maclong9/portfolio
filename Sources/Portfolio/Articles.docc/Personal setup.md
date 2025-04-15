@@ -1,21 +1,21 @@
-# Personal Setup
+# My Personal Setup
 
-**Published:** April 15, 2025
+**Posted:** April 15, 2025
 
-This is a collection of tools and software that I find indispensable for my daily work as a software engineer. A couple of notes on things I have chosen not to go into detail about: I use Terminal.app from Apple for my terminal emulator, it's simple effective and doesn't need to be configured. I also utilise the standard Apple Calendar, Notes and Reminders apps for my personal productivity, they do an excellent job of keeping me organised and on track.
+Here I will share the tools and software I rely on daily as a software engineer. A quick note on a couple of choices I won’t delve into deeply: I use Apple’s Terminal.app as my terminal emulator—it’s simple, effective, and requires no extra configuration. For personal productivity, I find Apple’s Calendar, Notes, and Reminders apps perfectly suited to keeping me organised and focused.
 
 ## Workstation
 
 ### 14" MacBook Pro, M3 Pro, 18GB RAM
 
-This powerhouse serves as the cornerstone of my professional setup. Whether I’m tackling web development, building native applications, or occasionally editing video, the M3 Pro delivers exceptional performance with remarkable efficiency. Video rendering tasks are completed swiftly, usually without even triggering the cooling fans. The only instance I’ve noticed fan activity was while maxing out the graphics settings in Lies of P. I prefer the MacBook’s integrated trackpad and keyboard over external peripherals, finding them precise and ergonomic for my needs—no additional monitors, mice, or keyboards required. The speakers are also wonderful, providing clear and immersive audio.
+This MacBook Pro is the heart of my professional setup. Whether I’m working on web development, building native applications, or occasionally editing videos, the M3 Pro offers outstanding performance and efficiency. Video rendering tasks are completed quickly, often without the cooling fans even activating. The only time I’ve noticed them was when pushing the graphics settings to their limit in *Lies of P*. I prefer the MacBook’s built-in trackpad and keyboard, which feel precise and comfortable, so I don’t use external monitors or peripherals. The speakers are also impressive, delivering clear and immersive sound.
 
 ## Development Tools
 
 ### Vim
 
-Vim is my text editor of choice, prized for its speed, flexibility, and extensive customization options. Its lightweight design accelerates my coding workflow. Pre-installed on macOS and widely available across server environments, Vim ensures I have a consistent, reliable editing experience wherever I work–especially since I started focusing on using it without any plugins.
+Vim is my preferred text editor, valued for its speed, flexibility, and customisation options. Its lightweight nature helps me work efficiently, and since it’s pre-installed on macOS and widely available on servers, I enjoy a consistent editing experience wherever I’m coding. Recently, I’ve been using it without plugins, which keeps things streamlined and focused. You can view my configuration for it [here](https://github.com/maclong9/dots).
 
 ### Deno
 
-When working with TypeScript I rely on Deno as my primary runtime environment. Its emphasis on security, performance, and built-in tooling—such as formatting, linting, and testing—streamlines my development process significantly. I opt to use the Fresh framework, which integrates seamlessly with Deno to provide a Wmodern, efficient stack for delivering high-quality web applications.
+For TypeScript projects, I turn to Deno as my runtime environment. Its focus on security, performance, and built-in tools—like formatting, linting, and testing—makes development smoother and more efficient. I often use the Fresh framework alongside Deno, as it integrates seamlessly and provides a modern, reliable foundation for building high-quality web applications.
