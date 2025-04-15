@@ -32,9 +32,9 @@ let typographyStyles = """
 
       &.source { display: none; }
 
-      :where(p code &, li code &) {
-        font-weight: normal;
+      :where(p code &, li code &, p &) {
         border-bottom: 1px dotted var(--text-color);
+        font-weight: normal;
       }
     }
 
