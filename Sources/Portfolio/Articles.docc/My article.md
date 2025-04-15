@@ -1,5 +1,7 @@
 # My article
 
+**Published:** April 15, 2025
+
 This is a simple article that demonstrates how to use snippets in documentation.
 
 > Note: I will leave this article here but hidden as an example of how to create various types of snippets using the Swift package manager.
