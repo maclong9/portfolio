@@ -11,4 +11,4 @@
 
 ## Swift Package Manager Snippets
 
-The articles on this portfolio make use of Swift Snippets, this allows compiling of codeblocks instead of just static markdown code. This provides a few benefits such as linking to types and keyword documentation.
+The articles on this portfolio make use of Swift Snippets, this allows compiling of codeblocks instead of just static markdown code. This provides a few benefits such as linking to types and keyword documentation. At some point I would like to add hover states to these symbols for quick reference of documentation.
