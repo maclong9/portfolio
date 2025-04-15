@@ -20,7 +20,7 @@ Swift is a lovely language that I have been using to write backend code more fre
 
 The most basic functionality of WebUI is to generate a web page, you do this by defining a document with a metadata structure and the content to be nested in the document structure, this is passed in the form of a closure with other WebUI elements.
 
-@Snippet(path: "Snippets/Introduction to WebUI/Document")
+@Snippet(path: "Sources/PortfolioSnippets/Introduction to WebUI/Document")
 
 The above code renders to the HTML seen below, as you can see at the time of writing styles are handled via TailwindCSS although this may change in the future if I decide it will be a useful change. The metadata is rendered into the `<head>` tag and then the closure content is rendered inside of the HTML document's `<body>` tags.
 
@@ -30,19 +30,19 @@ The above code renders to the HTML seen below, as you can see at the time of wri
 
 Adding styles is a simple task, following a modifier style pattern similar to SwiftUI. Below is an example of a simple div containing a heading, the container has a light background normally and a dark background on `prefers-color-scheme: dark`, and there are some simple typograhpy styles applied to the heading.
 
-@Snippet(path: "Snippets/Introduction to WebUI/Styles")
+@Snippet(path: "Sources/PortfolioSnippets/Introduction to WebUI/Styles")
 
 ## Generating a Simple Static Site
 
 ### Creating a Layout Component
 
-@Snippet(path: "Snippets/Introduction to WebUI/Static", slice: LAYOUT)
+@Snippet(path: "Sources/PortfolioSnippets/Introduction to WebUI/Static", slice: LAYOUT)
 
 This allows you to create reusable patterns that can be used throughout your WebUI documents, as you can see above I have generated a simple Layout with a header, main and footer.
 
 Next we can run the build step to generate a `.output` directory in the current working directory, you will need to set a custom working directory in your Xcode scheme if you are running this from Xcode and not the terminal.
 
-@Snippet(path: "Snippets/Introduction to WebUI/Static", slice: STATIC)
+@Snippet(path: "Sources/PortfolioSnippets/Introduction to WebUI/Static", slice: STATIC)
 
 The `.output` directory will follow a pattern like below after the build is completed:
 
@@ -54,7 +54,7 @@ The `.output` directory will follow a pattern like below after the build is comp
 
 You are also able to specifiy a public directory that will be copied to `.output/public` with any files nested inside, this means if you wanted to create an image in this example you could place the file inside of `Sources/Static Site/Public` and then reference it in the code like so:
 
-@Snippet(path: "Snippets/Introduction to WebUI/Static", slice: IMAGE)
+@Snippet(path: "Sources/PortfolioSnippets/Introduction to WebUI/Static", slice: IMAGE)
 
 ## Conclusion
 
