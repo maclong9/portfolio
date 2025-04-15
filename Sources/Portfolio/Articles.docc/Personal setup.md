@@ -1,6 +1,6 @@
 # My Personal Setup
 
-**Posted:** April 15, 2025
+**Published:** April 15, 2025
 
 Here I will share the tools and software I rely on daily as a software engineer. A quick note on a couple of choices I won’t delve into deeply: I use Apple’s Terminal.app as my terminal emulator—it’s simple, effective, and requires no extra configuration. For personal productivity, I find Apple’s Calendar, Notes, and Reminders apps perfectly suited to keeping me organised and focused.
 
