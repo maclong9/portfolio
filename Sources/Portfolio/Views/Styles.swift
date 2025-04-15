@@ -94,18 +94,7 @@ let typographyStyles = """
         font-weight: 700;  /* Bold */
       }
 
-      a.source {
-        --primary: oklch(60% 0.118 184.704);
-        margin-block-end: 1rem;
-        display: block; 
-        font-size: .75rem;
-
-        span:first-child::before {
-          content: "Source: ";
-          font-weight: bold;
-          color: var(--primary);
-        }
-      }
+      a.source { display: none; }
 
       em, i {
         font-style: italic;
