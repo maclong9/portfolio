@@ -3,6 +3,9 @@
 
 import PackageDescription
 
+// TODO: Figure out how to newline in pre/code blocks
+// TODO: Automate Swiftinit build
+
 let package = Package(
   name: "Portfolio",
   platforms: [.macOS(.v13)],
