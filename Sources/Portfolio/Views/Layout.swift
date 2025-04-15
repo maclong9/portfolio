@@ -37,7 +37,7 @@ struct Layout: HTML {
       }
       .flex(grow: .one)
       .margins(.horizontal, auto: true)
-      .frame(maxWidth: .custom("90vw"))
+      .frame(maxWidth: .custom("95vw"))
       .frame(maxWidth: .character(64), on: .sm)
       .font(wrapping: .pretty)
       .padding()
