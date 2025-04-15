@@ -22,12 +22,6 @@ let package = Package(
       dependencies: [
         .product(name: "WebUI", package: "web-ui")
       ]
-    ),
-    .target(
-      name: "PortfolioSnippets",
-      dependencies: [
-        .product(name: "WebUI", package: "web-ui")
-      ]
     )
   ]
 )
