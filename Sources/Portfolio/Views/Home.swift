@@ -28,25 +28,6 @@ struct Home: HTML {
           .transition(property: .colors, duration: 300, easing: .inOut)
           .padding()
         }
-        Anchor(to: "/portfolio/articles/my-article") {
-          Article {
-            Heading(level: .two) { "Example Article" }.styled(size: .lg)
-            Text {
-              "This is a simple article that demonstrates how to use snippets in documentation."
-            }
-            .font(size: .sm)
-            .margins(.top, length: 2)
-            .margins(.bottom, length: 3)
-            Text { "Read more ›" }
-              .font(size: .sm, weight: .semibold, color: .teal(._600))
-          }
-          .cursor(.pointer)
-          .flex(direction: .column, align: .start)
-          .border(edges: .all, radius: (side: .all, size: .lg))
-          .background(color: .zinc(._700), on: .hover)
-          .transition(property: .colors, duration: 300, easing: .inOut)
-          .padding()
-        }
       }.flex(direction: .column).spaced()
     }.render()
   }
