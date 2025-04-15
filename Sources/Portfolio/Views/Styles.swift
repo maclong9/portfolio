@@ -40,7 +40,8 @@ let typographyStyles = """
       }
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1, h2, h3, h4, h5, h6, b, strong {
+      font-family: system-ui;
       font-weight: bold;
       color: var(--text-color);
     }
@@ -61,11 +62,6 @@ let typographyStyles = """
       }
     }
 
-    b, strong {
-      font-weight: bold;
-      color: var(--text-color);
-    }
-
     ul {
       list-style: disc;
       margin-left: 2rem;
@@ -75,6 +71,10 @@ let typographyStyles = """
         
         & p { margin: 0; }
       }
+    }
+  
+    blockquote {
+      font-style: italic;
     }
 
     /* Code Formatting */
@@ -93,10 +93,8 @@ let typographyStyles = """
         display: block;
         overflow-x: auto;
         white-space: pre;
-        tab-size: 2;
 
         & a:not(a.xs) { border-bottom: 1px dotted var(--text-color); }
-        & .newline { display: block; height: 0; }
         & .xk { color: oklch(0.74 0.1431 353.93); }
         & .xt { color: oklch(0.79 0.0844 302.64); }
         & .xv { color: oklch(80% 0.15 300); }
@@ -105,23 +103,5 @@ let typographyStyles = """
         & .xc, &.xd { color: oklch(0.65 0.05 245); }
         & .xr { color: oklch(0.75 0.20 40); }
       }
-    }
-
-    blockquote {
-      font-style: italic;
-    }
-
-    pre code .xk, pre code .xt {
-      margin-right: 0.5rem;
-    }
-
-    pre code .xv:not(::first-child) {
-      margin: 0 0.5rem;
-    }
-
-    /* Add spacing after colons in parameter declarations */
-    pre code span:has(+ .xt)::after {
-      content: "";
-      white-space: pre;
     }
   """
