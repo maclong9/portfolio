@@ -19,7 +19,7 @@ extension Heading {
 let typographyStyles = """
     :root {
       --text-color: oklch(98.5% 0 0);
-      --link-color: oklch(0.6 0.118 184.703995);
+      --link-color: oklch(70.4% 0.14 182.503); 
       --visited-color: oklch(43.7% 0.078 188.216);
       --hover-color: oklch(0.8 0.078 188.216);
       --border-color: oklch(21% 0.006 285.885);
