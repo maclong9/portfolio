@@ -43,7 +43,7 @@ let typographyStyles = """
     h1, h2, h3, h4, h5, h6 {
       font-weight: bold;
       color: var(--text-color);
-      margin-bottom: .5rem;
+      margin-bottom: .2rem;
     }
     h1 { font-size: 2.5rem; line-height: 3rem; }
     h2 { font-size: 1.75rem; line-height: 2.25rem; margin-top: 1.5rem; }
