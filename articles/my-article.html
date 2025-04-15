@@ -33,7 +33,7 @@
 
   a {
     &:where(:not(h1 a, h2 a, h3 a, h4 a, h5 a, h6 a, pre a, header a, footer a)) {
-      &:link { color: var(--link-color); }
+      &:link, &:visited { color: var(--link-color); }
       &:hover { color: var(--hover-color); }
     }
 
