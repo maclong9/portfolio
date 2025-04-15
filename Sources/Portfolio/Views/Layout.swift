@@ -37,7 +37,7 @@ struct Layout: HTML {
       }
       .flex(grow: .one)
       .margins(.horizontal, auto: true)
-      .frame(maxWidth: .character(64))
+      .frame(maxWidth: .character(75))
       .font(wrapping: .pretty)
       .padding()
 
