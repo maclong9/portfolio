@@ -11,18 +11,18 @@ This is a simple article that demonstrates how to use snippets in documentation.
 ## Example Snippets
 
 **Simple Snippet:**
-@Snippet(path: "Portfolio/Snippets/SnippetsExample_I")
+@Snippet(path: "Portfolio/Snippets/My article/SnippetsExample_I")
 
 **Snippet with Hide and Show**
-@Snippet(path: "Portfolio/Snippets/SnippetsExample_II")
+@Snippet(path: "Portfolio/Snippets/My article/SnippetsExample_II")
 
 **Snippet with Slices:**
 
 1. First declare the function:
-@Snippet(path: "Portfolio/Snippets/SnippetsExample_III", slice: DECLARATION)
+@Snippet(path: "Portfolio/Snippets/My article/SnippetsExample_III", slice: DECLARATION)
 
 2. Then call it:
-@Snippet(path: "Portfolio/Snippets/SnippetsExample_III", slice: USAGE)
+@Snippet(path: "Portfolio/Snippets/My article/SnippetsExample_III", slice: USAGE)
 
 **Snippet with Caption:**
-@Snippet(path: "Portfolio/Snippets/SnippetsExample_IV")
+@Snippet(path: "Portfolio/Snippets/My article/SnippetsExample_IV")
