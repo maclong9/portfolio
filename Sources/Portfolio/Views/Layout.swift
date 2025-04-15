@@ -53,7 +53,7 @@ struct Layout: HTML {
       .padding()
     }
     .frame(minHeight: .screen)
-    .font(color: .zinc(._400))
+    .font(color: .zinc(._200))
     .background(color: .zinc((._950)))
     .flex(direction: .column)
     .render()

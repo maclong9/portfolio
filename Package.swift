@@ -3,7 +3,7 @@
 
 import PackageDescription
 
-// TODO: Figure out how to newline in pre/code blocks
+// TODO: Figure out how to indent and improve spacing
 // TODO: Figure out how to create symbol hovers
 // TODO: Automate Swiftinit build
 

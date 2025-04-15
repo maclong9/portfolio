@@ -18,7 +18,7 @@ extension Heading {
 
 let typographyStyles = """
     :root {
-      --text-color: oklch(87.1% 0.006 286.286);
+      --text-color: oklch(98.5% 0 0);
       --link-color: oklch(0.6 0.118 184.703995);
       --visited-color: oklch(43.7% 0.078 188.216);
       --hover-color: oklch(0.8 0.078 188.216);
@@ -43,14 +43,13 @@ let typographyStyles = """
     h1, h2, h3, h4, h5, h6 {
       font-weight: bold;
       color: var(--text-color);
-      margin-bottom: .2rem;
     }
-    h1 { font-size: 2.5rem; line-height: 3rem; }
-    h2 { font-size: 1.75rem; line-height: 2.25rem; margin-top: 1.5rem; }
-    h3 { font-size: 1.5rem; line-height: 2rem; margin-top: 1.5rem; }
-    h4 { font-size: 1.25rem; line-height: 1.75rem; }
-    h5 { font-size: 1.125rem; line-height: 1.625rem; }
-    h6 { font-size: 1rem; line-height: 1.5rem; }
+    h1 { font-size: 2.5rem; line-height: 2.25rem; margin-bottom: 0.25rem; }
+    h2 { font-size: 1.75rem; line-height: 1.75rem; margin-top: 1.5rem; margin-bottom: 0.25rem; }
+    h3 { font-size: 1.5rem; line-height: 1.5rem; margin-top: 1.5rem; margin-bottom: 0.25rem; }
+    h4 { font-size: 1.25rem; line-height: 1.25rem; margin-bottom: 0.25rem; }
+    h5 { font-size: 1.125rem; line-height: 1.125rem; margin-bottom: 0.25rem; }
+    h6 { font-size: 1rem; line-height: 1rem; margin-bottom: 0.25rem; }
 
     p {
       font-family: ui-serif;
@@ -78,6 +77,7 @@ let typographyStyles = """
       }
     }
 
+    /* Code Formatting */
     pre {
       font-size: 0.8rem;
       line-height: 1.25rem;
@@ -93,10 +93,10 @@ let typographyStyles = """
         display: block;
         overflow-x: auto;
         white-space: pre;
-        -webkit-overflow-scrolling: touch;
+        tab-size: 2;
 
-        & a { border-bottom: 1px dotted var(--text-color); }
-
+        & a:not(a.xs) { border-bottom: 1px dotted var(--text-color); }
+        & .newline { display: block; height: 0; }
         & .xk { color: oklch(0.74 0.1431 353.93); }
         & .xt { color: oklch(0.79 0.0844 302.64); }
         & .xv { color: oklch(80% 0.15 300); }
@@ -109,5 +109,19 @@ let typographyStyles = """
 
     blockquote {
       font-style: italic;
+    }
+
+    pre code .xk, pre code .xt {
+      margin-right: 0.5rem;
+    }
+
+    pre code .xv:not(::first-child) {
+      margin: 0 0.5rem;
+    }
+
+    /* Add spacing after colons in parameter declarations */
+    pre code span:has(+ .xt)::after {
+      content: "";
+      white-space: pre;
     }
   """
