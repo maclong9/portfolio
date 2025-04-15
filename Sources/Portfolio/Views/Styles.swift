@@ -20,7 +20,6 @@ let typographyStyles = """
     :root {
       --text-color: oklch(98.5% 0 0);
       --link-color: oklch(70.4% 0.14 182.503); 
-      --visited-color: oklch(43.7% 0.078 188.216);
       --hover-color: oklch(0.8 0.078 188.216);
       --border-color: oklch(21% 0.006 285.885);
     }
@@ -28,7 +27,6 @@ let typographyStyles = """
     a {
       &:where(:not(h1 a, h2 a, h3 a, h4 a, h5 a, h6 a, pre a, header a, footer a)) {
         &:link { color: var(--link-color); }
-        &:visited { color: var(--visited-color); }
         &:hover { color: var(--hover-color); }
       }
 
