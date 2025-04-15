@@ -6,7 +6,7 @@ import FoundationNetworking
 #endif
 
 struct ArticleResponse: Identifiable {
-  let id: String  // slug
+  let id: String
   let title: String
   let description: String
   let htmlContent: String
@@ -36,7 +36,7 @@ enum ArticleService {
   private static let baseURL = "https://api.swiftinit.org/render/maclong9.portfolio:main/portfolio/"
   private static let authHeader = "Unidoc 4410635584_e9e9cd4e119016ea"
 
-  static let availableSlugs = ["personal-setup", "my-article"]
+  static let availableSlugs = ["personal-setup", "introduction-to-webui"]
 
   /// Fetches all articles defined in availableSlugs
   static func fetchAllArticles() async throws -> [ArticleResponse] {
