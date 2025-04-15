@@ -58,7 +58,7 @@ public struct StaticSite: Sendable {
         path: "index",
         metadata: .init(
           title: "Home",
-          description: "Description goes here.",
+          description: "Description goes here."
         ),
         content: {
           Layout {
@@ -71,7 +71,7 @@ public struct StaticSite: Sendable {
         path: "about",
         metadata: .init(
           title: "About",
-          description: "Software Engineer, crafting intuitive solutions.",
+          description: "Description goes here."
         ),
         content: {
           Layout {
