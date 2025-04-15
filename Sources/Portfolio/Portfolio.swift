@@ -5,125 +5,44 @@ import WebUI
 import FoundationNetworking
 #endif
 
-let author = "Mac Long"
-
 @main
 public struct Portfolio: Sendable {
-  public static let staticRoutes: [Document] = [
-    ("index", "Home", "Software Engineer, crafting intuitive solutions.", Home())
-  ].map { (path: String, title: String, description: String, content: HTML) in
-    Document(
-      path: "\(path)",
-      metadata: .init(site: author, title: title, description: description, author: author, type: .website),
-      head: "<link rel=\"icon\" href=\"public/icon.svg\" type=\"image/svg+xml\" />",
-      content: { content }
-    )
+  public static let author = "Mac Long"
+  
+  // Articles are fetched first so they can be used in Home view
+  let articles: [ArticleResponse]
+  let articleDocuments: [Document]
+  
+  // Static routes will now be a computed property that uses the articles
+  var staticRoutes: [Document] {
+    [
+      Document(
+        path: "index",
+        metadata: .init(
+          site: Self.author,
+          title: "Home",
+          description: "Software Engineer, crafting intuitive solutions.",
+          author: Self.author,
+          type: .website
+        ),
+        head: "<link rel=\"icon\" href=\"public/icon.svg\" type=\"image/svg+xml\" />",
+        content: { Home(articles: self.articles) }
+      )
+    ]
   }
 
-  static let slugs = ["personal-setup", "my-article"]
-  let articles: [Document]
-
-  // Initialize articles by fetching content for each slug
+  // Initialize with articles fetched from the service
   init() async throws {
-    self.articles = try await Self.fetchArticles()
-  }
-
-  // Fetch articles for all slugs
-  private static func fetchArticles() async throws -> [Document] {
-    var documents: [Document] = []
-    for slug in slugs {
-      if let document = try await fetchArticle(for: slug) {
-        documents.append(document)
-      }
-    }
-    return documents
-  }
-
-  // Fetch a single article for a given slug
-  private static func fetchArticle(for slug: String) async throws -> Document? {
-    let urlString = "https://api.swiftinit.org/render/maclong9.portfolio:main/portfolio/\(slug)"
-    guard let url = URL(string: urlString) else {
-      print("Invalid URL for slug: \(slug)")
-      return nil
-    }
-
-    var request = URLRequest(url: url)
-    request.setValue("Unidoc 4410635584_e9e9cd4e119016ea", forHTTPHeaderField: "Authorization")
-
-    let (data, response) = try await URLSession.shared.data(for: request)
-    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-      print("Failed to fetch article for slug: \(slug), status: \((response as? HTTPURLResponse)?.statusCode ?? -1)")
-      return nil
-    }
-
-    guard let htmlString = String(data: data, encoding: .utf8) else {
-      print("Failed to decode response for slug: \(slug)")
-      return nil
-    }
-
-    // Extract title, description, and cover image
-    let title = extractTitle(from: htmlString) ?? slug.capitalized
-    let description = extractDescription(from: htmlString) ?? "Article about \(slug)"
-    let coverImage = extractCoverImage(from: htmlString)
-
-    return Document(
-      path: "articles/\(slug)",
-      metadata: .init(
-        site: author,
-        title: title,
-        description: description,
-        author: author,
-        type: .article
-      ),
-      head: "<link rel=\"icon\" href=\"icon.svg\" type=\"image/svg+xml\" />",
-      content: {
-        Layout(image: coverImage) {
-          "\(htmlString)"
-          Style { typographyStyles }
-        }
-      }
-    )
-  }
-
-  // Helper to extract title from HTML (simplified regex for <h1>)
-  private static func extractTitle(from html: String) -> String? {
-    let pattern = "<h1[^>]*>(.*?)</h1>"
-    guard let regex = try? NSRegularExpression(pattern: pattern),
-      let match = regex.firstMatch(in: html, range: NSRange(html.startIndex..., in: html)),
-      let range = Range(match.range(at: 1), in: html)
-    else {
-      return nil
-    }
-    return String(html[range])
-  }
-
-  // Helper to extract description from HTML (simplified regex for first <p>)
-  private static func extractDescription(from html: String) -> String? {
-    let pattern = "<p[^>]*>(.*?)</p>"
-    guard let regex = try? NSRegularExpression(pattern: pattern),
-      let match = regex.firstMatch(in: html, range: NSRange(html.startIndex..., in: html)),
-      let range = Range(match.range(at: 1), in: html)
-    else {
-      return nil
-    }
-    return String(html[range])
-  }
-
-  // Helper to extract cover image from HTML (first <img> tag's src attribute)
-  private static func extractCoverImage(from html: String) -> String? {
-    let pattern = "<img[^>]+src=[\"'](.*?)['\"]"
-    guard let regex = try? NSRegularExpression(pattern: pattern),
-      let match = regex.firstMatch(in: html, range: NSRange(html.startIndex..., in: html)),
-      let range = Range(match.range(at: 1), in: html)
-    else {
-      return nil
-    }
-    return String(html[range])
+    // First fetch the article data
+    self.articles = try await ArticleService.fetchAllArticles()
+    // Then create documents from them
+    self.articleDocuments = articles.map { $0.document }
   }
 
   static func main() async throws {
     let portfolioInstance = try await Portfolio()
-    let allRoutes = staticRoutes + portfolioInstance.articles
+    // Combine both static routes and article documents
+    let allRoutes = portfolioInstance.staticRoutes + portfolioInstance.articleDocuments
     try Application(routes: allRoutes).build(publicDirectory: "Sources/Portfolio/Public")
   }
 }
