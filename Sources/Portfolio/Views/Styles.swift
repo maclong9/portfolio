@@ -52,8 +52,7 @@ let typographyStyles = """
     h6 { font-size: 1rem; line-height: 1.5rem; }
 
     p {
-      font-size: 1rem;
-      line-height: 1.5rem;
+      font-family: ui-serif;
       margin: 1rem 0;
 
       & code {
@@ -71,7 +70,11 @@ let typographyStyles = """
       list-style: disc;
       margin-left: 2rem;
 
-      & li { margin-bottom: 1rem; }
+      & li { 
+        margin-bottom: 1rem; 
+        
+        & p { margin: 0; }
+      }
     }
 
     pre {

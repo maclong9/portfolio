@@ -19,7 +19,7 @@ struct Home: HTML {
             .margins(.top, length: 2)
             .margins(.bottom, length: 3)
             Text { "Read more ›" }
-              .font(size: .sm, weight: .semibold, color: .teal(._600))
+              .font(size: .sm, weight: .semibold, color: .teal(._500))
           }
           .cursor(.pointer)
           .flex(direction: .column, align: .start)
