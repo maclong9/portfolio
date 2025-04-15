@@ -31,6 +31,10 @@ let typographyStyles = """
         display: block;
         list-style-type: disc;
         padding: 0 0 0 40px;
+
+        li p {
+          margin: 0;
+        }
       }
 
       /* Headings */
@@ -90,12 +94,20 @@ let typographyStyles = """
       strong, b {
         font-weight: 700;  /* Bold */
       }
-  
+
       a.source {
+        --primary: oklch(60% 0.118 184.704);
         margin-block-end: 1rem;
         display: block; 
+        font-size: .75rem;
+
+        span:first-child::before {
+          content: "Source: ";
+          font-weight: bold;
+          color: var(--primary);
+        }
       }
-  
+
       em, i {
         font-style: italic;
         font-weight: 400;  /* Regular */
@@ -170,4 +182,14 @@ let typographyStyles = """
       code .xt { color: oklch(80% 0.12 260); } /* Type: Same as actor */
       code .xu { color: oklch(80% 0.12 260); } /* Typealias: Same as actor */
       code .xi { color: transparent; } /* Indent: No color, spacing handled by pre */  
+
+      p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+        margin: 1rem 0;
+      }
+
+      p:has(strong) {
+        margin-block-end: 0.5rem;
+      }
   """

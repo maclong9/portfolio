@@ -9,27 +9,44 @@ struct Home: HTML {
         "I'm Mac, a software engineer based out of the United Kingdom. I enjoy working on open source projects and building things that make people's lives easier. Read some of my articles below."
       }
       Stack {
-        /*for article in Portfolio.articleRoutes {
-            Anchor(to: "/portfolio/articles/\(article.metadata.title.slugified())") {
-                Article {
-                    Heading(level: .two) { article.metadata.title }.styled(size: .lg)
-                    Text { article.metadata.description }
-                        .font(size: .sm)
-                        .margins(.top, length: 2)
-                        .margins(.bottom, length: 3)
-                    Text { "Read more ›" }
-                        .font(size: .sm, weight: .semibold, color: .teal(._600))
-                }
-                .cursor(.pointer)
-                .flex(direction: .column, align: .start)
-                .border(edges: .all, radius: (side: .all, size: .lg))
-                .background(color: .zinc(._700), on: .hover)
-                .transition(property: .colors, duration: 300, easing: .inOut)
-                .padding()
+        Anchor(to: "/portfolio/articles/personal-setup") {
+          Article {
+            Heading(level: .two) { "Personal Setup" }.styled(size: .lg)
+            Text {
+              "This is a collection of tools and software that I find indispensable for my daily work as a software engineer."
             }
-        }*/
-        // Temporary placeholder to avoid empty Stack
-        Text { "No articles available yet." }
+            .font(size: .sm)
+            .margins(.top, length: 2)
+            .margins(.bottom, length: 3)
+            Text { "Read more ›" }
+              .font(size: .sm, weight: .semibold, color: .teal(._600))
+          }
+          .cursor(.pointer)
+          .flex(direction: .column, align: .start)
+          .border(edges: .all, radius: (side: .all, size: .lg))
+          .background(color: .zinc(._700), on: .hover)
+          .transition(property: .colors, duration: 300, easing: .inOut)
+          .padding()
+        }
+        Anchor(to: "/portfolio/articles/my-article") {
+          Article {
+            Heading(level: .two) { "Example Article" }.styled(size: .lg)
+            Text {
+              "This is a simple article that demonstrates how to use snippets in documentation."
+            }
+            .font(size: .sm)
+            .margins(.top, length: 2)
+            .margins(.bottom, length: 3)
+            Text { "Read more ›" }
+              .font(size: .sm, weight: .semibold, color: .teal(._600))
+          }
+          .cursor(.pointer)
+          .flex(direction: .column, align: .start)
+          .border(edges: .all, radius: (side: .all, size: .lg))
+          .background(color: .zinc(._700), on: .hover)
+          .transition(property: .colors, duration: 300, easing: .inOut)
+          .padding()
+        }
       }.flex(direction: .column).spaced()
     }.render()
   }
