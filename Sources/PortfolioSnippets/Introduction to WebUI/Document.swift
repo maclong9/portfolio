@@ -1,3 +1,4 @@
+import Foundation
 import WebUI
 
 let document = Document(
@@ -6,7 +7,6 @@ let document = Document(
     title: "Some Page",
     titleSeperator: "-",
     description: "This is my awesome page",
-    date: Date(),
     image: "/og.png",
     author: "Your Name",
     keywords: ["swift", "webui"],
@@ -22,7 +22,7 @@ let document = Document(
       Item { "Item 1" }
       Item { "Item 2" }
     }
-    Anchor(to: "https://github.com/maclong9/web-ui", newTabe: true) { "WebUI Repository" }
+    Anchor(to: "https://github.com/maclong9/web-ui", newTab: true) { "WebUI Repository" }
   }.render()
 }
 

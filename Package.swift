@@ -13,7 +13,7 @@ let package = Package(
     .executable(name: "Portfolio", targets: ["Portfolio"])
   ],
   dependencies: [
-    .package(url: "https://github.com/maclong9/web-ui", branch: "main"),
+    .package(url: "https://github.com/maclong9/web-ui", from: "1.0.1"),
     .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.3.0"),
   ],
   targets: [
@@ -22,6 +22,12 @@ let package = Package(
       dependencies: [
         .product(name: "WebUI", package: "web-ui")
       ]
-    )
+    ),
+    .target(
+      name: "PortfolioSnippets",
+      dependencies: [
+        .product(name: "WebUI", package: "web-ui")
+      ],
+    ),
   ]
 )

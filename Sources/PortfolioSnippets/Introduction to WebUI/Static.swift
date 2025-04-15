@@ -2,7 +2,7 @@ import WebUI
 
 // snippet.LAYOUT
 // Components in WebUI are defined in a struct that conforms to the ``HTML`` type.
-struct LayoutOne: HTML {
+struct Layout: HTML {
   let children: [any HTML]
 
   init(@HTMLBuilder children: @escaping () -> [any HTML]) {
@@ -34,7 +34,6 @@ struct LayoutOne: HTML {
 
       Footer {
         Text {
-          "© \(Date().formattedYear()) "
           Anchor(to: "/") { "Site Title" }
         }
       }
