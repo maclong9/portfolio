@@ -15,6 +15,7 @@ public struct Portfolio: Sendable {
     Document(
       path: "\(path)",
       metadata: .init(site: author, title: title, description: description, author: author, type: .website),
+      head: "<link rel=\"icon\" href=\"public/icon.svg\" type=\"image/svg+xml\" />",
       content: { content }
     )
   }
@@ -74,6 +75,7 @@ public struct Portfolio: Sendable {
         author: author,
         type: .article
       ),
+      head: "<link rel=\"icon\" href=\"icon.svg\" type=\"image/svg+xml\" />",
       content: {
         Layout(image: coverImage) {
           "\(htmlString)"
@@ -122,6 +124,6 @@ public struct Portfolio: Sendable {
   static func main() async throws {
     let portfolioInstance = try await Portfolio()
     let allRoutes = staticRoutes + portfolioInstance.articles
-    try Application(routes: allRoutes).build()
+    try Application(routes: allRoutes).build(publicDirectory: "Sources/Portfolio/Public")
   }
 }

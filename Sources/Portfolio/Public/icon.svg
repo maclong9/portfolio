@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background Circle -->
+  <circle cx="32" cy="32" r="30" fill="#2d3748" />
+  
+  <!-- Code Brackets with more space -->
+  <path d="M20 20L10 32L20 44" stroke="#38b2ac" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  <path d="M44 20L54 32L44 44" stroke="#38b2ac" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  
+  <!-- Smaller M Centered -->
+  <path d="M27,40 V28 L32,33 L37,28 V40" stroke="#f6ad55" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+</svg>
