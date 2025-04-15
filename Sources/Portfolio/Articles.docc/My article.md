@@ -17,8 +17,12 @@ This is a simple article that demonstrates how to use snippets in documentation.
 **Simple Snippet:**
 @Snippet(path: "Portfolio/Snippets/My article/SnippetsExample_I")
 
+--- 
+
 **Snippet with Hide and Show**
 @Snippet(path: "Portfolio/Snippets/My article/SnippetsExample_II")
+
+--- 
 
 **Snippet with Slices:**
 

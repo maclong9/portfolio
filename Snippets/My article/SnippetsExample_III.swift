@@ -1,6 +1,6 @@
 // snippet.DECLARATION
-func sayHello(name: String? = nil) {
-  print("Hello, \(name ?? "World")!")
+func sayHello(name: String? = nil) -> String {
+  "Hello, \(name ?? "World")!"
 }
 
 // snippet.USAGE
