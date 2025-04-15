@@ -77,6 +77,7 @@ let typographyStyles = """
 
     /* Code Formatting */
     pre {
+      background-color: oklch(0.2 0 0);
       font-size: 0.8rem;
       line-height: 1.25rem;
       padding: 1rem;

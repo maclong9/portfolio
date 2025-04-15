@@ -1,5 +1,5 @@
 {
-  "originHash" : "2238d9f1947950526e0aae567b20b454c34592a9ad3313794f1c5d8fb2144ed1",
+  "originHash" : "3b660318ba947e90fec54720b40c8f6c1fd5618826986d86e209cc055b1f371a",
   "pins" : [
     {
       "identity" : "swift-docc-plugin",
@@ -25,7 +25,7 @@
       "location" : "https://github.com/maclong9/web-ui",
       "state" : {
         "branch" : "main",
-        "revision" : "45835faca2b67f14e84d6b6a4f517348bed605d7"
+        "revision" : "aa5aaa41eb956ee5ae3ee6804b766f30457e3d7b"
       }
     }
   ],
