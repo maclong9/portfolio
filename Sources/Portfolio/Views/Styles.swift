@@ -20,7 +20,6 @@ let typographyStyles = """
       section {
         box-sizing: border-box; /* Include padding/margins in width */
         margin-inline: auto; /* Center within parent */
-        max-width: 90vw;
 
         @media(min-width: 640px) {
           max-width: 64ch; /* Match main's max-width */
