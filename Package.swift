@@ -4,6 +4,7 @@
 import PackageDescription
 
 // TODO: Figure out how to create symbol hovers
+// TODO: Add CSS for articles which moves the TOC to a floating aside
 // TODO: Automate Swiftinit build
 
 let package = Package(

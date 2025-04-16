@@ -2,11 +2,14 @@
 
 **Published:** April 15, 2025
 
-- [What is WebUI?](#what-is-webui)
-- [Why Did I Build It?](#why-did-i-build-it)
-- [Creating a Web Document](#creating-a-web-document)
-- [Adding Styles](#adding-styles)
-- [Generating a Simple Static Site](#generating-a-simple-static-site)
+1. [What is WebUI?](#what-is-webui)
+2. [Why Did I Build It?](#why-did-i-build-it)
+3. [Creating a Web Document](#creating-a-web-document)
+4. [Adding Styles](#adding-styles)
+5. [Generating a Simple Static Site](#generating-a-simple-static-site)
+   1. [Creating a Layout Component](#creating-a-layout-component)
+	 2. [Generating the Website](#generating-the-website)
+6. [Conclusion](#conclusion)
 
 ## What is WebUI?
 
@@ -82,6 +85,8 @@ Adding styles is a simple task, following a modifier style pattern similar to Sw
 @Snippet(path: "Snippets/Introduction to WebUI/Static", slice: LAYOUT)
 
 This allows you to create reusable patterns that can be used throughout your WebUI documents, as you can see above I have generated a simple Layout with a header, main and footer.
+
+### Generating the Website
 
 Next we can run the build step to generate a `.output` directory in the current working directory, you will need to set a custom working directory in your Xcode scheme if you are running this from Xcode and not the terminal.
 

@@ -21,7 +21,7 @@ let typographyStyles = """
       --text-color: oklch(98.5% 0 0);
       --link-color: oklch(70.4% 0.14 182.503); 
       --hover-color: oklch(0.8 0.078 188.216);
-      --border-color: oklch(21% 0.006 285.885);
+      --border-color: oklch(0.46 0 0);
     }
 
     a {
@@ -83,7 +83,7 @@ let typographyStyles = """
       padding: 1rem;
       margin: 1rem auto;
       border-radius: 8px;
-      border: 2px solid var(--border-color);
+      border: 1px solid var(--border-color);
 
       & code {
         color: oklch(0.85 0.00 0);
