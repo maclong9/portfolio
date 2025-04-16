@@ -2,7 +2,7 @@ import WebUI
 
 // snippet.LAYOUT
 // Components in WebUI are defined in a struct that conforms to the ``HTML`` type.
-struct Layout: HTML {
+struct LayoutOne: HTML {
   let children: [any HTML]
 
   init(@HTMLBuilder children: @escaping () -> [any HTML]) {
@@ -60,7 +60,7 @@ public struct StaticSite: Sendable {
           description: "Description goes here."
         ),
         content: {
-          Layout {
+          LayoutOne {
             Heading(level: .one) { "Home Page" }
             Anchor(to: "/about") { "Go to About" }
           }
@@ -73,7 +73,7 @@ public struct StaticSite: Sendable {
           description: "Description goes here."
         ),
         content: {
-          Layout {
+          LayoutOne {
             Heading(level: .one) { "About Page" }
             Anchor(to: "/") { "Go to Home" }
           }
@@ -82,23 +82,10 @@ public struct StaticSite: Sendable {
     ]
   }
 
-  func main() async throws {
+  func build() async throws {
     try Application(routes: staticRoutes).build(publicDirectory: "Sources/Static Site/Public")
   }
 }
 
 // snippet.IMAGE
 let image = Image(source: "public/image.jpg", description: "An image for web rendering")
-
-// snippet.RESOURCE
-targets: [
-  .executableTarget(
-    name: "TargetName",
-    dependencies: [
-      .product(name: "WebUI", package: "web-ui")
-    ],
-    resources: [
-      .copy("Public")
-    ]
-  )
-]

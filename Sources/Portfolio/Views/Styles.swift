@@ -70,7 +70,7 @@ let typographyStyles = """
         & p { margin: 0; }
       }
     }
-  
+
     blockquote {
       font-style: italic;
     }

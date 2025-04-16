@@ -8,11 +8,11 @@ import FoundationNetworking
 @main
 public struct Portfolio: Sendable {
   public static let author = "Mac Long"
-  
+
   // Articles are fetched first so they can be used in Home view
   let articles: [ArticleResponse]
   let articleDocuments: [Document]
-  
+
   // Static routes will now be a computed property that uses the articles
   var staticRoutes: [Document] {
     [
