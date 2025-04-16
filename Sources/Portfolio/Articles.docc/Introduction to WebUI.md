@@ -216,7 +216,7 @@ The `.output` directory will follow a pattern like below after the build is comp
 You are also able to specifiy a public directory that will be copied to `.output/public` with any files nested inside, this means if you wanted to create an image in this example you could place the file inside of `Sources/Static Site/Public` and then reference it in the code like so:
 
 ```swift
-let image = Image(source: "public/image.jpg", description: "An image for web rendering")
+Image(source: "public/image.jpg", description: "An image for web rendering")
 ```
 
 Make sure you add the `Public` directory as a resource within your target:
