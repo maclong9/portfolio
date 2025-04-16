@@ -12,14 +12,14 @@ let package = Package(
   name: "Portfolio",
   platforms: [.macOS(.v13)],
   products: [
-    .library(name: "Portfolio", targets: ["Portfolio"]),
+    .executable(name: "Portfolio", targets: ["Portfolio"]),
   ],
   dependencies: [
     .package(url: "https://github.com/maclong9/web-ui", from: "1.0.1"),
     .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.3.0"),
   ],
   targets: [
-    .target(
+    .executableTarget(
       name: "Portfolio",
       dependencies: [
         .product(name: "WebUI", package: "web-ui")
