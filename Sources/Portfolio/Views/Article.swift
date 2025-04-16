@@ -21,7 +21,17 @@ struct ArticleResponse: Identifiable {
         author: Portfolio.author,
         type: .article
       ),
-      head: "<link rel=\"icon\" href=\"icon.svg\" type=\"image/svg+xml\" />",
+      head: """
+        <link rel=\"icon\" href=\"icon.svg\" type=\"image/svg+xml\" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+        <script>
+          document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('section pre code:not(.language-swift').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+          });
+        </script>
+      """,
       content: {
         Layout {
           Fragment { htmlContent }

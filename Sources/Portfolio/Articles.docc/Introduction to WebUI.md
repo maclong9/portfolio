@@ -207,7 +207,7 @@ public struct StaticSite: Sendable {
 
 The `.output` directory will follow a pattern like below after the build is completed:
 
-```text
+```
 .output/
   index.html
   about.html
