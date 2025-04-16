@@ -23,7 +23,37 @@ Swift is a lovely language that I have been using to write backend code more fre
 
 The most basic functionality of WebUI is to generate a web page, you do this by defining a document with a metadata structure and the content to be nested in the document structure, this is passed in the form of a closure with other WebUI elements.
 
-@Snippet(path: "Examples/Introduction to WebUI/Document")
+```swift
+import Foundation
+import WebUI
+
+let document = Document(
+  metadata: Metadata(
+    site: "Awesome Site",
+    title: "Some Page",
+    titleSeperator: "-",
+    description: "This is my awesome page",
+    image: "/og.png",
+    author: "Your Name",
+    keywords: ["swift", "webui"],
+    twitter: "@username",
+    locale: .en,
+    type: .website
+  )
+) {
+  Header { "Hello, World!" }
+  Main {
+    Heading(level: .one) { "This is my awesome page." }
+    List {
+      Item { "Item 1" }
+      Item { "Item 2" }
+    }
+    Anchor(to: "https://github.com/maclong9/web-ui", newTab: true) { "WebUI Repository" }
+  }.render()
+}
+
+let html = document.render()
+```
 
 The above code renders to the HTML seen below, as you can see at the time of writing styles are handled via TailwindCSS although this may change in the future if I decide it will be a useful change. The metadata is rendered into the `<head>` tag and then the closure content is rendered inside of the HTML document's `<body>` tags.
 
@@ -76,13 +106,68 @@ The above code renders to the HTML seen below, as you can see at the time of wri
 
 Adding styles is a simple task, following a modifier style pattern similar to SwiftUI. Below is an example of a simple div containing a heading, the container has a light background normally and a dark background on `prefers-color-scheme: dark`, and there are some simple typograhpy styles applied to the heading.
 
-@Snippet(path: "Examples/Introduction to WebUI/Styles")
+```swift
+let styledContent = Stack {
+  Heading(level: .one) { "Hello, world!" }
+    .font(size: .xl, weight: .bold, decoration: .underline)
+}
+.background(color: .neutral(._100))
+.background(color: .neutral(._950), on: .dark)
+```
 
 ## Generating a Simple Static Site
 
 ### Creating a Layout Component
 
-@Snippet(path: "Examples/Introduction to WebUI/Static", slice: LAYOUT)
+Components in WebUI are defined in a struct that conforms to the `HTML` type.
+```swift
+struct LayoutOne: HTML {
+  let children: [any HTML]
+
+  init(@HTMLBuilder children: @escaping () -> [any HTML]) {
+    self.children = children()
+  }
+
+  public func render() -> String {
+    Stack {
+      Header {
+        Anchor(to: "/") { "Site Title" }
+        Navigation {
+          Anchor(to: "https://github.com/maclong9", newTab: true) { "GitHub" }
+        }
+      }
+      .flex(justify: .between, align: .center)
+      .frame(width: .screen, maxWidth: .fixed(200))
+      .margins(.horizontal, auto: true)
+      .padding()
+
+      Main {
+        children.map { $0.render() }.joined()
+      }
+      .flex(grow: .one)
+      .margins(.horizontal, auto: true)
+      .frame(maxWidth: .custom("95vw"))
+      .frame(maxWidth: .character(64), on: .sm)
+      .font(wrapping: .pretty)
+      .padding()
+
+      Footer {
+        Text {
+          Anchor(to: "/") { "Site Title" }
+        }
+      }
+      .font(size: .sm, color: .zinc(._400, opacity: 0.9))
+      .flex(justify: .center, align: .center)
+      .padding()
+    }
+    .frame(minHeight: .screen)
+    .font(color: .zinc(._200))
+    .background(color: .zinc((._950)))
+    .flex(direction: .column)
+    .render()
+  }
+}
+```
 
 This allows you to create reusable patterns that can be used throughout your WebUI documents, as you can see above I have generated a simple Layout with a header, main and footer.
 
@@ -90,7 +175,44 @@ This allows you to create reusable patterns that can be used throughout your Web
 
 Next we can run the build step to generate a `.output` directory in the current working directory, you will need to set a custom working directory in your Xcode scheme if you are running this from Xcode and not the terminal.
 
-@Snippet(path: "Examples/Introduction to WebUI/Static", slice: STATIC)
+```swift
+public struct StaticSite: Sendable {
+  var staticRoutes: [Document] {
+    [
+      Document(
+        path: "index",
+        metadata: .init(
+          title: "Home",
+          description: "Description goes here."
+        ),
+        content: {
+          LayoutOne {
+            Heading(level: .one) { "Home Page" }
+            Anchor(to: "/about") { "Go to About" }
+          }
+        }
+      ),
+      Document(
+        path: "about",
+        metadata: .init(
+          title: "About",
+          description: "Description goes here."
+        ),
+        content: {
+          LayoutOne {
+            Heading(level: .one) { "About Page" }
+            Anchor(to: "/") { "Go to Home" }
+          }
+        }
+      )
+    ]
+  }
+
+  func build() async throws {
+    try Application(routes: staticRoutes).build(publicDirectory: "Sources/Static Site/Public")
+  }
+}
+```
 
 The `.output` directory will follow a pattern like below after the build is completed:
 
@@ -102,11 +224,25 @@ The `.output` directory will follow a pattern like below after the build is comp
 
 You are also able to specifiy a public directory that will be copied to `.output/public` with any files nested inside, this means if you wanted to create an image in this example you could place the file inside of `Sources/Static Site/Public` and then reference it in the code like so:
 
-@Snippet(path: "Examples/Introduction to WebUI/Static", slice: IMAGE)
+```swift
+let image = Image(source: "public/image.jpg", description: "An image for web rendering")
+```
 
 Make sure you add the `Public` directory as a resource within your target:
 
-@Snippet(path: "Examples/Introduction to WebUI/Package")
+```swift
+targets: [
+  .executableTarget(
+    name: "TargetName",
+    dependencies: [
+      .product(name: "WebUI", package: "web-ui")
+    ],
+    resources: [
+      .copy("Public") // Add this
+    ]
+  ),
+]
+```
 
 ## Conclusion
 

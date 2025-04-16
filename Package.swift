@@ -4,7 +4,6 @@
 import PackageDescription
 
 // TODO: Fix build errors when importing WebUI
-// TODO: Figure out how to create symbol hovers
 // TODO: Add CSS for articles which moves the TOC to a floating aside
 // TODO: Automate Swiftinit build
 
