@@ -4,12 +4,6 @@
 
 ## Table of Contents
 
-1. [Workstation](#workstation)
-   1. [14" MacBook Pro, M3 Pro, 18GB RAM](#14-macbook-pro-m3-pro-18gb-ram)
-2. [Development Tools](#development-tools)
-   1. [Vim](#vim)
-   2. [Deno](#deno)
-
 Here I will share the tools and software I rely on daily as a software engineer. A quick note on a couple of choices I won’t delve into deeply: I use Apple’s Terminal.app as my terminal emulator—it’s simple, effective, and requires no extra configuration. For personal productivity, I find Apple’s Calendar, Notes, and Reminders apps perfectly suited to keeping me organised and focused.
 
 ## Workstation

@@ -3,10 +3,6 @@
 
 import PackageDescription
 
-// TODO: Fix build errors when importing WebUI
-// TODO: Add CSS for articles which moves the TOC to a floating aside
-// TODO: Automate Swiftinit build
-
 let package = Package(
   name: "Portfolio",
   platforms: [.macOS(.v13)],

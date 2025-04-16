@@ -2,15 +2,6 @@
 
 **Published:** April 15, 2025
 
-1. [What is WebUI?](#what-is-webui)
-2. [Why Did I Build It?](#why-did-i-build-it)
-3. [Creating a Web Document](#creating-a-web-document)
-4. [Adding Styles](#adding-styles)
-5. [Generating a Simple Static Site](#generating-a-simple-static-site)
-   1. [Creating a Layout Component](#creating-a-layout-component)
-	 2. [Generating the Website](#generating-the-website)
-6. [Conclusion](#conclusion)
-
 ## What is WebUI?
 
 WebUI is an HTML, CSS and JS rendering library built entirely in Swift, it's a convenient way to write simple user interface code with a syntax that is similar to SwiftUI this results in code that is clean, efficient and easy to maintain.
