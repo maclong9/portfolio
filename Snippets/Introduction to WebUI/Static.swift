@@ -89,3 +89,16 @@ public struct StaticSite: Sendable {
 
 // snippet.IMAGE
 let image = Image(source: "public/image.jpg", description: "An image for web rendering")
+
+// snippet.RESOURCE
+targets: [
+  .executableTarget(
+    name: "TargetName",
+    dependencies: [
+      .product(name: "WebUI", package: "web-ui")
+    ],
+    resources: [
+      .copy("Public")
+    ]
+  )
+]

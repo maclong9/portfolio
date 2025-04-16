@@ -24,7 +24,50 @@ The most basic functionality of WebUI is to generate a web page, you do this by 
 
 The above code renders to the HTML seen below, as you can see at the time of writing styles are handled via TailwindCSS although this may change in the future if I decide it will be a useful change. The metadata is rendered into the `<head>` tag and then the closure content is rendered inside of the HTML document's `<body>` tags.
 
-@Code(name: "document.html", file: "document.html")
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Some Page - Awesome Site</title>
+    <meta property="og:title" content="Some Page - Awesome Site" />
+    <meta name="description" content="This is my awesome page" />
+    <meta property="og:description" content="This is my awesome page" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:image" content="/og.png" />
+    <meta name="author" content="Your Name" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:creator" content="@username" />
+    <meta name="keywords" content="swift, webui" />
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --breakpoint-xs: 30rem;
+        --breakpoint-3xl: 120rem;
+        --breakpoint-4xl: 160rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>Hello, World!</header>
+    <main>
+      <h1>This is my awesome page.</h1>
+      <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+      </ul>
+      <a
+        href="https://github.com/maclong9/web-ui"
+        target="_blank"
+        rel="noreferrer"
+      >
+        WebUI Repository
+      </a>
+    </main>
+  </body>
+</html>
+```
 
 ## Adding Styles
 
@@ -55,6 +98,10 @@ The `.output` directory will follow a pattern like below after the build is comp
 You are also able to specifiy a public directory that will be copied to `.output/public` with any files nested inside, this means if you wanted to create an image in this example you could place the file inside of `Sources/Static Site/Public` and then reference it in the code like so:
 
 @Snippet(path: "Snippets/Introduction to WebUI/Static", slice: IMAGE)
+
+Make sure you add the `Public` directory as a resource within your target:
+
+@Snippet(path: "Snippets/Introduction to WebUI/Static", slice: RESOURCE)
 
 ## Conclusion
 

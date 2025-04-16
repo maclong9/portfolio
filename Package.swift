@@ -14,13 +14,16 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/maclong9/web-ui", from: "1.0.1"),
-    .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.3.0")
+    .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.3.0"),
   ],
   targets: [
     .executableTarget(
       name: "Portfolio",
       dependencies: [
         .product(name: "WebUI", package: "web-ui")
+      ],
+      resources: [
+        .copy("Public")
       ]
     )
   ]
