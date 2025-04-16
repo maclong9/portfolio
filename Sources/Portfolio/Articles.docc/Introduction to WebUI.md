@@ -24,7 +24,7 @@ The most basic functionality of WebUI is to generate a web page, you do this by 
 
 The above code renders to the HTML seen below, as you can see at the time of writing styles are handled via TailwindCSS although this may change in the future if I decide it will be a useful change. The metadata is rendered into the `<head>` tag and then the closure content is rendered inside of the HTML document's `<body>` tags.
 
-@Code(name: "document.html", file: "Snippets/Introduction to WebUI/Document")
+@Code(name: "document.html", file: "document.html")
 
 ## Adding Styles
 
