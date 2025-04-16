@@ -199,7 +199,7 @@ public struct StaticSite: Sendable {
     ]
   }
 
-  func build() async throws {
+  func main() async throws {
     try Application(routes: staticRoutes).build(publicDirectory: "Sources/Static Site/Public")
   }
 }
