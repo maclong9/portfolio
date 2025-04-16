@@ -12,13 +12,11 @@ struct Home: HTML {
     Layout {
       Heading(level: .one) { "Software engineer, skater, & musician." }.styled(size: .xl4).margins(.bottom)
       Text {
-        "I'm Mac, a software engineer based out of the United Kingdom. I enjoy working on open source projects and building things that make people's lives easier. Read some of my articles below."
+        "I'm Mac, a software engineer based out of the United Kingdom. I enjoy building robust and efficient software. Read some of my articles below."
       }.font(family: "ui-serif")
 
-      // Only show the articles section if there are articles
       if !articles.isEmpty {
         Stack {
-          // Iterate through all articles
           for article in articles {
             Anchor(to: "/portfolio/articles/\(article.id)") {
               Article {
@@ -42,7 +40,6 @@ struct Home: HTML {
           }
         }.flex(direction: .column).spaced()
       } else {
-        // Show a message if no articles are available
         Text {
           "No articles available at the moment. Check back soon!"
         }.font(family: "ui-serif").margins(.top)
