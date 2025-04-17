@@ -18,7 +18,7 @@ struct Home: HTML {
       if !articles.isEmpty {
         Stack {
           for article in articles {
-            Anchor(to: "/portfolio/articles/\(article.id)") {
+            Link(to: "/portfolio/articles/\(article.id)") {
               Article {
                 Heading(level: .two) { article.title }.styled(size: .lg)
                 Text {

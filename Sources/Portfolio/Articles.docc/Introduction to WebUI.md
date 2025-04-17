@@ -39,7 +39,7 @@ let document = Document(
       Item { "Item 1" }
       Item { "Item 2" }
     }
-    Anchor(to: "https://github.com/maclong9/web-ui", newTab: true) { "WebUI Repository" }
+    Link(to: "https://github.com/maclong9/web-ui", newTab: true) { "WebUI Repository" }
   }.render()
 }
 
@@ -122,9 +122,9 @@ struct LayoutOne: HTML {
   public func render() -> String {
     Stack {
       Header {
-        Anchor(to: "/") { "Site Title" }
+        Link(to: "/") { "Site Title" }
         Navigation {
-          Anchor(to: "https://github.com/maclong9", newTab: true) { "GitHub" }
+          Link(to: "https://github.com/maclong9", newTab: true) { "GitHub" }
         }
       }
       .flex(justify: .between, align: .center)
@@ -144,7 +144,7 @@ struct LayoutOne: HTML {
 
       Footer {
         Text {
-          Anchor(to: "/") { "Site Title" }
+          Link(to: "/") { "Site Title" }
         }
       }
       .font(size: .sm, color: .zinc(._400, opacity: 0.9))
@@ -179,7 +179,7 @@ public struct StaticSite: Sendable {
         content: {
           LayoutOne {
             Heading(level: .one) { "Home Page" }
-            Anchor(to: "/about") { "Go to About" }
+            Link(to: "/about") { "Go to About" }
           }
         }
       ),
@@ -192,7 +192,7 @@ public struct StaticSite: Sendable {
         content: {
           LayoutOne {
             Heading(level: .one) { "About Page" }
-            Anchor(to: "/") { "Go to Home" }
+            Link(to: "/") { "Go to Home" }
           }
         }
       )
