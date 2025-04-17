@@ -53,7 +53,7 @@
 </span>      <span class='xv'>Item</span> { <span class='xs'>"Item 1"</span> }<span class='newline'>
 </span>      <span class='xv'>Item</span> { <span class='xs'>"Item 2"</span> }<span class='newline'>
 </span>    }<span class='newline'>
-</span>    <span class='xv'>Anchor</span>(<span class='xv'>to</span>: <span class='xs'>"https://github.com/maclong9/web-ui"</span>, <span class='xv'>newTab</span>: <span class='xk'>true</span>) { <span class='xs'>"WebUI Repository"</span> }<span class='newline'>
+</span>    <span class='xv'>Link</span>(<span class='xv'>to</span>: <span class='xs'>"https://github.com/maclong9/web-ui"</span>, <span class='xv'>newTab</span>: <span class='xk'>true</span>) { <span class='xs'>"WebUI Repository"</span> }<span class='newline'>
 </span>  }.<span class='xv'>render</span>()<span class='newline'>
 </span>}<span class='newline'>
 
@@ -113,9 +113,9 @@
 </span>  <span class='xk'>public</span> <span class='xk'>func</span> <span class='xv'>render</span>() -&gt; <span class='xt'>String</span> {<span class='newline'>
 </span>    <span class='xv'>Stack</span> {<span class='newline'>
 </span>      <span class='xv'>Header</span> {<span class='newline'>
-</span>        <span class='xv'>Anchor</span>(<span class='xv'>to</span>: <span class='xs'>"/"</span>) { <span class='xs'>"Site Title"</span> }<span class='newline'>
+</span>        <span class='xv'>Link</span>(<span class='xv'>to</span>: <span class='xs'>"/"</span>) { <span class='xs'>"Site Title"</span> }<span class='newline'>
 </span>        <span class='xv'>Navigation</span> {<span class='newline'>
-</span>          <span class='xv'>Anchor</span>(<span class='xv'>to</span>: <span class='xs'>"https://github.com/maclong9"</span>, <span class='xv'>newTab</span>: <span class='xk'>true</span>) { <span class='xs'>"GitHub"</span> }<span class='newline'>
+</span>          <span class='xv'>Link</span>(<span class='xv'>to</span>: <span class='xs'>"https://github.com/maclong9"</span>, <span class='xv'>newTab</span>: <span class='xk'>true</span>) { <span class='xs'>"GitHub"</span> }<span class='newline'>
 </span>        }<span class='newline'>
 </span>      }<span class='newline'>
 </span>      .<span class='xv'>flex</span>(<span class='xv'>justify</span>: .<span class='xv'>between</span>, <span class='xv'>align</span>: .<span class='xv'>center</span>)<span class='newline'>
@@ -135,7 +135,7 @@
 
 </span>      <span class='xv'>Footer</span> {<span class='newline'>
 </span>        <span class='xv'>Text</span> {<span class='newline'>
-</span>          <span class='xv'>Anchor</span>(<span class='xv'>to</span>: <span class='xs'>"/"</span>) { <span class='xs'>"Site Title"</span> }<span class='newline'>
+</span>          <span class='xv'>Link</span>(<span class='xv'>to</span>: <span class='xs'>"/"</span>) { <span class='xs'>"Site Title"</span> }<span class='newline'>
 </span>        }<span class='newline'>
 </span>      }<span class='newline'>
 </span>      .<span class='xv'>font</span>(<span class='xv'>size</span>: .<span class='xv'>sm</span>, <span class='xv'>color</span>: .<span class='xv'>zinc</span>(.<span class='xv'>_400</span>, <span class='xv'>opacity</span>: <span class='xn'>0.9</span>))<span class='newline'>
@@ -160,7 +160,7 @@
 </span>        <span class='xv'>content</span>: {<span class='newline'>
 </span>          <span class='xv'>LayoutOne</span> {<span class='newline'>
 </span>            <span class='xv'>Heading</span>(<span class='xv'>level</span>: .<span class='xv'>one</span>) { <span class='xs'>"Home Page"</span> }<span class='newline'>
-</span>            <span class='xv'>Anchor</span>(<span class='xv'>to</span>: <span class='xs'>"/about"</span>) { <span class='xs'>"Go to About"</span> }<span class='newline'>
+</span>            <span class='xv'>Link</span>(<span class='xv'>to</span>: <span class='xs'>"/about"</span>) { <span class='xs'>"Go to About"</span> }<span class='newline'>
 </span>          }<span class='newline'>
 </span>        }<span class='newline'>
 </span>      ),<span class='newline'>
@@ -173,7 +173,7 @@
 </span>        <span class='xv'>content</span>: {<span class='newline'>
 </span>          <span class='xv'>LayoutOne</span> {<span class='newline'>
 </span>            <span class='xv'>Heading</span>(<span class='xv'>level</span>: .<span class='xv'>one</span>) { <span class='xs'>"About Page"</span> }<span class='newline'>
-</span>            <span class='xv'>Anchor</span>(<span class='xv'>to</span>: <span class='xs'>"/"</span>) { <span class='xs'>"Go to Home"</span> }<span class='newline'>
+</span>            <span class='xv'>Link</span>(<span class='xv'>to</span>: <span class='xs'>"/"</span>) { <span class='xs'>"Go to Home"</span> }<span class='newline'>
 </span>          }<span class='newline'>
 </span>        }<span class='newline'>
 </span>      )<span class='newline'>
