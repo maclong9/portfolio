@@ -17,13 +17,19 @@ struct Layout: HTML {
   }
 
   public func render() -> String {
-    Stack {
+    let childrenContent = children.map { $0.render() }.joined()
+
+    return Stack {
       Header {
-        Link(to: "/portfolio", config: .init(classes: [temporaryLinkStyles, "font-bold"])) { "Mac Long" }
+        Link(to: "/portfolio", classes: [temporaryLinkStyles, "font-bold"]) {
+          "Mac Long"
+        }
         Navigation {
           Link(
-            to: "https://github.com/maclong9", newTab: true,
-            config: .init(classes: [temporaryLinkStyles], label: "Visit Mac Long's GitHub profile")
+            to: "https://github.com/maclong9",
+            newTab: true,
+            classes: [temporaryLinkStyles],
+            label: "Visit Mac Long's GitHub profile"
           ) { Icon.github.rawValue }
         }
       }
@@ -33,7 +39,7 @@ struct Layout: HTML {
       .padding()
 
       Main {
-        children.map { $0.render() }.joined()
+        childrenContent
       }
       .flex(grow: .one)
       .margins(.horizontal, auto: true)
@@ -45,7 +51,7 @@ struct Layout: HTML {
       Footer {
         Text {
           "© \(Date().formattedYear()) "
-          Link(to: "/portfolio", config: .init(classes: [temporaryLinkStyles])) { "Mac Long" }
+          Link(to: "/portfolio", classes: [temporaryLinkStyles]) { "Mac Long" }
         }
       }
       .font(size: .sm, color: .zinc(._400, opacity: 0.9))
@@ -54,7 +60,7 @@ struct Layout: HTML {
     }
     .frame(minHeight: .screen)
     .font(color: .zinc(._200))
-    .background(color: .zinc((._950)))
+    .background(color: .zinc(._950))
     .flex(direction: .column)
     .render()
   }

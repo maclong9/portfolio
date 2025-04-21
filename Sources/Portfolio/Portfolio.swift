@@ -1,19 +1,13 @@
 import Foundation
 import WebUI
 
-#if os(Linux)
-import FoundationNetworking
-#endif
-
 @main
-public struct Portfolio: Sendable {
+public struct Portfolio {
   public static let author = "Mac Long"
 
-  // Articles are fetched first so they can be used in Home view
   let articles: [ArticleResponse]
   let articleDocuments: [Document]
 
-  // Static routes will now be a computed property that uses the articles
   var staticRoutes: [Document] {
     [
       Document(
@@ -31,18 +25,15 @@ public struct Portfolio: Sendable {
     ]
   }
 
-  // Initialize with articles fetched from the service
-  init() async throws {
-    // First fetch the article data
-    self.articles = try await ArticleService.fetchAllArticles()
-    // Then create documents from them
+  init(articles: [ArticleResponse]) {
+    self.articles = articles
     self.articleDocuments = articles.map { $0.document }
   }
 
   static func main() async throws {
-    let portfolioInstance = try await Portfolio()
-    // Combine both static routes and article documents
+    let articles = try await ArticleService.fetchAllArticles()
+    let portfolioInstance = Portfolio(articles: articles)
     let allRoutes = portfolioInstance.staticRoutes + portfolioInstance.articleDocuments
-    try Application(routes: allRoutes).build(publicDirectory: "Sources/Portfolio/Public")
+    try Application(routes: allRoutes).build(assetsPath: "Sources/Portfolio/Public")
   }
 }

@@ -1,22 +1,22 @@
 {
-  "originHash" : "b0ef9913e85682bdeb05f3f854c433049b1a1a0017538cabade761d44eb10edb",
+  "originHash" : "003ec29a5f8209cf488ca54f71d585d5332ff403c6b71a78aab931bbfa025db2",
   "pins" : [
     {
-      "identity" : "swift-docc-plugin",
+      "identity" : "swift-cmark",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-docc-plugin",
+      "location" : "https://github.com/swiftlang/swift-cmark.git",
       "state" : {
-        "revision" : "85e4bb4e1cd62cec64a4b8e769dcefdf0c5b9d64",
-        "version" : "1.4.3"
+        "branch" : "gfm",
+        "revision" : "b97d09472e847a416629f026eceae0e2afcfad65"
       }
     },
     {
-      "identity" : "swift-docc-symbolkit",
+      "identity" : "swift-markdown",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swiftlang/swift-docc-symbolkit",
+      "location" : "https://github.com/swiftlang/swift-markdown.git",
       "state" : {
-        "revision" : "b45d1f2ed151d057b54504d653e0da5552844e34",
-        "version" : "1.0.0"
+        "branch" : "main",
+        "revision" : "4e6854f056a5ea80515cbd306e09d4b488889b90"
       }
     },
     {
@@ -25,7 +25,7 @@
       "location" : "https://github.com/maclong9/web-ui",
       "state" : {
         "branch" : "main",
-        "revision" : "4c621f66aa60af5e307b4285bc6e504a57897e86"
+        "revision" : "aec0a7e939f36fb06ddaaadfd9abcd37b57a9c88"
       }
     }
   ],

@@ -7,21 +7,22 @@ let package = Package(
   name: "Portfolio",
   platforms: [.macOS(.v13)],
   products: [
-    .executable(name: "Portfolio", targets: ["Portfolio"]),
+    .executable(name: "Portfolio", targets: ["Portfolio"])
   ],
   dependencies: [
     .package(url: "https://github.com/maclong9/web-ui", branch: "main"),
-    .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.3.0"),
+    .package(url: "https://github.com/swiftlang/swift-markdown.git", branch: "main"),
   ],
   targets: [
     .executableTarget(
       name: "Portfolio",
       dependencies: [
-        .product(name: "WebUI", package: "web-ui")
+        .product(name: "WebUI", package: "web-ui"),
+        .product(name: "Markdown", package: "swift-markdown"),
       ],
       resources: [
         .copy("Public")
       ]
-    ),
+    )
   ]
 )
