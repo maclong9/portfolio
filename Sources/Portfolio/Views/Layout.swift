@@ -21,16 +21,15 @@ struct Layout: HTML {
 
     return Stack {
       Header {
-        Link(to: "/portfolio", classes: [temporaryLinkStyles, "font-bold"]) {
+        Link(to: "/portfolio") {
           "Mac Long"
-        }
+        }.styled()
         Navigation {
           Link(
             to: "https://github.com/maclong9",
             newTab: true,
-            classes: [temporaryLinkStyles],
             label: "Visit Mac Long's GitHub profile"
-          ) { Icon.github.rawValue }
+          ) { Icon.github.rawValue }.styled()
         }
       }
       .flex(justify: .between, align: .center)
@@ -51,7 +50,7 @@ struct Layout: HTML {
       Footer {
         Text {
           "© \(Date().formattedYear()) "
-          Link(to: "/portfolio", classes: [temporaryLinkStyles]) { "Mac Long" }
+          Link(to: "/portfolio") { "Mac Long" }.styled()
         }
       }
       .font(size: .sm, color: .zinc(._400, opacity: 0.9))
