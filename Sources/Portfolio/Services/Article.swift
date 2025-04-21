@@ -101,7 +101,7 @@ enum ArticleService {
     return String(html[range])
   }
 
-  // Helper to extract description from HTML (simplified regex for first <p>)
+  // Helper to extract published from HTML (simplified regex for first <p>)
   private static func extractDescription(from html: String) -> String? {
     let pattern = "<p[^>]*>(.*?)</p>"
     guard let regex = try? NSRegularExpression(pattern: pattern),
