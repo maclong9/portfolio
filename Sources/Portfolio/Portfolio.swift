@@ -5,6 +5,7 @@ import WebUI
 @main
 public struct Portfolio {
   public static let author = "Mac Long"
+  private static let logger = Logger(label: "Portfolio")
 
   let articles: [ArticleResponse]
   let articleDocuments: [Document]
@@ -38,9 +39,9 @@ public struct Portfolio {
     let articles: [ArticleResponse]
     do {
       articles = try ArticleService.fetchAllArticles()
-      print("Successfully loaded \(articles.count) articles from local markdown files")
+      logger.info("Successfully loaded \(articles.count) articles from local markdown files")
     } catch {
-      print("Error loading articles: \(error)")
+      logger.error("Error loading articles: \(error)")
       articles = []
     }
 
