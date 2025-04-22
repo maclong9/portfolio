@@ -38,8 +38,8 @@ struct ArticleResponse {
         author: Portfolio.author,
         type: .article
       ),
+      scripts: ["https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"],
       head: """
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
           <script>
             hljs.highlightAll();
             document.addEventListener('DOMContentLoaded', () => {
@@ -75,7 +75,7 @@ struct ArticleResponse {
       content: {
         Layout {
           htmlContent
-          Style { typographyStyles }
+          typographyStyles
         }
       }
     )
