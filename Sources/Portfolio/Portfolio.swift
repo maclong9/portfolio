@@ -1,4 +1,5 @@
 import Foundation
+import Logging
 import WebUI
 
 @main
@@ -31,6 +32,8 @@ public struct Portfolio {
   }
 
   static func main() async throws {
+    let logLevelString = ProcessInfo.processInfo.environment["LOG_LEVEL"] ?? "info"
+    LoggingSetup.bootstrap(logLevelString: logLevelString)
     let articles = try await ArticleService.fetchAllArticles()
     let portfolioInstance = Portfolio(articles: articles)
     let allRoutes = portfolioInstance.staticRoutes + portfolioInstance.articleDocuments
