@@ -1,3 +1,9 @@
+---
+title: My Personal Setup
+description: This post outlines the tools and software I rely on daily as a software engineer.
+published: April 11, 2025
+---
+
 # My Personal Setup
 
 **Published:** April 11, 2025

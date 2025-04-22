@@ -1,3 +1,9 @@
+---
+title: Introduction to WebUI
+description: An introduction to WebUI, a Swift library for rendering HTML, CSS, and JavaScript.
+published: April 15, 2025
+---
+
 # Introduction to WebUI
 
 **Published:** April 15, 2025

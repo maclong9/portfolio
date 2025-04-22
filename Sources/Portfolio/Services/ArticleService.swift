@@ -1,7 +1,26 @@
 import Foundation
 import WebUI
 
-struct ArticleResponse: Identifiable {
+enum ArticleService {
+  static func fetchAllArticles() throws -> [ArticleResponse] {
+    let fileManager = FileManager.default
+    let articlesDirectoryURL = URL(fileURLWithPath: "Sources/Portfolio/Articles")
+    let fileURLs = try fileManager.contentsOfDirectory(
+      at: articlesDirectoryURL,
+      includingPropertiesForKeys: nil,
+      options: .skipsHiddenFiles
+    ).filter { $0.pathExtension == "md" }
+
+    return try fileURLs.map { url in
+      let id = url.deletingPathExtension().lastPathComponent
+      let content = try String(contentsOf: url, encoding: .utf8)
+      let parsed = MarkdownParser.parseMarkdown(content)
+      return ArticleResponse(id: id, parsed: parsed)
+    }
+  }
+}
+
+struct ArticleResponse {
   let id: String
   let title: String
   let description: String
@@ -15,15 +34,16 @@ struct ArticleResponse: Identifiable {
         site: Portfolio.author,
         title: title,
         description: description,
+        date: publishedDate,
         author: Portfolio.author,
-        type: .article
+        type: .article,
       ),
       head: """
           <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
           <script>hljs.highlightAll();</script>
         """,
       content: {
-        Layout(date: publishedDate) {
+        Layout {
           htmlContent
           Style { typographyStyles }
         }
@@ -31,19 +51,11 @@ struct ArticleResponse: Identifiable {
     )
   }
 
-  init(from parsedArticle: MarkdownService.ParsedArticle) {
-    self.id = parsedArticle.id.pathFormatted()
-    self.title = parsedArticle.title
-    self.description = parsedArticle.description
-    self.htmlContent = parsedArticle.htmlContent
-    self.publishedDate = parsedArticle.publishedDate
-  }
-}
-
-enum ArticleService {
-  /// Fetches all articles from the local Articles directory
-  static func fetchAllArticles() throws -> [ArticleResponse] {
-    let parsedArticles = try MarkdownService.getAllArticles()
-    return parsedArticles.map { ArticleResponse(from: $0) }
+  init(id: String, parsed: MarkdownParser.ParsedMarkdown) {
+    self.id = id.pathFormatted()
+    self.htmlContent = parsed.htmlContent
+    self.title = parsed.frontMatter["title"] as? String ?? "Untitled"
+    self.description = parsed.frontMatter["description"] as? String ?? ""
+    self.publishedDate = parsed.frontMatter["published"] as? Date
   }
 }
