@@ -46,7 +46,7 @@ struct Layout: HTML {
         }
       }
       .font(size: .sm, color: .zinc(._600, opacity: 0.9))
-      .font(size: .sm, color: .zinc(._400, opacity: 0.9), on: .dark)
+      .font(color: .zinc(._400, opacity: 0.9), on: .dark)
       .flex(justify: .center, align: .center)
       .padding()
     }
