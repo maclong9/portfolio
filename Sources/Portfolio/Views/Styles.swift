@@ -17,18 +17,22 @@ extension Element {
 
 extension Heading {
   public func styled(size: TextSize) -> Element {
-    self.font(
-      size: size, weight: .bold, tracking: .tight, wrapping: .balance,
-      color: .zinc(._100))
+    self
+      .font(size: size, weight: .bold, tracking: .tight, wrapping: .balance, color: .zinc(._950))
+      .font(color: .zinc(._100), on: .dark)
   }
 }
 
 let typographyStyles = """
     :root {
-      --text-color: oklch(98.5% 0 0);
+      --text-color: oklch(37% 0.013 285.805);
       --link-color: oklch(70.4% 0.14 182.503); 
       --hover-color: oklch(0.8 0.078 188.216);
       --border-color: oklch(0.46 0 0);
+  
+      @media(prefers-color-scheme: dark) {
+        --text-color: oklch(98.5% 0 0);
+      }
     }
 
     a {

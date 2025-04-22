@@ -36,7 +36,8 @@ struct Home: HTML {
               .cursor(.pointer)
               .flex(direction: .column, align: .start)
               .border(edges: .all, radius: (side: .all, size: .lg))
-              .background(color: .zinc(._700), on: .hover)
+              .background(color: .zinc(._300), on: .hover)
+              .background(color: .zinc(._700), on: .hover, .dark)
               .transition(property: .colors, duration: 300, easing: .inOut)
               .padding()
             }
