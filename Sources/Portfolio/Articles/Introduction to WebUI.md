@@ -56,7 +56,7 @@ let html = document.render()
 
 This code renders the following HTML. Currently, styles are managed with TailwindCSS, though this may evolve in future updates. Metadata is rendered in the `<head>` tag, and closure content appears within the `<body>` tags.
 
-```html
+```HTML
 <!DOCTYPE html>
 <html lang="en">
   <head>

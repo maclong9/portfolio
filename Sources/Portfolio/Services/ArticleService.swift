@@ -36,11 +36,41 @@ struct ArticleResponse {
         description: description,
         date: publishedDate,
         author: Portfolio.author,
-        type: .article,
+        type: .article
       ),
       head: """
           <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-          <script>hljs.highlightAll();</script>
+          <script>
+            hljs.highlightAll();
+            document.addEventListener('DOMContentLoaded', () => {
+              document.querySelectorAll('pre code').forEach(block => {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'code-block-wrapper';
+                block.parentNode.before(wrapper);
+                wrapper.appendChild(block.parentNode);
+                
+                const lang = (block.className.match(/language-(\\w+)/)?.[1] || 'text');  
+                if(lang !== 'text') {
+                  const langFormatted = lang.charAt(0).toUpperCase() + lang.slice(1);
+                  const langSpan = document.createElement('span');
+                  langSpan.className = 'code-language';
+                  langSpan.textContent = langFormatted;
+                  wrapper.prepend(langSpan);
+                }
+
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'copy-button';
+                copyBtn.textContent = 'Copy';
+                copyBtn.onclick = () => {
+                  navigator.clipboard.writeText(block.textContent).then(() => {
+                    copyBtn.textContent = 'Copied!';
+                    setTimeout(() => copyBtn.textContent = 'Copy', 2000);
+                  });
+                };
+                wrapper.appendChild(copyBtn);
+              });
+            });
+          </script>
         """,
       content: {
         Layout {
