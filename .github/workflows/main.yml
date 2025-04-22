@@ -1,0 +1,30 @@
+name: Trigger Documentation Build and Deploy to Netlify
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Trigger Build with Curl
+        run: |
+          curl -v \
+            -H "authorization: ${{ secrets.API_AUTH_TOKEN }}" \
+            -H "content-type: application/x-www-form-urlencoded" \
+            -H "content-length: 0" \
+            -X POST \
+            https://api.swiftinit.org/ref/maclong9.portfolio/main/build
+
+      - name: Wait for 2 minutes
+        run: sleep 120
+
+      - name: Trigger Netlify Deploy
+        run: |
+          curl -X POST -d {} ${{ secrets.NETLIFY_DEPLOY_WEBHOOK }}
