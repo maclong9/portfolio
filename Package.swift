@@ -11,15 +11,18 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/maclong9/web-ui", branch: "main"),
+    .package(url: "https://github.com/apple/swift-markdown", from: "0.6.0"),
   ],
   targets: [
     .executableTarget(
       name: "Portfolio",
       dependencies: [
         .product(name: "WebUI", package: "web-ui"),
+        .product(name: "Markdown", package: "swift-markdown"),
       ],
       resources: [
-        .copy("Public")
+        .copy("Public"),
+        .copy("Articles"),
       ]
     )
   ]

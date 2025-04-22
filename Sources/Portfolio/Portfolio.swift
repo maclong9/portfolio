@@ -34,7 +34,17 @@ public struct Portfolio {
   static func main() async throws {
     let logLevelString = ProcessInfo.processInfo.environment["LOG_LEVEL"] ?? "info"
     LoggingSetup.bootstrap(logLevelString: logLevelString)
-    let articles = try await ArticleService.fetchAllArticles()
+
+    // Use local markdown files rather than remote API
+    let articles: [ArticleResponse]
+    do {
+      articles = try ArticleService.fetchAllArticles()
+      print("Successfully loaded \(articles.count) articles from local markdown files")
+    } catch {
+      print("Error loading articles: \(error)")
+      articles = []
+    }
+
     let portfolioInstance = Portfolio(articles: articles)
     let allRoutes = portfolioInstance.staticRoutes + portfolioInstance.articleDocuments
     try Application(routes: allRoutes).build(assetsPath: "Sources/Portfolio/Public")
