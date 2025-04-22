@@ -10,7 +10,7 @@ let package = Package(
     .executable(name: "Portfolio", targets: ["Portfolio"])
   ],
   dependencies: [
-    .package(url: "https://github.com/maclong9/web-ui", branch: "main")
+    .package(url: "https://github.com/maclong9/web-ui", from: "1.0.0")
   ],
   targets: [
     .executableTarget(

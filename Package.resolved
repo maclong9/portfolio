@@ -1,40 +1,13 @@
 {
-  "originHash" : "9c778475523860b8613f3d126fefad861d046e5d1c57fb8a7494f96ba73b84c0",
+  "originHash" : "e1300b172307f7d5c0fda589f6559a427081b8a3744947869d0ddd509bb95e3b",
   "pins" : [
-    {
-      "identity" : "swift-cmark",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swiftlang/swift-cmark.git",
-      "state" : {
-        "revision" : "b022b08312decdc46585e0b3440d97f6f22ef703",
-        "version" : "0.6.0"
-      }
-    },
-    {
-      "identity" : "swift-log",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-log.git",
-      "state" : {
-        "revision" : "3d8596ed08bd13520157f0355e35caed215ffbfa",
-        "version" : "1.6.3"
-      }
-    },
-    {
-      "identity" : "swift-markdown",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-markdown.git",
-      "state" : {
-        "revision" : "ea79e83c8744d2b50b0dc2d5bbd1e857e1253bf9",
-        "version" : "0.6.0"
-      }
-    },
     {
       "identity" : "web-ui",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/maclong9/web-ui",
       "state" : {
-        "branch" : "main",
-        "revision" : "3651716d29c319dd5b2e45962cce7670f3009a29"
+        "revision" : "aa5aaa41eb956ee5ae3ee6804b766f30457e3d7b",
+        "version" : "1.0.1"
       }
     }
   ],
