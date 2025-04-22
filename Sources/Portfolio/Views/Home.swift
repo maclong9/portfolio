@@ -5,7 +5,10 @@ struct Home: HTML {
   let articles: [ArticleResponse]
 
   init(articles: [ArticleResponse] = []) {
-    self.articles = articles
+    self.articles = articles.sorted {
+      guard let date1 = $0.publishedDate, let date2 = $1.publishedDate else { return false }
+      return date1 > date2
+    }
   }
 
   func render() -> String {

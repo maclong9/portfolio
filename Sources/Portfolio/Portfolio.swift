@@ -35,7 +35,6 @@ public struct Portfolio {
     let logLevelString = ProcessInfo.processInfo.environment["LOG_LEVEL"] ?? "info"
     LoggingSetup.bootstrap(logLevelString: logLevelString)
 
-    // Use local markdown files rather than remote API
     let articles: [ArticleResponse]
     do {
       articles = try ArticleService.fetchAllArticles()
