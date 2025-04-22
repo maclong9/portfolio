@@ -30,7 +30,7 @@ struct Home: HTML {
                   "\(article.publishedDate?.formatted(date: .complete, time: .omitted) ?? "")"
                 }
                 .font(size: .sm, color: .zinc(._600, opacity: 0.9))
-                .font(size: .sm, color: .zinc(._400, opacity: 0.9), on: .dark)
+                .font(color: .zinc(._400, opacity: 0.9), on: .dark)
                 Text {
                   article.description
                 }
@@ -53,7 +53,7 @@ struct Home: HTML {
       } else {
         Text {
           "No articles available at the moment. Check back soon!"
-        }.font(family: "ui-serif").margins(.top)
+        }.padding().margins(.top)
       }
     }.render()
   }
