@@ -21,7 +21,7 @@ struct Layout: HTML {
 
     return Stack {
       Header {
-        Link(to: "/portfolio") {
+        Link(to: "/") {
           "Mac Long"
         }.styled()
         Navigation {
@@ -50,7 +50,7 @@ struct Layout: HTML {
       Footer {
         Text {
           "© \(Date().formattedYear()) "
-          Link(to: "/portfolio") { "Mac Long" }.styled()
+          Link(to: "/") { "Mac Long" }.styled()
         }
       }
       .font(size: .sm, color: .zinc(._400, opacity: 0.9))
