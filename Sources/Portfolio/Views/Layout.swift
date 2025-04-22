@@ -59,7 +59,7 @@ struct Layout: HTML {
       .padding()
     }
     .frame(minHeight: .screen)
-    .font(color: .zinc(._700))
+    .font(color: .zinc(._800))
     .background(color: .zinc(._200))
     .font(color: .zinc(._200), on: .dark)
     .background(color: .zinc(._950), on: .dark)
