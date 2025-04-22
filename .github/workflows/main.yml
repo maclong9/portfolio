@@ -16,7 +16,7 @@ jobs:
       - name: Trigger Build with Curl
         run: |
           curl -v \
-            -H "authorization: ${{ secrets.API_AUTH_TOKEN }}" \
+            -H "authorization: Unidoc ${{ secrets.API_AUTH_TOKEN }}" \
             -H "content-type: application/x-www-form-urlencoded" \
             -H "content-length: 0" \
             -X POST \
