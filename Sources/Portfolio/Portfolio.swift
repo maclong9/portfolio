@@ -18,7 +18,7 @@ public struct Portfolio {
           site: Self.author,
           title: "Home",
           description: "Software Engineer, crafting intuitive solutions.",
-          image: "public/og.jpg",
+          image: "/public/og.jpg",
           author: Self.author,
           type: .website
         ),
@@ -31,11 +31,11 @@ public struct Portfolio {
           site: Self.author,
           title: "Projects",
           description: "Software Engineer, crafting intuitive solutions.",
-          image: "public/og.jpg",
+          image: "/public/og.jpg",
           author: Self.author,
           type: .website
         ),
-        head: "<link rel=\"icon\" href=\"public/icon.svg\" type=\"image/svg+xml\" />",
+        head: "<link rel=\"icon\" href=\"/public/icon.svg\" type=\"image/svg+xml\" />",
         content: { Projects() }
       ),
     ]

@@ -35,7 +35,7 @@ struct ArticleResponse {
         title: title,
         description: description,
         date: publishedDate,
-        image: "public/articles/\(id).jpg",
+        image: "/public/articles/\(id).jpg",
         author: Portfolio.author,
         type: .article
       ),
