@@ -19,7 +19,7 @@ struct Card: HTML {
               for technology in technologies {
                 Text { technology }
                   .background(color: .zinc(._300))
-                  .background(color: .zinc(._600), on: .dark)
+                  .background(color: .zinc(._800), on: .dark)
                   .border(edges: .all, radius: (side: .all, size: .lg))
                   .font(size: .xs, color: .zinc(._900))
                   .font(color: .zinc(._200), on: .dark)
