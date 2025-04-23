@@ -30,7 +30,7 @@ struct Home: HTML {
             publishedDate: article.publishedDate
           )
         }
-      }.flex(direction: .column).padding(length: 10).spaced()
+      }.flex(direction: .column).padding(length: 10).margins(.vertical)
     }.render()
   }
 }

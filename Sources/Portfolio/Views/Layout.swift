@@ -15,14 +15,15 @@ struct Layout: HTML {
       Header {
         Link(to: "/") {
           "Mac Long"
-        }.styled()
+        }.styled().font(size: .xl2)
         Navigation {
+          Link(to: "/projects") { "Projects" }.styled().font(size: .sm, weight: .semibold)
           Link(
             to: "https://github.com/maclong9",
             newTab: true,
             label: "Visit Mac Long's GitHub profile"
           ) { Icon.github.rawValue }.styled()
-        }
+        }.flex(align: .center).spacing(.x)
       }
       .flex(justify: .between, align: .center)
       .frame(width: .screen, maxWidth: .fixed(200))

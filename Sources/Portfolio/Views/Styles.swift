@@ -9,12 +9,6 @@ extension Link {
   }
 }
 
-extension Element {
-  public func spaced() -> Element {
-    self.margins(.vertical)
-  }
-}
-
 extension Heading {
   public func styled(size: TextSize) -> Element {
     self
