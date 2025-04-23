@@ -49,7 +49,7 @@ struct Home: HTML {
               .padding()
             }
           }
-        }.flex(direction: .column).spaced()
+        }.flex(direction: .column).padding(length: 10).spaced()
       } else {
         Text {
           "No articles available at the moment. Check back soon!"
