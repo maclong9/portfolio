@@ -43,7 +43,7 @@ struct Projects: HTML {
             publishedDate: nil
           )
         }
-      }.flex(direction: .column).padding(length: 10).margins(.vertical)
+      }.flex(direction: .column).padding(length: 10, on: .sm).margins(.vertical)
     }.render()
   }
 }
