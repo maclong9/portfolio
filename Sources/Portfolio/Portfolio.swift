@@ -24,7 +24,20 @@ public struct Portfolio {
         ),
         head: "<link rel=\"icon\" href=\"public/icon.svg\" type=\"image/svg+xml\" />",
         content: { Home(articles: self.articles) }
-      )
+      ),
+      Document(
+        path: "projects",
+        metadata: .init(
+          site: Self.author,
+          title: "Projects",
+          description: "Software Engineer, crafting intuitive solutions.",
+          image: "public/og.jpg",
+          author: Self.author,
+          type: .website
+        ),
+        head: "<link rel=\"icon\" href=\"public/icon.svg\" type=\"image/svg+xml\" />",
+        content: { Projects() }
+      ),
     ]
   }
 
