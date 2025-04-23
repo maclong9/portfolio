@@ -246,4 +246,6 @@ targets: [
 
 ## Conclusion
 
-This introduction covers the basics of WebUI, a library I created to streamline web development in Swift. While still evolving, WebUI has been a valuable learning experience in Swift and web technologies. Explore a production site using WebUI at its [source code](https://github.com/maclong9/portfolio) or learn more about the library [here](https://github.com/maclong9/web-ui). Thank you for reading!
+This introduction covers the basics of WebUI, a library I created to streamline web development in Swift. While still evolving, WebUI has been a valuable learning experience in Swift and web technologies. Explore this sites [source code](https://github.com/maclong9/portfolio) to see how a production site using WebUI is built or learn more about the library [here](https://github.com/maclong9/web-ui). 
+
+Thank you for reading!

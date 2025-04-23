@@ -23,7 +23,8 @@ extension Heading {
   }
 }
 
-let typographyStyles = """
+let typographyStyles = Style {
+  """
     :root {
       --text-color: oklch(27.4% 0.006 286.033);
       --link-color: oklch(70.4% 0.14 182.503);
@@ -277,3 +278,4 @@ let typographyStyles = """
       }
     }
   """
+}.render()

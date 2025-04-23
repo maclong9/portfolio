@@ -13,10 +13,9 @@ struct Home: HTML {
 
   func render() -> String {
     Layout {
-      Heading(level: .one) { "Software engineer, skater, & musician." }.styled(
-        size: .xl4
-      ).margins(
-        .bottom)
+      Heading(level: .one) { "Software engineer, skater, & musician." }
+        .styled(size: .xl4)
+        .margins(.bottom)
       Text {
         "I'm Mac, a software engineer based out of the United Kingdom. I enjoy building robust and efficient software. Read some of my articles below."
       }.font(family: "ui-serif")
@@ -31,7 +30,7 @@ struct Home: HTML {
                   "\(article.publishedDate?.formatted(date: .complete, time: .omitted) ?? "")"
                 }
                 .font(size: .sm, color: .zinc(._600, opacity: 0.9))
-                .font(size: .sm, color: .zinc(._400, opacity: 0.9), on: .dark)
+                .font(color: .zinc(._400, opacity: 0.9), on: .dark)
                 Text {
                   article.description
                 }
@@ -54,7 +53,7 @@ struct Home: HTML {
       } else {
         Text {
           "No articles available at the moment. Check back soon!"
-        }.font(family: "ui-serif").margins(.top)
+        }.padding().margins(.top)
       }
     }.render()
   }
