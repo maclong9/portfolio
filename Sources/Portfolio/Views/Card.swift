@@ -1,6 +1,14 @@
 import Foundation
 import WebUI
 
+protocol CardItem {
+  var title: String { get }
+  var url: String { get }
+  var description: String { get }
+  var technologies: [String]? { get }
+  var publishedDate: Date? { get }
+}
+
 struct Card: HTML {
   let title: String
   let url: String
@@ -55,5 +63,27 @@ struct Card: HTML {
       .transition(property: .colors, duration: 300, easing: .inOut)
       .padding()
     }.render()
+  }
+}
+
+struct Collection<T: CardItem>: HTML {
+  let items: [T]
+
+  func render() -> String {
+    Stack {
+      for item in items {
+        Card(
+          title: item.title,
+          url: item.url,
+          description: item.description,
+          technologies: item.technologies,
+          publishedDate: item.publishedDate
+        )
+      }
+    }
+    .flex(direction: .column)
+    .padding(length: 10)
+    .margins(.vertical)
+    .render()
   }
 }

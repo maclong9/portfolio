@@ -1,11 +1,14 @@
 import Foundation
 import WebUI
 
-struct Project {
+struct Project: CardItem {
   let name: String
   let description: String
-  let technologies: [String]
+  let technologies: [String]?
   let url: String
+
+  var title: String { name }
+  var publishedDate: Date? { nil }
 }
 
 struct Projects: HTML {
@@ -26,24 +29,12 @@ struct Projects: HTML {
 
   func render() -> String {
     Layout {
-      Heading(level: .one) { "Recent Projects" }
-        .styled(size: .xl4)
-        .margins(.bottom)
-      Text {
-        "Below are a list of projects I have worked on recently as well as links to their source code, they usually range from development tools to full stack applications."
-      }.font(family: "ui-serif")
-
-      Stack {
-        for project in projects {
-          Card(
-            title: project.name,
-            url: project.url,
-            description: project.description,
-            technologies: project.technologies,
-            publishedDate: nil
-          )
-        }
-      }.flex(direction: .column).padding(length: 10, on: .sm).margins(.vertical)
+      PageHeader(
+        title: "Recent Projects",
+        description:
+          "Below are a list of projects I have worked on recently as well as links to their source code, they usually range from development tools to full stack applications."
+      )
+      Collection(items: projects)
     }.render()
   }
 }

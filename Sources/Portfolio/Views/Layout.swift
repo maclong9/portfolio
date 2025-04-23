@@ -1,6 +1,21 @@
 import Foundation
 import WebUI
 
+struct PageHeader: HTML {
+  let title: String
+  let description: String
+
+  func render() -> String {
+    Stack {
+      Heading(level: .one) { title }
+        .styled(size: .xl4)
+        .margins(.bottom)
+      Text { description }
+        .font(family: "ui-serif")
+    }.render()
+  }
+}
+
 struct Layout: HTML {
   let children: [any HTML]
 

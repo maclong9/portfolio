@@ -20,12 +20,16 @@ enum ArticleService {
   }
 }
 
-struct ArticleResponse {
+struct ArticleResponse: CardItem {
   let id: String
   let title: String
   let description: String
   let htmlContent: String
   let publishedDate: Date?
+
+  // CardItem conformance
+  var url: String { "/articles/\(id)" }
+  let technologies: [String]? = nil
 
   var document: Document {
     Document(
