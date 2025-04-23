@@ -106,12 +106,14 @@ This code renders the following HTML. Currently, styles are managed with Tailwin
 Styles in WebUI follow a modifier pattern inspired by SwiftUI. Below is an example of a styled div with a heading. The container has a light background by default and a dark background when `prefers-color-scheme: dark` is active, with typography styles applied to the heading.
 
 ```swift
+import WebUI
+
 let styledContent = Stack {
   Heading(level: .h1) { "Hello, world!" }
-    .font(size: .xl, weight: .bold, decoration: .underline)
+    .font(size: .xl4, weight: .bold)
 }
-.background(color: .neutral(._100))
-.background(color: .neutral(._950), on: .dark)
+.background(color: .zinc(._200))
+.background(color: .zinc(._950), on: .dark)
 ```
 
 ## Generating a Simple Static Site
@@ -121,7 +123,9 @@ let styledContent = Stack {
 WebUI components are defined as structs conforming to the `HTML` protocol.
 
 ```swift
-struct LayoutOne: HTML {
+import WebUI
+
+struct Layout: HTML {
   let children: [any HTML]
 
   init(@HTMLBuilder children: @escaping () -> [any HTML]) {
@@ -147,46 +151,55 @@ struct LayoutOne: HTML {
       .flex(grow: .one)
       .margins(.horizontal, auto: true)
       .frame(maxWidth: .custom("95vw"))
-      .frame(maxWidth: .character(64), on: .sm)
+      .frame(maxWidth: .fixed(180), on: .sm)
       .font(wrapping: .pretty)
       .padding()
 
       Footer {
         Text {
+          "© \(Date().formattedYear()) "
           Link(to: "/") { "Site Title" }
         }
       }
-      .font(size: .sm, color: .zinc(._400, opacity: 0.9))
+      .font(size: .sm, color: .zinc(._600, opacity: 0.9))
+      .font(color: .zinc(._400, opacity: 0.9), on: .dark)
       .flex(justify: .center, align: .center)
       .padding()
     }
     .frame(minHeight: .screen)
-    .font(color: .zinc(._200))
-    .background(color: .zinc(._950))
+    .font(color: .zinc(._800))
+    .background(color: .zinc(._200))
+    .font(color: .zinc(._200), on: .dark)
+    .background(color: .zinc(._950), on: .dark)
     .flex(direction: .column)
     .render()
   }
 }
 ```
 
-This creates a reusable layout with a header, main content area, and footer.
-
 ### Generating the Website
 
 To generate a static site, run the build step to create an `.output` directory in the current working directory. If using Xcode, set a custom working directory in your scheme.
 
 ```swift
+import WebUI
+
 public struct StaticSite: Sendable {
   var staticRoutes: [Document] {
     [
       Document(
         path: "index",
         metadata: .init(
+          site: "Mac Long",
           title: "Home",
-          description: "Welcome to the home page."
+          description: "Welcome to the home page.",
+          image: "/public/og.jpg",
+          author: "Mac Long",
+          type: .website
         ),
+        head: "<link rel=\"icon\" href=\"public/icon.svg\" type=\"image/svg+xml\" />",
         content: {
-          LayoutOne {
+          Layout {
             Heading(level: .h1) { "Home Page" }
             Link(to: "/about") { "Go to About" }
           }
@@ -195,11 +208,16 @@ public struct StaticSite: Sendable {
       Document(
         path: "about",
         metadata: .init(
+          site: "Mac Long",
           title: "About",
-          description: "Learn more about us."
+          description: "Learn more about us.",
+          image: "/public/og.jpg",
+          author: "Mac Long",
+          type: .website
         ),
+        head: "<link rel=\"icon\" href=\"public/icon.svg\" type=\"image/svg+xml\" />",
         content: {
-          LayoutOne {
+          Layout {
             Heading(level: .h1) { "About Page" }
             Link(to: "/") { "Go to Home" }
           }
@@ -209,7 +227,7 @@ public struct StaticSite: Sendable {
   }
 
   func main() async throws {
-    try Application(routes: staticRoutes).build(publicDirectory: "Sources/StaticSite/Public")
+    try Application(routes: staticRoutes).build(assetsPath: "Sources/StaticSite/Public")
   }
 }
 ```
