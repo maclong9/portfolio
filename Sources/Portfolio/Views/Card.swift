@@ -37,7 +37,9 @@ struct Card: HTML {
               }
             }.padding(.bottom, length: 2)
           }
-        }.flex(direction: .row).spacing(.x, length: 3)
+        }
+        .flex(direction: .row)
+        .spacing(.x, length: 3)
 
         if let date = publishedDate {
           Time(datetime: "\(date.ISO8601Format())") {
