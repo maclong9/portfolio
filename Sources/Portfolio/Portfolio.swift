@@ -18,6 +18,7 @@ public struct Portfolio {
           site: Self.author,
           title: "Home",
           description: "Software Engineer, crafting intuitive solutions.",
+          image: "public/og.jpg",
           author: Self.author,
           type: .website
         ),
