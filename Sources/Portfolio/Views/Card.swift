@@ -82,7 +82,7 @@ struct Collection<T: CardItem>: HTML {
       }
     }
     .flex(direction: .column)
-    .padding(length: 10)
+    .padding(length: 10, on: .sm)
     .margins(.vertical)
     .render()
   }
