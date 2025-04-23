@@ -197,7 +197,7 @@ let typographyStyles = """
       padding: 2.5rem 1rem 1rem;
       margin: 0;
       overflow-x: auto;
-  
+
       &:has(.language-text) {
         padding: 1rem;
       }
