@@ -12,12 +12,11 @@ struct Home: HTML {
   }
 
   func render() -> String {
-    Layout {
-      PageHeader(
-        title: "Software engineer, skater, & musician.",
-        description:
-          "I'm Mac, a software engineer based out of the United Kingdom. I enjoy building robust and efficient software. Read some of my articles below."
-      )
+    Layout(
+      title: "Software engineer, skater, & musician.",
+      description:
+        "I'm Mac, a software engineer based out of the United Kingdom. I enjoy building robust and efficient software. Read some of my articles below."
+    ) {
       Collection(items: articles)
     }.render()
   }

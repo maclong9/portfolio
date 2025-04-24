@@ -4,12 +4,6 @@ description: This post outlines the tools and software I rely on daily as a soft
 published: April 11, 2025
 ---
 
-# My Personal Setup
-
-**Published:** April 11, 2025
-
-This post outlines the tools and software I rely on daily as a software engineer. 
-
 A brief note on some choices: I use Apple’s Terminal.app as my terminal emulator for its simplicity and zero configuration. For personal productivity, Apple’s Calendar, Notes, Mail, and Reminders apps keep me organized and focused without complexity.
 
 ## Workstation

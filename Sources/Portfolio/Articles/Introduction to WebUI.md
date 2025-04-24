@@ -4,10 +4,6 @@ description: An introduction to WebUI, a Swift library for rendering HTML, CSS, 
 published: April 15, 2025
 ---
 
-# Introduction to WebUI
-
-**Published:** April 15, 2025
-
 ## What is WebUI?
 
 WebUI is a rendering library for HTML, CSS, and JavaScript, built entirely in Swift. 

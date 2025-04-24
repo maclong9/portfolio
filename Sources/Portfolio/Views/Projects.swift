@@ -28,12 +28,11 @@ struct Projects: HTML {
   ]
 
   func render() -> String {
-    Layout {
-      PageHeader(
-        title: "Recent Projects",
-        description:
-          "Below are a list of projects I have worked on recently as well as links to their source code, they usually range from development tools to full stack applications."
-      )
+    Layout(
+      title: "Recent Projects",
+      description:
+        "Below are a list of projects I have worked on recently as well as links to their source code, they usually range from development tools to full stack applications."
+    ) {
       Collection(items: projects)
     }.render()
   }

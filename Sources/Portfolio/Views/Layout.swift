@@ -4,22 +4,43 @@ import WebUI
 struct PageHeader: HTML {
   let title: String
   let description: String
+  let published: Date?
 
   func render() -> String {
     Stack {
       Heading(level: .one) { title }
         .styled(size: .xl4)
         .margins(.bottom)
+      if let published = published {
+        Text {
+          Text { "Published: " }
+            .font(weight: .bold, family: "system-ui")
+          "\(published.formatted(date: .complete, time: .omitted))"
+        }.margins(.vertical)
+      }
       Text { description }
         .font(family: "ui-serif")
-    }.render()
+    }
+    .flex(direction: .column)
+    .render()
   }
 }
 
 struct Layout: HTML {
+  let title: String
+  let description: String
+  let published: Date?
   let children: [any HTML]
 
-  init(@HTMLBuilder children: @escaping () -> [any HTML]) {
+  init(
+    title: String,
+    description: String,
+    published: Date? = nil,
+    @HTMLBuilder children: @escaping () -> [any HTML]
+  ) {
+    self.title = title
+    self.description = description
+    self.published = published
     self.children = children()
   }
 
@@ -44,8 +65,13 @@ struct Layout: HTML {
       .frame(width: .screen, maxWidth: .fixed(200))
       .margins(.horizontal, auto: true)
       .padding()
-      
+
       Main {
+        PageHeader(
+          title: title,
+          description: description,
+          published: published
+        )
         childrenContent
       }
       .flex(grow: .one)

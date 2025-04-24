@@ -78,7 +78,11 @@ struct ArticleResponse: CardItem {
           </script>
         """,
       content: {
-        Layout {
+        Layout(
+          title: title,
+          description: description,
+          published: publishedDate
+        ) {
           htmlContent
           typographyStyles
         }
