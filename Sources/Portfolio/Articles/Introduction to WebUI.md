@@ -10,21 +10,20 @@ published: April 15, 2025
 
 ## What is WebUI?
 
-WebUI is a rendering library for HTML, CSS, and JavaScript, built entirely in Swift.
+WebUI is a rendering library for HTML, CSS, and JavaScript, built entirely in Swift. 
 
 It offers a convenient way to create user interfaces with a syntax similar to SwiftUI, resulting in clean, efficient, and maintainable code.
 
 ## Why I Built WebUI
 
-As a frequent user of Swift for backend development, thanks to the Swift on Server workgroup, I often opted for server-side rendering of HTML within Swift to maintain a unified codebase, avoiding the complexity of a decoupled ferontend. However, this approach typically involved embedding HTML templates as strings within Swift code, which introduced several challenges.
+As a frequent user of Swift for backend development, thanks to the [Swift on Server workgroup](https://www.swift.org/documentation/server/), I often opted for server-side rendering of HTML within Swift to maintain a unified codebase, avoiding the complexity of a decoupled frontend. However, this approach typically involved embedding HTML templates as strings within Swift code, which introduced several challenges.
 
-For example, consider a typical setup using Hummingbird, a Swift web framework, to render a dynamic homepage. Below is a simplified implementation of an `HTML` response generator that wraps HTML content, a `HomeView` struct for rendering the page's content, and a route handler to serve the page:
+For example, consider a typical setup using [Hummingbird](https://github.com/hummingbird-project/hummingbird), a Swift web framework, to render a dynamic homepage. Below is a simplified implementation of an `HTML` response generator that wraps HTML content, a `HomeView` struct for rendering the page's content, and a route handler to serve the page:
 
 ```swift
 import Hummingbird
 
-/// Type wrapping HTML code. Will convert to HBResponse that includes the correct
-/// content-type header
+/// Type wrapping HTML code. Will convert to HBResponse that includes the correct content-type header
 struct HTML: ResponseGenerator {
   let title: String
   let description: String
@@ -33,8 +32,9 @@ struct HTML: ResponseGenerator {
 
   init(
     title: String,
-    description = "Take control of your life with this wonderful todo list application.",
-    isLoggedIn: = false,
+    description: String =
+      "Take control of your life with this wonderful todo list application.",
+    isLoggedIn: Bool? = false,
     content: String
   ) {
     self.title = title
@@ -64,8 +64,8 @@ struct HTML: ResponseGenerator {
 
 /// A view that renders the marketing landing page of the application.
 ///
-/// Displays the main value proposition, feature highlights, and appropriate
-/// call-to-action buttons based on user authentication state.
+/// Displays the main value proposition, feature highlights, and appropriate call-to-action
+/// buttons based on user authentication state.
 ///
 /// - Parameters:
 ///    - isLoggedIn: Whether a user is currently authenticated, affecting which CTAs are shown
@@ -96,11 +96,28 @@ struct HomeView {
     """
   }
 }
+
+/// Renders the home page with dynamic content based on auth status
+///
+/// - Parameters:
+///   - request: The incoming HTTP request
+///   - context: The application context
+/// - Returns: The rendered HTML page
+/// - Note: Content varies based on whether user is authenticated
+@Sendable func home(request: Request, context: Context) async throws -> HTML {
+  HTML(
+    title: "Home",
+    isLoggedIn: request.cookies["SESSION_ID"] != nil,
+    content: HomeView(
+      isLoggedIn: request.cookies["SESSION_ID"] != nil
+    ).render()
+  )
+}
 ```
 
 In this setup, the `HomeView` struct generates HTML as a string, which is then passed to the `HTML` response generator to create an HTTP response. The route handler (`home`) checks for a session cookie to determine the user's authentication status and renders the page accordingly. While functional, this approach has significant drawbacks. Storing HTML in strings sacrifices Swift's type safety, making it impossible for the compiler to catch errors in HTML structure or attribute usage at compile time. For instance, a typo in a tag name or an unclosed tag would only be caught at runtime, often resulting in malformed HTML that's difficult to debug. Additionally, embedding HTML strings means losing access to Swift's powerful language features, like autocompletion, refactoring tools, and syntax highlighting, which hinders productivity and increases the likelihood of errors. Maintaining and scaling such code becomes cumbersome, especially for complex interfaces with dynamic content.
 
-Frustrated by these limitations, I explored domain-specific languages (DSLs) for writing HTML in Swift, such as Elementary. While Elementary provided a more structured approach by allowing HTML to be expressed in Swift's native syntax, its ergonomics and flexibility didn't fully align with my vision for a seamless and expressive developer experience. This prompted me to create WebUI, a custom solution designed to combine the benefits of type-safe, Swift-native HTML rendering with a syntax that feels intuitive and familiar to SwiftUI.
+Frustrated by these limitations, I explored domain-specific languages (DSLs) for writing HTML in Swift, such as [Elementary](https://github.com/sliemeobn/elementary). While Elementary provided a more structured approach by allowing HTML to be expressed in Swift's native syntax, its ergonomics and flexibility didn't fully align with my vision for a seamless and expressive developer experience. This prompted me to create WebUI, a custom solution designed to combine the benefits of type-safe, Swift-native HTML rendering with a syntax that feels intuitive and familiar to [SwiftUI](https://developer.apple.com/xcode/swiftui/).
 
 Another goal of the project was to make it hard to write bad applications. All of the metadata generation is handled by the library, as well as the base HTML document structure. This allows you to focus on the content and just building the user interface.
 
@@ -140,7 +157,7 @@ let document = Document(
 let html = document.render()
 ```
 
-This code renders the following HTML. Currently, styles are managed with TailwindCSS, though this may evolve in future updates. Metadata is rendered in the `<head>` tag, and closure content commercials within the `<body>` tags.
+This code renders the following HTML. Currently, styles are managed with TailwindCSS, though this may evolve in future updates. Metadata is rendered in the `<head>` tag, and closure content appears within the `<body>` tags.
 
 ```HTML
 <!DOCTYPE html>
@@ -350,6 +367,6 @@ targets: [
 
 ## Conclusion
 
-This introduction covers the basics of WebUI, a library I created to streamline web development in Swift. While still evolving, WebUI has been a valuable learning experience in Swift and web technologies. Explore this sites source code to see how a production site using WebUI is built or learn more about the library here.
+This introduction covers the basics of WebUI, a library I created to streamline web development in Swift. While still evolving, WebUI has been a valuable learning experience in Swift and web technologies. Explore this sites [source code](https://github.com/maclong9/portfolio) to see how a production site using WebUI is built or learn more about the library [here](https://github.com/maclong9/web-ui). 
 
 Thank you for reading!
