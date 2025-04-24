@@ -43,17 +43,17 @@ struct Layout: HTML {
       .flex(justify: .between, align: .center)
       .frame(width: .screen, maxWidth: .fixed(200))
       .margins(.horizontal, auto: true)
-      .padding(on: .sm)
-
+      .padding()
+      
       Main {
         childrenContent
       }
       .flex(grow: .one)
       .margins(.horizontal, auto: true)
-      .frame(maxWidth: .custom("95vw"))
+      .frame(maxWidth: .custom("99vw"))
       .frame(maxWidth: .fixed(180), on: .sm)
       .font(wrapping: .pretty)
-      .padding(on: .sm)
+      .padding()
 
       Footer {
         Text {
