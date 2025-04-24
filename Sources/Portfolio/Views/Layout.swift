@@ -12,7 +12,7 @@ struct PageHeader: HTML {
         .margins(.bottom)
       Text { description }
         .font(family: "ui-serif")
-    }.render(on: .sm)
+    }.render()
   }
 }
 
@@ -43,7 +43,7 @@ struct Layout: HTML {
       .flex(justify: .between, align: .center)
       .frame(width: .screen, maxWidth: .fixed(200))
       .margins(.horizontal, auto: true)
-      .padding()
+      .padding(on: .sm)
 
       Main {
         childrenContent
