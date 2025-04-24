@@ -53,7 +53,7 @@ struct Layout: HTML {
       .frame(maxWidth: .custom("95vw"))
       .frame(maxWidth: .fixed(180), on: .sm)
       .font(wrapping: .pretty)
-      .padding()
+      .padding(on: .sm)
 
       Footer {
         Text {
