@@ -198,7 +198,6 @@ let typographyStyles = Style {
       }
 
       & code {
-        color: oklch(0.85 0 0);
         text-shadow: none;
         font-family: ui-monospace;
         display: block;
@@ -209,7 +208,7 @@ let typographyStyles = Style {
         }
 
         &.hljs {
-          color: var(--text-color);
+          color: light-dark(oklch(85% 0 0), oklch(98.5% 0 0));
         }
 
         .hljs-comment,
