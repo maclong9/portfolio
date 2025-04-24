@@ -12,7 +12,7 @@ struct PageHeader: HTML {
         .margins(.bottom)
       Text { description }
         .font(family: "ui-serif")
-    }.render()
+    }.render(on: .sm)
   }
 }
 
