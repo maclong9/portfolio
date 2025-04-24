@@ -23,7 +23,8 @@ For example, consider a typical setup using [Hummingbird](https://github.com/hum
 ```swift
 import Hummingbird
 
-/// Type wrapping HTML code. Will convert to HBResponse that includes the correct content-type header
+/// Type wrapping HTML code. 
+/// Will convert to HBResponse that includes the correct content-type header
 struct HTML: ResponseGenerator {
   let title: String
   let description: String
