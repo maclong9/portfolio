@@ -34,7 +34,7 @@ ssh-add ~/.ssh/id_ed25519
 cat ~/.ssh/id_ed25519.pub | pbcopy
 ```
 
-**macOS Specific Setup**
+**macOS Specific Set Up**
 
 * Enabling Touch ID for `sudo` Commands in the Terminal 
 * Installing Xcode Developer Tooling
@@ -57,7 +57,7 @@ fi
 At the time of writing, the following additional tools are required:
 
 * Swift List: A simple recreation of the UNIX `ls` command written in Swift.
-* Deno: A full replacement for node.js and npm, suitable for my TypeScript projects.
+* Deno: A full replacement for Node.js and npm, suitable for my TypeScript projects.
 
 ```sh
  # Install Swift List
@@ -69,6 +69,6 @@ sudo chmod +x /usr/local/bin/sls
 curl -fsSL https://deno.land/install.sh | sh;
 ```
 
- You can view my full configuration and script [here](https://github.com/maclong9/dots) as well as a brief explanation of some of the tools I use and why [on this post](/articles/my-personal-setup).
+ You can view my full configuration and script [here](https://github.com/maclong9/dots) as well as a brief explanation of some of the tools I use and why [on this post](/articles/my-personal-set-up).
 
- Once these two steps are done I can go back to working as if nothing changed and I am still running on my old laptop just with the updated macOS and MacBook features.
+Once these two steps are done I can go back to working as if nothing changed and I am still running on my old laptop just with the updated macOS and MacBook features.
