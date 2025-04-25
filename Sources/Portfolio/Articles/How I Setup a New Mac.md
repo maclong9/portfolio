@@ -6,7 +6,7 @@ published: April 25, 2025
 
 ## Running Migration Assistant
 
-Apple conveniently provide this tool to allow you to migrate all of your documents, apps, user accounts and settings from your old Mac to the new one. This saves me a whole bunch of time from writing a script that manually edits all of the settings using the `defaults` command and also from spending time clicking around the App Store.
+Apple conveniently provide [Migration Assistant](https://support.apple.com/en-us/102613) to the new one. This saves me a whole bunch of time from writing a script that manually edits all of the settings using the `defaults` command and also from spending time clicking around the App Store.
 
 ## Configuring Development Tools
 
