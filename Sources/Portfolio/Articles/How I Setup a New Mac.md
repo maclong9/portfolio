@@ -34,7 +34,10 @@ ssh-add ~/.ssh/id_ed25519
 cat ~/.ssh/id_ed25519.pub | pbcopy
 ```
 
-**Enabling Touch ID for `sudo` Commands in the Terminal and Installing Xcode Developer Tooling**
+**macOS Specific Setup**
+
+* Enabling Touch ID for `sudo` Commands in the Terminal 
+* Installing Xcode Developer Tooling
 
 ```sh
 # Check if running on macOS
