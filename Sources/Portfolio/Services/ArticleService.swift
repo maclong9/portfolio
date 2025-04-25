@@ -53,10 +53,9 @@ struct ArticleResponse: CardItem {
                 
                 const lang = (block.className.match(/language-(\\w+)/)?.[1] || 'text');  
                 if(lang !== 'text') {
-                  const langFormatted = lang.charAt(0).toUpperCase() + lang.slice(1);
                   const langSpan = document.createElement('span');
                   langSpan.className = 'code-language';
-                  langSpan.textContent = langFormatted;
+                  langSpan.textContent = lang;
                   wrapper.prepend(langSpan);
                 }
 

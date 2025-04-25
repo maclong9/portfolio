@@ -16,7 +16,7 @@ As a frequent user of Swift for backend development, thanks to the [Swift on Ser
 
 For example, consider a typical setup using [Hummingbird](https://github.com/hummingbird-project/hummingbird), a Swift web framework, to render a dynamic homepage. Below is a simplified implementation of an `HTML` response generator that wraps HTML content, a `HomeView` struct for rendering the page's content, and a route handler to serve the page:
 
-```swift
+```Swift
 import Hummingbird
 
 /// Type wrapping HTML code. 
@@ -156,7 +156,7 @@ let html = document.render()
 
 This code renders the following HTML. Currently, styles are managed with TailwindCSS, though this may evolve in future updates. Metadata is rendered in the `<head>` tag, and closure content appears within the `<body>` tags.
 
-```HTML
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
