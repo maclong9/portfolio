@@ -19,8 +19,8 @@ struct PageHeader: HTML {
         }.margins(.vertical)
       }
       Text { description }
-        .font(family: "ui-serif")
     }
+    .font(family: "ui-serif")
     .flex(direction: .column)
     .render()
   }
