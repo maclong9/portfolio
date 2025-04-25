@@ -26,7 +26,7 @@ struct Projects: HTML {
     ),
   ]
   var document: Document {
-    Document(
+    .init(
       path: "projects",
       metadata: .init(
         site: Portfolio.author,

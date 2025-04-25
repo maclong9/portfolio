@@ -27,7 +27,6 @@ struct ArticleResponse: CardItem {
   let htmlContent: String
   let publishedDate: Date?
 
-  // CardItem conformance
   var url: String { "/articles/\(id)" }
   let technologies: [String]? = nil
 

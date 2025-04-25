@@ -4,7 +4,7 @@ import WebUI
 struct Home: HTML {
   let articles: [ArticleResponse]
   var document: Document {
-    Document(
+    .init(
       path: "index",
       metadata: .init(
         site: Portfolio.author,
