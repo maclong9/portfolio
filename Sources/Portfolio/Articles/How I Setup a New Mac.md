@@ -1,57 +1,62 @@
 ---
-title: How I Setup a New Mac
-description: A walkthrough of the process of configuring a new macOS system.
+title: Setting Up a New Mac
+description: This guide outlines the process of configuring a new macOS system.
 published: April 25, 2025
 ---
 
-## Running Migration Assistant
+### Running Migration Assistant
 
-Apple conveniently provide [Migration Assistant](https://support.apple.com/en-us/102613) to the new one. This saves me a whole bunch of time from writing a script that manually edits all of the settings using the `defaults` command and also from spending time clicking around the App Store.
+Apple provides [Migration Assistant](https://support.apple.com/en-us/102613) to facilitate the transfer of documents, applications, user accounts, and settings from an old Mac to a new one. This saves time by eliminating the need to manually edit settings using the `defaults` command and navigating the App Store.
 
-## Configuring Development Tools
+### Configuring Development Tools
 
-This used to be a tedious process however I wrote a lovely little POSIX shell script that will clone my dotfiles to `~/.config` and symbolically link the relevant files for `zsh`, `git` and `vim` to my home directory.
+Previously, configuring development tools was a time-consuming process. However, I have developed a POSIX shell script that automates the cloning of dotfiles to `~/.config` and the symbolic linking of relevant files for `zsh`, `git`, and `vim` to my home directory.
 
- ```sh
+```sh
 # Clone Configuration Files and Symlink to Home Directory
 git clone https://github.com/maclong9/dots .config
 for file in .config/.*; do
-	case "$(basename "$file")" in
-		"." | ".." | ".git") continue ;;
-		*) ln -s "$file" "$HOME/$(basename "$file")" ;;
+	case “$(basename “$file”)” in
+		“.” | “..” | “.git”) continue ;;
+		*) ln -s “$file” “$HOME/$(basename “$file”)” ;;
 	esac
 done
 ```
 
-A few other things the script does include configuring my ssh keys: 
+The script also configures my SSH keys:
 
- ```sh
- ssh-keygen -t ed25519 -C "maclong9@icloud.com" -f "$HOME/.ssh/id_ed25519" -N ""
-eval "$(ssh-agent -s)"
+```sh
+ssh-keygen -t ed25519 -C “maclong9@icloud.com” -f “$HOME/.ssh/id_ed25519” -N “”
+eval “$(ssh-agent -s)”
 mkdir ~/.ssh
-printf 'Host github.com\n\tAddKeysToAgent yes\n\tIdentityFile ~/.ssh/id_ed25519' > ~/.ssh/config
+printf ‘Host github.com\n\tAddKeysToAgent yes\n\tIdentityFile ~/.ssh/id_ed25519” > ~/.ssh/config
 ssh-add ~/.ssh/id_ed25519
 cat ~/.ssh/id_ed25519.pub | pbcopy
 ```
 
-Enabling Touch ID for allowing `sudo` commands in the terminal, installing Xcode developer tooling if it's missing:
+**Enabling Touch ID for `sudo` Commands in the Terminal and Installing Xcode Developer Tooling**
 
- ```sh
- # Check If Running on macOS
-if [ "$(uname -s)" = "Darwin" ]; then
-	# Enable Touch ID for `sudo`
-	sudo cp /etc/pam.d/sudo_local.template /etc/pam.d/sudo_local
-	sudo sed -i '' '3s/^#//' /etc/pam.d/sudo_local
+```sh
+# Check if running on macOS
+if [ “$(uname -s)” = “Darwin” ]; then
+    # Enable Touch ID for `sudo`
+    sudo cp /etc/pam.d/sudo_local.template /etc/pam.d/sudo_local
+    sudo sed -i ‘’ ‘3s/^#//‘ /etc/pam.d/sudo_local
 
-	# Install Developer Tools
-	! xcode-select -p >/dev/null 2>&1 && xcode-select --install
-	! /usr/bin/xcrun clang >/dev/null 2>&1 && sudo xcodebuild -license accept
+    # Install Developer Tools
+    ! xcode-select -p >/dev/null 2>&1 && xcode-select —install
+    ! /usr/bin/xcrun clang >/dev/null 2>&1 && sudo xcodebuild -license accept
 fi
 ```
 
- Installing any extra tools I need, at the time of writing this list includes [Swift List](https://github.com/maclong9/list) a simple recreation of the UNIX `ls` command written in Swift and [Deno](https://deno.com) as I work on a fair amount of TypeScript projects for my job and have been using Deno as a full replacement for node.js and npm:
+**Installing Additional Tools**
 
- ```sh
+At the time of writing, the following additional tools are required:
+
+* Swift List: A simple recreation of the UNIX `ls` command written in Swift.
+* Deno: A full replacement for node.js and npm, suitable for my TypeScript projects.
+
+```sh
  # Install Swift List
 sudo mkdir /usr/local/bin
 sudo curl -L https://github.com/maclong9/list/releases/download/v1.1.2/sls -o /usr/local/bin/sls
