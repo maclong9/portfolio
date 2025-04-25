@@ -4,38 +4,29 @@ import WebUI
 
 @main
 public struct Portfolio {
+  private static let logger = Logger(label: "com.maclong.portfolio")
   public static let author = "Mac Long"
-  private static let logger = Logger(label: "Portfolio")
 
-  let articles: [ArticleResponse]
-  let articleDocuments: [Document]
+  var articles: [ArticleResponse] = []
   var routes: [Document] {
     [
       Home(articles: articles).document,
       Projects().document,
-    ]
-  }
-
-  init(articles: [ArticleResponse]) {
-    self.articles = articles
-    self.articleDocuments = articles.map { $0.document }
+    ] + articles.map(\.document)
   }
 
   static func main() async throws {
-    let logLevelString = ProcessInfo.processInfo.environment["LOG_LEVEL"] ?? "info"
-    LoggingSetup.bootstrap(logLevelString: logLevelString)
+    LoggingSetup.bootstrap(logLevelString: ProcessInfo.processInfo.environment["LOG_LEVEL"] ?? "info")
 
-    let articles: [ArticleResponse]
+    var portfolio = Portfolio()
+
     do {
-      articles = try ArticleService.fetchAllArticles()
-      logger.info("Successfully loaded \(articles.count) articles from local markdown files")
+      portfolio.articles = try ArticleService.fetchAllArticles()
+      logger.info("Successfully loaded \(portfolio.articles.count) articles from local markdown files")
     } catch {
       logger.error("Error loading articles: \(error)")
-      articles = []
     }
 
-    let portfolioInstance = Portfolio(articles: articles)
-    let allRoutes = portfolioInstance.routes + portfolioInstance.articleDocuments
-    try Application(routes: allRoutes).build(assetsPath: "Sources/Portfolio/Public")
+    try Application(routes: portfolio.routes).build(assetsPath: "Sources/Portfolio/Public")
   }
 }
