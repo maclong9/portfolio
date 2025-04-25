@@ -69,6 +69,6 @@ sudo chmod +x /usr/local/bin/sls
 curl -fsSL https://deno.land/install.sh | sh;
 ```
 
- You can view my full configuration and script [here](https://github.com/maclong9/dots).
+ You can view my full configuration and script [here](https://github.com/maclong9/dots) as well as a brief explanation of some of the tools I use and why [on this post](/articles/my-personal-setup).
 
  Once these two steps are done I can go back to working as if nothing changed and I am still running on my old laptop just with the updated macOS and MacBook features.
