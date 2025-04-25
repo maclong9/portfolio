@@ -20,9 +20,7 @@ struct Card: HTML {
     Link(to: url, newTab: technologies != nil) {
       Article {
         Stack {
-          Heading(level: .two) { title }
-            .font(size: .lg, weight: .bold, tracking: .tight, wrapping: .balance, color: .zinc(._950))
-            .font(color: .zinc(._100), on: .dark)
+          Heading(level: .two) { title }.styled(size: .lg)
 
           if let technologies = technologies {
             Stack {
