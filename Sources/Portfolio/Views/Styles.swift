@@ -129,7 +129,7 @@ let typographyStyles = Style {
     margin-left: 2rem;
 
     & li {
-      margin-bottom: 1lh;
+      margin-bottom: .5rem;
 
       & p {
         margin: 0;
