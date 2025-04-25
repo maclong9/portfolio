@@ -116,7 +116,7 @@ let typographyStyles = Style {
 
   p {
     font-family: ui-serif;
-    margin: 1rem 0;
+    margin-block: 1lh;
 
     & code {
       font-family: monospace;
@@ -129,7 +129,7 @@ let typographyStyles = Style {
     margin-left: 2rem;
 
     & li {
-      margin-bottom: 1rem;
+      margin-bottom: 1lh;
 
       & p {
         margin: 0;
@@ -147,7 +147,7 @@ let typographyStyles = Style {
     position: relative;
     width: 100%;
     max-width: 95vw;
-    margin: 1rem auto;
+    margin: 1lh auto;
 
     @media (min-width: 768px) {
       width: 760px;

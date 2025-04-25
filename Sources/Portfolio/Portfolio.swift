@@ -9,10 +9,6 @@ public struct Portfolio {
 
   let articles: [ArticleResponse]
   let articleDocuments: [Document]
-<<<<<<< refs/remotes/origin/main
-
-=======
->>>>>>> refactor: move document generation to route files
   var routes: [Document] {
     [
       Home(articles: articles).document,
