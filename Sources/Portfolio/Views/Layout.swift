@@ -57,7 +57,7 @@ struct Layout: HTML {
           Link(
             to: "https://github.com/maclong9",
             newTab: true,
-            label: "Visit Mac Long's GitHub profile"
+            label: "Visit Mac Long's GitHub profile",
           ) { Icon.github.rawValue }.styled()
         }.flex(align: .center).spacing(.x)
       }
@@ -70,7 +70,7 @@ struct Layout: HTML {
         PageHeader(
           title: title,
           description: description,
-          published: published
+          published: published,
         )
         childrenContent
       }

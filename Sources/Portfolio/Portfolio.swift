@@ -10,34 +10,10 @@ public struct Portfolio {
   let articles: [ArticleResponse]
   let articleDocuments: [Document]
 
-  var staticRoutes: [Document] {
+  var routes: [Document] {
     [
-      Document(
-        path: "index",
-        metadata: .init(
-          site: Self.author,
-          title: "Home",
-          description: "Software Engineer, crafting intuitive solutions.",
-          image: "/public/og.jpg",
-          author: Self.author,
-          type: .website
-        ),
-        head: "<link rel=\"icon\" href=\"public/icon.svg\" type=\"image/svg+xml\" />",
-        content: { Home(articles: self.articles) }
-      ),
-      Document(
-        path: "projects",
-        metadata: .init(
-          site: Self.author,
-          title: "Projects",
-          description: "Software Engineer, crafting intuitive solutions.",
-          image: "/public/og.jpg",
-          author: Self.author,
-          type: .website
-        ),
-        head: "<link rel=\"icon\" href=\"/public/icon.svg\" type=\"image/svg+xml\" />",
-        content: { Projects() }
-      ),
+      Home(articles: articles).document,
+      Projects().document,
     ]
   }
 
@@ -60,7 +36,7 @@ public struct Portfolio {
     }
 
     let portfolioInstance = Portfolio(articles: articles)
-    let allRoutes = portfolioInstance.staticRoutes + portfolioInstance.articleDocuments
+    let allRoutes = portfolioInstance.routes + portfolioInstance.articleDocuments
     try Application(routes: allRoutes).build(assetsPath: "Sources/Portfolio/Public")
   }
 }

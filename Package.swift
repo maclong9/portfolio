@@ -7,16 +7,16 @@ let package = Package(
   name: "Portfolio",
   platforms: [.macOS(.v13)],
   products: [
-    .executable(name: "Portfolio", targets: ["Portfolio"]),
+    .executable(name: "Portfolio", targets: ["Portfolio"])
   ],
   dependencies: [
-    .package(url: "https://github.com/maclong9/web-ui.git", from: "1.0.0"),
+    .package(url: "https://github.com/maclong9/web-ui.git", from: "1.0.0")
   ],
   targets: [
     .executableTarget(
       name: "Portfolio",
       dependencies: [
-        .product(name: "WebUI", package: "web-ui"),
+        .product(name: "WebUI", package: "web-ui")
       ],
       resources: [
         .copy("Public"),
