@@ -68,12 +68,12 @@ let typographyStyles = Style {
     font-family: system-ui;
     font-weight: bold;
     color: var(--text-color);
+    margin-block-end: 0.5lh; /* Changed to logical property */
   }
 
   h1 {
     font-size: 2.5rem;
     line-height: 2.25rem;
-    margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
 
@@ -81,7 +81,6 @@ let typographyStyles = Style {
     font-size: 1.75rem;
     line-height: 1.75rem;
     margin-top: 1.5rem;
-    margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
 
@@ -89,31 +88,28 @@ let typographyStyles = Style {
     font-size: 1.5rem;
     line-height: 1.5rem;
     margin-top: 1.5rem;
-    margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
 
   h4 {
     font-size: 1.25rem;
     line-height: 1.25rem;
-    margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
 
   h5 {
     font-size: 1.125rem;
     line-height: 1.125rem;
-    margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
 
   h6 {
     font-size: 1rem;
     line-height: 1rem;
-    margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
 
+  /* Rest of the styles remain unchanged */
   p {
     font-family: ui-serif;
     margin-block: 1lh;
@@ -164,7 +160,7 @@ let typographyStyles = Style {
 
   .code-language {
     position: absolute;
-    top: 0.5rem; /* Adjusted to align visually inside pre */
+    top: 0.5rem;
     left: 0.5rem;
     background: oklch(0.2 0 0);
     color: oklch(85% 0 0);
@@ -177,7 +173,7 @@ let typographyStyles = Style {
 
   .copy-button {
     position: absolute;
-    top: 0.5rem; /* Adjusted to align visually inside pre */
+    top: 0.5rem;
     right: 0.5rem;
     background: oklch(0.2 0 0);
     color: oklch(85% 0 0);
@@ -297,6 +293,5 @@ let typographyStyles = Style {
       }
     }
   }
-
   """
 }.render()
