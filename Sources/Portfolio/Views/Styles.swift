@@ -12,7 +12,7 @@ extension Link {
 extension Heading {
   public func styled(size: TextSize) -> Element {
     self
-      .font(size: size, weight: .bold, tracking: .tight, wrapping: .balance, color: .zinc(._950))
+      .font(size: size, weight: .bold, tracking: .tight, wrapping: .balance, color: .zinc(._950), family: "system-ui")
       .font(color: .zinc(._100), on: .dark)
   }
 }
@@ -68,48 +68,47 @@ let typographyStyles = Style {
     font-family: system-ui;
     font-weight: bold;
     color: var(--text-color);
+    margin-block-end: 0.5lh; 
   }
 
   h1 {
-    font-size: 2.5rem; /* Closest: text-5xl (3rem), but kept custom for exact 2.5rem */
-    line-height: 2.25rem; /* No direct Tailwind equivalent, kept custom */
+    font-size: 2.5rem; 
+    line-height: 2.25rem; 
     margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
 
   h2 {
-    font-size: 1.875rem; /* text-3xl */
-    line-height: 1.875rem; /* leading-none */
+    font-size: 1.875rem;
+    line-height: 1.875rem;
     margin-top: 1.5rem;
-    margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
 
   h3 {
-    font-size: 1.5rem; /* text-2xl */
-    line-height: 1.5rem; /* leading-none */
+    font-size: 1.5rem; 
+    line-height: 1.5rem; 
     margin-top: 1.5rem;
-    margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
 
   h4 {
-    font-size: 1.25rem; /* text-xl */
-    line-height: 1.25rem; /* leading-none */
+    font-size: 1.25rem; 
+    line-height: 1.25rem; 
     margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
 
   h5 {
-    font-size: 1.125rem; /* text-lg */
-    line-height: 1.125rem; /* leading-none */
+    font-size: 1.125rem; 
+    line-height: 1.125rem;
     margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
 
   h6 {
-    font-size: 1rem; /* text-base */
-    line-height: 1rem; /* leading-none */
+    font-size: 1rem; 
+    line-height: 1rem;
     margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
