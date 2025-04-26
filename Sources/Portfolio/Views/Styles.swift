@@ -71,45 +71,45 @@ let typographyStyles = Style {
   }
 
   h1 {
-    font-size: 2.5rem;
-    line-height: 2.25rem;
+    font-size: 2.5rem; /* Closest: text-5xl (3rem), but kept custom for exact 2.5rem */
+    line-height: 2.25rem; /* No direct Tailwind equivalent, kept custom */
     margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
 
   h2 {
-    font-size: 1.75rem;
-    line-height: 1.75rem;
+    font-size: 1.875rem; /* text-3xl */
+    line-height: 1.875rem; /* leading-none */
     margin-top: 1.5rem;
     margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
 
   h3 {
-    font-size: 1.5rem;
-    line-height: 1.5rem;
+    font-size: 1.5rem; /* text-2xl */
+    line-height: 1.5rem; /* leading-none */
     margin-top: 1.5rem;
     margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
 
   h4 {
-    font-size: 1.25rem;
-    line-height: 1.25rem;
+    font-size: 1.25rem; /* text-xl */
+    line-height: 1.25rem; /* leading-none */
     margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
 
   h5 {
-    font-size: 1.125rem;
-    line-height: 1.125rem;
+    font-size: 1.125rem; /* text-lg */
+    line-height: 1.125rem; /* leading-none */
     margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
 
   h6 {
-    font-size: 1rem;
-    line-height: 1rem;
+    font-size: 1rem; /* text-base */
+    line-height: 1rem; /* leading-none */
     margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
@@ -164,12 +164,12 @@ let typographyStyles = Style {
 
   .code-language {
     position: absolute;
-    top: 0.5rem; /* Adjusted to align visually inside pre */
+    top: 0.5rem;
     left: 0.5rem;
     background: oklch(0.2 0 0);
     color: oklch(85% 0 0);
     padding: 2px 8px;
-    font-size: 0.8rem;
+    font-size: 0.75rem; /* text-xs */
     font-family: ui-monospace;
     border-bottom-right-radius: 4px;
     z-index: 10;
@@ -177,7 +177,7 @@ let typographyStyles = Style {
 
   .copy-button {
     position: absolute;
-    top: 0.5rem; /* Adjusted to align visually inside pre */
+    top: 0.5rem;
     right: 0.5rem;
     background: oklch(0.2 0 0);
     color: oklch(85% 0 0);
@@ -185,7 +185,7 @@ let typographyStyles = Style {
     border-radius: 8px;
     padding: 4px 8px;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.75rem; /* text-xs */
     font-family: ui-monospace;
     border-bottom-left-radius: 4px;
     transition: background 0.2s ease-in-out;
@@ -198,8 +198,8 @@ let typographyStyles = Style {
 
   pre {
     background: oklch(0.2 0 0);
-    font-size: 0.8rem;
-    line-height: 1.25rem;
+    font-size: 0.75rem; /* text-xs */
+    line-height: 1.25rem; /* leading-5 */
     padding: 2.5rem 1rem 1rem;
     overflow-x: auto;
     border-radius: 8px;
@@ -297,6 +297,5 @@ let typographyStyles = Style {
       }
     }
   }
-
   """
 }.render()
