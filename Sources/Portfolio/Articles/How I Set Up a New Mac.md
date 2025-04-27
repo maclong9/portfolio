@@ -56,8 +56,8 @@ fi
 
 At the time of writing, the following additional tools are required:
 
-* Swift List: A simple recreation of the UNIX `ls` command written in Swift.
-* Deno: A full replacement for Node.js and npm, suitable for my TypeScript projects.
+* [Swift List](https://github.com/maclong9/list): A simple recreation of the UNIX `ls` command written in Swift.
+* [Deno](https://deno.com): A full replacement for Node.js and npm, suitable for my TypeScript projects.
 
 ```sh
  # Install Swift List
