@@ -48,7 +48,9 @@ struct ArticleResponse: CardItem {
       head: """
           <script>
             hljs.highlightAll();
-            hljs.initLineNumbersOnLoad();
+            hljs.initLineNumbersOnLoad({
+              singleLine: true,
+            });
             document.addEventListener('DOMContentLoaded', () => {
               document.querySelectorAll('pre code').forEach(block => {
                 const wrapper = document.createElement('div');
@@ -62,6 +64,8 @@ struct ArticleResponse: CardItem {
                   langSpan.className = 'code-language';
                   langSpan.textContent = lang;
                   wrapper.prepend(langSpan);
+                } else {
+                  wrapper.classList.add('nohljsln')
                 }
 
                 const copyBtn = document.createElement('button');
