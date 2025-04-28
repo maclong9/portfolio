@@ -120,7 +120,7 @@ Another goal of the project was to make it hard to write bad applications. All o
 
 WebUI’s core functionality is generating web pages. You define a document with metadata and content, passed as a closure containing WebUI elements.
 
-```swift
+```Swift
 import Foundation
 import WebUI
 
@@ -203,7 +203,7 @@ This code renders the following HTML. Currently, styles are managed with Tailwin
 
 Styles in WebUI follow a modifier pattern inspired by SwiftUI. Below is an example of a styled div with a heading. The container has a light background by default and a dark background when `prefers-color-scheme: dark` is active, with typography styles applied to the heading.
 
-```swift
+```Swift
 import WebUI
 
 let styledContent = Stack {
@@ -220,7 +220,7 @@ let styledContent = Stack {
 
 WebUI components are defined as structs conforming to the `HTML` protocol.
 
-```swift
+```Swift
 import WebUI
 
 struct Layout: HTML {
@@ -279,7 +279,7 @@ struct Layout: HTML {
 
 To generate a static site, run the build step to create an `.output` directory in the current working directory. If using Xcode, set a custom working directory in your scheme.
 
-```swift
+```Swift
 import WebUI
 
 public struct StaticSite: Sendable {
@@ -340,13 +340,13 @@ The `.output` directory will contain:
 
 You can specify a public directory to be copied to `.output/public`. For example, to include an image, place it in `Sources/StaticSite/Public` and reference it as:
 
-```swift
+```Swift
 Image(source: "public/image.jpg", description: "An image for web rendering")
 ```
 
 Ensure the `Public` directory is added as a resource in your target:
 
-```swift
+```Swift
 targets: [
   .executableTarget(
     name: "TargetName",
