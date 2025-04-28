@@ -168,8 +168,7 @@ let typographyStyles = Style {
     background: oklch(0.2 0 0);
     color: oklch(85% 0 0);
     padding: 2px 8px;
-    font-size: 0.75rem; /* text-xs */
-    font-family: ui-monospace;
+    font-size: 0.75rem;
     border-bottom-right-radius: 4px;
     z-index: 10;
   }
@@ -185,7 +184,6 @@ let typographyStyles = Style {
     padding: 4px 8px;
     cursor: pointer;
     font-size: 0.75rem; /* text-xs */
-    font-family: ui-monospace;
     border-bottom-left-radius: 4px;
     transition: background 0.2s ease-in-out;
     z-index: 10;
@@ -197,8 +195,8 @@ let typographyStyles = Style {
 
   pre {
     background: oklch(0.2 0 0);
-    font-size: 0.75rem; /* text-xs */
-    line-height: 1.25rem; /* leading-5 */
+    font-size: 0.75rem;
+    line-height: 1.25rem;
     padding: 2.5rem 1rem 1rem;
     overflow-x: auto;
     border-radius: 8px;
