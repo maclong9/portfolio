@@ -282,7 +282,7 @@ To generate a static site, run the build step to create an `.output` directory i
 ```Swift
 import WebUI
 
-public struct StaticSite: Sendable {
+public struct StaticSite {
   var staticRoutes: [Document] {
     [
       Document(
