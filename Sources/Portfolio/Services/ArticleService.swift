@@ -39,6 +39,7 @@ struct ArticleResponse: CardItem {
         image: "/public/articles/\(id).jpg",
         author: Portfolio.author,
         type: .article,
+        themeColor: .init(light: "oklch(92% 0.004 286.32)", dark: "oklch(14.1% 0.005 285.823)")
       ),
       scripts: ["https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"],
       head: """

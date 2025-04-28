@@ -13,7 +13,7 @@ struct Home: HTML {
         image: "/public/og.jpg",
         author: Portfolio.author,
         type: .website,
-        themeColor: .init(light: Color(.zinc(._200)).rawValue, dark: Color(.zinc(._950)).rawValue),
+        themeColor: .init(light: "oklch(92% 0.004 286.32)", dark: "oklch(14.1% 0.005 285.823)")
       ),
       head: "<link rel=\"icon\" href=\"/public/icon.svg\" type=\"image/svg+xml\" />",
       content: { self },
