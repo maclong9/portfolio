@@ -294,6 +294,21 @@ let typographyStyles = Style {
       .hljs-strong {
         font-weight: bold;
       }
+  
+      .hljs-ln-n {
+          text-align: right;
+          color: oklch(60% 0.03 250);
+          padding-right: .5rem;
+          font-family: ui-monospace;
+          font-size: 0.75rem;
+          line-height: 1.25rem;
+          margin-right: 1rem;
+          border-right: 1px solid var(--border-color);
+      }
+
+      .line-numbers .hljs {
+          padding-left: 1rem;
+      }
     }
   }
   """
