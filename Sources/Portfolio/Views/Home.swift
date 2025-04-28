@@ -12,7 +12,8 @@ struct Home: HTML {
         description: "Software Engineer, crafting intuitive solutions.",
         image: "/public/og.jpg",
         author: Portfolio.author,
-        type: .website
+        type: .website,
+        themeColor: .init(light: Color(.zinc(._200)).rawValue, dark: Color(.zinc(._950)).rawValue),
       ),
       head: "<link rel=\"icon\" href=\"/public/icon.svg\" type=\"image/svg+xml\" />",
       content: { self },
