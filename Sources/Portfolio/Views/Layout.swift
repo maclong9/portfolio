@@ -64,7 +64,8 @@ struct Layout: HTML {
       .flex(justify: .between, align: .center)
       .frame(width: .screen, maxWidth: .fixed(200))
       .margins(.horizontal, auto: true)
-      .border(.bottom, length: 1, color: .neutral(._500, opacity: 0.5)
+      .border(edges: .bottom, color: .zinc(._900, opacity: 0.5))
+      .border(color: .zinc(._500, opacity: 0.5), on: .dark)
       .padding()
 
       Main {
