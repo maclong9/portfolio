@@ -14,7 +14,7 @@ As a frequent user of Swift for backend development, thanks to the [Swift on Ser
 
 For example, consider a typical setup using [Hummingbird](https://github.com/hummingbird-project/hummingbird), a Swift web framework, to render a dynamic homepage. Below is a simplified implementation of an `HTML` response generator that wraps HTML content, a `HomeView` struct for rendering the page's content, and a route handler to serve the page:
 
-```Swift
+```swift
 import Hummingbird
 
 /// Type wrapping HTML code. 
@@ -120,7 +120,7 @@ Another goal of the project was to make it hard to write bad applications. All o
 
 WebUI’s core functionality is generating web pages. You define a document with metadata and content, passed as a closure containing WebUI elements.
 
-```Swift
+```swift
 import Foundation
 import WebUI
 
@@ -203,7 +203,7 @@ This code renders the following HTML. Currently, styles are managed with Tailwin
 
 Styles in WebUI follow a modifier pattern inspired by SwiftUI. Below is an example of a styled div with a heading. The container has a light background by default and a dark background when `prefers-color-scheme: dark` is active, with typography styles applied to the heading.
 
-```Swift
+```swift
 import WebUI
 
 let styledContent = Stack {
@@ -220,7 +220,7 @@ let styledContent = Stack {
 
 WebUI components are defined as structs conforming to the `HTML` protocol.
 
-```Swift
+```swift
 import WebUI
 
 struct Layout: HTML {
@@ -279,7 +279,7 @@ struct Layout: HTML {
 
 To generate a static site, run the build step to create an `.output` directory in the current working directory. If using Xcode, set a custom working directory in your scheme.
 
-```Swift
+```swift
 import WebUI
 
 public struct StaticSite {
@@ -340,13 +340,13 @@ The `.output` directory will contain:
 
 You can specify a public directory to be copied to `.output/public`. For example, to include an image, place it in `Sources/StaticSite/Public` and reference it as:
 
-```Swift
+```swift
 Image(source: "public/image.jpg", description: "An image for web rendering")
 ```
 
 Ensure the `Public` directory is added as a resource in your target:
 
-```Swift
+```swift
 targets: [
   .executableTarget(
     name: "TargetName",
