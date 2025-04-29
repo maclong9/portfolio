@@ -123,10 +123,8 @@ let typographyStyles = Style {
     }
   }
 
-  ul { list-style: disc; }
-  ol { list-style: decimal; }
-  ol ol { list-style: lower-latin; }
-  ul, ol {
+  ul {
+    list-style: disc;
     margin-left: 2rem;
 
     & li {

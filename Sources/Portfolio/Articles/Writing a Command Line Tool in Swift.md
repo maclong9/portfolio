@@ -64,7 +64,7 @@ This guide implements a minimal `ls` clone that:
 
 ### Steps
 
-1. Define the main entry point using `ParsableCommand`:
+Define the main entry point using `ParsableCommand`:
 
 ```swift
 import ArgumentParser
@@ -76,14 +76,14 @@ struct Lsc: ParsableCommand {
 }
 ```
 
-2. Add a flag and argument for user input. The `all` flag supports `-a` or `--all` due to the `.shortAndLong` name parameter and is set to a default value of false. The `paths` argument accepts a collection of directory paths:
+Add a flag and argument for user input. The `all` flag supports `-a` or `--all` due to the `.shortAndLong` name parameter and is set to a default value of false. The `paths` argument accepts a collection of directory paths:
 
 ```swift
 @Flag(name: .shortAndLong, help: "Display all files, including hidden.") var all = false
 @Argument(help: "Directories to list.") var paths: [String] = []
 ```
 
-3. Implement the `run` function:
+Implement the `run` function:
 
 ```swift
 func run() throws {
