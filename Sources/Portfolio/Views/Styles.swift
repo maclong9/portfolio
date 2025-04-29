@@ -123,7 +123,7 @@ let typographyStyles = Style {
     }
   }
 
-  ul {
+  ul, ol {
     list-style: disc;
     margin-left: 2rem;
 
