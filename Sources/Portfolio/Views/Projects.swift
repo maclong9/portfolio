@@ -12,17 +12,17 @@ struct Project: CardItem {
 
 struct Projects: HTML {
   let projects: [Project] = [
-    /*Project(
-      name: "Todos",
-      description: "Full stack todo list implimentation.",
-      technologies: ["Swift", "Hummingbird", "WebUI"],
-      url: "https://github.com/maclong9/todos",
-    ),*/
     Project(
       name: "WebUI",
       description: "WebUI is a rendering library for HTML, CSS, and JavaScript, built entirely in Swift.",
       technologies: ["Swift"],
       url: "https://github.com/maclong9/web-ui",
+    ),
+    Project(
+      name: "List",
+      description: "Quickly list files found in your operating system",
+      technologies: ["Swift"],
+      url: "https://github.com/maclong9/list",
     ),
   ]
   var document: Document {
