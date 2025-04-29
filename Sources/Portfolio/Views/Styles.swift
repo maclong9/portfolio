@@ -73,7 +73,7 @@ let typographyStyles = Style {
 
   h1 {
     font-size: 2.5rem; 
-    line-height: 2.25rem; 
+    line-height: calc(0.25rem * 7);
     margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
   }
