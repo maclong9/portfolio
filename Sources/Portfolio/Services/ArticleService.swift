@@ -58,8 +58,8 @@ struct ArticleResponse: CardItem {
                 block.parentNode.before(wrapper);
                 wrapper.appendChild(block.parentNode);
                 
-                const lang = (block.className.match(/language-(\\w+)/)?.[1] || 'text');  
-                if(lang !== 'text') {
+                const lang = (block.className.match(/language-(\\w+)/)?.[1] || 'plaintext');  
+                if(lang !== 'plaintext') {
                   const langSpan = document.createElement('span');
                   langSpan.className = 'code-language';
                   langSpan.textContent = lang;
