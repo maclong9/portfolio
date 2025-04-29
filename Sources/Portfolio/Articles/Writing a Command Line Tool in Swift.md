@@ -11,8 +11,7 @@ This guide demonstrates how to create a simplified version of the UNIX `ls` comm
 The `ls` command lists files in the current or specified directory, aiding navigation within a file system. Example output:
 
 ```text
-Desktop  Documents  Library  Music  Public
-Developer  Downloads  Movies  Pictures
+Desktop  Documents  Library  Music  Public Developer  Downloads  Movies  Pictures
 ```
 
 ## Creating the Tool
