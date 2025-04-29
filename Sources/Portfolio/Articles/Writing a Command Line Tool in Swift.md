@@ -10,7 +10,7 @@ This guide demonstrates how to create a simplified version of the UNIX `ls` comm
 
 The `ls` command lists files in the current or specified directory, aiding navigation within a file system. Example output:
 
-```sh
+```text
 Desktop  Documents  Library  Music  Public
 Developer  Downloads  Movies  Pictures
 ```
@@ -139,7 +139,7 @@ Run the tool with `swift run lsc` or `swift run lsc -a`.
 
 **Example Output:**
 
-```sh
+```text
 Tests
 Package.resolved
 Package.swift
@@ -148,7 +148,7 @@ Sources
 
 **With `-a` Flag:**
 
-```sh
+```text
 .build
 Tests
 Package.resolved
@@ -204,7 +204,7 @@ Run tests with `swift test`.
 
 **Example Test Output:**
 
-```sh
+```text
 Test Suite 'All tests' started at 2025-04-29 10:38:20.741
 Test Suite 'LscTestSuite' started
 Test Case 'List Current Directory' passed
