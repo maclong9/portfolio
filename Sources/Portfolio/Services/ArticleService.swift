@@ -59,14 +59,10 @@ struct ArticleResponse: CardItem {
                 wrapper.appendChild(block.parentNode);
                 
                 const lang = (block.className.match(/language-(\\w+)/)?.[1] || 'plaintext');  
-                if(lang !== 'plaintext') {
-                  const langSpan = document.createElement('span');
-                  langSpan.className = 'code-language';
-                  langSpan.textContent = lang;
-                  wrapper.prepend(langSpan);
-                } else {
-                  wrapper.classList.add('nohljsln')
-                }
+                const langSpan = document.createElement('span');
+                langSpan.className = lang === 'plaintext' ? 'nohljsln' : 'code-language';
+                langSpan.textContent = lang;
+                wrapper.prepend(langSpan);
 
                 const copyBtn = document.createElement('button');
                 copyBtn.className = 'copy-button';
