@@ -125,9 +125,17 @@ let typographyStyles = Style {
     }
   }
 
+  ol { 
+    list-style: decimal;
+    list-style-position: inside;
+    
+    & ol { list-style: lower-latin; }
+  }
+  
   ul {
     list-style: disc;
     margin-left: 2rem;
+    list-style-position: inside;
 
     & li {
       margin-bottom: .5rem;
