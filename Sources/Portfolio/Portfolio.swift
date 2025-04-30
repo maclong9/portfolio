@@ -16,13 +16,15 @@ public struct Portfolio {
   }
 
   static func main() async throws {
-    LoggingSetup.bootstrap(logLevelString: ProcessInfo.processInfo.environment["LOG_LEVEL"] ?? "info")
+    LoggingSetup.bootstrap(
+      logLevelString: ProcessInfo.processInfo.environment["LOG_LEVEL"] ?? "info")
 
     var portfolio = Portfolio()
 
     do {
       portfolio.articles = try ArticleService.fetchAllArticles()
-      logger.info("Successfully loaded \(portfolio.articles.count) articles from local markdown files")
+      logger.info(
+        "Successfully loaded \(portfolio.articles.count) articles from local markdown files")
     } catch {
       logger.error("Error loading articles: \(error)")
     }

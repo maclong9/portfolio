@@ -14,7 +14,8 @@ struct Projects: HTML {
   let projects: [Project] = [
     Project(
       name: "WebUI",
-      description: "WebUI is a rendering library for HTML, CSS, and JavaScript, built entirely in Swift.",
+      description:
+        "WebUI is a rendering library for HTML, CSS, and JavaScript, built entirely in Swift.",
       technologies: ["Swift"],
       url: "https://github.com/maclong9/web-ui",
     ),

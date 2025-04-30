@@ -12,7 +12,10 @@ extension Link {
 extension Heading {
   public func styled(size: TextSize) -> Element {
     self
-      .font(size: size, weight: .bold, tracking: .tight, wrapping: .balance, color: .zinc(._950), family: "system-ui")
+      .font(
+        size: size, weight: .bold, tracking: .tight, wrapping: .balance, color: .zinc(._950),
+        family: "system-ui"
+      )
       .font(color: .zinc(._100), on: .dark)
   }
 }
@@ -130,11 +133,11 @@ let typographyStyles = Style {
 
     & ol { list-style: lower-latin; }
   }
-  
+
   ul {
     list-style: disc;
   }
-  
+
   ul, ol {
     margin-left: 2rem;
     list-style-position: inside;
@@ -304,7 +307,7 @@ let typographyStyles = Style {
       .hljs-strong {
         font-weight: bold;
       }
-  
+
       .hljs-ln-n {
           text-align: right;
           color: oklch(60% 0.03 250);
