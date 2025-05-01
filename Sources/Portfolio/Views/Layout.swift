@@ -48,7 +48,7 @@ struct Layout: HTML {
     let childrenContent = children.map { $0.render() }.joined()
 
     return Stack {
-      Header {
+      Header(classes: ["backdrop-blur-md"]) {
         Link(to: "/") {
           "Mac Long"
         }.styled().font(size: .xl2)
@@ -81,6 +81,10 @@ struct Layout: HTML {
       .border(edges: .bottom, color: .zinc(._500, opacity: 0.7), on: .dark)
       .padding(.horizontal)
       .padding(.vertical, length: 2)
+      .position(.fixed, edges: .horizontal, .top, length: 0)
+      .background(color: .zinc(._200, opacity: 0.7))
+      .background(color: .zinc(._950, opacity: 0.7), on: .dark)
+      .zIndex(50)
 
       Main {
         PageHeader(
@@ -96,6 +100,7 @@ struct Layout: HTML {
       .frame(maxWidth: .fixed(180), on: .sm)
       .font(wrapping: .pretty)
       .padding()
+      .padding(.top, length: 20)
 
       Footer {
         Text {
