@@ -10,7 +10,7 @@ permissions:
   contents: write # Grant write access to repository contents
 
 jobs:
-  build-and-deploy:
+  build-and-push:
     runs-on: macos-15
     steps:
       # Check out the repository code
@@ -33,11 +33,19 @@ jobs:
       # Run the static site generator
       - name: Generate Site
         run: swift run Portfolio
-
-      # Deploy to GitHub Pages (only on push to main)
-      - name: Deploy to GitHub Pages
+      
+      # Push to static branch (only on push to main)
+      - name: Push to static branch
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .output
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git checkout -B static
+          rm -rf ./*
+          mv .output/* .
+          rm -rf .output
+          git add .
+          git commit -m "release: update static site content"
+          git push origin static --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
