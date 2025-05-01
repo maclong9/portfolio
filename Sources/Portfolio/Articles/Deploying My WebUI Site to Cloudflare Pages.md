@@ -14,7 +14,7 @@ To automate the build and deployment process, we'll set up a GitHub Action to co
 
 ### Step 1: Create the Workflow File
 
-Create a file named `.github/workflows/build.yml` in your repository. This file defines the workflow that triggers on pushes or pull requests to the `main` branch and uses a macOS runner for Swift compatibility.
+Create a file named `.github/workflows/build.yml` in your repository. This file defines the workflow that triggers on pushes or pull requests to the `main` branch and uses a macOS runner for Swift compatibility. With an intial step to checkout the repository code.
 
 ```yaml
 name: Build and Deploy Static Site
@@ -32,17 +32,10 @@ jobs:
   build:
     runs-on: macos-15
     steps:
-```
-
-### Step 2: Check Out the Repository
-
-Add a step to check out the repository code using the `actions/checkout` action.
-
-```yaml
       - uses: actions/checkout@v4
 ```
 
-### Step 3: Set Up Swift
+### Step 2: Set Up Swift
 
 Install Swift 6.1 using the `SwiftyLab/setup-swift` action and verify the version.
 
@@ -56,7 +49,7 @@ Install Swift 6.1 using the `SwiftyLab/setup-swift` action and verify the versio
         run: swift --version
 ```
 
-### Step 4: Cache Swift Build Artifacts
+### Step 3: Cache Swift Build Artifacts
 
 Cache the Swift build artifacts to speed up subsequent runs.
 
@@ -71,7 +64,7 @@ Cache the Swift build artifacts to speed up subsequent runs.
             ${{ runner.os }}-swift-build-
 ```
 
-### Step 5: Build the Project
+### Step 4: Build the Project
 
 Build the Swift project, but only if the cache for build artifacts was not hit.
 
@@ -81,7 +74,7 @@ Build the Swift project, but only if the cache for build artifacts was not hit.
         if: steps.cache-swift-build.outputs.cache-hit != 'true'
 ```
 
-### Step 6: Cache Generated Site Output
+### Step 5: Cache Generated Site Output
 
 Cache the generated site output to avoid regenerating it unnecessarily.
 
@@ -96,7 +89,7 @@ Cache the generated site output to avoid regenerating it unnecessarily.
             ${{ runner.os }}-site-output-
 ```
 
-### Step 7: Generate the Static Site
+### Step 6: Generate the Static Site
 
 Run the static site generator using the `Portfolio` executable, but only if the site output cache was not hit.
 
@@ -106,7 +99,7 @@ Run the static site generator using the `Portfolio` executable, but only if the 
         if: steps.cache-site-output.outputs.cache-hit != 'true'
 ```
 
-### Step 8: Push to Static Branch
+### Step 7: Push to Static Branch
 
 Push the generated site to the `static` branch, but only on pushes to the `main` branch.
 
