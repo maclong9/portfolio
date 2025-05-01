@@ -129,10 +129,10 @@ Once your static site is built and pushed to the `static` branch, you can deploy
 1. Log in to your Cloudflare account and navigate to **Compute > Workers & Pages > Create > Pages**.
 2. Choose **Connect to Git**, then select your GitHub repository containing the WebUI project.
 3. Configure the project:
-   - Enter a **Project Name** (e.g., `my-webui-site`).
-   - Select the **static** branch as the deployment branch.
-   - Leave the build settings blank, as the site is pre-built by the GitHub Action.
-   - Click **Save and Deploy**.
+   1. Enter a **Project Name** (e.g., `my-webui-site`).
+   2. Select the **static** branch as the deployment branch.
+   3. Leave the build settings blank, as the site is pre-built by the GitHub Action.
+   4. Click **Save and Deploy**.
 
 Cloudflare Pages will automatically detect the static files in the `static` branch and deploy your site. Once the deployment is complete, you'll receive a URL (e.g., `my-webui-site.pages.dev`) where your site is live.
 
