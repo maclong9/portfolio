@@ -82,8 +82,8 @@ struct Layout: HTML {
       .padding(.horizontal)
       .padding(.vertical, length: 2)
       .position(.fixed, edges: .horizontal, .top, length: 0)
-      .background(color: .zinc(._200, opacity: 0.7))
-      .background(color: .zinc(._950, opacity: 0.7), on: .dark)
+      .background(color: .zinc(._200, opacity: 0.5))
+      .background(color: .zinc(._950, opacity: 0.5), on: .dark)
       .zIndex(50)
 
       Main {
