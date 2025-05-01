@@ -1,4 +1,4 @@
-name: Build and Deploy Static Site
+ename: Build and Deploy Static Site
 
 on:
   push:
@@ -69,5 +69,6 @@ jobs:
           git add .
           git commit -m "release: update static site content"
           git push origin static --force
+          echo 'User-agent: *\nAllow: /' >> robots.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
