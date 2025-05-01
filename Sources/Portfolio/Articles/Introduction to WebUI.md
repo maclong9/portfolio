@@ -233,7 +233,7 @@ struct Layout: HTML {
   public func render() -> String {
     Stack {
       Header {
-        Link(to: "/") { "Site Title" }
+        Link(to: "/portfolio/") { "Site Title" }
         Navigation {
           Link(to: "https://github.com/maclong9", newTab: true) { "GitHub" }
         }
@@ -256,7 +256,7 @@ struct Layout: HTML {
       Footer {
         Text {
           "© \(Date().formattedYear()) "
-          Link(to: "/") { "Site Title" }
+          Link(to: "/portfolio/") { "Site Title" }
         }
       }
       .font(size: .sm, color: .zinc(._600, opacity: 0.9))
@@ -299,7 +299,7 @@ public struct StaticSite {
         content: {
           Layout {
             Heading(level: .h1) { "Home Page" }
-            Link(to: "/about") { "Go to About" }
+            Link(to: "/portfolio/about") { "Go to About" }
           }
         }
       ),
@@ -317,7 +317,7 @@ public struct StaticSite {
         content: {
           Layout {
             Heading(level: .h1) { "About Page" }
-            Link(to: "/") { "Go to Home" }
+            Link(to: "/portfolio/") { "Go to Home" }
           }
         }
       )
