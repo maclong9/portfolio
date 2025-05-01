@@ -71,7 +71,7 @@ struct Layout: HTML {
           .transition(property: .colors, duration: 300, easing: .inOut)
           .frame(width: .fixed(8), height: .fixed(8))
           .flex(justify: .center, align: .center)
-        }.flex(align: .center).spacing(.x)
+        }.flex(align: .center).spacing(.x, length: 2)
       }
       .flex(justify: .between, align: .center)
       .frame(width: .screen, maxWidth: .fixed(200))
