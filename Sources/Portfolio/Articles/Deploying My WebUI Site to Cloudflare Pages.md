@@ -14,7 +14,7 @@ To automate the build and deployment process, we'll set up a GitHub Action to co
 
 ### Step 1: Create the Workflow File
 
-Create a file named `.github/workflows/build.yml` in your repository. This file defines the workflow that triggers on pushes or pull requests to the `main` branch and uses a macOS runner for Swift compatibility. With an intial step to checkout the repository code.
+Create `.github/workflows/build.yml` in your repository. This file defines the workflow that triggers on pushes or pull requests to the `main` branch and uses a macOS runner for Swift compatibility. With an intial step to checkout the repository code.
 
 ```yaml
 name: Build and Deploy Static Site
