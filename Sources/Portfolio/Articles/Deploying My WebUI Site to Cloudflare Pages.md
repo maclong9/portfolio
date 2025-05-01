@@ -138,5 +138,5 @@ Cloudflare Pages will automatically detect the static files in the `static` bran
 
 ## Conclusion
 
-By combining WebUI with a GitHub Action and Cloudflare Pages, you can automate the process of building and deploying a Swift-based static site. This setup ensures fast, reliable deployments with minimal manual intervention. For more details on setting up WebUI, refer to the [Introduction to WebUI](https://maclong.uk/articles/introduction-to-webui) guide.
+By combining WebUI with a GitHub Action and Cloudflare Pages, you can automate the process of building and deploying a Swift-based static site. This setup ensures fast, reliable deployments with minimal manual intervention.
 
