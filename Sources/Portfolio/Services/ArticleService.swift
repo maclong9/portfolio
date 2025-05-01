@@ -46,11 +46,45 @@ struct ArticleResponse: CardItem {
         type: .article,
         themeColor: .init(light: "oklch(92% 0.004 286.32)", dark: "oklch(14.1% 0.005 285.823)")
       ),
+      scripts: [
+        "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js",
+      ],
       stylesheets: ["/public/articles/typography.css"],
       head: """
-      <script async src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-      <script async src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
-      <script async src="/public/articles/syntax.js"></script>
+      hljs.highlightAll();
+      hljs.initLineNumbersOnLoad({
+          singleLine: true
+      });
+      document.addEventListener('DOMContentLoaded', () => {
+          document.querySelectorAll('pre code').forEach(block => {
+              const wrapper = document.createElement('div');
+              wrapper.className = 'code-block-wrapper';
+              block.parentNode.before(wrapper);
+              wrapper.appendChild(block.parentNode);
+
+              const lang = (block.className.match(/language-(\\w+)/)?.[1] || 'plaintext');
+              if (lang === 'plaintext' || lang === 'text') {
+                  block.classList.add('nohljsln');
+              } else {
+                  const langSpan = document.createElement('span');
+                  langSpan.className = 'code-language';
+                  langSpan.textContent = lang;
+                  wrapper.prepend(langSpan);
+
+                  const copyBtn = document.createElement('button');
+                  copyBtn.className = 'copy-button';
+                  copyBtn.textContent = 'Copy';
+                  copyBtn.onclick = () => {
+                      navigator.clipboard.writeText(block.textContent).then(() => {
+                          copyBtn.textContent = 'Copied!';
+                          setTimeout(() => copyBtn.textContent = 'Copy', 2000);
+                      });
+                  };
+                  wrapper.appendChild(copyBtn);
+              }
+          });
+      });
       """,
       content: {
         Layout(
