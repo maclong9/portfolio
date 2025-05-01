@@ -13,7 +13,11 @@ extension Heading {
   public func styled(size: TextSize) -> Element {
     self
       .font(
-        size: size, weight: .bold, tracking: .tight, wrapping: .balance, color: .zinc(._950),
+        size: size,
+        weight: .bold,
+        tracking: .tight,
+        wrapping: .balance,
+        color: .zinc(._950),
         family: "system-ui"
       )
       .font(color: .zinc(._100), on: .dark)

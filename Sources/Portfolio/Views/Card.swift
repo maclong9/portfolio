@@ -55,7 +55,8 @@ struct Card: HTML {
           .margins(.bottom, length: 3)
 
         Text { "\(technologies == nil ? "Read more" :"Source code") ›" }
-          .font(size: .sm, weight: .semibold, color: .teal(._500))
+          .font(size: .sm, weight: .semibold, color: .teal(._600))
+          .font(color: .teal(._500), on: .dark)
       }
       .cursor(.pointer)
       .flex(direction: .column, align: .start)
