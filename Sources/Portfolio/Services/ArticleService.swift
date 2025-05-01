@@ -35,7 +35,7 @@ struct ArticleResponse: CardItem {
 
   var document: Document {
     Document(
-      path: "articles/\(id)",
+      path: "/portfolio/articles/\(id)",
       metadata: .init(
         site: Portfolio.author,
         title: title,
