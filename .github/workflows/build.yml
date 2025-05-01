@@ -26,13 +26,35 @@ jobs:
       - name: Verify Swift Version
         run: swift --version
       
+      # Cache Swift build artifacts
+      - name: Cache Swift Build
+        uses: actions/cache@v4
+        id: cache-swift-build
+        with:
+          path: .build
+          key: ${{ runner.os }}-swift-build-${{ hashFiles('Package.swift', 'Sources/**') }}
+          restore-keys: |
+            ${{ runner.os }}-swift-build-
+      
       # Build the project
       - name: Build
         run: swift build -v
+        if: steps.cache-swift-build.outputs.cache-hit != 'true'
+      
+      # Cache generated site output
+      - name: Cache Generated Site
+        uses: actions/cache@v4
+        id: cache-site-output
+        with:
+          path: .output
+          key: ${{ runner.os }}-site-output-${{ hashFiles('Sources/**', 'Resources/**') }}
+          restore-keys: |
+            ${{ runner.os }}-site-output-
       
       # Run the static site generator
       - name: Generate Site
         run: swift run Portfolio
+        if: steps.cache-site-output.outputs.cache-hit != 'true'
       
       # Push to static branch (only on push to main)
       - name: Push to static branch
@@ -44,6 +66,8 @@ jobs:
           rm -rf ./*
           mv .output/* .
           rm -rf .output
+          rm -f .gitignore
+          rm -rf .github
           git add .
           git commit -m "release: update static site content"
           git push origin static --force
