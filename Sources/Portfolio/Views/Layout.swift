@@ -53,12 +53,24 @@ struct Layout: HTML {
           "Mac Long"
         }.styled().font(size: .xl2)
         Navigation {
-          Link(to: "/projects") { "Projects" }.styled().font(size: .sm, weight: .semibold)
+          Link(to: "/projects") { "Projects" }.styled().font(
+            size: .sm,
+            weight: .semibold
+          )
           Link(
             to: "https://github.com/maclong9",
             newTab: true,
             label: "Visit Mac Long's GitHub profile",
-          ) { Icon.github.rawValue }.styled()
+          ) {
+            Text { Icon.github.rawValue }
+          }
+          .styled()
+          .background(color: .zinc(._300), on: .hover)
+          .background(color: .zinc(._700), on: .hover, .dark)
+          .border(edges: .all, radius: (side: .all, size: .lg))
+          .transition(property: .colors, duration: 300, easing: .inOut)
+          .frame(width: .fixed(8), height: .fixed(8))
+          .flex(justify: .center, align: .center)
         }.flex(align: .center).spacing(.x)
       }
       .flex(justify: .between, align: .center)
