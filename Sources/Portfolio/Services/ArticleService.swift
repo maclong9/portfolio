@@ -49,9 +49,9 @@ struct ArticleResponse: CardItem {
       scripts: [
         "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js",
         "https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js",
-        "/public/articles/syntax.js",
       ],
       stylesheets: ["/public/articles/typography.css"],
+      head: "<script defer src=\"/public/articles/syntax.js\"></script>",
       content: {
         Layout(
           title: title,
