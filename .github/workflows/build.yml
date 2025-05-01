@@ -66,9 +66,9 @@ jobs:
           rm -rf ./*
           mv .output/* .
           rm -rf .output .gitignore .github .build
+          echo 'User-agent: *\nAllow: /' >> robots.txt
           git add .
           git commit -m "release: update static site content"
           git push origin static --force
-          echo 'User-agent: *\nAllow: /' >> robots.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
