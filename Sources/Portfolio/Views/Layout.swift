@@ -49,11 +49,11 @@ struct Layout: HTML {
 
     return Stack {
       Header(classes: ["backdrop-blur-md"]) {
-        Link(to: "/portfolio/") {
+        Link(to: "/") {
           "Mac Long"
         }.styled().font(size: .xl2)
         Navigation {
-          Link(to: "/portfolio/projects") { "Projects" }.styled().font(
+          Link(to: "/projects") { "Projects" }.styled().font(
             size: .sm,
             weight: .semibold
           )
@@ -105,7 +105,7 @@ struct Layout: HTML {
       Footer {
         Text {
           "© \(Date().formattedYear()) "
-          Link(to: "/portfolio/") { "Mac Long" }.styled().font(weight: .normal)
+          Link(to: "/") { "Mac Long" }.styled().font(weight: .normal)
         }
       }
       .font(size: .sm, color: .zinc(._600, opacity: 0.9))

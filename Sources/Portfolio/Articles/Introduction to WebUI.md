@@ -233,7 +233,7 @@ struct Layout: HTML {
   public func render() -> String {
     Stack {
       Header {
-        Link(to: "/portfolio/") { "Site Title" }
+        Link(to: "/") { "Site Title" }
         Navigation {
           Link(to: "https://github.com/maclong9", newTab: true) { "GitHub" }
         }
@@ -256,7 +256,7 @@ struct Layout: HTML {
       Footer {
         Text {
           "© \(Date().formattedYear()) "
-          Link(to: "/portfolio/") { "Site Title" }
+          Link(to: "/") { "Site Title" }
         }
       }
       .font(size: .sm, color: .zinc(._600, opacity: 0.9))
@@ -299,7 +299,7 @@ public struct StaticSite {
         content: {
           Layout {
             Heading(level: .h1) { "Home Page" }
-            Link(to: "/portfolio/about") { "Go to About" }
+            Link(to: "/about") { "Go to About" }
           }
         }
       ),
@@ -317,7 +317,7 @@ public struct StaticSite {
         content: {
           Layout {
             Heading(level: .h1) { "About Page" }
-            Link(to: "/portfolio/") { "Go to Home" }
+            Link(to: "/") { "Go to Home" }
           }
         }
       )
@@ -362,4 +362,4 @@ targets: [
 
 ## Conclusion
 
-This introduction covers the basics of WebUI, a library I created to streamline web development in Swift. While still evolving, WebUI has been a valuable learning experience in Swift and web technologies. Explore this sites [source code](https://github.com/maclong9/portfolio) to see how a production site using WebUI is built or learn more about the library [here](https://github.com/maclong9/web-ui). 
+This introduction covers the basics of WebUI, a library I created to streamline web development in Swift. While still evolving, WebUI has been a valuable learning experience in Swift and web technologies. Explore this sites [source code](https://github.com/maclong9) to see how a production site using WebUI is built or learn more about the library [here](https://github.com/maclong9/web-ui). 
