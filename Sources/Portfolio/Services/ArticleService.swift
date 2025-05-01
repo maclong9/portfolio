@@ -51,7 +51,7 @@ struct ArticleResponse: CardItem {
         "https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js",
       ],
       stylesheets: ["/public/articles/typography.css"],
-      head: "<script defer src=\"/public/articles/syntax.js\"></script>",
+      head: "<script async src=\"/public/articles/syntax.js\"></script>",
       content: {
         Layout(
           title: title,
