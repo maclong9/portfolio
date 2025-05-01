@@ -77,7 +77,7 @@ struct Layout: HTML {
       .frame(width: .screen, maxWidth: .fixed(200))
       .margins(.horizontal, auto: true)
       .margins(.bottom)
-      .border(edges: .bottom, color: .zinc(._900, opacity: 0.5))
+      .border(edges: .bottom, radius: (side: .bottom, size: .xl2), color: .zinc(._900, opacity: 0.5))
       .border(edges: .bottom, color: .zinc(._500, opacity: 0.7), on: .dark)
       .padding(.horizontal)
       .padding(.vertical, length: 2)
