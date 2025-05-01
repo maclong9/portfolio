@@ -10,7 +10,7 @@ permissions:
   contents: write # Grant write access to repository contents
 
 jobs:
-  build-and-push:
+  build:
     runs-on: macos-15
     steps:
       # Check out the repository code
