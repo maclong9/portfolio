@@ -59,7 +59,6 @@ struct ArticleResponse: CardItem {
           published: publishedDate,
         ) {
           htmlContent
-          typographyStyles
         }
       }
     )
