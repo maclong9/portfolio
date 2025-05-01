@@ -65,9 +65,7 @@ jobs:
           git checkout -B static
           rm -rf ./*
           mv .output/* .
-          rm -rf .output
-          rm -f .gitignore
-          rm -rf .github
+          rm -rf .output .gitignore .github .build
           git add .
           git commit -m "release: update static site content"
           git push origin static --force
