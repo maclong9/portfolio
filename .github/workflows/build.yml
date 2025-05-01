@@ -16,7 +16,7 @@ jobs:
       # Check out the repository code
       - uses: actions/checkout@v4
       
-      # Set up Swift 6.0
+      # Set up Swift 6.1
       - name: Setup Swift 6.1
         uses: SwiftyLab/setup-swift@latest
         with:
