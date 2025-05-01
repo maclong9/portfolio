@@ -40,13 +40,13 @@ jobs:
 Install Swift 6.1 using the `SwiftyLab/setup-swift` action and verify the version.
 
 ```yaml
-      - name: Setup Swift 6.1
-        uses: SwiftyLab/setup-swift@latest
-        with:
-          swift-version: "6.1"
-      
-      - name: Verify Swift Version
-        run: swift --version
+- name: Setup Swift 6.1
+  uses: SwiftyLab/setup-swift@latest
+  with:
+    swift-version: "6.1"
+
+- name: Verify Swift Version
+  run: swift --version
 ```
 
 ### Step 3: Cache Swift Build Artifacts
@@ -54,14 +54,14 @@ Install Swift 6.1 using the `SwiftyLab/setup-swift` action and verify the versio
 Cache the Swift build artifacts to speed up subsequent runs.
 
 ```yaml
-      - name: Cache Swift Build
-        uses: actions/cache@v4
-        id: cache-swift-build
-        with:
-          path: .build
-          key: ${{ runner.os }}-swift-build-${{ hashFiles('Package.swift', 'Sources/**') }}
-          restore-keys: |
-            ${{ runner.os }}-swift-build-
+- name: Cache Swift Build
+  uses: actions/cache@v4
+  id: cache-swift-build
+  with:
+    path: .build
+    key: ${{ runner.os }}-swift-build-${{ hashFiles('Package.swift', 'Sources/**') }}
+    restore-keys: |
+      ${{ runner.os }}-swift-build-
 ```
 
 ### Step 4: Build the Project
@@ -69,9 +69,9 @@ Cache the Swift build artifacts to speed up subsequent runs.
 Build the Swift project, but only if the cache for build artifacts was not hit.
 
 ```yaml
-      - name: Build
-        run: swift build -v
-        if: steps.cache-swift-build.outputs.cache-hit != 'true'
+- name: Build
+  run: swift build -v
+  if: steps.cache-swift-build.outputs.cache-hit != 'true'
 ```
 
 ### Step 5: Cache Generated Site Output
@@ -79,14 +79,14 @@ Build the Swift project, but only if the cache for build artifacts was not hit.
 Cache the generated site output to avoid regenerating it unnecessarily.
 
 ```yaml
-      - name: Cache Generated Site
-        uses: actions/cache@v4
-        id: cache-site-output
-        with:
-          path: .output
-          key: ${{ runner.os }}-site-output-${{ hashFiles('Sources/**', 'Resources/**') }}
-          restore-keys: |
-            ${{ runner.os }}-site-output-
+- name: Cache Generated Site
+  uses: actions/cache@v4
+  id: cache-site-output
+  with:
+    path: .output
+    key: ${{ runner.os }}-site-output-${{ hashFiles('Sources/**', 'Resources/**') }}
+    restore-keys: |
+      ${{ runner.os }}-site-output-
 ```
 
 ### Step 6: Generate the Static Site
@@ -94,9 +94,9 @@ Cache the generated site output to avoid regenerating it unnecessarily.
 Run the static site generator using the `Portfolio` executable, but only if the site output cache was not hit.
 
 ```yaml
-      - name: Generate Site
-        run: swift run Portfolio
-        if: steps.cache-site-output.outputs.cache-hit != 'true'
+- name: Generate Site
+  run: swift run Portfolio
+  if: steps.cache-site-output.outputs.cache-hit != 'true'
 ```
 
 ### Step 7: Push to Static Branch
@@ -104,20 +104,20 @@ Run the static site generator using the `Portfolio` executable, but only if the 
 Push the generated site to the `static` branch, but only on pushes to the `main` branch.
 
 ```yaml
-      - name: Push to static branch
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "actions@github.com"
-          git checkout -B static
-          rm -rf ./*
-          mv .output/* .
-          rm -rf .output .gitignore .github .build
-          git add .
-          git commit -m "release: update static site content"
-          git push origin static --force
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+- name: Push to static branch
+  if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  run: |
+    git config user.name "GitHub Actions Bot"
+    git config user.email "actions@github.com"
+    git checkout -B static
+    rm -rf ./*
+    mv .output/* .
+    rm -rf .output .gitignore .github .build
+    git add .
+    git commit -m "release: update static site content"
+    git push origin static --force
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 You can view the complete workflow file in my [Portfolio repository](https://github.com/maclong9/portfolio/blob/main/.github/workflows/build.yml).
