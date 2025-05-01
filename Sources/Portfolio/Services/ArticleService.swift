@@ -3,18 +3,23 @@ import WebUI
 
 enum ArticleService {
   static func fetchAllArticles() throws -> [ArticleResponse] {
-    let fileURLs = try FileManager.default.contentsOfDirectory(
+    let fileURLs = try fetchMarkdownFiles()
+    return try fileURLs.map(createArticleResponse)
+  }
+
+  private static func fetchMarkdownFiles() throws -> [URL] {
+    try FileManager.default.contentsOfDirectory(
       at: URL(fileURLWithPath: "Sources/Portfolio/Articles"),
       includingPropertiesForKeys: nil,
       options: .skipsHiddenFiles
     ).filter { $0.pathExtension == "md" }
+  }
 
-    return try fileURLs.map { url in
-      ArticleResponse(
-        id: url.deletingPathExtension().lastPathComponent,
-        parsed: MarkdownParser.parseMarkdown(try String(contentsOf: url, encoding: .utf8))
-      )
-    }
+  private static func createArticleResponse(from url: URL) throws -> ArticleResponse {
+    ArticleResponse(
+      id: url.deletingPathExtension().lastPathComponent,
+      parsed: MarkdownParser.parseMarkdown(try String(contentsOf: url, encoding: .utf8))
+    )
   }
 }
 

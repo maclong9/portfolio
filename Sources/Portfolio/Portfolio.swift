@@ -8,27 +8,35 @@ public struct Portfolio {
   public static let author = "Mac Long"
 
   var articles: [ArticleResponse] = []
+
   var routes: [Document] {
-    [
-      Home(articles: articles).document,
-      Projects().document,
-    ] + articles.map(\.document)
+    generateRoutes()
   }
 
   static func main() async throws {
-    LoggingSetup.bootstrap(
-      logLevelString: ProcessInfo.processInfo.environment["LOG_LEVEL"] ?? "info")
+    setupLogging()
 
     var portfolio = Portfolio()
 
     do {
       portfolio.articles = try ArticleService.fetchAllArticles()
-      logger.info(
-        "Successfully loaded \(portfolio.articles.count) articles from local markdown files")
+      logger.info("Successfully loaded \(portfolio.articles.count) articles from local markdown files")
     } catch {
       logger.error("Error loading articles: \(error)")
     }
 
     try Application(routes: portfolio.routes).build(assetsPath: "Sources/Portfolio/Public")
+  }
+
+  private static func setupLogging() {
+    LoggingSetup.bootstrap(
+      logLevelString: ProcessInfo.processInfo.environment["LOG_LEVEL"] ?? "info")
+  }
+
+  private func generateRoutes() -> [Document] {
+    [
+      Home(articles: articles).document,
+      Projects().document,
+    ] + articles.map(\.document)
   }
 }
