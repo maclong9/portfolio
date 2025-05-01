@@ -1,0 +1,43 @@
+name: Build and Deploy Static Site
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: write # Grant write access to repository contents
+
+jobs:
+  build-and-deploy:
+    runs-on: macos-15
+    steps:
+      # Check out the repository code
+      - uses: actions/checkout@v4
+      
+      # Set up Swift 6.0
+      - name: Setup Swift 6.1
+        uses: SwiftyLab/setup-swift@latest
+        with:
+          swift-version: "6.1"
+      
+      # Verify the Swift version
+      - name: Verify Swift Version
+        run: swift --version
+      
+      # Build the project
+      - name: Build
+        run: swift build -v
+      
+      # Run the static site generator
+      - name: Generate Site
+        run: swift run Portfolio
+
+      # Deploy to GitHub Pages (only on push to main)
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .output
