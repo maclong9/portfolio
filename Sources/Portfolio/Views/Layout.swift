@@ -66,8 +66,7 @@ struct Layout: HTML {
           }
           .styled()
           .background(color: .zinc(._300), on: .hover)
-          .background(color: .zinc(._700), on: .hover, .dark)
-          .border(edges: .all, radius: (side: .all, size: .lg))
+          .background(color: .zinc(._700), on: .hover, .dark)s
           .transition(property: .colors, duration: 300, easing: .inOut)
           .frame(width: .fixed(8), height: .fixed(8))
           .flex(justify: .center, align: .center)
