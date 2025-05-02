@@ -216,6 +216,7 @@ pre {
   & code {
     text-shadow: none;
     font-family: ui-monospace;
+    font-weight: normal;
     display: block;
     white-space: pre;
 
