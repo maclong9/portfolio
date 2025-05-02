@@ -49,7 +49,7 @@ h6 {
   font-family: system-ui;
   font-weight: 700;
   color: var(--text-color);
-  margin: 1.5lh 0;
+  margin: 1.5lh 0 0;
   line-height: 1.2;
   text-wrap: balance;
 
