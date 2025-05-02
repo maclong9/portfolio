@@ -50,7 +50,7 @@ struct ArticleResponse: CardItem {
         "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js",
         "https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js",
       ],
-      stylesheets: ["/articles/typography.css"],
+      stylesheets: ["/public/articles/typography.css"],
       head: """
       <script>
         hljs.highlightAll();
