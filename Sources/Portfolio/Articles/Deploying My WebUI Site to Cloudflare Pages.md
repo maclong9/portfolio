@@ -37,21 +37,18 @@ jobs:
 
 ### Step 2: Set Up Swift
 
-Install Swift 6.1 using the `SwiftyLab/setup-swift` action and verify the version.
+Install Swift using the `SwiftyLab/setup-swift` action, make sure the version is set to `6.1` for compatibility.
 
 ```yaml
 - name: Setup Swift 6.1
   uses: SwiftyLab/setup-swift@latest
   with:
     swift-version: "6.1"
-
-- name: Verify Swift Version
-  run: swift --version
 ```
 
 ### Step 3: Cache Swift Build Artifacts
 
-Cache the Swift build artifacts to speed up subsequent runs.
+Cache the Swift build artifacts to speed up future runs of this workflow.
 
 ```yaml
 - name: Cache Swift Build
