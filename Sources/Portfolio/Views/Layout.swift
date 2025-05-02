@@ -59,7 +59,7 @@ struct Layout: HTML {
           )
           Link(
             to: "mailto:hello@maclong.uk",
-            lable: "Send an Email to Mac Long",
+            label: "Send an Email to Mac Long",
           ) { Icon.mail.rawValue }
           Link(
             to: "https://github.com/maclong9",
