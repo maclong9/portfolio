@@ -49,9 +49,13 @@ h6 {
   font-family: system-ui;
   font-weight: 700;
   color: var(--text-color);
-  margin: 1.5lh 0 -0.75lh;
+  margin: 1.5lh 0;
   line-height: 1.2;
   text-wrap: balance;
+
+  + p { 
+    margin-top: 0;
+  }
 }
 
 h1 {
