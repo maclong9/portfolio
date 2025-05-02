@@ -21,7 +21,7 @@ struct Projects: HTML {
     ),
     Project(
       name: "List",
-      description: "Quickly list files found in your operating system",
+      description: "Quickly list files found in your operating system from the command line.",
       technologies: ["Swift"],
       url: "https://github.com/maclong9/list",
     ),
