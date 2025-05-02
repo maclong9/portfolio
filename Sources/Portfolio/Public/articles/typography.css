@@ -54,7 +54,7 @@ h6 {
   text-wrap: balance;
 
   + p { 
-    margin-top: 0;
+    margin-top: .25lh;
   }
 }
 
