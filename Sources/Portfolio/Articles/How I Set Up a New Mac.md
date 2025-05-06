@@ -4,11 +4,11 @@ description: This guide outlines the process of configuring a new macOS system.
 published: April 25, 2025
 ---
 
-### Running Migration Assistant
+## Running Migration Assistant
 
 Apple provides [Migration Assistant](https://support.apple.com/en-us/102613) to facilitate the transfer of documents, applications, user accounts, and settings from an old Mac to a new one. This saves time by eliminating the need to manually edit settings using the `defaults` command and navigating the App Store.
 
-### Configuring Development Tools
+## Configuring Development Tools
 
 Previously, configuring development tools was a time-consuming process. However, I have developed a POSIX shell script that automates the cloning of dotfiles to `~/.config` and the symbolic linking of relevant files for `zsh`, `git`, and `vim` to my home directory.
 
