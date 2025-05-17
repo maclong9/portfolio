@@ -62,33 +62,33 @@ h6 {
 h2 {
     font-size: 1.75rem;
     letter-spacing: -0.015em;
-    margin-top: 1.25lh;
+    margin-top: 1lh;
     margin-bottom: 0.5lh;
 }
 
 h3 {
     font-size: 1.5rem;
     letter-spacing: -0.01em;
-    margin-top: 1lh;
+    margin-top: 0.75lh;
     margin-bottom: 0.75lh;
 }
 
 h4 {
     font-size: 1.25rem;
     letter-spacing: -0.01em;
-    margin-top: 0.75lh;
+    margin-top: 0.50lh;
     margin-bottom: 0.5lh;
 }
 
 h5 {
     font-size: 1.125rem;
-    margin-top: 0.5lh;
+    margin-top: 0.25lh;
     margin-bottom: 0.5lh;
 }
 
 h6 {
     font-size: 1rem;
-    margin-top: 0.35lh;
+    margin-top: 0.15lh;
     margin-bottom: 0.5lh;
 }
 
