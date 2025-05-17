@@ -62,7 +62,7 @@ At the time of writing, the following additional tools are required:
 * [Deno](https://deno.com): A full replacement for Node.js and npm, suitable for my TypeScript projects.
 
 ```sh
- # Install Swift List
+# Install Swift List
 sudo mkdir /usr/local/bin
 sudo curl -L https://github.com/maclong9/list/releases/download/v1.1.2/sls -o /usr/local/bin/sls
 sudo chmod +x /usr/local/bin/sls
