@@ -46,7 +46,7 @@ actor Application {
             try Website(
                 metadata: metadata,
                 routes: routes + articles.map(\.document),
-                baseURL: "maclong.uk",
+                baseURL: "https://maclong.uk",
                 generateSitemap: true,
             ).build()
         } catch {
