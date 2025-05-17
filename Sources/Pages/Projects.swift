@@ -1,6 +1,32 @@
+import Foundation
 import WebUI
 
+struct Project: CardItem {
+    let name: String
+    let description: String
+    let technologies: [String]?
+    let url: String
+    var title: String { name }
+    var publishedDate: Date? { nil }
+}
+
 struct Projects: HTML {
+    let projects: [Project] = [
+        Project(
+            name: "WebUI",
+            description:
+                "WebUI is a library for HTML, CSS, and JavaScript generation built entirely in Swift.",
+            technologies: ["Swift"],
+            url: "https://github.com/maclong9/web-ui",
+        ),
+        Project(
+            name: "List",
+            description: "Quickly list files found in your operating system from the command line.",
+            technologies: ["Swift"],
+            url: "https://github.com/maclong9/list",
+        ),
+    ]
+
     var document: Document {
         .init(
             path: "projects",
@@ -15,9 +41,7 @@ struct Projects: HTML {
             description:
                 "Below are a list of projects I have worked on recently as well as links to their source code, they usually range from development tools to full stack applications."
         ) {
-            Section {
-
-            }
+            Collection(items: projects)
         }.render()
     }
 }

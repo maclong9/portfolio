@@ -8,20 +8,12 @@ actor Application {
         title: "Software Engineer",
         titleSeperator: " | ",
         description:
-            "Swift, TypeScript, React and TailwindCSS developer crafting clean code and efficient, forward-thinking solutions",
+            "Swift, TypeScript, React and TailwindCSS developer crafting clean code and efficient forward-thinking solutions",
         image: "/public/og.jpg",
         author: "Mac Long",
         keywords: [
-            "software engineer",
-            "swift developer",
-            "react developer",
-            "typescript",
-            "tailwindcss",
-            "frontend development",
-            "skateboarding",
-            "punk rock",
-            "web development",
-            "iOS development",
+            "software engineer", "swift developer", "react developer", "typescript", "tailwindcss",
+            "frontend development", "skateboarding", "punk rock", "web development", "iOS development",
         ],
         locale: .en,
         type: .website,
@@ -42,16 +34,18 @@ actor Application {
         RobotsRule(userAgent: "*", allow: ["/"])
     ]
 
-    static let routes = [
-        Home().document,
-        Projects().document,
-    ]
-
     static func main() async {
         do {
+            let articles = try ArticleService.fetchAllArticles()
+
+            let routes = [
+                Home(articles: articles).document,
+                Projects().document,
+            ]
+
             try Website(
                 metadata: metadata,
-                routes: routes,
+                routes: routes + articles.map(\.document),
                 baseURL: "maclong.uk",
                 generateSitemap: true,
             ).build()
