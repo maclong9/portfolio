@@ -52,6 +52,8 @@ if [ “$(uname -s)” = “Darwin” ]; then
 fi
 ```
 
+> `>/dev/null` is used to silence STDOUT and `2>&1` silences STDERR
+
 **Installing Additional Tools**
 
 At the time of writing, the following additional tools are required:
