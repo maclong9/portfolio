@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to WebUI Mac Long</title>
+    <meta property="og:title" content="Introduction to WebUI Mac Long">
+<meta name="description" content="An introduction to WebUI, a Swift library for rendering HTML, CSS, and JavaScript.">
+<meta property="og:description" content="An introduction to WebUI, a Swift library for rendering HTML, CSS, and JavaScript.">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="/public/articles/introduction-to-webui.jpg">
+<meta name="author" content="Mac Long">
+<script type="application/ld+json">
+{
+  "publisher" : {
+    "name" : "Mac Long",
+    "@type" : "Organization"
+  },
+  "description" : "An introduction to WebUI, a Swift library for rendering HTML, CSS, and JavaScript.",
+  "url" : "/articles/introduction-to-webui",
+  "image" : "/public/articles/introduction-to-webui.jpg",
+  "@type" : "Article",
+  "author" : {
+    "name" : "Mac Long",
+    "@type" : "Person"
+  },
+  "@context" : "https://schema.org",
+  "headline" : "Introduction to WebUI",
+  "dateModified" : "2025-04-15T00:00:00Z",
+  "datePublished" : "2025-04-15T00:00:00Z"
+}
+</script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+<link rel="stylesheet" href="/public/articles/typography.css">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script>
+  hljs.highlightAll();
+  hljs.initLineNumbersOnLoad({
+      singleLine: true
+  });
+  document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('pre code').forEach(block => {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'code-block-wrapper';
+          block.parentNode.before(wrapper);
+          wrapper.appendChild(block.parentNode);
+
+          const lang = (block.className.match(/language-(\w+)/)?.[1] || 'plaintext');
+          if (lang === 'plaintext' || lang === 'text') {
+              block.classList.add('nohljsln');
+          } else {
+              const langSpan = document.createElement('span');
+              langSpan.className = 'code-language';
+              langSpan.textContent = lang;
+              wrapper.prepend(langSpan);
+
+              const copyBtn = document.createElement('button');
+              copyBtn.className = 'copy-button';
+              copyBtn.textContent = 'Copy';
+              copyBtn.onclick = () => {
+                  navigator.clipboard.writeText(block.textContent).then(() => {
+                      copyBtn.textContent = 'Copied!';
+                      setTimeout(() => copyBtn.textContent = 'Copy', 2000);
+                  });
+              };
+              wrapper.appendChild(copyBtn);
+          }
+      });
+  });
+</script>
+</head>
+<body>
+  <div class="flex flex-col min-h-screen text-zinc-800 font-[ui-serif] bg-zinc-200 dark:text-zinc-200 dark:bg-zinc-950"><header class="backdrop-blur-3xl flex justify-between items-center w-screen max-w-[100ch] mx-auto mb-4 border-b border-zinc-900/50 dark:border-b dark:border-zinc-500/70 px-4 py-2 fixed inset-x-0 top-0 bg-zinc-200/50 dark:bg-zinc-950/50 z-50"><a class="cursor-pointer transition-colors font-bold font-[system-ui] hover:text-teal-600" href="/">Mac Long</a><nav class="flex items-center space-x-2"><a class="cursor-pointer transition-colors font-bold font-[system-ui] hover:text-teal-600" href="/projects">Projects</a><a class="cursor-pointer transition-colors font-bold font-[system-ui] hover:text-teal-600 rounded-lg transition-colors w-8 h-8 flex justify-center items-center hover:bg-zinc-300 hover:dark:bg-zinc-700" aria-label="Visit Mac Long's GitHub profile" href="https://github.com/maclong9" target="_blank" rel="noreferrer"><p><svg width="20" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.49933 0.25C3.49635 0.25 0.25 3.49593 0.25 7.50024C0.25 10.703 2.32715 13.4206 5.2081 14.3797C5.57084 14.446 5.70302 14.2222 5.70302 14.0299C5.70302 13.8576 5.69679 13.4019 5.69323 12.797C3.67661 13.235 3.25112 11.825 3.25112 11.825C2.92132 10.9874 2.44599 10.7644 2.44599 10.7644C1.78773 10.3149 2.49584 10.3238 2.49584 10.3238C3.22353 10.375 3.60629 11.0711 3.60629 11.0711C4.25298 12.1788 5.30335 11.8588 5.71638 11.6732C5.78225 11.205 5.96962 10.8854 6.17658 10.7043C4.56675 10.5209 2.87415 9.89918 2.87415 7.12104C2.87415 6.32925 3.15677 5.68257 3.62053 5.17563C3.54576 4.99226 3.29697 4.25521 3.69174 3.25691C3.69174 3.25691 4.30015 3.06196 5.68522 3.99973C6.26337 3.83906 6.8838 3.75895 7.50022 3.75583C8.1162 3.75895 8.73619 3.83906 9.31523 3.99973C10.6994 3.06196 11.3069 3.25691 11.3069 3.25691C11.7026 4.25521 11.4538 4.99226 11.3795 5.17563C11.8441 5.68257 12.1245 6.32925 12.1245 7.12104C12.1245 9.9063 10.4292 10.5192 8.81452 10.6985C9.07444 10.9224 9.30633 11.3648 9.30633 12.0413C9.30633 13.0102 9.29742 13.7922 9.29742 14.0299C9.29742 14.2239 9.42828 14.4496 9.79591 14.3788C12.6746 13.4179 14.75 10.7025 14.75 7.50024C14.75 3.49593 11.5036 0.25 7.49933 0.25Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg></p></a></nav></header><main class="flex-1 mx-auto max-w-[99vw] sm:max-w-[76ch] text-pretty p-4 pt-20"><div class="flex flex-col space-y-4"><h1 class="text-4xl font-bold tracking-tight text-balance text-zinc-950 font-[system-ui] dark:text-zinc-100">Introduction to WebUI</h1><span><span class="font-bold font-[system-ui]">Published: </span>Tuesday, April 15, 2025</span><span>An introduction to WebUI, a Swift library for rendering HTML, CSS, and JavaScript.</span></div><h2>What is WebUI?</h2><p>It offers a convenient way to create user interfaces with a syntax similar to SwiftUI, resulting in clean, efficient, and maintainable code.</p><h2>Why I Built WebUI</h2><p>As a frequent user of Swift for backend development, thanks to the <a href="https://www.swift.org/documentation/server/" target="_blank" rel="noopener noreferrer">Swift on Server workgroup</a>, I often opted for server-side rendering of HTML within Swift to maintain a unified codebase, avoiding the complexity of a decoupled frontend. However, this approach typically involved embedding HTML templates as strings within Swift code, which introduced several challenges.</p><p>For example, consider a typical setup using <a href="https://github.com/hummingbird-project/hummingbird" target="_blank" rel="noopener noreferrer">Hummingbird</a>, a Swift web framework, to render a dynamic homepage. Below is a simplified implementation of an <code>HTML</code> response generator that wraps HTML content, a <code>HomeView</code> struct for rendering the page’s content, and a route handler to serve the page:</p><pre><code class="language-swift">import Hummingbird
+
+/// Type wrapping HTML code. 
+/// Will convert to HBResponse that includes the correct content-type header
+struct HTML: ResponseGenerator {
+  let title: String
+  let description: String
+  let isLoggedIn: Bool?
+  let content: String
+
+  init(
+    title: String,
+    description: String =
+      &quot;Take control of your life with this wonderful todo list application.&quot;,
+    isLoggedIn: Bool? = false,
+    content: String
+  ) {
+    self.title = title
+    self.description = description
+    self.isLoggedIn = isLoggedIn
+    self.content = content
+  }
+
+  public func response(from request: Request, context: some RequestContext) throws -&gt; Response {
+    .init(
+      status: .ok,
+      headers: [.contentType: &quot;text/html&quot;],
+      body: .init(
+        byteBuffer: ByteBuffer(
+          string: LayoutView(
+            title: title,
+            description: description,
+            isLoggedIn: isLoggedIn ?? false,
+            content: content
+          )
+          .render()
+        )
+      )
+    )
+  }
+}
+
+/// A view that renders the marketing landing page of the application.
+///
+/// Displays the main value proposition, feature highlights, and appropriate call-to-action
+/// buttons based on user authentication state.
+///
+/// - Parameters:
+///    - isLoggedIn: Whether a user is currently authenticated, affecting which CTAs are shown
+struct HomeView {
+  let isLoggedIn: Bool
+
+  init(isLoggedIn: Bool = false) {
+    self.isLoggedIn = isLoggedIn
+  }
+
+  func render() -&gt; String {
+    &quot;&quot;&quot;
+    &lt;section class=&quot;grid hero&quot;&gt;
+      &lt;div class=&quot;background&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;text&quot;&gt;
+        &lt;h1&gt;
+          Take Control of
+          &lt;span class=&quot;gradient-highlight&quot;&gt;Your Life&lt;/span&gt;
+        &lt;/h1&gt;
+        &lt;p&gt;
+          With this wonderful application, designed to make your life easier while
+          staying out of the way. Take the first step in your new journey.
+        &lt;/p&gt;
+        \(ActionButtons(isLoggedIn: isLoggedIn).render())
+      &lt;/div&gt;
+      &lt;img src=&quot;images/hero.svg&quot; /&gt;
+    &lt;/section&gt;
+    &quot;&quot;&quot;
+  }
+}
+
+/// Renders the home page with dynamic content based on auth status
+///
+/// - Parameters:
+///   - request: The incoming HTTP request
+///   - context: The application context
+/// - Returns: The rendered HTML page
+/// - Note: Content varies based on whether user is authenticated
+@Sendable func home(request: Request, context: Context) async throws -&gt; HTML {
+  HTML(
+    title: &quot;Home&quot;,
+    isLoggedIn: request.cookies[&quot;SESSION_ID&quot;] != nil,
+    content: HomeView(
+      isLoggedIn: request.cookies[&quot;SESSION_ID&quot;] != nil
+    ).render()
+  )
+}
+</code></pre><p>In this setup, the <code>HomeView</code> struct generates HTML as a string, which is then passed to the <code>HTML</code> response generator to create an HTTP response. The route handler (<code>home</code>) checks for a session cookie to determine the user’s authentication status and renders the page accordingly. While functional, this approach has significant drawbacks. Storing HTML in strings sacrifices Swift’s type safety, making it impossible for the compiler to catch errors in HTML structure or attribute usage at compile time. For instance, a typo in a tag name or an unclosed tag would only be caught at runtime, often resulting in malformed HTML that’s difficult to debug. Additionally, embedding HTML strings means losing access to Swift’s powerful language features, like autocompletion, refactoring tools, and syntax highlighting, which hinders productivity and increases the likelihood of errors. Maintaining and scaling such code becomes cumbersome, especially for complex interfaces with dynamic content.</p><p>Frustrated by these limitations, I explored domain-specific languages (DSLs) for writing HTML in Swift, such as <a href="https://github.com/sliemeobn/elementary" target="_blank" rel="noopener noreferrer">Elementary</a>. While Elementary provided a more structured approach by allowing HTML to be expressed in Swift’s native syntax, its ergonomics and flexibility didn’t fully align with my vision for a seamless and expressive developer experience. This prompted me to create WebUI, a custom solution designed to combine the benefits of type-safe, Swift-native HTML rendering with a syntax that feels intuitive and familiar to <a href="https://developer.apple.com/xcode/swiftui/" target="_blank" rel="noopener noreferrer">SwiftUI</a>.</p><p>Another goal of the project was to make it hard to write bad applications. All of the metadata generation is handled by the library, as well as the base HTML document structure. This allows you to focus on the content and just building the user interface.</p><h2>Creating a Web Document</h2><p>WebUI’s core functionality is generating web pages. You define a document with metadata and content, passed as a closure containing WebUI elements.</p><pre><code class="language-swift">import Foundation
+import WebUI
+
+let document = Document(
+  metadata: Metadata(
+    site: &quot;Awesome Site&quot;,
+    title: &quot;Some Page&quot;,
+    titleSeparator: &quot;-&quot;,
+    description: &quot;This is my awesome page&quot;,
+    image: &quot;/og.png&quot;,
+    author: &quot;Your Name&quot;,
+    keywords: [&quot;swift&quot;, &quot;webui&quot;],
+    twitter: &quot;username&quot;,
+    locale: .en,
+    type: .website
+  )
+) {
+  Header { &quot;Hello, World!&quot; }
+  Main {
+    Heading(level: .h1) { &quot;This is my awesome page.&quot; }
+    List {
+      Item { &quot;Item 1&quot; }
+      Item { &quot;Item 2&quot; }
+    }
+    Link(to: &quot;https://github.com/maclong9/web-ui&quot;, newTab: true) { &quot;WebUI Repository&quot; }
+  }
+}
+
+let html = document.render()
+</code></pre><p>This code renders the following HTML. Currently, styles are managed with TailwindCSS, though this may evolve in future updates. Metadata is rendered in the <code>&lt;head&gt;</code> tag, and closure content appears within the <code>&lt;body&gt;</code> tags.</p><pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+    &lt;title&gt;Some Page - Awesome Site&lt;/title&gt;
+    &lt;meta property=&quot;og:title&quot; content=&quot;Some Page - Awesome Site&quot; /&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;This is my awesome page&quot; /&gt;
+    &lt;meta property=&quot;og:description&quot; content=&quot;This is my awesome page&quot; /&gt;
+    &lt;meta name=&quot;twitter:card&quot; content=&quot;summary_large_image&quot; /&gt;
+    &lt;meta property=&quot;og:image&quot; content=&quot;/og.png&quot; /&gt;
+    &lt;meta name=&quot;author&quot; content=&quot;Your Name&quot; /&gt;
+    &lt;meta property=&quot;og:type&quot; content=&quot;website&quot; /&gt;
+    &lt;meta name=&quot;twitter:creator&quot; content=&quot;@username&quot; /&gt;
+    &lt;meta name=&quot;keywords&quot; content=&quot;swift, webui&quot; /&gt;
+    &lt;script src=&quot;https://unpkg.com/@tailwindcss/browser@4&quot;&gt;&lt;/script&gt;
+    &lt;style type=&quot;text/tailwindcss&quot;&gt;
+      @theme {
+        --breakpoint-xs: 30rem;
+        --breakpoint-3xl: 120rem;
+        --breakpoint-4xl: 160rem;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header&gt;Hello, World!&lt;/header&gt;
+    &lt;main&gt;
+      &lt;h1&gt;This is my awesome page.&lt;/h1&gt;
+      &lt;ul&gt;
+        &lt;li&gt;Item 1&lt;/li&gt;
+        &lt;li&gt;Item 2&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;a
+        href=&quot;https://github.com/maclong9/web-ui&quot;
+        target=&quot;_blank&quot;
+        rel=&quot;noreferrer&quot;
+      &gt;
+        WebUI Repository
+      &lt;/a&gt;
+    &lt;/main&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h2>Adding Styles</h2><p>Styles in WebUI follow a modifier pattern inspired by SwiftUI. Below is an example of a styled div with a heading. The container has a light background by default and a dark background when <code>prefers-color-scheme: dark</code> is active, with typography styles applied to the heading.</p><pre><code class="language-swift">import WebUI
+
+let styledContent = Stack {
+  Heading(level: .h1) { &quot;Hello, world!&quot; }
+    .font(size: .xl4, weight: .bold)
+}
+.background(color: .zinc(._200))
+.background(color: .zinc(._950), on: .dark)
+</code></pre><h2>Generating a Simple Static Site</h2><h3>Creating a Layout Component</h3><p>WebUI components are defined as structs conforming to the <code>HTML</code> protocol.</p><pre><code class="language-swift">import WebUI
+
+struct Layout: HTML {
+  let children: [any HTML]
+
+  init(@HTMLBuilder children: @escaping () -&gt; [any HTML]) {
+    self.children = children()
+  }
+
+  public func render() -&gt; String {
+    Stack {
+      Header {
+        Link(to: &quot;/&quot;) { &quot;Site Title&quot; }
+        Navigation {
+          Link(to: &quot;https://github.com/maclong9&quot;, newTab: true) { &quot;GitHub&quot; }
+        }
+      }
+      .flex(justify: .between, align: .center)
+      .frame(width: .screen, maxWidth: .fixed(200))
+      .margins(.horizontal, auto: true)
+      .padding()
+
+      Main {
+        children.map { $0.render() }.joined()
+      }
+      .flex(grow: .one)
+      .margins(.horizontal, auto: true)
+      .frame(maxWidth: .custom(&quot;95vw&quot;))
+      .frame(maxWidth: .fixed(180), on: .sm)
+      .font(wrapping: .pretty)
+      .padding()
+
+      Footer {
+        Text {
+          &quot;© \(Date().formattedYear()) &quot;
+          Link(to: &quot;/&quot;) { &quot;Site Title&quot; }
+        }
+      }
+      .font(size: .sm, color: .zinc(._600, opacity: 0.9))
+      .font(color: .zinc(._400, opacity: 0.9), on: .dark)
+      .flex(justify: .center, align: .center)
+      .padding()
+    }
+    .frame(minHeight: .screen)
+    .font(color: .zinc(._800))
+    .background(color: .zinc(._200))
+    .font(color: .zinc(._200), on: .dark)
+    .background(color: .zinc(._950), on: .dark)
+    .flex(direction: .column)
+    .render()
+  }
+}
+</code></pre><h3>Generating the Website</h3><p>To generate a static site, run the build step to create an <code>.output</code> directory in the current working directory. If using Xcode, set a custom working directory in your scheme.</p><pre><code class="language-swift">import WebUI
+
+public struct StaticSite {
+  var staticRoutes: [Document] {
+    [
+      Document(
+        path: &quot;index&quot;,
+        metadata: .init(
+          site: &quot;Mac Long&quot;,
+          title: &quot;Home&quot;,
+          description: &quot;Welcome to the home page.&quot;,
+          image: &quot;/public/og.jpg&quot;,
+          author: &quot;Mac Long&quot;,
+          type: .website
+        ),
+        head: &quot;&lt;link rel=\&quot;icon\&quot; href=\&quot;public/icon.svg\&quot; type=\&quot;image/svg+xml\&quot; /&gt;&quot;,
+        content: {
+          Layout {
+            Heading(level: .h1) { &quot;Home Page&quot; }
+            Link(to: &quot;/about&quot;) { &quot;Go to About&quot; }
+          }
+        }
+      ),
+      Document(
+        path: &quot;about&quot;,
+        metadata: .init(
+          site: &quot;Mac Long&quot;,
+          title: &quot;About&quot;,
+          description: &quot;Learn more about us.&quot;,
+          image: &quot;/public/og.jpg&quot;,
+          author: &quot;Mac Long&quot;,
+          type: .website
+        ),
+        head: &quot;&lt;link rel=\&quot;icon\&quot; href=\&quot;public/icon.svg\&quot; type=\&quot;image/svg+xml\&quot; /&gt;&quot;,
+        content: {
+          Layout {
+            Heading(level: .h1) { &quot;About Page&quot; }
+            Link(to: &quot;/&quot;) { &quot;Go to Home&quot; }
+          }
+        }
+      )
+    ]
+  }
+
+  func main() async throws {
+    try Application(routes: staticRoutes).build(assetsPath: &quot;Sources/StaticSite/Public&quot;)
+  }
+}
+</code></pre><p>The <code>.output</code> directory will contain:</p><pre><code class="language-text">.output/
+  index.html
+  about.html
+</code></pre><p>You can specify a public directory to be copied to <code>.output/public</code>. For example, to include an image, place it in <code>Sources/StaticSite/Public</code> and reference it as:</p><pre><code class="language-swift">Image(source: &quot;public/image.jpg&quot;, description: &quot;An image for web rendering&quot;)
+</code></pre><p>Ensure the <code>Public</code> directory is added as a resource in your target:</p><pre><code class="language-swift">targets: [
+  .executableTarget(
+    name: &quot;TargetName&quot;,
+    dependencies: [
+      .product(name: &quot;WebUI&quot;, package: &quot;web-ui&quot;)
+    ],
+    resources: [
+      .copy(&quot;Public&quot;)
+    ]
+  ),
+]
+</code></pre><h2>Conclusion</h2><p>This introduction covers the basics of WebUI, a library I created to streamline web development in Swift. While still evolving, WebUI has been a valuable learning experience in Swift and web technologies. Explore this sites <a href="https://github.com/maclong9" target="_blank" rel="noopener noreferrer">source code</a> to see how a production site using WebUI is built or learn more about the library <a href="https://github.com/maclong9/web-ui" target="_blank" rel="noopener noreferrer">here</a>.</p></main><footer class="text-sm text-zinc-600/90 dark:text-zinc-400/90 flex justify-center items-center py-4"><span>© 2025 <a class="cursor-pointer transition-colors font-normal font-[system-ui] hover:text-teal-600" href="/">Mac Long</a></span></footer></div>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing a Command Line Tool in Swift Mac Long</title>
+    <meta property="og:title" content="Writing a Command Line Tool in Swift Mac Long">
+<meta name="description" content="A concise guide to creating a CLI tool in Swift using the Swift Package Manager.">
+<meta property="og:description" content="A concise guide to creating a CLI tool in Swift using the Swift Package Manager.">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="/public/articles/writing-a-command-line-tool-in-swift.jpg">
+<meta name="author" content="Mac Long">
+<script type="application/ld+json">
+{
+  "@type" : "Article",
+  "dateModified" : "2025-04-29T00:00:00Z",
+  "description" : "A concise guide to creating a CLI tool in Swift using the Swift Package Manager.",
+  "author" : {
+    "@type" : "Person",
+    "name" : "Mac Long"
+  },
+  "publisher" : {
+    "name" : "Mac Long",
+    "@type" : "Organization"
+  },
+  "headline" : "Writing a Command Line Tool in Swift",
+  "datePublished" : "2025-04-29T00:00:00Z",
+  "@context" : "https://schema.org",
+  "image" : "/public/articles/writing-a-command-line-tool-in-swift.jpg",
+  "url" : "/articles/writing-a-command-line-tool-in-swift"
+}
+</script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"></script>
+<link rel="stylesheet" href="/public/articles/typography.css">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script>
+  hljs.highlightAll();
+  hljs.initLineNumbersOnLoad({
+      singleLine: true
+  });
+  document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('pre code').forEach(block => {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'code-block-wrapper';
+          block.parentNode.before(wrapper);
+          wrapper.appendChild(block.parentNode);
+
+          const lang = (block.className.match(/language-(\w+)/)?.[1] || 'plaintext');
+          if (lang === 'plaintext' || lang === 'text') {
+              block.classList.add('nohljsln');
+          } else {
+              const langSpan = document.createElement('span');
+              langSpan.className = 'code-language';
+              langSpan.textContent = lang;
+              wrapper.prepend(langSpan);
+
+              const copyBtn = document.createElement('button');
+              copyBtn.className = 'copy-button';
+              copyBtn.textContent = 'Copy';
+              copyBtn.onclick = () => {
+                  navigator.clipboard.writeText(block.textContent).then(() => {
+                      copyBtn.textContent = 'Copied!';
+                      setTimeout(() => copyBtn.textContent = 'Copy', 2000);
+                  });
+              };
+              wrapper.appendChild(copyBtn);
+          }
+      });
+  });
+</script>
+</head>
+<body>
+  <div class="flex flex-col min-h-screen text-zinc-800 font-[ui-serif] bg-zinc-200 dark:text-zinc-200 dark:bg-zinc-950"><header class="backdrop-blur-3xl flex justify-between items-center w-screen max-w-[100ch] mx-auto mb-4 border-b border-zinc-900/50 dark:border-b dark:border-zinc-500/70 px-4 py-2 fixed inset-x-0 top-0 bg-zinc-200/50 dark:bg-zinc-950/50 z-50"><a class="cursor-pointer transition-colors font-bold font-[system-ui] hover:text-teal-600" href="/">Mac Long</a><nav class="flex items-center space-x-2"><a class="cursor-pointer transition-colors font-bold font-[system-ui] hover:text-teal-600" href="/projects">Projects</a><a class="cursor-pointer transition-colors font-bold font-[system-ui] hover:text-teal-600 rounded-lg transition-colors w-8 h-8 flex justify-center items-center hover:bg-zinc-300 hover:dark:bg-zinc-700" aria-label="Visit Mac Long's GitHub profile" href="https://github.com/maclong9" target="_blank" rel="noreferrer"><p><svg width="20" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.49933 0.25C3.49635 0.25 0.25 3.49593 0.25 7.50024C0.25 10.703 2.32715 13.4206 5.2081 14.3797C5.57084 14.446 5.70302 14.2222 5.70302 14.0299C5.70302 13.8576 5.69679 13.4019 5.69323 12.797C3.67661 13.235 3.25112 11.825 3.25112 11.825C2.92132 10.9874 2.44599 10.7644 2.44599 10.7644C1.78773 10.3149 2.49584 10.3238 2.49584 10.3238C3.22353 10.375 3.60629 11.0711 3.60629 11.0711C4.25298 12.1788 5.30335 11.8588 5.71638 11.6732C5.78225 11.205 5.96962 10.8854 6.17658 10.7043C4.56675 10.5209 2.87415 9.89918 2.87415 7.12104C2.87415 6.32925 3.15677 5.68257 3.62053 5.17563C3.54576 4.99226 3.29697 4.25521 3.69174 3.25691C3.69174 3.25691 4.30015 3.06196 5.68522 3.99973C6.26337 3.83906 6.8838 3.75895 7.50022 3.75583C8.1162 3.75895 8.73619 3.83906 9.31523 3.99973C10.6994 3.06196 11.3069 3.25691 11.3069 3.25691C11.7026 4.25521 11.4538 4.99226 11.3795 5.17563C11.8441 5.68257 12.1245 6.32925 12.1245 7.12104C12.1245 9.9063 10.4292 10.5192 8.81452 10.6985C9.07444 10.9224 9.30633 11.3648 9.30633 12.0413C9.30633 13.0102 9.29742 13.7922 9.29742 14.0299C9.29742 14.2239 9.42828 14.4496 9.79591 14.3788C12.6746 13.4179 14.75 10.7025 14.75 7.50024C14.75 3.49593 11.5036 0.25 7.49933 0.25Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg></p></a></nav></header><main class="flex-1 mx-auto max-w-[99vw] sm:max-w-[76ch] text-pretty p-4 pt-20"><div class="flex flex-col space-y-4"><h1 class="text-4xl font-bold tracking-tight text-balance text-zinc-950 font-[system-ui] dark:text-zinc-100">Writing a Command Line Tool in Swift</h1><span><span class="font-bold font-[system-ui]">Published: </span>Tuesday, April 29, 2025</span><span>A concise guide to creating a CLI tool in Swift using the Swift Package Manager.</span></div><p>This guide demonstrates how to create a simplified version of the UNIX <code>ls</code> command using Swift. The <code>ls</code> command is chosen for its simplicity and familiarity, making it an ideal example for building a command-line tool.</p><h2>Overview</h2><p>The <code>ls</code> command lists files in the current or specified directory, aiding navigation within a file system. Example output:</p><pre><code class="language-text">Desktop  Documents  Library  Music  Public Developer  Downloads  Movies  Pictures
+</code></pre><h2>Creating the Tool</h2><p>Initialize a new Swift Package Manager project:</p><pre><code class="language-sh">mkdir ls-clone
+cd ls-clone
+swift package init --name LsClone --type executable
+</code></pre><p>This generates the project structure. Open it in your preferred editor or run <code>open Package.swift</code> to use Xcode.</p><h2>Adding Dependencies</h2><p>The tool uses <a href="https://github.com/apple/swift-argument-parser" target="_blank" rel="noopener noreferrer">Swift Argument Parser</a> for handling command-line flags and options. Update <code>Package.swift</code>:</p><pre><code class="language-swift">// swift-tools-version:6.0
+import PackageDescription
+
+let package = Package(
+    name: &quot;LsClone&quot;,
+    products: [
+        .executable(name: &quot;lsc&quot;, targets: [&quot;lsc&quot;])
+    ],
+    dependencies: [
+        .package(url: &quot;https://github.com/apple/swift-argument-parser&quot;, from: &quot;1.0.0&quot;)
+    ],
+    targets: [
+        .executableTarget(
+            name: &quot;lsc&quot;,
+            dependencies: [
+                .product(name: &quot;ArgumentParser&quot;, package: &quot;swift-argument-parser&quot;)
+            ]
+        )
+    ]
+)
+</code></pre><blockquote><p>The tool is named <code>lsc</code> (ls clone), but you may rename it as desired.</p></blockquote><h2>Implementation</h2><p>This guide implements a minimal <code>ls</code> clone that:</p><ol><li><p>Lists files in the current or specified directory.</p></li><li><p>Supports a flag to include hidden files.</p></li></ol><h3>Steps</h3><p>Define the main entry point using <code>ParsableCommand</code>:</p><pre><code class="language-swift">import ArgumentParser
+import Foundation
+
+@main
+struct Lsc: ParsableCommand {
+    // Configuration and logic here
+}
+</code></pre><p>Add a flag and argument for user input. The <code>all</code> flag supports <code>-a</code> or <code>--all</code> due to the <code>.shortAndLong</code> name parameter and is set to a default value of false. The <code>paths</code> argument accepts a collection of directory paths:</p><pre><code class="language-swift">@Flag(name: .shortAndLong, help: &quot;Display all files, including hidden.&quot;) var all = false
+@Argument(help: &quot;Directories to list.&quot;) var paths: [String] = []
+</code></pre><p>Implement the <code>run</code> function:</p><pre><code class="language-swift">func run() throws {
+    let fm = FileManager.default
+    let locations = paths.isEmpty ? [fm.currentDirectoryPath] : paths
+    
+    for path in locations {
+        let url = URL(fileURLWithPath: path)
+        let items = try fm.contentsOfDirectory(
+            at: url,
+            includingPropertiesForKeys: nil,
+            options: all ? [] : [.skipsHiddenFiles]
+        )
+        for item in items {
+            print(item.lastPathComponent)
+        }
+    }
+}
+</code></pre><h2>Complete Code</h2><pre><code class="language-swift">// Sources/lsc/main.swift
+import ArgumentParser
+import Foundation
+
+@main
+struct Lsc: ParsableCommand {
+    @Flag(name: .shortAndLong, help: &quot;Display all files, including hidden.&quot;) var all = false
+    @Argument(help: &quot;Directories to list.&quot;) var paths: [String] = []
+    
+    func run() throws {
+        let fm = FileManager.default
+        let locations = paths.isEmpty ? [fm.currentDirectoryPath] : paths
+        
+        for path in locations {
+            let url = URL(fileURLWithPath: path)
+            let items = try fm.contentsOfDirectory(
+                at: url,
+                includingPropertiesForKeys: nil,
+                options: all ? [] : [.skipsHiddenFiles]
+            )
+            for item in items {
+                print(item.lastPathComponent)
+            }
+        }
+    }
+}
+</code></pre><p>Run the tool with <code>swift run lsc</code> or <code>swift run lsc -a</code>.</p><p><strong>Example Output:</strong></p><pre><code class="language-text">Tests
+Package.resolved
+Package.swift
+Sources
+</code></pre><p><strong>With <code>-a</code> Flag:</strong></p><pre><code class="language-text">.build
+Tests
+Package.resolved
+.gitignore
+Package.swift
+Sources
+</code></pre><p>Build a release version for distribution with <code>swift build -c release</code>, producing an executable at <code>.build/arm64-apple-macosx/release/lsc</code>. For cross-platform builds, refer to the <a href="https://www.swift.org/documentation/server/guides/building.html" target="_blank" rel="noopener noreferrer">Swift Build System</a> or <a href="https://www.swift.org/documentation/articles/static-linux-getting-started.html" target="_blank" rel="noopener noreferrer">Static Linux SDK</a>.</p><h2>Testing</h2><p>It is good practice to include tests to ensure reliability. Below is a sample test suite that verifies the tool’s output:</p><pre><code class="language-swift">// Tests/LsCloneTests.swift
+import Foundation
+import Testing
+@testable import lsc
+
+@Suite(&quot;LsClone Tests&quot;)
+struct LscTestSuite {
+    @Test(&quot;List Current Directory&quot;)
+    func testListCurrentDirectory() throws {
+        let output = try captureOutput {
+            try Lsc.parse([]).run()
+        }
+        #expect(output.contains(&quot;Package.swift&quot;))
+    }
+    
+    @Test(&quot;List Hidden Files&quot;)
+    func testListHiddenFiles() throws {
+        let output = try captureOutput {
+            try Lsc.parse([&quot;-a&quot;]).run()
+        }
+        #expect(output.contains(&quot;.gitignore&quot;))
+    }
+    
+    func captureOutput(_ closure: () throws -&gt; Void) throws -&gt; String {
+        let pipe = Pipe()
+        let original = dup(STDOUT_FILENO) 
+        defer { dup2(original, STDOUT_FILENO); close(original) }
+        dup2(pipe.fileHandleForWriting.fileDescriptor, STDOUT_FILENO)
+        try pipe.fileHandleForWriting.close()
+        try closure()
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        return String(decoding: data, as: UTF8.self)
+    }
+}
+</code></pre><p>Run tests with <code>swift test</code>.</p><p><strong>Example Test Output:</strong></p><pre><code class="language-text">Test Suite &#39;All tests&#39; started at 2025-04-29 10:38:20.741
+Test Suite &#39;LscTestSuite&#39; started
+Test Case &#39;List Current Directory&#39; passed
+Test Case &#39;List Hidden Files&#39; passed
+Test Suite &#39;All tests&#39; passed
+Executed 2 tests, with 0 failures in 0.002 seconds
+</code></pre><h2>Conclusion</h2><p>Swift is an excellent language for writing command line tools in a concise and efficient manner, if you’d like to see a more extensive implementation of <code>ls</code> in Swift you can see my tool <code>sls</code> at <a href="https://github.com/maclong9/list" target="_blank" rel="noopener noreferrer">SwiftList</a>.</p></main><footer class="text-sm text-zinc-600/90 dark:text-zinc-400/90 flex justify-center items-center py-4"><span>© 2025 <a class="cursor-pointer transition-colors font-normal font-[system-ui] hover:text-teal-600" href="/">Mac Long</a></span></footer></div>
+</body>
+</html>
