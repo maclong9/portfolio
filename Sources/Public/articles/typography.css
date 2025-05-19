@@ -109,6 +109,8 @@ code {
   font-size: 0.9em;
   padding: 0.15em 0.3em;
   border-radius: 3px;
+  background-color: oklch(0.2 0 0);
+  color: oklch(98.5% 0 0);
 }
 
 ol {
