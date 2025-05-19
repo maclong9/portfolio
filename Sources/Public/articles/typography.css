@@ -53,7 +53,7 @@ h6 {
   text-wrap: balance;
 
   + p {
-    margin-block-start: 0.5lh;
+    margin-block-start: 0;
   }
 }
 
@@ -91,11 +91,14 @@ h6 {
 }
 
 p {
-  margin-block: 1lh;
   font-family: ui-serif;
   line-height: 1.7;
   text-wrap: pretty;
   max-width: 70ch;
+}
+
+p:where(:not(:is(h1, h2, h3, h4, h5, h6) + p)) {
+  margin-block: 1lh;
 }
 
 b,
