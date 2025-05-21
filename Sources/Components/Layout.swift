@@ -48,6 +48,7 @@ struct Layout: HTML {
                 Link(to: "/") { "Mac Long" }.styled()
                 Navigation {
                     Link(to: "/projects") { "Projects" }.styled()
+                    Link(to: "notes.maclong.uk") { "Notes" }.styled()
                     Link(to: "https://github.com/maclong9", newTab: true, label: "Visit Mac Long's GitHub profile") {
                         Text { Icon.github.rawValue }
                     }

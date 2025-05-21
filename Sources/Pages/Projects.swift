@@ -11,6 +11,14 @@ struct Project: CardItem {
 }
 
 struct Projects: HTML {
+    var document: Document {
+        .init(
+            path: "projects",
+            metadata: Metadata(from: Application.metadata, title: "About"),
+            content: { self }
+        )
+    }
+
     let projects: [Project] = [
         Project(
             name: "WebUI",
@@ -26,14 +34,6 @@ struct Projects: HTML {
             url: "https://github.com/maclong9/list",
         ),
     ]
-
-    var document: Document {
-        .init(
-            path: "projects",
-            metadata: Metadata(from: Application.metadata, title: "About"),
-            content: { self }
-        )
-    }
 
     func render() -> String {
         Layout(
