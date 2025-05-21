@@ -63,9 +63,7 @@ struct ArticleResponse: CardItem {
                         "https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"
                 ),
             ],
-            stylesheets: [
-                "https://gist.githubusercontent.com/maclong9/db4e2243f8c4a78064c9d25eb527bcf3/raw/8db914d367fcc4d5351257f4ae18e57457d12690/typography.css"
-            ],
+            stylesheets: ["https://static.maclong.uk/typography.v1.css"],
             head: """
                 <script>
                   hljs.highlightAll();
