@@ -16,7 +16,7 @@ let package = Package(
                 .product(name: "WebUIMarkdown", package: "web-ui"),
             ],
             path: "Sources",
-            resources: [.process("Public")]
+            resources: [.process("Public"), .process("Articles")]
         )
     ]
 )
