@@ -52,6 +52,9 @@ actor Application {
                 baseURL: "https://maclong.uk",
                 generateSitemap: true,
             ).build()
+
+            let fm = FileManager.default
+            try fm.copyItem(at: URL("Sources/Functions")!, to: URL(".output/functions")!)
         } catch {
             print("Failed to build application: \(error)")
         }
