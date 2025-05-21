@@ -41,7 +41,10 @@ struct Middleware {
             }
 
             // Write the content to the output file
-            try FileManager.default.createDirectory(at: URL(fileURLWithPath: ".output/functions"), withIntermediateDirectories: true)
+            try FileManager.default.createDirectory(
+                at: URL(fileURLWithPath: ".output/functions"),
+                withIntermediateDirectories: true
+            )
             try content.write(to: URL(fileURLWithPath: outputPath), atomically: true, encoding: .utf8)
             print("Successfully updated middleware at \(outputPath)")
         } catch {
