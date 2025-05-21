@@ -12,7 +12,8 @@ let package = Package(
         .executableTarget(
             name: "Application",
             dependencies: [
-                .product(name: "WebUI", package: "web-ui")
+                .product(name: "WebUI", package: "web-ui"),
+                .product(name: "WebUIMarkdown", package: "web-ui"),
             ],
             path: "Sources",
             resources: [.process("Public")]

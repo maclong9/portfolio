@@ -1,5 +1,6 @@
 import Foundation
 import WebUI
+import WebUIMarkdown
 
 enum ArticleService {
     static func fetchAllArticles() throws -> [ArticleResponse] {
@@ -18,7 +19,7 @@ enum ArticleService {
     private static func createArticleResponse(from url: URL) throws -> ArticleResponse {
         ArticleResponse(
             id: url.deletingPathExtension().lastPathComponent,
-            parsed: MarkdownParser.parseMarkdown(try String(contentsOf: url, encoding: .utf8))
+            parsed: WebUIMarkdown().parseMarkdown(try String(contentsOf: url, encoding: .utf8))
         )
     }
 }
@@ -62,7 +63,9 @@ struct ArticleResponse: CardItem {
                         "https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"
                 ),
             ],
-            stylesheets: ["https://gist.githubusercontent.com/maclong9/db4e2243f8c4a78064c9d25eb527bcf3/raw/8db914d367fcc4d5351257f4ae18e57457d12690/typography.css"],
+            stylesheets: [
+                "https://gist.githubusercontent.com/maclong9/db4e2243f8c4a78064c9d25eb527bcf3/raw/8db914d367fcc4d5351257f4ae18e57457d12690/typography.css"
+            ],
             head: """
                 <script>
                   hljs.highlightAll();
@@ -112,7 +115,7 @@ struct ArticleResponse: CardItem {
         )
     }
 
-    init(id: String, parsed: MarkdownParser.ParsedMarkdown) {
+    init(id: String, parsed: WebUIMarkdown.ParsedMarkdown) {
         self.id = id.pathFormatted()
         self.htmlContent = parsed.htmlContent
         self.title = parsed.frontMatter["title"] as? String ?? "Untitled"
