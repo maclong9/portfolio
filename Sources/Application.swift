@@ -54,7 +54,7 @@ actor Application {
             ).build()
 
             let fm = FileManager.default
-            try fm.copyItem(at: URL("Sources/Functions")!, to: URL(".output/functions")!)
+            try fm.copyItem(at: URL(filePath: "Sources/Functions")!, to: URL(filePath: ".output/functions")!)
         } catch {
             print("Failed to build application: \(error)")
         }
