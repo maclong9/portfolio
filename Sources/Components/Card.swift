@@ -5,7 +5,7 @@ protocol CardItem {
     var title: String { get }
     var url: String { get }
     var description: String { get }
-    var technologies: [String]? { get }
+    var tags: [String]? { get }
     var publishedDate: Date? { get }
 }
 
@@ -13,16 +13,16 @@ struct Card: HTML, CardItem {
     let title: String
     let url: String
     let description: String
-    let technologies: [String]?
+    let tags: [String]?
     let publishedDate: Date?
 
     func render() -> String {
-        Link(to: url, newTab: technologies != nil) {
+        Link(to: url, newTab: tags != nil) {
             Article {
                 Stack {
                     Heading(.title) { title }.styled(size: .xl2)
 
-                    if let technologies = technologies {
+                    if let technologies = tags {
                         Stack {
                             for technology in technologies {
                                 Text { technology }
@@ -51,7 +51,7 @@ struct Card: HTML, CardItem {
                     .margins(of: 2, at: .top)
                     .margins(of: 3, at: .bottom)
 
-                Text { "\(technologies == nil ? "Read more" :"Source code") ›" }
+                Text { "\(tags == nil ? "Read more" :"Source code") ›" }
                     .font(size: .sm, weight: .semibold, color: .teal(._800), family: "system-ui")
                     .font(color: .teal(._500), on: .dark)
             }
@@ -76,7 +76,7 @@ struct Collection<T: CardItem>: HTML {
                     title: item.title,
                     url: item.url,
                     description: item.description,
-                    technologies: item.technologies,
+                    tags: item.tags,
                     publishedDate: item.publishedDate
                 )
             }

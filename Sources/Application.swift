@@ -41,6 +41,7 @@ actor Application {
             let routes = [
                 Home(articles: articles).document,
                 Projects().document,
+                Missing().document,
             ]
 
             try Website(
