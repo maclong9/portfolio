@@ -11,16 +11,6 @@ struct Note: CardItem {
 }
 
 struct Notes: HTML {
-    let notes: [Note] = [
-        Note(
-            name: "Computer Science",
-            description:
-                "My notes from following along with https://teachyourselfcs.com and some bonus Harvard CS50 notes.",
-            tags: ["comp-sci"],
-            url: "https://notes.maclong.uk/comp-sci",
-        )
-    ]
-
     var document: Document {
         .init(
             path: "notes",
@@ -29,11 +19,21 @@ struct Notes: HTML {
         )
     }
 
+    let notes: [Note] = [
+        Note(
+            name: "Computer Science",
+            description:
+                "My notes from following along with https://teachyourselfcs.com, a course recommended for furthering Computer Science knowledge",
+            tags: ["comp-sci"],
+            url: "https://notes.maclong.uk/comp-sci",
+        )
+    ]
+
     func render() -> String {
         Layout(
             title: "Notes",
             description:
-                "I like to take notes of courses and things I find interesting. Here is a collection of them."
+                "I like to take notes of courses and things I find interesting. Here is a collection of them for you to read."
         ) {
             Collection(items: notes)
         }.render()
