@@ -110,7 +110,7 @@ async function proxyRequest(targetUrl, originalRequest) {
 
 function getContentType(key) {
   if (key.endsWith(".css")) return "text/css";
-  if (key.endsWith(".js")) return "application/javascript";
+  if (key.endsWith(".js")) return "application/x-javascript";
   if (key.endsWith(".json")) return "application/json";
   if (key.endsWith(".png")) return "image/png";
   if (key.endsWith(".jpg") || key.endsWith(".jpeg")) return "image/jpeg";
