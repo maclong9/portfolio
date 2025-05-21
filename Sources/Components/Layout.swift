@@ -92,7 +92,7 @@ struct Layout: HTML {
 
             Footer {
                 Text {
-                    "© \(Date().formattedYear()) "
+                    "© \(Date().formatAsYear()) "
                     Link(to: "/") { "Mac Long" }.styled(weight: .normal)
                 }
             }
