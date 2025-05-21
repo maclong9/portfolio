@@ -52,7 +52,7 @@ struct ArticleResponse: CardItem {
                     headline: title,
                     image: "/public/articles/\(id).jpg",
                     author: Application.metadata.author ?? "Mac",
-                    publisher: Application.metadata.site ?? "Portfolio",
+                    publisher: Application.metadata.structuredData,
                     datePublished: publishedDate ?? Date(),
                     dateModified: publishedDate,
                     description: description,
@@ -60,50 +60,11 @@ struct ArticleResponse: CardItem {
                 )
             ),
             scripts: [
-                Script(src: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"),
-                Script(
-                    src:
-                        "https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"
-                ),
+                Script(src: "https://static.maclong.uk/hl.v1.js"),
+                Script(src: "https://static.maclong.uk/hl-ln.v1.js"),
+                Script(src: "https://static.maclong.uk/syntax-highlight.v1.js"),
             ],
             stylesheets: ["https://static.maclong.uk/typography.v1.css"],
-            head: """
-                <script>
-                  hljs.highlightAll();
-                  hljs.initLineNumbersOnLoad({
-                      singleLine: true
-                  });
-                  document.addEventListener('DOMContentLoaded', () => {
-                      document.querySelectorAll('pre code').forEach(block => {
-                          const wrapper = document.createElement('div');
-                          wrapper.className = 'code-block-wrapper';
-                          block.parentNode.before(wrapper);
-                          wrapper.appendChild(block.parentNode);
-
-                          const lang = (block.className.match(/language-(\\w+)/)?.[1] || 'plaintext');
-                          if (lang === 'plaintext' || lang === 'text') {
-                              block.classList.add('nohljsln');
-                          } else {
-                              const langSpan = document.createElement('span');
-                              langSpan.className = 'code-language';
-                              langSpan.textContent = lang;
-                              wrapper.prepend(langSpan);
-
-                              const copyBtn = document.createElement('button');
-                              copyBtn.className = 'copy-button';
-                              copyBtn.textContent = 'Copy';
-                              copyBtn.onclick = () => {
-                                  navigator.clipboard.writeText(block.textContent).then(() => {
-                                      copyBtn.textContent = 'Copied!';
-                                      setTimeout(() => copyBtn.textContent = 'Copy', 2000);
-                                  });
-                              };
-                              wrapper.appendChild(copyBtn);
-                          }
-                      });
-                  });
-                </script>
-                """,
             content: {
                 Layout(
                     title: title,
