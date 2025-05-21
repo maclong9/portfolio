@@ -15,7 +15,7 @@ struct Missing: HTML {
             description:
                 "Whoops, unfortunately that page either no longer or never existed in the first place."
         ) {
-            Link(to: "/") { "Head back home?" }.styled().padding()
+            Link(to: "/") { "Head back home?" }.styled().padding(at: .vertical)
         }.render()
     }
 }
