@@ -107,6 +107,7 @@ struct Layout: HTML {
         .background(color: .zinc(._200))
         .font(color: .zinc(._200), on: .dark)
         .background(color: .zinc(._950), on: .dark)
+        .position(.relative)
         .render()
     }
 }

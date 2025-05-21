@@ -1,6 +1,8 @@
 import Foundation
 import WebUI
 
+import struct Foundation.URL
+
 @main
 actor Application {
     static let metadata = Metadata(
@@ -53,8 +55,8 @@ actor Application {
                 generateSitemap: true,
             ).build()
 
-            let fm = FileManager.default
-            try fm.copyItem(at: URL(filePath: "Sources/Functions")!, to: URL(filePath: ".output/functions")!)
+            // Fetch middleware content from URL and update the middleware file
+            await Middleware.fetchAndUpdate()
         } catch {
             print("Failed to build application: \(error)")
         }
