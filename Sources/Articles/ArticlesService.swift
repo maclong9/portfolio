@@ -31,7 +31,7 @@ struct ArticleResponse: CardItem {
     let publishedDate: Date?
 
     var url: String { "/articles/\(id)" }
-    let technologies: [String]? = nil
+    let tags: [String]? = nil
 
     var document: Document {
         Document(
