@@ -13,9 +13,9 @@ struct Missing: HTML {
         Layout(
             title: "404 - Page Not Found",
             description:
-                "Whoops, unfortunately that page either no longer or never existed in the first place..."
+                "Whoops, unfortunately that page either no longer or never existed in the first place."
         ) {
-          Link(to: "/") { "Head back home?" }.styled()
+            Link(to: "/") { "Head back home?" }.styled().padding()
         }.render()
     }
 }

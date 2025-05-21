@@ -6,7 +6,7 @@ let package = Package(
     name: "Portfolio",
     platforms: [.macOS(.v15)],
     dependencies: [
-        .package(url: "https://github.com/maclong9/web-ui.git", branch: "development")
+        .package(url: "https://github.com/maclong9/web-ui.git", from: "1.0.0")
     ],
     targets: [
         .executableTarget(
