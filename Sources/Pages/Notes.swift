@@ -6,6 +6,8 @@ struct Note: CardItem {
     let description: String
     let tags: [String]?
     let url: String
+    let newTab: Bool = false
+    let action: CardAction = .readMore
     var title: String { name }
     var publishedDate: Date? { nil }
 }
@@ -23,7 +25,7 @@ struct Notes: HTML {
         Note(
             name: "Computer Science",
             description:
-                "My notes from following along with https://teachyourselfcs.com, a course recommended for furthering Computer Science knowledge",
+                "My notes from following along with Teach Yourself Computer Science, a course recommended for furthering knowledge in comp-sci.",
             tags: ["comp-sci"],
             url: "https://notes.maclong.uk/comp-sci",
         )

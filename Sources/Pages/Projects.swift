@@ -6,6 +6,8 @@ struct Project: CardItem {
     let description: String
     let tags: [String]?
     let url: String
+    let newTab: Bool = true
+    let action: CardAction = .sourceCode
     var title: String { name }
     var publishedDate: Date? { nil }
 }
