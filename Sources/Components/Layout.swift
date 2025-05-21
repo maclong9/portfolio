@@ -45,7 +45,7 @@ struct Layout: HTML {
     public func render() -> String {
         Stack {
             Header(classes: ["backdrop-blur-3xl"]) {
-                Link(to: "/") { "Mac Long" }.styled()
+                Link(to: "https://maclong.uk") { "Mac Long" }.styled()
                 Navigation {
                     Link(to: "/projects") { "Projects" }.styled()
                     Link(to: "https://notes.maclong.uk", newTab: false) { "Notes" }.styled()

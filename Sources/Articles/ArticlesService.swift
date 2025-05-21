@@ -32,6 +32,9 @@ struct ArticleResponse: CardItem {
     let publishedDate: Date?
 
     var url: String { "/articles/\(id)" }
+    var newTab: Bool = false
+    var action: CardAction = .readMore
+
     let tags: [String]? = nil
 
     var document: Document {

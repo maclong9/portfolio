@@ -1,23 +1,50 @@
 import Foundation
 import WebUI
 
+enum CardAction: String {
+    case readMore = "Read more"
+    case sourceCode = "Source code"
+}
+
 protocol CardItem {
     var title: String { get }
-    var url: String { get }
     var description: String { get }
     var tags: [String]? { get }
+    var url: String { get }
+    var newTab: Bool { get }
+    var action: CardAction { get }
     var publishedDate: Date? { get }
 }
 
 struct Card: HTML, CardItem {
     let title: String
-    let url: String
     let description: String
     let tags: [String]?
+    let url: String
+    let newTab: Bool
+    let action: CardAction
     let publishedDate: Date?
 
+    init(
+        title: String,
+        description: String,
+        tags: [String]?,
+        url: String,
+        newTab: Bool = false,
+        action: CardAction = .readMore,
+        publishedDate: Date?
+    ) {
+        self.title = title
+        self.description = description
+        self.tags = tags
+        self.url = url
+        self.newTab = newTab
+        self.action = action
+        self.publishedDate = publishedDate
+    }
+
     func render() -> String {
-        Link(to: url, newTab: tags != nil) {
+        Link(to: url, newTab: newTab) {
             Article {
                 Stack {
                     Heading(.title) { title }.styled(size: .xl2)
@@ -51,7 +78,7 @@ struct Card: HTML, CardItem {
                     .margins(of: 2, at: .top)
                     .margins(of: 3, at: .bottom)
 
-                Text { "\(tags == nil ? "Read more" :"Source code") ›" }
+                Text { "\(action.rawValue) ›" }
                     .font(size: .sm, weight: .semibold, color: .teal(._800), family: "system-ui")
                     .font(color: .teal(._500), on: .dark)
             }
@@ -74,9 +101,11 @@ struct Collection<T: CardItem>: HTML {
             for item in items {
                 Card(
                     title: item.title,
-                    url: item.url,
                     description: item.description,
                     tags: item.tags,
+                    url: item.url,
+                    newTab: item.newTab,
+                    action: item.action,
                     publishedDate: item.publishedDate
                 )
             }
