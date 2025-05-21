@@ -59,11 +59,6 @@ struct ArticleResponse: CardItem {
                     url: "/articles/\(id)"
                 )
             ),
-            scripts: [
-                Script(src: "https://static.maclong.uk/hl.v1.js"),
-                Script(src: "https://static.maclong.uk/hl-ln.v1.js"),
-                Script(src: "https://static.maclong.uk/syntax-highlight.v1.js"),
-            ],
             stylesheets: ["https://static.maclong.uk/typography.v1.css"],
             content: {
                 Layout(
