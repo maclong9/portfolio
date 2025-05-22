@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/maclong9/web-ui.git",
       "state" : {
-        "revision" : "2472d03167b0c2f849818d6f47d3e43a0312e900",
-        "version" : "1.3.6"
+        "revision" : "f12949491cf5bbda19fdf3c7dc9038979cb92eea",
+        "version" : "1.3.7"
       }
     }
   ],
