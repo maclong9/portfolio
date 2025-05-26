@@ -22,6 +22,18 @@ public struct Layout: Element {
         self.content = content
     }
 
+    // Computed property to determine the correct link URL
+    private var linkURL: String {
+        guard let path = path, path == "Article" else { return "" }
+        return "https://notes.maclong.uk/\(path)"
+    }
+
+    // Computed property to determine the display text
+    private var linkText: String {
+        guard let path = path else { return "" }
+        return path == "Article" ? "Home" : path.capitalized
+    }
+
     public var body: some HTML {
         BodyWrapper {
             Header(classes: ["backdrop-blur-3xl"]) {
@@ -31,7 +43,7 @@ public struct Layout: Element {
                     }.styled()
                     if path != nil {
                         Text { "/" }
-                        Link(to: "https://notes.maclong.uk/\(path ?? "")") { path?.capitalized ?? "" }.styled()
+                        Link(to: linkURL) { linkText }.styled()
                     }
                 }.flex(align: .center).spacing(of: 2, along: .horizontal)
                 Navigation {
