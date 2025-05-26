@@ -3,9 +3,14 @@ import WebUI
 import WebUIMarkdown
 
 public enum ArticleService {
-    public static func fetchAllArticles(from directoryPath: String = "Articles") throws -> [ArticleResponse] {
+    public static func fetchAllArticles(
+        from directoryPath: String = "Articles",
+        root: Bool = false
+    ) throws -> [ArticleResponse] {
         let fileURLs = try fetchMarkdownFiles(from: directoryPath)
-        return try fileURLs.map(createArticleResponse)
+        return try fileURLs.map { url in
+            try createArticleResponse(from: url, root: root)
+        }
     }
 
     private static func fetchMarkdownFiles(from directoryPath: String) throws -> [URL] {
@@ -16,10 +21,11 @@ public enum ArticleService {
         ).filter { $0.pathExtension == "md" }
     }
 
-    private static func createArticleResponse(from url: URL) throws -> ArticleResponse {
+    private static func createArticleResponse(from url: URL, root: Bool) throws -> ArticleResponse {
         ArticleResponse(
             id: url.deletingPathExtension().lastPathComponent,
-            parsed: try WebUIMarkdown().parseMarkdown(try String(contentsOf: url, encoding: .utf8))
+            parsed: try WebUIMarkdown().parseMarkdown(try String(contentsOf: url, encoding: .utf8)),
+            root: root
         )
     }
 }
@@ -30,6 +36,7 @@ public struct ArticleResponse: Document, CardItem {
     public let description: String
     public let htmlContent: String
     public let publishedDate: Date?
+    public let root: Bool
 
     // MARK: - CardItem conformance
     public var url: String { "/articles/\(id)" }
@@ -80,11 +87,12 @@ public struct ArticleResponse: Document, CardItem {
         ["https://static.maclong.uk/typography.v1.css"]
     }
 
-    public init(id: String, parsed: WebUIMarkdown.ParsedMarkdown) {
+    public init(id: String, parsed: WebUIMarkdown.ParsedMarkdown, root: Bool = false) {
         self.id = id.pathFormatted()
         self.htmlContent = parsed.htmlContent
         self.title = parsed.frontMatter["title"] as? String ?? "Untitled"
         self.description = parsed.frontMatter["description"] as? String ?? ""
         self.publishedDate = parsed.frontMatter["published"] as? Date
+        self.root = root
     }
 }
