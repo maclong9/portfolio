@@ -34,10 +34,10 @@ struct Notes: Document {
 
     var body: some HTML {
         Layout(
+            path: path,
             title: "Notes",
             description:
                 "I like to take notes of courses and things I find interesting. Here is a collection of them for you to read.",
-            isNotes: true
         ) {
             CardCollection(items: notes)
         }

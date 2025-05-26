@@ -39,6 +39,7 @@ struct Projects: Document {
 
     var body: some HTML {
         Layout(
+            path: path,
             title: "Recent Projects",
             description:
                 "Below are a list of projects I have worked on recently as well as links to their source code, they usually range from development tools to full stack applications."
