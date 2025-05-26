@@ -2,23 +2,23 @@ import Foundation
 import WebUI
 
 public struct Layout: Element {
+    let path: String?
     let title: String
     let description: String
     let published: Date?
-    let isNotes: Bool
     let content: HTMLContentBuilder
 
     public init(
+        path: String? = nil,
         title: String,
         description: String,
         published: Date? = nil,
-        isNotes: Bool = false,
         @HTMLBuilder content: @escaping HTMLContentBuilder
     ) {
+        self.path = path
         self.title = title
         self.description = description
         self.published = published
-        self.isNotes = isNotes
         self.content = content
     }
 
@@ -29,9 +29,9 @@ public struct Layout: Element {
                     Link(to: "https://maclong.uk/") {
                         "Mac Long"
                     }.styled()
-                    if isNotes {
+                    if path != nil {
                         Text { "/" }
-                        Link(to: "https://notes.maclong.uk") { "Notes" }.styled()
+                        Link(to: "https://notes.maclong.uk/\(path ?? "")") { path ?? "" }.styled()
                     }
                 }.flex(align: .center).spacing(of: 2, along: .horizontal)
                 Navigation {

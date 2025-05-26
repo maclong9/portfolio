@@ -70,10 +70,10 @@ public struct ArticleResponse: Document, CardItem {
 
     public var body: some HTML {
         Layout(
+            path: root ? "Notes" : "Articles",
             title: title,
             description: description,
             published: publishedDate,
-            isNotes: root
         ) {
             htmlContent
         }
