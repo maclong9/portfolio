@@ -1,11 +1,9 @@
 import Foundation
 import WebUI
 
-import struct Foundation.URL
-
-@main
-actor Application {
-    static let metadata = Metadata(
+public struct PersonalData {
+    public init() {}
+    public let metadata = Metadata(
         site: "Mac Long",
         title: "Software Engineer",
         titleSeperator: " | ",
@@ -32,33 +30,4 @@ actor Application {
             sameAs: ["https://github.com/maclong9", "https://orcid.org/0009-0002-4180-3822"]
         )
     )
-
-    let robotsRules: [RobotsRule] = [
-        RobotsRule(userAgent: "*", allow: ["/"])
-    ]
-
-    static func main() async {
-        do {
-            let articles = try ArticleService.fetchAllArticles()
-
-            let routes = [
-                Home(articles: articles).document,
-                Projects().document,
-                Notes().document,
-                Missing().document,
-            ]
-
-            try Website(
-                metadata: metadata,
-                routes: routes + articles.map(\.document),
-                baseURL: "https://maclong.uk",
-                generateSitemap: true,
-            ).build()
-
-            // Fetch middleware content from URL and update the middleware file
-            await Middleware.fetchAndUpdate()
-        } catch {
-            print("Failed to build application: \(error)")
-        }
-    }
 }

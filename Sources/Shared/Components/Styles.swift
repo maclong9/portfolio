@@ -1,7 +1,7 @@
 import WebUI
 
 extension Link {
-    func styled(weight: Weight = .bold) -> Element {
+    public func styled(weight: Weight = .bold) -> any HTML {
         self
             .cursor(.pointer)
             .transition(of: .colors)
@@ -11,7 +11,7 @@ extension Link {
 }
 
 extension Heading {
-    public func styled(size: TextSize) -> Element {
+    public func styled(size: TextSize) -> any HTML {
         self
             .font(
                 size: size,

@@ -60,9 +60,9 @@ jobs:
           git checkout -B static
           rm -rf ./*
           mv .output/* .
-          rm -rf .output .gitignore .github .build .swift-format
+          rm -rf .*
           git add .
-          git commit -m "release: update static site content"
+          git commit -m "Update static site content"
           git push origin static --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

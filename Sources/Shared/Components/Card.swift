@@ -1,12 +1,12 @@
 import Foundation
 import WebUI
 
-enum CardAction: String {
+public enum CardAction: String {
     case readMore = "Read more"
     case sourceCode = "Source code"
 }
 
-protocol CardItem {
+public protocol CardItem {
     var title: String { get }
     var description: String { get }
     var tags: [String]? { get }
@@ -16,16 +16,16 @@ protocol CardItem {
     var publishedDate: Date? { get }
 }
 
-struct Card: HTML, CardItem {
-    let title: String
-    let description: String
-    let tags: [String]?
-    let url: String
-    let newTab: Bool
-    let action: CardAction
-    let publishedDate: Date?
+public struct Card: Element, CardItem {
+    public let title: String
+    public let description: String
+    public let tags: [String]?
+    public let url: String
+    public let newTab: Bool
+    public let action: CardAction
+    public let publishedDate: Date?
 
-    init(
+    public init(
         title: String,
         description: String,
         tags: [String]?,
@@ -43,10 +43,10 @@ struct Card: HTML, CardItem {
         self.publishedDate = publishedDate
     }
 
-    func render() -> String {
+    public var body: some HTML {
         Link(to: url, newTab: newTab) {
             Article {
-                Stack {
+                Header {
                     Heading(.title) { title }.styled(size: .xl2)
 
                     if let technologies = tags {
@@ -58,7 +58,8 @@ struct Card: HTML, CardItem {
                                     .rounded(.lg)
                                     .font(size: .xs, color: .zinc(._900), family: "system-ui")
                                     .font(color: .zinc(._200), on: .dark)
-                                    .padding(EdgeInsets(vertical: 1, horizontal: 2))
+                                    .padding(of: 1, at: .vertical)
+                                    .padding(of: 1, at: .horizontal)
                                     .margins(of: 2, at: .horizontal)
                             }
                         }
@@ -74,13 +75,14 @@ struct Card: HTML, CardItem {
                     .font(color: .zinc(._400, opacity: 0.9), on: .dark)
                 }
 
-                Text { description }
-                    .margins(of: 2, at: .top)
-                    .margins(of: 3, at: .bottom)
-
-                Text { "\(action.rawValue) ›" }
-                    .font(size: .sm, weight: .semibold, color: .teal(._800), family: "system-ui")
-                    .font(color: .teal(._500), on: .dark)
+                Main {
+                    Text { description }
+                        .margins(of: 2, at: .top)
+                        .margins(of: 3, at: .bottom)
+                    Text { "\(action.rawValue) ›" }
+                        .font(size: .sm, weight: .semibold, color: .teal(._800), family: "system-ui")
+                        .font(color: .teal(._500), on: .dark)
+                }.flex(direction: .column, align: .start)
             }
             .cursor(.pointer)
             .flex(direction: .column, align: .start)
@@ -89,14 +91,18 @@ struct Card: HTML, CardItem {
             .background(color: .zinc(._700), on: .hover, .dark)
             .transition(of: .colors, for: 300, easing: .inOut)
             .padding()
-        }.render()
+        }
     }
 }
 
-struct Collection<T: CardItem>: HTML {
+public struct CardCollection<T: CardItem>: Element {
     let items: [T]
 
-    func render() -> String {
+    public init(items: [T]) {
+        self.items = items
+    }
+
+    public var body: some HTML {
         Stack {
             for item in items {
                 Card(
@@ -113,7 +119,6 @@ struct Collection<T: CardItem>: HTML {
         .flex(direction: .column)
         .padding(on: .sm)
         .margins(at: .vertical)
-        .spacing(of: 4, along: .y)
-        .render()
+        .spacing(of: 4, along: .vertical)
     }
 }
