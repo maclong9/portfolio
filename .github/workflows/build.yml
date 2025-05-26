@@ -59,6 +59,7 @@ jobs:
           git config user.email "actions@github.com"
           git checkout -B static
           rm -rf ./*
+          mv .output/* .
           rm -rf .output .gitignore .github .build .swift-format
           git add .
           git commit -m "Update static site content"
