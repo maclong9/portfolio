@@ -60,7 +60,7 @@ jobs:
           git checkout -B static
           rm -rf ./*
           mv .output/* .
-          rm -rf .output .gitignore .github .build .swift-format
+          rm -rf .output .gitignore .github .build .swift-format Public
           git add .
           git commit -m "Update static site content"
           git push origin static --force
