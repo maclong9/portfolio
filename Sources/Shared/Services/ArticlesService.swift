@@ -84,7 +84,7 @@ public struct ArticleResponse: Document, CardItem {
     }
 
     public var stylesheets: [String]? {
-        ["https://static.maclong.uk/typography.v1.css"]
+        ["https://static.maclong.uk/typography.css"]
     }
 
     public init(id: String, parsed: WebUIMarkdown.ParsedMarkdown, root: Bool = false) {
