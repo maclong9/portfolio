@@ -14,7 +14,7 @@ struct Home: Document {
         Layout(
             title: "Software Engineer, Skater & Musician",
             description:
-                "I'm Mac, a software engineer based out of the United Kingdom. I enjoy building robust and efficient software. Read some of my articles below."
+                "I'm Mac, a software engineer based out of the United Kingdom. I enjoy building forward thinking and efficient solutions. Read some of my articles below."
         ) {
             CardCollection(items: articles)
         }
