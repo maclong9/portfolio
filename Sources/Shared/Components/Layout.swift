@@ -25,15 +25,15 @@ public struct Layout: Element {
     public var body: some HTML {
         BodyWrapper {
             Header(classes: ["backdrop-blur-3xl"]) {
-              Text {
-                Link(to: "https://maclong.uk/") {
-                  "Mac Long"
-                }.styled()
-                if isNotes {
-                  " / "
-                  Link(to: "https://notes.maclong.uk") { "Notes" }.styled()
-                }
-              }
+                Stack {
+                    Link(to: "https://maclong.uk/") {
+                        "Mac Long"
+                    }.styled()
+                    if isNotes {
+                        Text { "/" }
+                        Link(to: "https://notes.maclong.uk") { "Notes" }.styled()
+                    }
+                }.flex(align: .center).spacing(of: 2, along: .horizontal)
                 Navigation {
                     Link(to: "/projects") { "Projects" }.styled()
                     Link(to: "https://notes.maclong.uk", newTab: false) { "Notes" }.styled()
