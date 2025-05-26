@@ -6,7 +6,7 @@ import Foundation
 /// updating the local middleware file used by the application.
 struct Middleware {
     /// The URL to fetch the middleware script from
-    static let middlewareURL = URL(string: "https://static.maclong.uk/middleware.js")!
+    static let middlewareURL = URL(string: "https://gist.githubusercontent.com/maclong9/9f9f3f81a722bbf6d0d2741b161bce9c/raw/2d774b1322013a966231a7f5fb2e570e06b87f9f/gistfile1.js")!
 
     /// The local path where the middleware script should be saved
     static let outputPath = ".output/functions/_middleware.js"
