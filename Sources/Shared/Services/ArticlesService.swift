@@ -73,7 +73,7 @@ public struct ArticleResponse: Document, CardItem {
             title: title,
             description: description,
             published: publishedDate,
-            isNotes: true
+            isNotes: root
         ) {
             htmlContent
         }
