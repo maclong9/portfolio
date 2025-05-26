@@ -31,7 +31,7 @@ public struct Layout: Element {
                     }.styled()
                     if path != nil {
                         Text { "/" }
-                        Link(to: "https://notes.maclong.uk/\(path ?? "")") { path ?? "" }.styled()
+                        Link(to: "https://notes.maclong.uk/\(path ?? "")") { path?.capitalized ?? "" }.styled()
                     }
                 }.flex(align: .center).spacing(of: 2, along: .horizontal)
                 Navigation {
