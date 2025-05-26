@@ -39,7 +39,7 @@ public struct ArticleResponse: Document, CardItem {
     public let root: Bool
 
     // MARK: - CardItem conformance
-    public var url: String { "/articles/\(id)" }
+    public var url: String { root ? "\(id)" : "/articles/\(id)" }
     public var newTab: Bool = false
     public var action: CardAction = .readMore
     public let tags: [String]? = nil
