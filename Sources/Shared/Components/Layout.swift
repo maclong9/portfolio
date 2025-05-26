@@ -44,7 +44,7 @@ public struct Layout: Element {
                         "Mac Long"
                     }.styled()
                     if path != nil {
-                        Text { "/" }
+                        Stack { "/" }
                         Link(to: linkURL) { linkText }.styled()
                     }
                 }.flex(align: .center).spacing(of: 2, along: .horizontal)
