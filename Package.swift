@@ -5,8 +5,15 @@ import PackageDescription
 let package = Package(
     name: "Portfolio",
     platforms: [.macOS(.v15)],
+    products: [
+        .library(
+            name: "Shared",
+            targets: ["Shared"]
+        )
+    ],
     dependencies: [
-        .package(url: "https://github.com/maclong9/web-ui.git", from: "1.0.0")
+        //        .package(url: "https://github.com/maclong9/web-ui.git", branch: "main")
+        .package(path: "../web-ui")
     ],
     targets: [
         .executableTarget(
@@ -14,9 +21,15 @@ let package = Package(
             dependencies: [
                 .product(name: "WebUI", package: "web-ui"),
                 .product(name: "WebUIMarkdown", package: "web-ui"),
+                "Shared",
             ],
-            path: "Sources",
-            resources: [.process("Public"), .process("Articles")]
-        )
+        ),
+        .target(
+            name: "Shared",
+            dependencies: [
+                .product(name: "WebUI", package: "web-ui"),
+                .product(name: "WebUIMarkdown", package: "web-ui"),
+            ],
+        ),
     ]
 )

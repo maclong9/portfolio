@@ -46,7 +46,6 @@ struct Middleware {
                 withIntermediateDirectories: true
             )
             try content.write(to: URL(fileURLWithPath: outputPath), atomically: true, encoding: .utf8)
-            print("Successfully updated middleware at \(outputPath)")
         } catch {
             print("Failed to update middleware: \(error)")
         }
