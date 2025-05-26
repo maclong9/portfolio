@@ -24,8 +24,10 @@ public struct Layout: Element {
 
     // Computed property to determine the correct link URL
     private var linkURL: String {
-        guard let path = path, path == "Article" else { return "" }
-        return "https://notes.maclong.uk/\(path)"
+        guard let path = path else { return "" }
+        return path == "Articles"
+            ? "https://maclong.uk"
+            : "https://notes.maclong.uk/\(path)"
     }
 
     // Computed property to determine the display text
