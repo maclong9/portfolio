@@ -2,7 +2,11 @@
 
 [Live Site](https://maclong.uk)
 
-Personal portfolio static site built with [Swift](https://swift.org) and [WebUI](https://github.com/maclong9/web-ui).
+Personal portfolio static site built with [Swift](https://swift.org) and [WebUI](https://github.com/maclong9/web-ui). 
+
+## Requirements
+
+Requires Swift `6.1` or later.
 
 ## Usage
 
