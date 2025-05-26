@@ -80,7 +80,7 @@ public struct ArticleResponse: Document, CardItem {
     }
 
     public var path: String? {
-        return root ? "\(id)" : "/articles/\(id)"
+        root ? "\(id)" : "/articles/\(id)"
     }
 
     public var stylesheets: [String]? {
