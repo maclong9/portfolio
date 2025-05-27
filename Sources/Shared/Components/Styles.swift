@@ -1,7 +1,7 @@
 import WebUI
 
 extension Link {
-    public func styled(weight: Weight = .bold) -> any HTML {
+    public func styled(weight: Weight = .medium) -> any HTML {
         self
             .cursor(.pointer)
             .transition(of: .colors)
