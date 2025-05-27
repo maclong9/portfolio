@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "Portfolio",
+    name: "portfolio",
     platforms: [.macOS(.v15)],
     products: [
         .library(
