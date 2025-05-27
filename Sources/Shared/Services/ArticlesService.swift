@@ -71,7 +71,7 @@ public struct ArticleResponse: Document, CardItem {
     public var body: some HTML {
         Layout(
             path: root ? "Notes" : "Articles",
-            title: title,
+            title: title == "Untitled" ? "Introduction" : title,
             description: description,
             published: publishedDate,
         ) {
