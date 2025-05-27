@@ -50,7 +50,7 @@ public struct ArticleResponse: Document, CardItem {
     public var metadata: Metadata {
         Metadata(
             from: personalData.metadata,
-            title: title,
+            title: title == "Untitled" ? "Introduction" : title,
             description: description,
             date: publishedDate,
             image: "/public/articles/\(id).jpg",
