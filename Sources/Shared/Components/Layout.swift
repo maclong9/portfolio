@@ -52,7 +52,7 @@ public struct Layout: Element {
                     Link(to: "/projects") { "Projects" }.styled()
                     Link(to: "https://notes.maclong.uk", newTab: false) { "Notes" }.styled()
                     Link(to: "https://github.com/maclong9", newTab: true, label: "Visit Mac Long's GitHub profile") {
-                        Text { Icon.github.rawValue }
+                        Stack { Icon.github.rawValue }
                     }
                     .styled()
                     .rounded(.lg)
