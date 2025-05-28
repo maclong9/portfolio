@@ -36,8 +36,8 @@ struct Application: Website {
             let application = Application()
             try application.build()
 
-            // Fetch middleware content
-            await Middleware.fetchAndUpdate()
+            // Fetch and Update Cloud Functions
+            await CloudFunctions.fetchAndUpdate()
             print("✓ Application built successfully.")
         } catch {
             print("⨉ Failed to build application: \(error)")
