@@ -17,9 +17,20 @@ jobs:
       # Check out the repository code
       - uses: actions/checkout@v4
       
-      # Set up Swift
+      # Cache Swift toolchain
+      - name: Cache Swift Toolchain
+        uses: actions/cache@v4
+        id: cache-swift-toolchain
+        with:
+          path: ~/Library/Developer/Toolchains
+          key: ${{ runner.os }}-swift-toolchain-${{ hashFiles('.github/workflows/*.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-swift-toolchain-
+
+      # Set up Swift (only if cache miss)
       - name: Setup Swift
         uses: swift-actions/setup-swift@v2
+        if: steps.cache-swift-toolchain.outputs.cache-hit != 'true'
       
       # Cache Swift build artifacts
       - name: Cache Swift Build
