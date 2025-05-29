@@ -17,13 +17,13 @@ jobs:
       # Check out the repository code
       - uses: actions/checkout@v4
       
-      # Cache Swift toolchain
+      # Cache Swift toolchain (stable key)
       - name: Cache Swift Toolchain
         uses: actions/cache@v4
         id: cache-swift-toolchain
         with:
           path: ~/Library/Developer/Toolchains
-          key: ${{ runner.os }}-swift-toolchain-${{ hashFiles('.github/workflows/*.yml') }}
+          key: ${{ runner.os }}-swift-toolchain-v1
           restore-keys: |
             ${{ runner.os }}-swift-toolchain-
 
@@ -32,28 +32,28 @@ jobs:
         uses: swift-actions/setup-swift@v2
         if: steps.cache-swift-toolchain.outputs.cache-hit != 'true'
       
-      # Cache Swift build artifacts
+      # Cache Swift build artifacts (more specific key)
       - name: Cache Swift Build
         uses: actions/cache@v4
         id: cache-swift-build
         with:
           path: .build
-          key: ${{ runner.os }}-swift-build-${{ hashFiles('Package.swift', 'Sources/**') }}
+          key: ${{ runner.os }}-swift-build-${{ hashFiles('Package.swift', 'Package.resolved') }}-${{ hashFiles('Sources/**/*.swift') }}
           restore-keys: |
+            ${{ runner.os }}-swift-build-${{ hashFiles('Package.swift', 'Package.resolved') }}-
             ${{ runner.os }}-swift-build-
       
-      # Build the project
+      # Build the project (always run, but will be fast with cache)
       - name: Build
         run: swift build -v
-        if: steps.cache-swift-build.outputs.cache-hit != 'true'
       
-      # Cache generated site output
+      # Cache generated site output (more targeted)
       - name: Cache Generated Site
         uses: actions/cache@v4
         id: cache-site-output
         with:
           path: .output
-          key: ${{ runner.os }}-site-output-${{ hashFiles('Sources/**') }}
+          key: ${{ runner.os }}-site-output-${{ hashFiles('Sources/**/*.swift', 'Public/**', 'Package.swift') }}
           restore-keys: |
             ${{ runner.os }}-site-output-
       
