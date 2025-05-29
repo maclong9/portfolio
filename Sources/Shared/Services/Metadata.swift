@@ -2,8 +2,7 @@ import Foundation
 import WebUI
 
 public struct PersonalData {
-    public init() {}
-    public let metadata = Metadata(
+    public static let metadata = Metadata(
         site: "Mac Long",
         title: "Software Engineer",
         titleSeperator: " | ",
