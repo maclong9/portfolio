@@ -17,13 +17,13 @@ jobs:
       # Check out the repository code
       - uses: actions/checkout@v4
       
-      # Cache Swift toolchain (stable key)
+      # Cache Swift toolchain
       - name: Cache Swift Toolchain
         uses: actions/cache@v4
         id: cache-swift-toolchain
         with:
           path: ~/Library/Developer/Toolchains
-          key: ${{ runner.os }}-swift-toolchain-v1
+          key: ${{ runner.os }}-swift-toolchain-v1  # Stable key
           restore-keys: |
             ${{ runner.os }}-swift-toolchain-
 
@@ -32,28 +32,28 @@ jobs:
         uses: swift-actions/setup-swift@v2
         if: steps.cache-swift-toolchain.outputs.cache-hit != 'true'
       
-      # Cache Swift build artifacts (more specific key)
+      # Cache Swift build artifacts
       - name: Cache Swift Build
         uses: actions/cache@v4
         id: cache-swift-build
         with:
           path: .build
-          key: ${{ runner.os }}-swift-build-${{ hashFiles('Package.swift', 'Package.resolved') }}-${{ hashFiles('Sources/**/*.swift') }}
+          key: ${{ runner.os }}-swift-build-${{ hashFiles('Package.swift', 'Sources/**') }}
           restore-keys: |
-            ${{ runner.os }}-swift-build-${{ hashFiles('Package.swift', 'Package.resolved') }}-
             ${{ runner.os }}-swift-build-
       
-      # Build the project (always run, but will be fast with cache)
+      # Build the project
       - name: Build
         run: swift build -v
+        if: steps.cache-swift-build.outputs.cache-hit != 'true'
       
-      # Cache generated site output (more targeted)
+      # Cache generated site output
       - name: Cache Generated Site
         uses: actions/cache@v4
         id: cache-site-output
         with:
           path: .output
-          key: ${{ runner.os }}-site-output-${{ hashFiles('Sources/**/*.swift', 'Public/**', 'Package.swift') }}
+          key: ${{ runner.os }}-site-output-${{ hashFiles('Sources/**') }}
           restore-keys: |
             ${{ runner.os }}-site-output-
       
