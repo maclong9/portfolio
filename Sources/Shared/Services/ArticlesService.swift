@@ -44,12 +44,10 @@ public struct ArticleResponse: Document, CardItem {
     public var action: CardAction = .readMore
     public let tags: [String]? = nil
 
-    let personalData = PersonalData()
-
     // MARK: - Document conformance
     public var metadata: Metadata {
         Metadata(
-            from: personalData.metadata,
+            from: PersonalData.metadata,
             title: title == "Untitled" ? "Introduction" : title,
             description: description,
             date: publishedDate,
@@ -58,8 +56,8 @@ public struct ArticleResponse: Document, CardItem {
             structuredData: StructuredData.article(
                 headline: title,
                 image: "/public/articles/\(id).jpg",
-                author: personalData.metadata.author ?? "Mac Long",
-                publisher: personalData.metadata.structuredData,
+                author: PersonalData.metadata.author ?? "Mac Long",
+                publisher: PersonalData.metadata.structuredData,
                 datePublished: publishedDate ?? Date(),
                 dateModified: publishedDate,
                 description: description,
