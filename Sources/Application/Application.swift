@@ -5,7 +5,7 @@ import WebUI
 @main
 struct Application: Website {
     var metadata: Metadata {
-        Metadata(from: PersonalData.metadata)
+        Metadata(from: PersonalData().metadata)
     }
 
     @WebsiteRouteBuilder
