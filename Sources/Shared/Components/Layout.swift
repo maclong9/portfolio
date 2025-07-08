@@ -6,14 +6,14 @@ public struct Layout: Element {
     let title: String
     let description: String
     let published: Date?
-    let content: HTMLContentBuilder
+    let content: MarkupContentBuilder
 
     public init(
         path: String? = nil,
         title: String,
         description: String,
         published: Date? = nil,
-        @HTMLBuilder content: @escaping HTMLContentBuilder
+        @MarkupBuilder content: @escaping MarkupContentBuilder
     ) {
         self.path = path
         self.title = title
@@ -36,7 +36,7 @@ public struct Layout: Element {
         return path == "Article" ? "Home" : path.capitalized
     }
 
-    public var body: some HTML {
+    public var body: some Markup {
         BodyWrapper {
             Header(classes: ["backdrop-blur-3xl"]) {
                 Stack {
@@ -91,7 +91,7 @@ public struct Layout: Element {
                 .flex(direction: .column)
                 .spacing(of: 4, along: .vertical)
 
-                HTMLString(content: content().map { $0.render() }.joined())
+                MarkupString(content: content().map { $0.render() }.joined())
             }
             .margins(at: .horizontal, auto: true)
             .frame(maxWidth: .custom("99vw"))

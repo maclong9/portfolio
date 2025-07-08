@@ -43,7 +43,7 @@ public struct Card: Element, CardItem {
         self.publishedDate = publishedDate
     }
 
-    public var body: some HTML {
+    public var body: some Markup {
         Link(to: url, newTab: newTab) {
             Article {
                 Header {
@@ -102,7 +102,7 @@ public struct CardCollection<T: CardItem>: Element {
         self.items = items
     }
 
-    public var body: some HTML {
+    public var body: some Markup {
         Stack {
             for item in items {
                 Card(

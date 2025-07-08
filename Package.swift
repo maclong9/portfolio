@@ -12,7 +12,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/maclong9/web-ui", .upToNextMajor(from: "1.0.0"))
+        .package(url: "https://github.com/maclong9/web-ui", branch: "main")
     ],
     targets: [
         .executableTarget(

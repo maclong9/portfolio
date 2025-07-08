@@ -25,7 +25,7 @@ public struct PersonalData {
                 image: "https://avatars.githubusercontent.com/u/115668288?v=4",
                 jobTitle: "Software Engineer",
                 email: "hello@maclong.uk",
-                url: "https://maclong.uk",
+                webAddress: "https://maclong.uk",
                 birthDate: ISO8601DateFormatter().date(from: "1995-10-19"),
                 sameAs: ["https://github.com/maclong9", "https://orcid.org/0009-0002-4180-3822"]
             )

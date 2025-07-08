@@ -18,7 +18,7 @@ struct Missing: Document {
         "404 - Page Not Found"
     }
 
-    var body: some HTML {
+    var body: some Markup {
         Layout(
             title: "404 - Page Not Found",
             description: "Whoops, unfortunately that page either no longer or never existed in the first place."

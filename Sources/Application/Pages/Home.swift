@@ -10,7 +10,7 @@ struct Home: Document {
         .init(from: Application().metadata, title: "Home")
     }
 
-    var body: some HTML {
+    var body: some Markup {
         Layout(
             title: "Software Engineer, Skater & Musician",
             description:

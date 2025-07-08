@@ -25,7 +25,7 @@ struct Projects: Document {
     let projects: [Project] = [
         Project(
             name: "WebUI",
-            description: "WebUI is a library for HTML, CSS, and JavaScript generation built entirely in Swift.",
+            description: "WebUI is a library for Markup, CSS, and JavaScript generation built entirely in Swift.",
             tags: ["Swift"],
             url: "https://github.com/maclong9/web-ui"
         ),
@@ -37,7 +37,7 @@ struct Projects: Document {
         ),
     ]
 
-    var body: some HTML {
+    var body: some Markup {
         Layout(
             path: path,
             title: "Recent Projects",

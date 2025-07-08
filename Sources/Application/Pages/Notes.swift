@@ -32,7 +32,7 @@ struct Notes: Document {
         )
     ]
 
-    var body: some HTML {
+    var body: some Markup {
         Layout(
             path: path,
             title: "Notes",

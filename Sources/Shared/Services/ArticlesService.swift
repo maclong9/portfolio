@@ -61,12 +61,12 @@ public struct ArticleResponse: Document, CardItem {
                 datePublished: publishedDate ?? Date(),
                 dateModified: publishedDate,
                 description: description,
-                url: "/articles/\(id)"
+                webAddress: "/articles/\(id)"
             )
         )
     }
 
-    public var body: some HTML {
+    public var body: some Markup {
         Layout(
             path: root ? "Notes" : "Articles",
             title: title == "Untitled" ? "Introduction" : title,
