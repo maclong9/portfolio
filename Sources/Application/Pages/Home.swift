@@ -2,28 +2,34 @@ import Shared
 import WebUI
 
 struct Home: Document {
-    let articles: [ArticleResponse]
+  let articles: [ArticleResponse]
 
-    var path: String? { "index" }
+  var path: String? { "index" }
 
-    var metadata: Metadata {
-        .init(from: Application().metadata, title: "Home")
+  var metadata: Metadata {
+    .init(from: Application().metadata, title: "Home")
+  }
+
+  var localState: StateManager? {
+    StateManager(scope: .document("counter")) {
+      NumberState(name: "counter", initialValue: 0)
     }
+  }
 
-    var body: some Markup {
-        Layout(
-            title: "Software Engineer, Skater & Musician",
-            description:
-                "I'm Mac, a software engineer based out of the United Kingdom. I enjoy building forward thinking and efficient solutions. Read some of my articles below."
-        ) {
-            CardCollection(items: articles)
-        }
+  var body: some Markup {
+    Layout(
+      title: "Software Engineer, Skater & Musician",
+      description:
+        "I'm Mac, a software engineer based out of the United Kingdom. I enjoy building forward thinking and efficient solutions. Read some of my articles below."
+    ) {
+      CardCollection(items: articles)
     }
+  }
 
-    init(articles: [ArticleResponse] = []) {
-        self.articles = articles.sorted {
-            guard let date1 = $0.publishedDate, let date2 = $1.publishedDate else { return false }
-            return date1 > date2
-        }
+  init(articles: [ArticleResponse] = []) {
+    self.articles = articles.sorted {
+      guard let date1 = $0.publishedDate, let date2 = $1.publishedDate else { return false }
+      return date1 > date2
     }
+  }
 }

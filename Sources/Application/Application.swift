@@ -4,43 +4,43 @@ import WebUI
 
 @main
 struct Application: Website {
-    var metadata: Metadata {
-        Metadata(from: PersonalData.metadata)
+  var metadata: Metadata {
+    Metadata(from: PersonalData.metadata)
+  }
+
+  @WebsiteRouteBuilder
+  var routes: [any Document] {
+    get throws {
+      // Fetch articles
+      let articles = try ArticleService.fetchAllArticles()
+
+      // Static routes and Home with articles
+      Home(articles: articles)
+      Missing()
+      Notes()
+      Projects()
+
+      // Dynamic article routes
+      for article in articles {
+        article as any Document
+      }
     }
+  }
 
-    @WebsiteRouteBuilder
-    var routes: [any Document] {
-        get throws {
-            // Fetch articles
-            let articles = try ArticleService.fetchAllArticles()
+  var baseURL: String? {
+    "https://maclong.uk"
+  }
 
-            // Static routes and Home with articles
-            Home(articles: articles)
-            Missing()
-            Notes()
-            Projects()
+  static func main() async throws {
+    do {
+      let application = Application()
+      try application.build()
 
-            // Dynamic article routes
-            for article in articles {
-                article as any Document
-            }
-        }
+      // Fetch and Update Cloud Functions
+      await CloudFunctions.fetchAndUpdate()
+      print("✓ Application built successfully.")
+    } catch {
+      print("⨉ Failed to build application: \(error)")
     }
-
-    var baseURL: String? {
-        "https://maclong.uk"
-    }
-
-    static func main() async throws {
-        do {
-            let application = Application()
-            try application.build()
-
-            // Fetch and Update Cloud Functions
-            await CloudFunctions.fetchAndUpdate()
-            print("✓ Application built successfully.")
-        } catch {
-            print("⨉ Failed to build application: \(error)")
-        }
-    }
+  }
 }

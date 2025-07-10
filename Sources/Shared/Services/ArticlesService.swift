@@ -3,94 +3,94 @@ import WebUI
 import WebUIMarkdown
 
 public enum ArticleService {
-    public static func fetchAllArticles(
-        from directoryPath: String = "Articles",
-        root: Bool = false
-    ) throws -> [ArticleResponse] {
-        let fileURLs = try fetchMarkdownFiles(from: directoryPath)
-        return try fileURLs.map { url in
-            try createArticleResponse(from: url, root: root)
-        }
+  public static func fetchAllArticles(
+    from directoryPath: String = "Articles",
+    root: Bool = false
+  ) throws -> [ArticleResponse] {
+    let fileURLs = try fetchMarkdownFiles(from: directoryPath)
+    return try fileURLs.map { url in
+      try createArticleResponse(from: url, root: root)
     }
+  }
 
-    private static func fetchMarkdownFiles(from directoryPath: String) throws -> [URL] {
-        try FileManager.default.contentsOfDirectory(
-            at: URL(fileURLWithPath: directoryPath),
-            includingPropertiesForKeys: nil,
-            options: .skipsHiddenFiles
-        ).filter { $0.pathExtension == "md" }
-    }
+  private static func fetchMarkdownFiles(from directoryPath: String) throws -> [URL] {
+    try FileManager.default.contentsOfDirectory(
+      at: URL(fileURLWithPath: directoryPath),
+      includingPropertiesForKeys: nil,
+      options: .skipsHiddenFiles
+    ).filter { $0.pathExtension == "md" }
+  }
 
-    private static func createArticleResponse(from url: URL, root: Bool) throws -> ArticleResponse {
-        ArticleResponse(
-            id: url.deletingPathExtension().lastPathComponent,
-            parsed: try WebUIMarkdown().parseMarkdown(try String(contentsOf: url, encoding: .utf8)),
-            root: root
-        )
-    }
+  private static func createArticleResponse(from url: URL, root: Bool) throws -> ArticleResponse {
+    ArticleResponse(
+      id: url.deletingPathExtension().lastPathComponent,
+      parsed: try WebUIMarkdown().parseMarkdown(try String(contentsOf: url, encoding: .utf8)),
+      root: root
+    )
+  }
 }
 
 public struct ArticleResponse: Document, CardItem {
-    public let id: String
-    public let title: String
-    public let description: String
-    public let htmlContent: String
-    public let publishedDate: Date?
-    public let root: Bool
+  public let id: String
+  public let title: String
+  public let description: String
+  public let htmlContent: String
+  public let publishedDate: Date?
+  public let root: Bool
 
-    // MARK: - CardItem conformance
-    public var url: String { root ? "\(id)" : "/articles/\(id)" }
-    public var newTab: Bool = false
-    public var action: CardAction = .readMore
-    public let tags: [String]? = nil
+  // MARK: - CardItem conformance
+  public var url: String { root ? "\(id)" : "/articles/\(id)" }
+  public var newTab: Bool = false
+  public var action: CardAction = .readMore
+  public let tags: [String]? = nil
 
-    // MARK: - Document conformance
-    public var metadata: Metadata {
-        Metadata(
-            from: PersonalData.metadata,
-            title: title == "Untitled" ? "Introduction" : title,
-            description: description,
-            date: publishedDate,
-            image: "/public/articles/\(id).jpg",
-            type: .article,
-            structuredData: StructuredData.article(
-                headline: title,
-                image: "/public/articles/\(id).jpg",
-                author: PersonalData.metadata.author ?? "Mac Long",
-                publisher: PersonalData.metadata.structuredData,
-                datePublished: publishedDate ?? Date(),
-                dateModified: publishedDate,
-                description: description,
-                webAddress: "/articles/\(id)"
-            )
-        )
+  // MARK: - Document conformance
+  public var metadata: Metadata {
+    Metadata(
+      from: PersonalData.metadata,
+      title: title == "Untitled" ? "Introduction" : title,
+      description: description,
+      date: publishedDate,
+      image: "/public/articles/\(id).jpg",
+      type: .article,
+      structuredData: StructuredData.article(
+        headline: title,
+        image: "/public/articles/\(id).jpg",
+        author: PersonalData.metadata.author ?? "Mac Long",
+        publisher: PersonalData.metadata.structuredData,
+        datePublished: publishedDate ?? Date(),
+        dateModified: publishedDate,
+        description: description,
+        webAddress: "/articles/\(id)"
+      )
+    )
+  }
+
+  public var body: some Markup {
+    Layout(
+      path: root ? "Notes" : "Articles",
+      title: title == "Untitled" ? "Introduction" : title,
+      description: description,
+      published: publishedDate,
+    ) {
+      htmlContent
     }
+  }
 
-    public var body: some Markup {
-        Layout(
-            path: root ? "Notes" : "Articles",
-            title: title == "Untitled" ? "Introduction" : title,
-            description: description,
-            published: publishedDate,
-        ) {
-            htmlContent
-        }
-    }
+  public var path: String? {
+    root ? "\(id)" : "/articles/\(id)"
+  }
 
-    public var path: String? {
-        root ? "\(id)" : "/articles/\(id)"
-    }
+  public var stylesheets: [String]? {
+    ["https://static.maclong.uk/typography.css"]
+  }
 
-    public var stylesheets: [String]? {
-        ["https://static.maclong.uk/typography.css"]
-    }
-
-    public init(id: String, parsed: WebUIMarkdown.ParsedMarkdown, root: Bool = false) {
-        self.id = id.pathFormatted()
-        self.htmlContent = parsed.htmlContent
-        self.title = parsed.frontMatter["title"] as? String ?? "Untitled"
-        self.description = parsed.frontMatter["description"] as? String ?? ""
-        self.publishedDate = parsed.frontMatter["published"] as? Date
-        self.root = root
-    }
+  public init(id: String, parsed: WebUIMarkdown.ParsedMarkdown, root: Bool = false) {
+    self.id = id.pathFormatted()
+    self.htmlContent = parsed.htmlContent
+    self.title = parsed.frontMatter["title"] as? String ?? "Untitled"
+    self.description = parsed.frontMatter["description"] as? String ?? ""
+    self.publishedDate = parsed.frontMatter["published"] as? Date
+    self.root = root
+  }
 }
