@@ -1,6 +1,16 @@
 import Foundation
 import WebUI
 
+public struct CardCollection: Element {
+    let cards: [Card]
+
+    public var body: some Markup {
+        Stack(classes: ["grid", "md:grid-cols-2", "gap-6", "max-w-4xl", "mx-auto", "auto-rows-min"]) {
+            for card in cards { card }
+        }
+    }
+}
+
 public struct Card: Element {
     public let title: String
     public let description: String
@@ -39,7 +49,7 @@ public struct Card: Element {
             "shadow-sm", "border", "border-zinc-200", "dark:border-zinc-700", "p-6",
             "hover:shadow-lg", "hover:shadow-teal-500/20",
             "dark:hover:shadow-teal-400/20",
-            "transition-all", "duration-300", "cursor-pointer", "card",
+            "transition-all", "duration-300", "cursor-pointer", "card", "min-h-[220px]",
         ]) {
 
             // Header row: icon/emoji + tags
@@ -94,7 +104,7 @@ public struct Card: Element {
                         description,
                         classes: [
                             "text-sm", "mb-4", "flex-1",
-                            
+
                         ]
                     )
                 }
@@ -109,7 +119,7 @@ public struct Card: Element {
                                     classes: [
                                         "px-2", "py-1", "text-xs",
                                         "bg-zinc-100", "dark:bg-zinc-700",
-                                        
+
                                         "rounded",
                                     ]
                                 )
@@ -133,7 +143,7 @@ public struct Card: Element {
 
         if let url = linkURL {
             return AnyMarkup(
-                Link(to: url, newTab: newTab, classes: ["block"]) {
+                Link(to: url, newTab: newTab) {
                     cardContent
                 }
             )

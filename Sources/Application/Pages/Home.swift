@@ -154,17 +154,13 @@ struct Home: Document {
                 // Skills Section
                 Section(classes: ["mb-16"]) {
                     Heading(.title, "Technologies & Skills", classes: ["text-2xl", "font-bold", "mb-8", "text-center"])
-                    Stack(classes: ["grid", "md:grid-cols-2", "gap-6", "max-w-4xl", "mx-auto", "auto-rows-fr"]) {
-                        for skill in skillsCards { skill }
-                    }
+                    CardCollection(cards: skillsCards)
                 }
 
                 // Projects Section
                 Section(classes: ["mb-16"]) {
                     Heading(.title, "Recent Projects", classes: ["text-2xl", "font-bold", "mb-8", "text-center"])
-                    Stack(classes: ["grid", "md:grid-cols-2", "gap-6", "max-w-4xl", "mx-auto", "auto-rows-fr"]) {
-                        for project in projectCards { project }
-                    }
+                    CardCollection(cards: projectCards)
                 }
             }
         }
