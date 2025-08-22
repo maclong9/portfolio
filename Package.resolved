@@ -1,5 +1,5 @@
 {
-  "originHash" : "b5e4e0fbabb027c9e908150b5dc7518d4945e47b2c5c38a757d2eaf1edb7d2e2",
+  "originHash" : "8a31d6685156f24d35f7f7562851b51bebc6850004eaa79542e9a66b8fe7954e",
   "pins" : [
     {
       "identity" : "swift-cmark",
@@ -25,7 +25,7 @@
       "location" : "https://github.com/maclong9/web-ui",
       "state" : {
         "branch" : "main",
-        "revision" : "ac623f783895e77ed7665678afd48d7e034eecd4"
+        "revision" : "0595705088026c239a161140a32fa6aab27e3243"
       }
     }
   ],

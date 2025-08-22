@@ -10,12 +10,6 @@ struct Home: Document {
     .init(from: Application().metadata, title: "Home")
   }
 
-  var localState: StateManager? {
-    StateManager(scope: .document("counter")) {
-      NumberState(name: "counter", initialValue: 0)
-    }
-  }
-
   var body: some Markup {
     Layout(
       title: "Software Engineer, Skater & Musician",
