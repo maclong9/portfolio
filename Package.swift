@@ -13,8 +13,8 @@ let package = Package(
       name: "Application",
       dependencies: [
         .product(name: "WebUI", package: "web-ui"),
-        .product(name: "WebUIMarkdown", package: "web-ui"),
-      ],
+        .product(name: "WebUIMarkdown", package: "web-ui")
+      ]
     )
   ]
 )
