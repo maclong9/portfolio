@@ -25,5 +25,4 @@ triggering an update of the live site.
 
 ## Tasks 
 
-- [ ] Build site so it looks the same as archived
 - [ ] Slowly transition features from `WebUI + classes + inline JS` to all style modifiers (add new ones to web-ui as required) and built in ways of writing JS.
