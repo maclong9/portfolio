@@ -225,28 +225,25 @@ struct Application: Website {
             return handleLikesAPI(request, env, url);
           }
 
-          // Determine which section to serve based on hostname
-          let basePath;
-          if (hostname === "tools.maclong.uk") {
-            basePath = "/tools";
-          } else if (hostname === "maclong.uk") {
-            basePath = "/portfolio";
-          } else {
-            // Default to portfolio for any other domain
-            basePath = "/portfolio";
-          }
-
-          // Handle root path - serve index.html
+          // Determine asset path based on hostname
           let assetPath;
-          if (url.pathname === "/") {
-            assetPath = basePath + "/index.html";
+          if (hostname === "tools.maclong.uk") {
+            // For tools subdomain, serve from /tools directory
+            if (url.pathname === "/") {
+              assetPath = "/tools.html";
+            } else if (!url.pathname.includes(".") && !url.pathname.endsWith("/")) {
+              assetPath = url.pathname + ".html";
+            } else {
+              assetPath = url.pathname;
+            }
           } else {
-            // For other paths, try direct path first, then with .html extension
-            assetPath = basePath + url.pathname;
-
-            // If path doesn't end with .html and doesn't have an extension, try adding .html
-            if (!url.pathname.includes(".") && !url.pathname.endsWith("/")) {
-              assetPath = basePath + url.pathname + ".html";
+            // For main domain (maclong.uk), serve from root
+            if (url.pathname === "/") {
+              assetPath = "/index.html";
+            } else if (!url.pathname.includes(".") && !url.pathname.endsWith("/")) {
+              assetPath = url.pathname + ".html";
+            } else {
+              assetPath = url.pathname;
             }
           }
 
@@ -255,15 +252,12 @@ struct Application: Website {
             const asset = await env.ASSETS.fetch(new URL(assetPath, request.url));
 
             if (asset.status === 404) {
-              // If not found, try without the base path (in case it's already in dist/)
-              const fallbackPath =
-                url.pathname === "/" ? "/index.html" : url.pathname;
-              const fallbackAsset = await env.ASSETS.fetch(
-                new URL(basePath.substring(1) + fallbackPath, request.url),
-              );
-
-              if (fallbackAsset.status !== 404) {
-                return addSecurityHeaders(fallbackAsset);
+              // For tools subdomain, if root path fails, try /tools/index.html
+              if (hostname === "tools.maclong.uk" && url.pathname === "/") {
+                const toolsFallback = await env.ASSETS.fetch(new URL("/tools/index.html", request.url));
+                if (toolsFallback.status !== 404) {
+                  return addSecurityHeaders(toolsFallback);
+                }
               }
 
               // If still not found, serve 404
