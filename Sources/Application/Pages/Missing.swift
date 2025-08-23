@@ -31,7 +31,7 @@ struct Missing: Document {
 
         Text(
           metadata.description ?? "",
-          classes: ["mb-8", "max-w-xl"]
+          classes: ["mb-8", "max-w-md", "text-balance"]
         )
 
         Link(

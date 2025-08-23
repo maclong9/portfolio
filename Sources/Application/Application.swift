@@ -45,6 +45,10 @@ struct Application: Website {
     get throws {
       Home()
       Posts()
+      MyPersonalSetup()
+      HowISetUpANewMac()
+      WritingACommandLineToolInSwift()
+      BuildingModernWebTools()
       Tools()
       BarreScales()
       SchengenTracker()

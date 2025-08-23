@@ -8,18 +8,22 @@ struct Posts: Document {
     Metadata(from: Application().metadata, title: "Posts")
   }
 
-  // MARK: - Mock Posts Data
-  struct Post {
-    let title: String
-    let description: String
-    let emoji: String
-    let slug: String
-    let date: Date
-    let readTime: String
-    let tags: [String]
+  // Load articles to display under posts
+  private var articles: [ArticleResponse] {
+    do {
+      return try ArticlesService.fetchAllArticles().sorted { (lhs, rhs) in
+        // Sort by date descending (newest first)
+        guard let lhsDate = lhs.publishedDate,
+              let rhsDate = rhs.publishedDate else {
+          return false
+        }
+        return lhsDate > rhsDate
+      }
+    } catch {
+      print("Error loading articles: \(error)")
+      return []
+    }
   }
-
-  let posts: [Post] = []
 
   var body: some Markup {
     Layout(
@@ -41,25 +45,16 @@ struct Posts: Document {
           )
         }
 
-        // Posts List or Empty State
-        if posts.isEmpty {
+        // Posts List
+        if articles.isEmpty {
           Stack(classes: ["text-center", "py-12"]) {
-            Icon(name: "edit-3", classes: ["w-12", "h-12", "mx-auto", "mb-4", "opacity-50"])
+            Icon(name: "file-text", classes: ["w-12", "h-12", "mx-auto", "mb-4", "opacity-50"])
             Heading(.headline, "No posts yet", classes: ["text-lg", "font-semibold", "mb-2"])
             Text("Check back soon for new content!", classes: ["opacity-75"])
           }
         } else {
           CardCollection(
-            cards: posts.map { post in
-              Card(
-                title: post.title,
-                description: post.description,
-                tags: Array(post.tags.prefix(3)),
-                linkURL: "/posts/\(post.slug)",
-                linkText: "Read more",
-                emoji: post.emoji
-              )
-            }
+            cards: articles.map { $0.toCard() }
           )
         }
       }
