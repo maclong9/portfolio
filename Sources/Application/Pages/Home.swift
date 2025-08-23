@@ -56,7 +56,7 @@ struct Home: Document {
       description:
         "Modern utility tools built with TailwindCSS and Alpine.js for guitar training and travel planning.",
       tags: ["TailwindCSS", "Alpine.js", "Cloudflare"],
-      linkURL: "https://tools.maclong.uk",
+      linkURL: "/tools",
       linkText: "Open Tools",
       emoji: "🛠️",
     ),

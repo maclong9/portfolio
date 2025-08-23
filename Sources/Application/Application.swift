@@ -203,10 +203,6 @@ struct Application: Website {
       [[routes]]
       pattern = "maclong.uk"
       custom_domain = true
-
-      [[routes]]
-      pattern = "tools.maclong.uk"
-      custom_domain = true
       """
     
     let wranglerURL = outputDir.appendingPathComponent("wrangler.toml")
@@ -225,26 +221,14 @@ struct Application: Website {
             return handleLikesAPI(request, env, url);
           }
 
-          // Determine asset path based on hostname
+          // Determine asset path
           let assetPath;
-          if (hostname === "tools.maclong.uk") {
-            // For tools subdomain, serve from /tools directory
-            if (url.pathname === "/") {
-              assetPath = "/tools.html";
-            } else if (!url.pathname.includes(".") && !url.pathname.endsWith("/")) {
-              assetPath = url.pathname + ".html";
-            } else {
-              assetPath = url.pathname;
-            }
+          if (url.pathname === "/") {
+            assetPath = "/index.html";
+          } else if (!url.pathname.includes(".") && !url.pathname.endsWith("/")) {
+            assetPath = url.pathname + ".html";
           } else {
-            // For main domain (maclong.uk), serve from root
-            if (url.pathname === "/") {
-              assetPath = "/index.html";
-            } else if (!url.pathname.includes(".") && !url.pathname.endsWith("/")) {
-              assetPath = url.pathname + ".html";
-            } else {
-              assetPath = url.pathname;
-            }
+            assetPath = url.pathname;
           }
 
           try {
@@ -252,14 +236,6 @@ struct Application: Website {
             const asset = await env.ASSETS.fetch(new URL(assetPath, request.url));
 
             if (asset.status === 404) {
-              // For tools subdomain, if root path fails, try /tools/index.html
-              if (hostname === "tools.maclong.uk" && url.pathname === "/") {
-                const toolsFallback = await env.ASSETS.fetch(new URL("/tools.html", request.url));
-                if (toolsFallback.status !== 404) {
-                  return addSecurityHeaders(toolsFallback);
-                }
-              }
-
               // If still not found, serve 404
               return new Response("Page not found", { status: 404 });
             }
@@ -279,7 +255,6 @@ struct Application: Website {
         // Define allowed origins
         const allowedOrigins = [
           "https://maclong.uk",
-          "https://tools.maclong.uk",
           "https://www.maclong.uk",
           "http://localhost:8787", // For development
           "http://127.0.0.1:8787", // For development
