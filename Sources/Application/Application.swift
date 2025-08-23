@@ -254,7 +254,7 @@ struct Application: Website {
             if (asset.status === 404) {
               // For tools subdomain, if root path fails, try /tools/index.html
               if (hostname === "tools.maclong.uk" && url.pathname === "/") {
-                const toolsFallback = await env.ASSETS.fetch(new URL("/tools/index.html", request.url));
+                const toolsFallback = await env.ASSETS.fetch(new URL("/tools.html", request.url));
                 if (toolsFallback.status !== 404) {
                   return addSecurityHeaders(toolsFallback);
                 }
