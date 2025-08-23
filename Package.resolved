@@ -2,15 +2,6 @@
   "originHash" : "57de4d4c533d5b4dc798a3791cf4e7be2c6e3a29d11e7052c7631897196e7d79",
   "pins" : [
     {
-      "identity" : "swift-argument-parser",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-argument-parser",
-      "state" : {
-        "revision" : "309a47b2b1d9b5e991f36961c983ecec72275be3",
-        "version" : "1.6.1"
-      }
-    },
-    {
       "identity" : "swift-cmark",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swiftlang/swift-cmark.git",
@@ -22,7 +13,7 @@
     {
       "identity" : "swift-markdown",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swiftlang/swift-markdown",
+      "location" : "https://github.com/apple/swift-markdown",
       "state" : {
         "revision" : "ea79e83c8744d2b50b0dc2d5bbd1e857e1253bf9",
         "version" : "0.6.0"
@@ -34,7 +25,7 @@
       "location" : "https://github.com/maclong9/web-ui",
       "state" : {
         "branch" : "main",
-        "revision" : "02745395332bb943efcb45f334c65c46fe02a435"
+        "revision" : "1045455d61ede81877e197b2842f2fdb5018f7f9"
       }
     }
   ],
