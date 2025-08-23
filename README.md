@@ -25,5 +25,5 @@ triggering an update of the live site.
 
 ## Tasks 
 
-- [ ] Clear out all duplicate tailwind classes e.g. if the text and background colour are set in @Sources/Application/Components/Layout.swift we don't need to set those colours elsewhere unless the colour differs.
-- [ ] Move all scripts as colocated to their various components (e.g. the card animations inside a Script() WebUI element and just have it handle each individual card entering the view for simplicity, and the particle network logic should be within the ParticleNetwork component)
+- [ ] Build site so it looks the same as archived
+- [ ] Slowly transition features from `WebUI + classes + inline JS` to all style modifiers (add new ones to web-ui as required) and built in ways of writing JS.

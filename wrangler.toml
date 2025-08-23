@@ -1,5 +1,5 @@
 compatibility_date = "2025-08-16"
-main = "dist/public/scripts/index.js"
+main = "index.js"
 name = "portfolio"
 
 [assets]

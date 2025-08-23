@@ -214,4 +214,4 @@ Executed 2 tests, with 0 failures in 0.002 seconds
 
 ## Conclusion
 
-Swift is an excellent language for writing command line tools in a concise and efficient manner, if you'd like to see a more extensive implementation of `ls` in Swift you can see my tool `sls` at [SwiftList](https://github.com/maclong9/list).
+Swift is an excellent language for writing command line tools in a concise and efficient manner, if you'd like to see a more extensive implementation of `ls` in Swift you can see my tool `sls` at [List](https://github.com/maclong9/list).
