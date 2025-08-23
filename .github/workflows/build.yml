@@ -12,4 +12,8 @@ permissions:
 
 jobs:
   build:
-    uses: maclong9/web-ui/.github/workflows/build.yml@main
+    uses: maclong9/web-ui/.github/workflows/build-optimized.yml@main
+    with:
+      webui-cli-version: 'latest'
+      output-directory: '.output'
+      static-branch: 'static'
