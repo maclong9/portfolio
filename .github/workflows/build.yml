@@ -12,8 +12,117 @@ permissions:
 
 jobs:
   build:
-    uses: maclong9/web-ui/.github/workflows/build-optimized.yml@main
-    with:
-      webui-cli-version: 'latest'
-      output-directory: '.output'
-      static-branch: 'static'
+    runs-on: macos-15
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Swift 6.0
+        run: |
+          echo "Swift version info:"
+          swift --version
+          echo "Xcode version info:"
+          xcode-select -p
+          
+      - name: Cache WebUI CLI Binary
+        uses: actions/cache@v4
+        id: cache-cli
+        with:
+          path: ~/webui
+          key: webui-latest
+
+      - name: Download WebUI CLI
+        if: steps.cache-cli.outputs.cache-hit != 'true'
+        run: |
+          echo "📥 Downloading WebUI CLI latest"
+          ASSET_URL="https://github.com/maclong9/web-ui/releases/latest/download/webui"
+          curl -L -o ~/webui "$ASSET_URL"
+          chmod +x ~/webui
+          ~/webui --version
+          echo "✅ WebUI CLI downloaded and cached"
+
+      - name: Install WebUI CLI to PATH
+        run: |
+          sudo cp ~/webui /usr/local/bin/webui
+          webui --version
+          echo "✅ WebUI CLI ready"
+
+      - name: Cache Generated Site
+        uses: actions/cache@v4
+        id: cache-site-output
+        with:
+          path: .output
+          key: ${{ runner.os }}-site-output-${{ hashFiles('Sources/**', 'Package.swift') }}
+          restore-keys: |
+            ${{ runner.os }}-site-output-
+
+      - name: Build Site with WebUI CLI
+        run: |
+          echo "🔧 Building WebUI project..."
+          webui build --verbose
+        if: steps.cache-site-output.outputs.cache-hit != 'true'
+
+      - name: Validate Build Output
+        run: |
+          if [ ! -d ".output" ]; then
+            echo "❌ Output directory not found: .output"
+            exit 1
+          fi
+
+          FILE_COUNT=$(find ".output" -type f | wc -l)
+          if [ "$FILE_COUNT" -eq 0 ]; then
+            echo "❌ No files generated in output directory"
+            exit 1
+          fi
+
+          echo "✅ Build validation passed: $FILE_COUNT files generated"
+          echo "📁 Generated files:"
+          find ".output" -type f | head -10 | sed 's/^/  /'
+
+      - name: Push to static branch
+        if: github.ref == 'refs/heads/main'
+        run: |
+          set -euo pipefail
+          echo "🔧 Configuring Git user"
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+
+          SOURCE=".output"
+          echo "📁 Copying from output directory: $SOURCE"
+
+          if [ ! -d "$SOURCE" ]; then
+            echo "❌ ERROR: Directory '$SOURCE' does not exist"
+            exit 1
+          fi
+
+          if [ -z "$(ls -A "$SOURCE")" ]; then
+            echo "❌ ERROR: Directory '$SOURCE' is empty"
+            exit 1
+          fi
+
+          echo "📦 Files in output directory before checkout:"
+          ls -la "$SOURCE"
+
+          echo "🧳 Moving site output to temp_output/"
+          mkdir -p temp_output
+          cp -r "$SOURCE"/. ~/temp_output/
+
+          echo "🌿 Switching to static branch"
+          git checkout -B "static"
+
+          echo "🧹 Cleaning current contents"
+          rm -rf ./*
+
+          echo "📥 Copying files back from temp_output/"
+          cp -r ~/temp_output/* .
+
+          echo "🧽 Cleaning up"
+          rm -rf ~/temp_output "$SOURCE" .gitignore .github .build .swift-format Public Articles
+
+          echo "📝 Git add & commit"
+          git add .
+          git commit -m "Update static site content - built with WebUI CLI latest"
+          git push origin "static" --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
