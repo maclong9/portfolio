@@ -15,6 +15,14 @@ let package = Package(
         .product(name: "WebUI", package: "web-ui"),
         .product(name: "WebUIMarkdown", package: "web-ui")
       ]
+    ),
+    .testTarget(
+      name: "ApplicationTests",
+      dependencies: [
+        "Application",
+        .product(name: "WebUI", package: "web-ui"),
+        .product(name: "WebUIMarkdown", package: "web-ui")
+      ]
     )
   ]
 )

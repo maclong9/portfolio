@@ -2,13 +2,30 @@ import Foundation
 import WebUI
 import WebUIMarkdown
 
+/// Security-related errors for article processing
+enum ArticleSecurityError: Error, LocalizedError {
+    case untrustedSource(String)
+    
+    var errorDescription: String? {
+        switch self {
+        case .untrustedSource(let path):
+            return "Attempted to process article from untrusted source: \(path)"
+        }
+    }
+}
+
 public enum ArticlesService {
     public static func fetchAllArticles(
         from directoryPath: String = "Articles"
     ) throws -> [ArticleResponse] {
         let fileURLs = try fetchMarkdownFiles(from: directoryPath)
-        return try fileURLs.map { url in
-            try createArticleResponse(from: url)
+        return fileURLs.compactMap { url in
+            do {
+                return try createArticleResponse(from: url)
+            } catch {
+                print("⚠️  Warning: Failed to process article '\(url.lastPathComponent)': \(error.localizedDescription)")
+                return nil // Skip this article, continue with others
+            }
         }
     }
 
@@ -22,6 +39,15 @@ public enum ArticlesService {
 
     private static func createArticleResponse(from url: URL) throws -> ArticleResponse {
         let content = try String(contentsOf: url, encoding: .utf8)
+        
+        // Validate that this is from a trusted source (our Articles directory)
+        // This prevents path traversal and ensures we only process trusted content
+        let trustedBasePath = URL(fileURLWithPath: "Articles").standardized
+        guard url.standardized.path.hasPrefix(trustedBasePath.path) else {
+            throw ArticleSecurityError.untrustedSource(url.path)
+        }
+        
+        // Parse the trusted markdown content
         let parsed = try WebUIMarkdown().parseMarkdown(content)
         
         return ArticleResponse(
@@ -78,7 +104,7 @@ public struct ArticleResponse: Identifiable {
         Card(
             title: title,
             description: description,
-            tags: readTime != nil ? [readTime!] : [],
+            tags: readTime.map { [$0] } ?? [],
             linkURL: "/posts/\(slug)",
             linkText: "Read more",
             newTab: false,

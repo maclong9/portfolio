@@ -26,7 +26,8 @@ struct ArticleLayout: Markup {
                 Text(article.description, classes: ["text-lg", "text-zinc-600", "dark:text-zinc-400"])
             }
             
-            // Article content
+            // Article content - WebUIMarkdown provides HTML escaping for text content
+            // Raw HTML in markdown is preserved, which is appropriate for trusted content
             Stack(classes: ["max-w-2xl", "mx-auto", "prose"]) {
                 contentHTML
             }

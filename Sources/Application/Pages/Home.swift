@@ -97,22 +97,22 @@ struct Home: Document {
             Stack(classes: ["text-center", "z-20", "max-w-xl", "mx-auto", "text-balance"]) {
               Image(
                 source: "https://avatars.githubusercontent.com/u/115668288?v=4",
-                description: "Mac Long",
-                classes: [
-                  "w-24", "h-24", "rounded-full", "border-2", "border-teal-400", "shadow-lg",
-                  "mx-auto", "mb-6", "hero-avatar",
-                ]
+                description: "Mac Long"
               )
+                .frame(width: .spacing(24), height: .spacing(24))
+                .addClasses([
+                  "rounded-full", "border-2", "border-teal-400", "shadow-lg",
+                  "mx-auto", "mb-6", "hero-avatar",
+                ])
 
-              Heading(.largeTitle, "Mac Long", classes: ["text-4xl", "md:text-5xl", "font-bold", "mb-4", "hero-name"])
+              Heading(.largeTitle, "Mac Long")
+                .addClasses(["text-4xl", "md:text-5xl", "font-bold", "mb-4", "hero-name"])
 
-              Text(
-                "Passionate about creating modern software experiences with clean code and thoughtful design.",
-                classes: [
+              Text("Passionate about creating modern software experiences with clean code and thoughtful design.")
+                .addClasses([
                   "text-xl", "mb-8", "mx-auto",
                   "hero-description",
-                ]
-              )
+                ])
             }
           }
         }

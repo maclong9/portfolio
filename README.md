@@ -25,4 +25,5 @@ triggering an update of the live site.
 
 ## Tasks 
 
-- [ ] Slowly transition features from `WebUI + classes + inline JS` to all style modifiers (add new ones to web-ui as required) and built in ways of writing JS.
+- [ ] Slowly transition everything that is not written in a nice type safe addition of the WebUI DSL into new features of WebUI so that there aren't any awkward css or js files written in strings.
+- [ ] Look into Application configuration done via a `site.pkl` to see how that works.

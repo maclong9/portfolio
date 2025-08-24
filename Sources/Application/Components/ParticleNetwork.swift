@@ -3,18 +3,23 @@ import WebUI
 struct ParticleNetwork: Element {
   public var body: some Markup {
     Stack {
-      Stack(classes: [
-        "particle-bg", "overflow-hidden", "inset-0", "w-full", "h-full", "opacity-80",
-        "absolute",
-      ])
+      Stack(classes: ["particle-bg"])
+        .overflow(.hidden)
+        .position(.absolute, at: .all, offset: 0)
+        .frame(width: .constant(.full), height: .constant(.full))
+        .opacity(80)
       Script(
         content: {
           """
-          // Particle network animation - colocated with ParticleNetwork component
+          // Optimized particle network animation
           (function() {
               function initParticleNetwork() {
                   const container = document.querySelector('.particle-bg');
                   if (!container) return;
+
+                  // Prevent multiple initializations
+                  if (container.dataset.initialized) return;
+                  container.dataset.initialized = 'true';
 
                   // Clear existing animations
                   container.innerHTML = '';
@@ -40,10 +45,20 @@ struct ParticleNetwork: Element {
 
                   container.appendChild(svg);
 
+                  // Optimized animation state
+                  let isVisible = true;
+                  let animationId = null;
+                  let lastConnectionUpdate = 0;
+                  const connectionUpdateInterval = 100; // Update connections every 100ms instead of every frame
+
                   // Create particles with positions
                   const particles = [];
                   const numParticles = 24;
                   let animationStartTime = Date.now();
+
+                  // Object pool for line elements to avoid constant DOM creation/destruction
+                  const linePool = [];
+                  let activeLinesCount = 0;
 
                   // Create particles with better distribution
                   for (let i = 0; i < numParticles; i++) {
@@ -88,19 +103,85 @@ struct ParticleNetwork: Element {
                       svg.appendChild(circle);
                   }
 
-                  // Animation function
-                  const animate = () => {
+                  // Helper function to get or create a line element from pool
+                  function getLineFromPool() {
+                      if (linePool.length > activeLinesCount) {
+                          const line = linePool[activeLinesCount];
+                          line.style.display = '';
+                          return line;
+                      } else {
+                          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                          line.setAttribute('stroke', 'rgba(20, 184, 166, 0.25)');
+                          line.setAttribute('stroke-width', '1');
+                          svg.appendChild(line);
+                          linePool.push(line);
+                          return line;
+                      }
+                  }
+
+                  // Helper function to hide unused lines
+                  function hideUnusedLines() {
+                      for (let i = activeLinesCount; i < linePool.length; i++) {
+                          linePool[i].style.display = 'none';
+                      }
+                  }
+
+                  // Optimized connection calculation (reduced frequency)
+                  function updateConnections(timestamp, width, height) {
+                      activeLinesCount = 0;
+                      
+                      for (let i = 0; i < particles.length; i++) {
+                          for (let j = i + 1; j < particles.length; j++) {
+                              const p1 = particles[i];
+                              const p2 = particles[j];
+                              const dx = p1.x - p2.x;
+                              const dy = p1.y - p2.y;
+                              const distance = Math.sqrt(dx * dx + dy * dy);
+
+                              if (distance < 30) {
+                                  const line = getLineFromPool();
+                                  const actualX1 = (p1.x / 100) * width;
+                                  const actualY1 = (p1.y / 100) * height;
+                                  const actualX2 = (p2.x / 100) * width;
+                                  const actualY2 = (p2.y / 100) * height;
+
+                                  line.setAttribute('x1', actualX1);
+                                  line.setAttribute('y1', actualY1);
+                                  line.setAttribute('x2', actualX2);
+                                  line.setAttribute('y2', actualY2);
+                                  line.setAttribute('opacity', (1 - distance / 30) * 0.7);
+                                  activeLinesCount++;
+                              }
+                          }
+                      }
+                      
+                      hideUnusedLines();
+                  }
+
+                  // Visibility detection for performance optimization
+                  const observer = new IntersectionObserver((entries) => {
+                      isVisible = entries[0].isIntersecting;
+                      if (!isVisible && animationId) {
+                          cancelAnimationFrame(animationId);
+                          animationId = null;
+                      } else if (isVisible && !animationId) {
+                          animate();
+                      }
+                  }, { threshold: 0.1 });
+                  
+                  observer.observe(container);
+
+                  // Optimized animation function
+                  const animate = (timestamp) => {
+                      if (!isVisible) return;
+
                       const containerRect = container.getBoundingClientRect();
                       const width = containerRect.width;
                       const height = containerRect.height;
                       const currentTime = Date.now();
                       const elapsed = currentTime - animationStartTime;
 
-                      // Clear existing lines
-                      const lines = svg.querySelectorAll('line');
-                      lines.forEach((line) => line.remove());
-
-                      // Update particle positions
+                      // Update particle positions (this runs at 60fps)
                       particles.forEach((particle) => {
                           if (elapsed < 3000) {
                               // Initial settling phase
@@ -159,40 +240,20 @@ struct ParticleNetwork: Element {
                               }
                           }
 
-                          // Update visual position
+                          // Update visual position (60fps - light operation)
                           const actualX = (particle.x / 100) * width;
                           const actualY = (particle.y / 100) * height;
                           particle.element.setAttribute('cx', actualX);
                           particle.element.setAttribute('cy', actualY);
                       });
 
-                      // Draw connections between nearby particles
-                      for (let i = 0; i < particles.length; i++) {
-                          for (let j = i + 1; j < particles.length; j++) {
-                              const p1 = particles[i];
-                              const p2 = particles[j];
-                              const distance = Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
-
-                              if (distance < 30) {
-                                  const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                                  const actualX1 = (p1.x / 100) * width;
-                                  const actualY1 = (p1.y / 100) * height;
-                                  const actualX2 = (p2.x / 100) * width;
-                                  const actualY2 = (p2.y / 100) * height;
-
-                                  line.setAttribute('x1', actualX1);
-                                  line.setAttribute('y1', actualY1);
-                                  line.setAttribute('x2', actualX2);
-                                  line.setAttribute('y2', actualY2);
-                                  line.setAttribute('stroke', 'rgba(20, 184, 166, 0.25)');
-                                  line.setAttribute('stroke-width', '1');
-                                  line.setAttribute('opacity', (1 - distance / 30) * 0.7);
-                                  svg.appendChild(line);
-                              }
-                          }
+                      // Update connections only every 100ms instead of every frame
+                      if (timestamp - lastConnectionUpdate > connectionUpdateInterval) {
+                          updateConnections(timestamp, width, height);
+                          lastConnectionUpdate = timestamp;
                       }
 
-                      requestAnimationFrame(animate);
+                      animationId = requestAnimationFrame(animate);
                   };
 
                   // Start animation

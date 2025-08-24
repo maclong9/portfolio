@@ -50,7 +50,7 @@ struct Application: Website {
       SchengenTracker()
       Missing()
       
-      // Dynamic article routes - automatically discovers .md files in Articles/
+      // Dynamic article routes - error handling moved to ArticlesService
       let articles = try ArticlesService.fetchAllArticles()
       for article in articles {
         DynamicArticle(article: article)
@@ -64,6 +64,13 @@ struct Application: Website {
 
   var head: String? {
     """
+    <!-- Resource preloading for performance optimization -->
+    <link rel="preload" href="https://unpkg.com/@tailwindcss/browser@4" as="script">
+    <link rel="preload" href="https://unpkg.com/lucide@latest" as="script">
+    <link rel="dns-prefetch" href="//unpkg.com">
+    <link rel="preload" href="/public/js/theme.js" as="script">
+    <link rel="preload" href="/public/js/icons.js" as="script">
+    
     <style type="text/tailwindcss">
         @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
         
@@ -261,28 +268,8 @@ struct Application: Website {
 
   var scripts: [Script]? {
     [
-      Script(
-        placement: .head,
-        content: {
-          """
-          // Prevent FOUC by setting theme immediately
-          (function () {
-            const savedTheme = localStorage.getItem('theme') || 'system';
-            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-            let actualTheme = 'light';
-            if (savedTheme === 'dark') {
-              actualTheme = 'dark';
-            } else if (savedTheme === 'system') {
-              actualTheme = systemPrefersDark ? 'dark' : 'light';
-            }
-
-            document.documentElement.setAttribute('data-theme', actualTheme);
-          })();
-          """
-        }
-      ),
-      Script(placement: .body) { "lucide.createIcons();" },
+      Script(src: "/public/js/theme.js", placement: .head),
+      Script(src: "/public/js/icons.js", placement: .body),
     ]
   }
 
@@ -302,9 +289,12 @@ struct Application: Website {
 
   private static func writeConfigurationFiles() throws {
     let outputDir = URL(filePath: ".output")
+    let publicDir = outputDir.appendingPathComponent("dist/public")
+    let jsDir = publicDir.appendingPathComponent("js")
     
-    // Ensure output directory exists
+    // Ensure directories exist
     try FileManager.default.createDirectory(at: outputDir, withIntermediateDirectories: true)
+    try FileManager.default.createDirectory(at: jsDir, withIntermediateDirectories: true)
     
     // Write wrangler.toml
     let wranglerContent = """
@@ -554,23 +544,57 @@ struct Application: Website {
         newResponse.headers.set("X-XSS-Protection", "1; mode=block");
         newResponse.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
 
-        // Content Security Policy for enhanced security
+        // Enhanced Content Security Policy with stricter controls
         const cspDirectives = [
           "default-src 'self'",
-          "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com 'unsafe-eval'",
-          "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
+          // Remove unsafe-inline and unsafe-eval for better security
+          "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com",
+          "style-src 'self' https://cdn.jsdelivr.net",
           "img-src 'self' data: https:",
           "font-src 'self' data:",
           "connect-src 'self'",
           "frame-ancestors 'none'",
           "base-uri 'self'",
           "form-action 'self'",
+          "upgrade-insecure-requests"
         ];
         newResponse.headers.set("Content-Security-Policy", cspDirectives.join("; "));
 
         return newResponse;
       }
       """
+    
+    // Write JavaScript files for CSP compliance
+    let themeJSContent = """
+      // Prevent FOUC by setting theme immediately
+      (function () {
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        let actualTheme = 'light';
+        if (savedTheme === 'dark') {
+          actualTheme = 'dark';
+        } else if (savedTheme === 'system') {
+          actualTheme = systemPrefersDark ? 'dark' : 'light';
+        }
+
+        document.documentElement.setAttribute('data-theme', actualTheme);
+      })();
+      """
+    
+    let iconsJSContent = """
+      // Initialize Lucide icons
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+      """
+    
+    let themeJSURL = jsDir.appendingPathComponent("theme.js")
+    let iconsJSURL = jsDir.appendingPathComponent("icons.js")
+    
+    try themeJSContent.write(to: themeJSURL, atomically: true, encoding: .utf8)
+    try iconsJSContent.write(to: iconsJSURL, atomically: true, encoding: .utf8)
+    print("✓ JavaScript files written for CSP compliance")
     
     let indexJSURL = outputDir.appendingPathComponent("index.js")
     try indexJSContent.write(to: indexJSURL, atomically: true, encoding: .utf8)
