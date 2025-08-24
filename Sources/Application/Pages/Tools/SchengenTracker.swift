@@ -128,13 +128,13 @@ struct SchengenTracker: Document {
           "mb-6",
         ]) {
           Heading(.title, "Next Reset Date", classes: ["text-lg", "font-semibold", "mb-2"])
-          Text("No visits yet", id: "next-reset", classes: ["text-2xl", "mb-2"])
+          Text("No visits yet", id: "next-reset", classes: ["text-2xl", "mb-4"])
           Text(
             "Your allowance will begin restoring on this date as your earliest visit falls outside the 180-day rolling window.",
             id: "reset-description",
-            classes: ["text-sm", "hidden"]
+            classes: ["text-sm", "text-zinc-600", "dark:text-zinc-400", "hidden"]
           )
-          Text("", id: "reset-days", classes: ["text-sm", "mt-2", "hidden"])
+          Text("", id: "reset-days", classes: ["text-sm", "text-zinc-500", "dark:text-zinc-500", "mt-2", "hidden"])
         }
 
         // Add New Visit
@@ -176,14 +176,18 @@ struct SchengenTracker: Document {
               ]
             )
           }
-          MarkupString(
-            content: """
-                  <button onclick="addVisit()" id="add-visit-btn" class="w-full bg-gray-400 dark:bg-zinc-600 text-white p-3 rounded-lg disabled:cursor-not-allowed flex items-center justify-center gap-2 font-medium transition-colors">
-                      <i data-lucide="plus" class="w-5 h-5"></i>
-                      Add Visit
-                  </button>
-              """
-          )
+          Button(
+            onClick: "addVisit()",
+            id: "add-visit-btn",
+            classes: [
+              "w-full", "bg-gray-400", "dark:bg-zinc-600", "text-white", "p-3",
+              "rounded-lg", "disabled:cursor-not-allowed", "flex", "items-center",
+              "justify-center", "gap-2", "font-medium", "transition-colors"
+            ]
+          ) {
+            Icon(name: "plus", classes: ["w-5", "h-5"])
+            Text("Add Visit")
+          }
         }
 
         // Visit History
@@ -206,61 +210,21 @@ struct SchengenTracker: Document {
         }
       }
 
-      // Info Modal
-      MarkupString(
+      InfoModal(
+        id: "info-modal",
+        title: "How the Schengen 90/180 Rule Works",
+        onClose: "hideInfo()",
         content: """
-              <div id="info-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden" onclick="hideInfo()">
-                  <div class="bg-white dark:bg-zinc-800 rounded-lg max-w-2xl w-full p-6" onclick="event.stopPropagation()">
-                      <div class="flex items-center justify-between mb-4">
-                          <h3 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">How the Schengen 90/180 Rule Works</h3>
-                          <button onclick="hideInfo()" class="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200">
-                              <i data-lucide="x" class="w-6 h-6"></i>
-                          </button>
-                      </div>
-                      <div class="text-zinc-700 dark:text-zinc-300 space-y-4">
-                          <p><strong>The Rule:</strong> You can stay up to 90 days within any 180-day period in the Schengen area. This is a rolling window that moves with each day.</p>
-                          <p>The tracker calculates your usage based on visits within the last 180 days from today. Your allowance resets gradually as old visits fall outside the 180-day window.</p>
-                          <p><strong>Next Reset:</strong> Shows when your earliest visit will fall outside the 180-day window, beginning to restore your allowance.</p>
-                          <p><strong>Sharing:</strong> Generate a secure link to share your visit history with family, friends, or advisors. The link contains only your travel dates and locations.</p>
-                      </div>
-                  </div>
-              </div>
-          """
+          <p><strong>The Rule:</strong> You can stay up to 90 days within any 180-day period in the Schengen area. This is a rolling window that moves with each day.</p>
+          <p>The tracker calculates your usage based on visits within the last 180 days from today. Your allowance resets gradually as old visits fall outside the 180-day window.</p>
+          <p><strong>Next Reset:</strong> Shows when your earliest visit will fall outside the 180-day window, beginning to restore your allowance.</p>
+          <p><strong>Sharing:</strong> Generate a secure link to share your visit history with family, friends, or advisors. The link contains only your travel dates and locations.</p>
+        """
       )
 
-      // Share Modal
-      MarkupString(
-        content: """
-              <div id="share-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden" onclick="hideShare()">
-                  <div class="bg-white dark:bg-zinc-800 rounded-lg max-w-md w-full p-6" onclick="event.stopPropagation()">
-                      <div class="flex items-center justify-between mb-4">
-                          <h3 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">Share Your Data</h3>
-                          <button onclick="hideShare()" class="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200">
-                              <i data-lucide="x" class="w-6 h-6"></i>
-                          </button>
-                      </div>
-                      <p class="text-zinc-600 dark:text-zinc-400 text-sm mb-4">Share your visit history with family, friends, or advisors</p>
-                      <div class="space-y-3">
-                          <button onclick="shareNatively()" class="w-full bg-teal-600 hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 text-white px-4 py-3 rounded-lg transition-colors flex items-center justify-center gap-2 font-medium">
-                              <i data-lucide="share-2" class="w-4 h-4"></i>
-                              Share
-                          </button>
-                          <button onclick="generateShareUrl()" class="w-full bg-zinc-600 hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-zinc-600 text-white px-4 py-3 rounded-lg transition-colors font-medium">
-                              Generate Link
-                          </button>
-                          <div id="share-url-container" class="space-y-2 hidden">
-                              <div class="flex items-center gap-2">
-                                  <input type="text" id="share-url-input" readonly class="flex-1 p-2 border border-zinc-300 dark:border-zinc-600 bg-gray-50 dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded text-sm font-mono">
-                                  <button onclick="copyToClipboard()" id="copy-btn" class="bg-zinc-600 hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-zinc-600 text-white px-3 py-2 rounded transition-colors flex items-center gap-1">
-                                      <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-                                      <span>Copy</span>
-                                  </button>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          """
+      ShareModal(
+        id: "share-modal",
+        onClose: "hideShare()"
       )
 
       Script(content: {

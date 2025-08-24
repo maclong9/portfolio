@@ -68,17 +68,22 @@ struct BarreScales: Document {
             "duration-300", "ease-out", "lg:translate-x-0",
           ]
         ) {
-          Stack(classes: ["flex", "flex-col", "h-full", "rounded-md"]) {
-            Stack(classes: ["p-4", "border", "border-zinc-200", "rounded-md", "dark:border-zinc-700", "flex-shrink-0"]) {
+          Stack(classes: ["flex", "flex-col", "h-full"]) {
+            Stack(classes: [
+              "bg-white", "dark:bg-zinc-800", "rounded-lg", "shadow-sm", "border",
+              "border-zinc-200", "dark:border-zinc-700", "p-4", "flex-shrink-0"
+            ]) {
               Stack(classes: ["flex", "items-center", "justify-between", "mb-4"]) {
                 Heading(.headline, "Chord Progressions", classes: ["text-lg", "font-semibold"])
-                MarkupString(
-                  content: """
-                        <button onclick="hideProgressions()" class="lg:hidden p-1 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200">
-                            <i data-lucide="x" class="w-5 h-5"></i>
-                        </button>
-                    """
-                )
+                Button(
+                  onClick: "hideProgressions()",
+                  classes: [
+                    "lg:hidden", "p-1", "text-zinc-500", "hover:text-zinc-700",
+                    "dark:text-zinc-400", "dark:hover:text-zinc-200"
+                  ]
+                ) {
+                  Icon(name: "x", classes: ["w-5", "h-5"])
+                }
               }
 
               // Color key
@@ -88,7 +93,11 @@ struct BarreScales: Document {
               }
             }
 
-            Stack(id: "progressions-list", classes: ["flex-1", "overflow-y-auto", "p-4", "space-y-4", "rounded-md", "min-h-0"])
+            Stack(id: "progressions-list", classes: [
+              "flex-1", "overflow-y-auto", "p-4", "space-y-4", "min-h-0",
+              "bg-white", "dark:bg-zinc-800", "rounded-lg", "shadow-sm", "border",
+              "border-zinc-200", "dark:border-zinc-700"
+            ])
           }
         }
 
@@ -171,27 +180,17 @@ struct BarreScales: Document {
         }
       }
 
-      // Info Modal
-      MarkupString(
+      InfoModal(
+        id: "info-modal",
+        title: "How to Use the Barre Scales Tool",
+        onClose: "hideInfo()",
         content: """
-              <div id="info-modal" class="fixed inset-0 bg-black bg-opacity-10 flex items-center justify-center p-4 z-50 hidden" onclick="hideInfo()">
-                  <div class="bg-white dark:bg-zinc-800 rounded-lg max-w-2xl w-full p-6" onclick="event.stopPropagation()">
-                      <div class="flex items-center justify-between mb-4">
-                          <h3 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">How to Use the Barre Scales Tool</h3>
-                          <button onclick="hideInfo()" class="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200">
-                              <i data-lucide="x" class="w-6 h-6"></i>
-                          </button>
-                      </div>
-                      <div class="text-zinc-700 dark:text-zinc-300 space-y-4">
-                          <p><strong>Getting Started:</strong> Choose your scale type (Major or Minor) and root note using the controls at the bottom. The table will update to show all seven degrees of the scale with their corresponding barre chord positions.</p>
-                          <p><strong>Selecting Degrees:</strong> Click on any row in the table to select that degree. Selected degrees are highlighted and numbered in order of selection. This helps you build chord progressions step by step.</p>
-                          <p><strong>Chord Progressions:</strong> Use the sidebar (toggle with the grid icon) to explore common chord progressions. Click any progression to automatically select the corresponding degrees in the correct order.</p>
-                          <p><strong>Barre Positions:</strong> Each degree shows multiple barre chord shapes with fret positions. The letters in parentheses indicate the root string: (E) = E-string shapes, (A) = A-string shapes, (D) = D-string shapes.</p>
-                          <p><strong>Color Coding:</strong> Chord qualities are color-coded (Major = green, Minor = blue, Diminished = red).</p>
-                      </div>
-                  </div>
-              </div>
-          """
+          <p><strong>Getting Started:</strong> Choose your scale type (Major or Minor) and root note using the controls at the bottom. The table will update to show all seven degrees of the scale with their corresponding barre chord positions.</p>
+          <p><strong>Selecting Degrees:</strong> Click on any row in the table to select that degree. Selected degrees are highlighted and numbered in order of selection. This helps you build chord progressions step by step.</p>
+          <p><strong>Chord Progressions:</strong> Use the sidebar (toggle with the grid icon) to explore common chord progressions. Click any progression to automatically select the corresponding degrees in the correct order.</p>
+          <p><strong>Barre Positions:</strong> Each degree shows multiple barre chord shapes with fret positions. The letters in parentheses indicate the root string: (E) = E-string shapes, (A) = A-string shapes, (D) = D-string shapes.</p>
+          <p><strong>Color Coding:</strong> Chord qualities are color-coded (Major = green, Minor = blue, Diminished = red).</p>
+        """
       )
 
       Script(content: {
