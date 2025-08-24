@@ -64,12 +64,12 @@ struct BarreScales: Document {
             "fixed", "inset-y-0", "left-0", "top-0", "z-60", "w-full", "max-w-sm",
             "bg-white", "dark:bg-zinc-800", "border-r", "border-zinc-200", "rounded-md",
             "dark:border-zinc-700", "lg:static", "lg:z-auto", "lg:max-w-80",
-            "lg:h-[calc(100vh-5rem)]", "transform", "-translate-x-full", "transition-transform",
+            "lg:h-[616px]", "transform", "-translate-x-full", "transition-transform",
             "duration-300", "ease-out", "lg:translate-x-0",
           ]
         ) {
           Stack(classes: ["flex", "flex-col", "h-full", "rounded-md"]) {
-            Stack(classes: ["p-4", "border", "border-zinc-200", "rounded-md", "dark:border-zinc-700"]) {
+            Stack(classes: ["p-4", "border", "border-zinc-200", "rounded-md", "dark:border-zinc-700", "flex-shrink-0"]) {
               Stack(classes: ["flex", "items-center", "justify-between", "mb-4"]) {
                 Heading(.headline, "Chord Progressions", classes: ["text-lg", "font-semibold"])
                 MarkupString(
@@ -88,7 +88,7 @@ struct BarreScales: Document {
               }
             }
 
-            Stack(id: "progressions-list", classes: ["flex-1", "overflow-y-auto", "p-4", "space-y-4", "rounded-md"])
+            Stack(id: "progressions-list", classes: ["flex-1", "overflow-y-auto", "p-4", "space-y-4", "rounded-md", "min-h-0"])
           }
         }
 

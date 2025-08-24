@@ -46,7 +46,15 @@ public struct ArticleResponse: Identifiable {
         self.title = parsed.frontMatter["title"] as? String ?? "Untitled"
         self.description = parsed.frontMatter["description"] as? String ?? ""
         self.htmlContent = parsed.htmlContent
-        self.publishedDate = Self.parseDate(from: parsed.frontMatter["published"] as? String)
+        
+        // Try to get the published date - it might already be a Date or a String
+        if let publishedDate = parsed.frontMatter["published"] as? Date {
+            self.publishedDate = publishedDate
+        } else if let dateString = parsed.frontMatter["published"] as? String {
+            self.publishedDate = Self.parseDate(from: dateString)
+        } else {
+            self.publishedDate = nil
+        }
         self.readTime = Self.calculateReadTime(from: parsed.htmlContent)
     }
     

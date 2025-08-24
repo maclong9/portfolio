@@ -74,11 +74,12 @@ public struct Card: Element {
         if let date = publishedDate {
           Time(
             datetime: date.ISO8601Format(),
-            id: "\(date.formatted(date: .abbreviated, time: .omitted))",
             classes: [
               "text-sm", "text-zinc-600/90", "dark:text-zinc-400/90", "mb-2",
             ]
-          )
+          ) {
+            DateFormatter.articleDate.string(from: date)
+          }
         }
 
         Heading(

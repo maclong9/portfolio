@@ -1,6 +1,6 @@
 ---
 title: Writing a Command Line Tool in Swift
-description: A concise guide to creating a CLI tool in Swift using the Swift Package Manager.
+description: A concise guide to creating a simple and fast CLI tool in Swift using the Swift Package Manager and Argument Parser.
 published: April 29, 2025
 ---
 

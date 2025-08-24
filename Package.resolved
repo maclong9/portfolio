@@ -1,5 +1,5 @@
 {
-  "originHash" : "57de4d4c533d5b4dc798a3791cf4e7be2c6e3a29d11e7052c7631897196e7d79",
+  "originHash" : "003a40f34575ff6e1504f3bccc68b4351f6c889d5fb5b3e4f0f3c60c2b8a9b98",
   "pins" : [
     {
       "identity" : "swift-cmark",
@@ -17,15 +17,6 @@
       "state" : {
         "revision" : "ea79e83c8744d2b50b0dc2d5bbd1e857e1253bf9",
         "version" : "0.6.0"
-      }
-    },
-    {
-      "identity" : "web-ui",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/maclong9/web-ui",
-      "state" : {
-        "branch" : "main",
-        "revision" : "f87548677a9f2402da8eb7fe4bf8d587a3cfc661"
       }
     }
   ],

@@ -209,7 +209,7 @@ struct SchengenTracker: Document {
       // Info Modal
       MarkupString(
         content: """
-              <div id="info-modal" class="fixed inset-0 bg-black bg-opacity-25 flex items-center justify-center p-4 z-50 hidden" onclick="hideInfo()">
+              <div id="info-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden" onclick="hideInfo()">
                   <div class="bg-white dark:bg-zinc-800 rounded-lg max-w-2xl w-full p-6" onclick="event.stopPropagation()">
                       <div class="flex items-center justify-between mb-4">
                           <h3 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">How the Schengen 90/180 Rule Works</h3>
@@ -231,7 +231,7 @@ struct SchengenTracker: Document {
       // Share Modal
       MarkupString(
         content: """
-              <div id="share-modal" class="fixed inset-0 bg-black bg-opacity-25 flex items-center justify-center p-4 z-50 hidden" onclick="hideShare()">
+              <div id="share-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden" onclick="hideShare()">
                   <div class="bg-white dark:bg-zinc-800 rounded-lg max-w-md w-full p-6" onclick="event.stopPropagation()">
                       <div class="flex items-center justify-between mb-4">
                           <h3 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">Share Your Data</h3>

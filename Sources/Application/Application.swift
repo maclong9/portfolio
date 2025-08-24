@@ -45,14 +45,16 @@ struct Application: Website {
     get throws {
       Home()
       Posts()
-      MyPersonalSetup()
-      HowISetUpANewMac()
-      WritingACommandLineToolInSwift()
-      BuildingModernWebTools()
       Tools()
       BarreScales()
       SchengenTracker()
       Missing()
+      
+      // Dynamic article routes - automatically discovers .md files in Articles/
+      let articles = try ArticlesService.fetchAllArticles()
+      for article in articles {
+        DynamicArticle(article: article)
+      }
     }
   }
 
@@ -120,6 +122,127 @@ struct Application: Website {
             animation: slideUp 0.6s ease-out 0.3s both;
         }
         
+        /* Typography enhancements for prose content */
+        .prose {
+            @apply text-zinc-700 dark:text-zinc-300 leading-relaxed;
+        }
+
+        /* Paragraph spacing */
+        .prose p {
+            @apply mb-6 leading-relaxed;
+        }
+
+        /* Headings */
+        .prose h1 {
+            @apply text-3xl font-bold text-zinc-900 dark:text-zinc-100 mt-12 mb-6 leading-tight;
+        }
+        
+        .prose h2 {
+            @apply text-2xl font-bold text-zinc-900 dark:text-zinc-100 mt-10 mb-4 leading-tight;
+        }
+        
+        .prose h3 {
+            @apply text-xl font-semibold text-zinc-900 dark:text-zinc-100 mt-8 mb-3 leading-snug;
+        }
+        
+        .prose h4 {
+            @apply text-lg font-semibold text-zinc-900 dark:text-zinc-100 mt-6 mb-2;
+        }
+
+        /* Lists */
+        .prose ul {
+            @apply mb-6 pl-6;
+        }
+        
+        .prose ol {
+            @apply mb-6 pl-6;
+        }
+        
+        .prose li {
+            @apply mb-2 leading-relaxed;
+        }
+        
+        .prose ul > li {
+            @apply relative;
+        }
+        
+        .prose ul > li::before {
+            content: "•";
+            @apply absolute -left-4 text-teal-600 dark:text-teal-400 font-medium;
+        }
+
+        /* Links */
+        .prose a {
+            @apply text-teal-600 dark:text-teal-400 underline decoration-teal-600/30 underline-offset-2 transition-colors;
+        }
+        
+        .prose a:hover {
+            @apply text-teal-700 dark:text-teal-300 decoration-teal-600/60;
+        }
+
+        /* Blockquotes */
+        .prose blockquote {
+            @apply border-l-4 border-teal-500 pl-6 py-4 my-6 italic text-zinc-600 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-800/50 rounded-r;
+        }
+        
+        .prose blockquote p {
+            @apply mb-3 last:mb-0;
+        }
+        
+        /* Blockquote attribution styling */
+        .prose blockquote cite,
+        .prose blockquote footer {
+            @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3 block;
+        }
+        
+        .prose blockquote cite::before,
+        .prose blockquote footer::before {
+            content: "— ";
+        }
+        
+        /* Attribution styling for marked elements */
+        .prose blockquote p.attribution {
+            @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3;
+        }
+
+        /* Code block styling */
+        .prose pre {
+            @apply bg-zinc-900 dark:bg-zinc-800 text-zinc-100 text-xs p-4 rounded-lg my-6 overflow-x-auto;
+            border: 1px solid theme(colors.zinc.700);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        
+        .prose code:not(pre code) {
+            @apply bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-1.5 py-0.5 rounded text-sm font-mono;
+        }
+
+        /* Tables */
+        .prose table {
+            @apply w-full my-6 border-collapse;
+        }
+        
+        .prose th {
+            @apply bg-zinc-50 dark:bg-zinc-800 font-semibold text-left px-4 py-3 border-b border-zinc-200 dark:border-zinc-700;
+        }
+        
+        .prose td {
+            @apply px-4 py-3 border-b border-zinc-100 dark:border-zinc-800;
+        }
+
+        /* Horizontal rules */
+        .prose hr {
+            @apply my-8 border-t-2 border-zinc-200 dark:border-zinc-700;
+        }
+
+        /* Strong and emphasis */
+        .prose strong {
+            @apply font-semibold text-zinc-900 dark:text-zinc-100;
+        }
+        
+        .prose em {
+            @apply italic text-zinc-600 dark:text-zinc-400;
+        }
+
         /* Accessibility: Hide animations on reduced motion preference */
         @media (prefers-reduced-motion: reduce) {
             .reveal-card,
