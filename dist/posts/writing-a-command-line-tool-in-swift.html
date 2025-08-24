@@ -1,0 +1,703 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Writing a Command Line Tool in Swift - Mac Long | Mac Long</title><meta property="og:title" content="Writing a Command Line Tool in Swift - Mac Long | Mac Long"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="A concise guide to creating a simple and fast CLI tool in Swift using the Swift Package Manager and Argument Parser."><meta property="og:description" content="A concise guide to creating a simple and fast CLI tool in Swift using the Swift Package Manager and Argument Parser."><meta property="og:image" content="/public/og.jpg"><meta name="author" content="Mac Long"><meta name="keywords" content="article, blog, development, software engineer, swift developer, react developer, typescript, tailwindcss, frontend development, skateboarding, punk rock, web development, iOS development"><link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>👨‍💻</text></svg>"><script type="application/ld+json">
+{"url":"https://maclong.uk","jobTitle":"Software Engineer","sameAs":["https://github.com/maclong9","https://orcid.org/0009-0002-4180-3822"],"@context":"https://schema.org","@type":"Person","email":"hello@maclong.uk","familyName":"Long","givenName":"Mac","name":"Mac Long","image":"https://avatars.githubusercontent.com/u/115668288?v=4"}
+</script><script src="/public/js/theme.js"></script><script src="https://unpkg.com/@tailwindcss/browser@4"></script><script src="https://unpkg.com/lucide@latest"></script><meta name="generator" content="WebUI" /><link rel="preload" href="https://unpkg.com/@tailwindcss/browser@4" as="script"><link rel="preload" href="https://unpkg.com/lucide@latest" as="script"><link rel="dns-prefetch" href="//unpkg.com"><link rel="preload" href="/public/js/theme.js" as="script"><link rel="preload" href="/public/js/icons.js" as="script"><style type="text/tailwindcss">
+    @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+    
+    /* Hero animations */
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes avatarFadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    /* Progressive Reveal for Cards */
+    .reveal-card {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .reveal-card.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .reveal-card:nth-child(1) { transition-delay: 0.1s; }
+    .reveal-card:nth-child(2) { transition-delay: 0.2s; }
+    .reveal-card:nth-child(3) { transition-delay: 0.3s; }
+    .reveal-card:nth-child(4) { transition-delay: 0.4s; }
+    .reveal-card:nth-child(5) { transition-delay: 0.5s; }
+    .reveal-card:nth-child(6) { transition-delay: 0.6s; }
+    
+    /* Hero element animations */
+    .hero-avatar {
+        animation: avatarFadeIn 0.8s ease-out;
+    }
+    
+    .hero-name {
+        animation: slideUp 0.6s ease-out 0.1s both;
+    }
+    
+    .hero-description {
+        animation: slideUp 0.6s ease-out 0.3s both;
+    }
+    
+    /* Typography enhancements for prose content */
+    .prose {
+        @apply text-zinc-700 dark:text-zinc-300 leading-relaxed;
+    }
+
+    /* Paragraph spacing */
+    .prose p {
+        @apply mb-6 leading-relaxed;
+    }
+
+    /* Headings */
+    .prose h1 {
+        @apply text-3xl font-bold text-zinc-900 dark:text-zinc-100 mt-12 mb-6 leading-tight;
+    }
+    
+    .prose h2 {
+        @apply text-2xl font-bold text-zinc-900 dark:text-zinc-100 mt-10 mb-4 leading-tight;
+    }
+    
+    .prose h3 {
+        @apply text-xl font-semibold text-zinc-900 dark:text-zinc-100 mt-8 mb-3 leading-snug;
+    }
+    
+    .prose h4 {
+        @apply text-lg font-semibold text-zinc-900 dark:text-zinc-100 mt-6 mb-2;
+    }
+
+    /* Lists */
+    .prose ul {
+        @apply mb-6 pl-6;
+    }
+    
+    .prose ol {
+        @apply mb-6 pl-6;
+    }
+    
+    .prose li {
+        @apply mb-2 leading-relaxed;
+    }
+    
+    .prose ul > li {
+        @apply relative;
+    }
+    
+    .prose ul > li::before {
+        content: "•";
+        @apply absolute -left-4 text-teal-600 dark:text-teal-400 font-medium;
+    }
+
+    /* Links */
+    .prose a {
+        @apply text-teal-600 dark:text-teal-400 underline decoration-teal-600/30 underline-offset-2 transition-colors;
+    }
+    
+    .prose a:hover {
+        @apply text-teal-700 dark:text-teal-300 decoration-teal-600/60;
+    }
+
+    /* Blockquotes */
+    .prose blockquote {
+        @apply border-l-4 border-teal-500 pl-6 py-4 my-6 italic text-zinc-600 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-800/50 rounded-r;
+    }
+    
+    .prose blockquote p {
+        @apply mb-3 last:mb-0;
+    }
+    
+    /* Blockquote attribution styling */
+    .prose blockquote cite,
+    .prose blockquote footer {
+        @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3 block;
+    }
+    
+    .prose blockquote cite::before,
+    .prose blockquote footer::before {
+        content: "— ";
+    }
+    
+    /* Attribution styling for marked elements */
+    .prose blockquote p.attribution {
+        @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3;
+    }
+
+    /* Code block styling */
+    .prose pre {
+        @apply bg-zinc-900 dark:bg-zinc-800 text-zinc-100 text-xs p-4 rounded-lg my-6 overflow-x-auto;
+        border: 1px solid theme(colors.zinc.700);
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+    
+    .prose code:not(pre code) {
+        @apply bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-1.5 py-0.5 rounded text-sm font-mono;
+    }
+
+    /* Tables */
+    .prose table {
+        @apply w-full my-6 border-collapse;
+    }
+    
+    .prose th {
+        @apply bg-zinc-50 dark:bg-zinc-800 font-semibold text-left px-4 py-3 border-b border-zinc-200 dark:border-zinc-700;
+    }
+    
+    .prose td {
+        @apply px-4 py-3 border-b border-zinc-100 dark:border-zinc-800;
+    }
+
+    /* Horizontal rules */
+    .prose hr {
+        @apply my-8 border-t-2 border-zinc-200 dark:border-zinc-700;
+    }
+
+    /* Strong and emphasis */
+    .prose strong {
+        @apply font-semibold text-zinc-900 dark:text-zinc-100;
+    }
+    
+    .prose em {
+        @apply italic text-zinc-600 dark:text-zinc-400;
+    }
+
+    /* Accessibility: Hide animations on reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        .reveal-card,
+        .hero-avatar,
+        .hero-name, 
+        .hero-description {
+            animation: none !important;
+            transition: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    }
+</style></head><body class="bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 transition-colors duration-300"><div><div id="mobile-menu-container" data-mobile-menu-open="false"><div id="mobile-menu-overlay" class="fixed inset-y-0 right-0 w-64 bg-white dark:bg-zinc-800 border-l border-zinc-200 dark:border-zinc-700 px-6 py-8 shadow-xl transform translate-x-full transition-transform duration-300 ease-out z-100 hidden" data-mobile-menu="closed"><div class="flex flex-col space-y-3"><div class="flex items-center justify-between mb-4"><span class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Navigation</span><button id="mobile-menu-close" class="p-1 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200" aria-label="Close menu" onclick="window.closeMobileMenu()"><i data-lucide="x" class="w-5 h-5"></i></button></div><a href="/posts" class="flex items-center space-x-3 p-3 text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-lg transition-colors cursor-pointer" data-mobile-menu-link="posts"><i data-lucide="file-text" class="w-5 h-5"></i><span>Posts</span></a><a href="mailto:hello@maclong.uk" class="flex items-center space-x-3 p-3 text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-lg transition-colors cursor-pointer" data-mobile-menu-link="email"><i data-lucide="mail" class="w-5 h-5"></i><span>Email</span></a><a href="https://github.com/maclong9" class="flex items-center space-x-3 p-3 text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-lg transition-colors cursor-pointer" data-mobile-menu-link="github" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i><span>GitHub</span></a><div class="border-t border-zinc-200 dark:border-zinc-700 pt-4"><span class="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-3">Theme</span><div class="space-y-1"><button id="theme-system-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700" data-theme-option="system" onclick="if (window.setTheme) window.setTheme('system'); window.closeMobileMenu()"><div class="flex items-center space-x-3"><i data-lucide="monitor" class="w-4 h-4"></i><span>System</span></div></button><button id="theme-light-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700" data-theme-option="light" onclick="if (window.setTheme) window.setTheme('light'); window.closeMobileMenu()"><div class="flex items-center space-x-3"><i data-lucide="sun" class="w-4 h-4"></i><span>Light</span></div></button><button id="theme-dark-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700" data-theme-option="dark" onclick="if (window.setTheme) window.setTheme('dark'); window.closeMobileMenu()"><div class="flex items-center space-x-3"><i data-lucide="moon" class="w-4 h-4"></i><span>Dark</span></div></button></div></div></div></div></div><script>// Mobile Menu JavaScript - matches archive implementation
+(function() {
+    let mobileMenuOpen = false;
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const container = document.getElementById('mobile-menu-container');
+    const menuButton = document.getElementById('mobile-menu-button');
+    const closeButton = document.getElementById('mobile-menu-close');
+
+    function toggleMobileMenu(event) {
+        if (event) {
+            event.stopPropagation();
+        }
+        if (mobileMenuOpen) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    }
+
+    function openMobileMenu() {
+        if (!overlay) return;
+        console.log('Opening mobile menu...');
+        mobileMenuOpen = true;
+        
+        // Temporarily disable click outside to prevent immediate closing
+        clickOutsideEnabled = false;
+        setTimeout(() => {
+            clickOutsideEnabled = true;
+        }, 100);
+        
+        // Show menu by setting display and ensuring it's positioned off-screen initially
+        overlay.style.display = 'block';
+        overlay.style.zIndex = '99999';
+        overlay.style.transform = 'translateX(100%)'; // Start off-screen
+        
+        // Force reflow to ensure the element is visible before animating
+        overlay.offsetHeight;
+        
+        // Now slide it in
+        overlay.style.transform = 'translateX(-100%)';
+        overlay.dataset.mobileMenu = 'open';
+        container.dataset.mobileMenuOpen = 'true';
+
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+        if (!overlay) return;
+        console.log('Closing mobile menu...');
+        mobileMenuOpen = false;
+        
+        // Hide menu with slide-out animation
+        overlay.style.transform = 'translateX(100%)';
+        overlay.dataset.mobileMenu = 'closed';
+        container.dataset.mobileMenuOpen = 'false';
+        
+        // Restore body scroll
+        document.body.style.overflow = '';
+        
+        // Hide menu after transition by setting display to none
+        setTimeout(() => {
+            if (!mobileMenuOpen) {
+                overlay.style.display = 'none';
+            }
+        }, 300);
+    }
+
+    // Set up event listeners
+    if (menuButton) {
+        menuButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMobileMenu(e);
+        });
+    }
+    
+    if (closeButton) {
+        closeButton.addEventListener('click', closeMobileMenu);
+    }
+    
+    // Close menu when clicking links
+    const menuLinks = document.querySelectorAll('[data-mobile-menu-link]');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+    
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenuOpen) {
+            closeMobileMenu();
+        }
+    });
+
+    // Click outside to close (simulating Alpine's @click.outside)
+    // Add a small delay to prevent immediate closing when opening
+    let clickOutsideEnabled = true;
+    document.addEventListener('click', function(e) {
+        if (clickOutsideEnabled && mobileMenuOpen && overlay && !overlay.contains(e.target) && 
+            (!menuButton || !menuButton.contains(e.target))) {
+            closeMobileMenu();
+        }
+    });
+
+    // Make functions globally available
+    window.toggleMobileMenu = toggleMobileMenu;
+    window.openMobileMenu = openMobileMenu;
+    window.closeMobileMenu = closeMobileMenu;
+})();</script></div><div class="min-h-screen flex flex-col"><div><header id="main-header" class="fixed top-0 left-0 right-0 bg-white dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-700 px-4 py-6 z-30 transition-transform duration-300 ease-in-out"><div class="max-w-4xl mx-auto flex items-center justify-between"><div class="flex items-center justify-between w-full"><nav class="md:hidden flex items-center space-x-1 text-sm"><a href="/" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Mac Long</a><span class="text-zinc-400 dark:text-zinc-600">/</span><a href="/posts" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Posts</a><span class="text-zinc-400 dark:text-zinc-600">/</span><span class="text-zinc-900 dark:text-zinc-100 font-medium text-lg">Writing a Command Line Tool in Swift</span></nav><nav class="hidden md:flex items-center space-x-1 text-sm"><a href="/" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Mac Long</a><span class="text-zinc-400 dark:text-zinc-600">/</span><a href="/posts" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Posts</a><span class="text-zinc-400 dark:text-zinc-600">/</span><span class="text-zinc-900 dark:text-zinc-100 font-medium">Writing a Command Line Tool in Swift</span></nav><div class="flex items-center space-x-6"><div class="flex items-center space-x-2"><div class="md:hidden"><button id="mobile-menu-button" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Menu" onclick="toggleMobileMenu()"><i data-lucide="chevron-left" class="w-5 h-5"></i></button></div><div class="hidden md:flex items-center space-x-2"><a href="/posts" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Posts"><i data-lucide="file-text" class="w-5 h-5"></i></a><a href="mailto:hello@maclong.uk" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Email"><i data-lucide="mail" class="w-5 h-5"></i></a><a href="https://github.com/maclong9" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="View GitHub Profile" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i></a><div class="relative theme-dropdown"><button class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Change theme" data-theme-toggle="true"><i data-lucide="sun" theme-icon="light" class="hidden"></i><i data-lucide="moon" theme-icon="dark" class="hidden"></i><i data-lucide="palette" theme-icon="system" class="w-5 h-5"></i></button><div class="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-zinc-800 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700 py-1 z-50 theme-dropdown-menu hidden"><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="system"><i data-lucide="palette" class="w-5 h-5"></i><span>System</span></button><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="light"><i data-lucide="sun" class="w-5 h-5"></i><span>Light</span></button><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="dark"><i data-lucide="moon" class="w-5 h-5"></i><span>Dark</span></button></div><style>.theme-dropdown-menu {
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transition: opacity 0.15s ease-in, transform 0.15s ease-in;
+}
+
+.theme-dropdown-menu--open {
+    display: block;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.theme-option--active {
+    background-color: rgb(240 253 250);
+    color: rgb(15 118 110);
+}
+
+.dark .theme-option--active {
+    background-color: rgb(19 78 74 / 0.5);
+    color: rgb(94 234 212);
+}
+
+[data-theme-icon] {
+    display: none;
+}
+
+[data-theme-icon="system"] {
+    display: block;
+}</style><script>// Theme dropdown functionality - colocated with ThemeDropdown component
+(function() {
+    let isDropdownOpen = false;
+
+    function initThemeDropdown() {
+        // Listen for dropdown toggle
+        document.addEventListener('click', (e) => {
+            const themeToggle = e.target.closest('[data-theme-toggle]');
+            if (themeToggle) {
+                e.preventDefault();
+                toggleDropdown();
+                return;
+            }
+
+            const themeOption = e.target.closest('[data-theme-option]');
+            if (themeOption) {
+                e.preventDefault();
+                const theme = themeOption.dataset.themeOption;
+                setTheme(theme);
+                updateDropdownUI();
+                closeDropdown();
+                return;
+            }
+
+            // Close dropdown when clicking outside
+            if (isDropdownOpen && !e.target.closest('.theme-dropdown')) {
+                closeDropdown();
+            }
+        });
+
+        // Update UI initially and when theme changes
+        updateDropdownUI();
+        
+        // Listen for theme changes
+        const observer = new MutationObserver(() => {
+            updateDropdownUI();
+        });
+        
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
+    }
+
+    function toggleDropdown() {
+        if (isDropdownOpen) {
+            closeDropdown();
+        } else {
+            openDropdown();
+        }
+    }
+
+    function openDropdown() {
+        isDropdownOpen = true;
+        const dropdown = document.querySelector('.theme-dropdown-menu');
+        if (dropdown) {
+            dropdown.classList.remove('hidden');
+            // Trigger reflow for animation
+            dropdown.offsetHeight;
+            dropdown.classList.add('theme-dropdown-menu--open');
+        }
+    }
+
+    function closeDropdown() {
+        isDropdownOpen = false;
+        const dropdown = document.querySelector('.theme-dropdown-menu');
+        if (dropdown) {
+            dropdown.classList.remove('theme-dropdown-menu--open');
+            setTimeout(() => {
+                if (!isDropdownOpen) {
+                    dropdown.classList.add('hidden');
+                }
+            }, 200); // Match transition duration
+        }
+    }
+
+    function setTheme(theme) {
+        localStorage.setItem('theme', theme);
+        updateTheme();
+    }
+
+    function updateTheme() {
+        const themePreference = localStorage.getItem('theme') || 'system';
+        let actualTheme = 'light';
+
+        if (themePreference === 'dark') {
+            actualTheme = 'dark';
+        } else if (themePreference === 'system') {
+            actualTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        document.documentElement.setAttribute('data-theme', actualTheme);
+    }
+
+    function updateDropdownUI() {
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        
+        // Update theme toggle button icon
+        const toggleIcons = document.querySelectorAll('[data-theme-icon]');
+        toggleIcons.forEach(icon => {
+            icon.style.display = 'none';
+        });
+        
+        const activeIcon = document.querySelector(`[data-theme-icon="${savedTheme}"]`);
+        if (activeIcon) {
+            activeIcon.style.display = 'block';
+        }
+
+        // Update dropdown options
+        const options = document.querySelectorAll('[data-theme-option]');
+        options.forEach(option => {
+            const isActive = option.dataset.themeOption === savedTheme;
+            option.classList.toggle('theme-option--active', isActive);
+        });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initThemeDropdown);
+    } else {
+        initThemeDropdown();
+    }
+})();</script></div></div></div></div></div></div></header><script>// Header scroll behavior - hide on scroll down, show on scroll up
+(function() {
+    function initHeaderScrollBehavior() {
+        const header = document.getElementById('main-header');
+        if (!header) return;
+
+        // Ensure header is visible initially
+        header.style.transform = 'translateY(0)';
+
+        let lastScrollTop = 0;
+        let scrollThreshold = 10; // Minimum scroll distance before hiding/showing
+        let isScrolling = false;
+
+        function handleScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Don't hide header when at the very top
+            if (scrollTop <= 0) {
+                header.style.transform = 'translateY(0)';
+                lastScrollTop = scrollTop;
+                return;
+            }
+
+            // Only act on significant scroll changes
+            if (Math.abs(scrollTop - lastScrollTop) < scrollThreshold) {
+                return;
+            }
+
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down - hide header
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling up - show header
+                header.style.transform = 'translateY(-1px)';
+            }
+
+            lastScrollTop = scrollTop;
+        }
+
+        // Throttle scroll events for better performance
+        function throttledHandleScroll() {
+            if (!isScrolling) {
+                window.requestAnimationFrame(() => {
+                    handleScroll();
+                    isScrolling = false;
+                });
+                isScrolling = true;
+            }
+        }
+
+        // Add scroll event listener
+        window.addEventListener('scroll', throttledHandleScroll, { passive: true });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initHeaderScrollBehavior);
+    } else {
+        initHeaderScrollBehavior();
+    }
+
+    // Also initialize on window load as backup
+    window.addEventListener('load', initHeaderScrollBehavior);
+})();</script></div><main class="flex-1 px-4 py-8 pt-28"><div><article><div class="max-w-2xl mx-auto mb-8 pt-8"><div class="text-sm text-zinc-500 dark:text-zinc-400 mb-2"><span>April 29, 2025 • 5 min read</span></div><h1 class="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100 mb-4">Writing a Command Line Tool in Swift</h1><span class="text-lg text-zinc-600 dark:text-zinc-400">A concise guide to creating a simple and fast CLI tool in Swift using the Swift Package Manager and Argument Parser.</span></div><div class="max-w-2xl mx-auto prose"><div class="markdown-content"><p>This guide demonstrates how to create a simplified version of the UNIX <code>ls</code> command using Swift. The <code>ls</code> command is chosen for its simplicity and familiarity, making it an ideal example for building a command-line tool.</p><h2>Overview</h2><p>The <code>ls</code> command lists files in the current or specified directory, aiding navigation within a file system. Example output:</p><pre class="markdown-code-block"><code>Desktop  Documents  Library  Music  Public Developer  Downloads  Movies  Pictures
+</code></pre><h2>Creating the Tool</h2><p>Initialize a new Swift Package Manager project:</p><pre class="markdown-code-block language-shell"><code>mkdir ls-clone
+cd ls-clone
+swift package init --name LsClone --type executable
+</code></pre><p>This generates the project structure. Open it in your preferred editor or run <code>open Package.swift</code> to use Xcode.</p><h2>Adding Dependencies</h2><p>The tool uses <a href="https://github.com/apple/swift-argument-parser" target="_blank" rel="noopener noreferrer">Swift Argument Parser</a> for handling command-line flags and options. Update <code>Package.swift</code>:</p><pre class="markdown-code-block language-swift"><code>// swift-tools-version:6.0
+import PackageDescription
+
+let package = Package(
+    name: &quot;LsClone&quot;,
+    products: [
+        .executable(name: &quot;lsc&quot;, targets: [&quot;lsc&quot;])
+    ],
+    dependencies: [
+        .package(url: &quot;https://github.com/apple/swift-argument-parser&quot;, from: &quot;1.0.0&quot;)
+    ],
+    targets: [
+        .executableTarget(
+            name: &quot;lsc&quot;,
+            dependencies: [
+                .product(name: &quot;ArgumentParser&quot;, package: &quot;swift-argument-parser&quot;)
+            ]
+        )
+    ]
+)
+</code></pre><blockquote><p>The tool is named <code>lsc</code> (ls clone), but you may rename it as desired.</p></blockquote><h2>Implementation</h2><p>This guide implements a minimal <code>ls</code> clone that:</p><ol><li><p>Lists files in the current or specified directory.</p></li><li><p>Supports a flag to include hidden files.</p></li></ol><h3>Steps</h3><p>Define the main entry point using <code>ParsableCommand</code>:</p><pre class="markdown-code-block language-swift"><code>import ArgumentParser
+import Foundation
+
+@main
+struct Lsc: ParsableCommand {
+    // Configuration and logic here
+}
+</code></pre><p>Add a flag and argument for user input. The <code>all</code> flag supports <code>-a</code> or <code>--all</code> due to the <code>.shortAndLong</code> name parameter and is set to a default value of false. The <code>paths</code> argument accepts a collection of directory paths:</p><pre class="markdown-code-block language-swift"><code>@Flag(name: .shortAndLong, help: &quot;Display all files, including hidden.&quot;) var all = false
+@Argument(help: &quot;Directories to list.&quot;) var paths: [String] = []
+</code></pre><p>Implement the <code>run</code> function:</p><pre class="markdown-code-block language-swift"><code>func run() throws {
+    let fm = FileManager.default
+    let locations = paths.isEmpty ? [fm.currentDirectoryPath] : paths
+    
+    for path in locations {
+        let url = URL(fileURLWithPath: path)
+        let items = try fm.contentsOfDirectory(
+            at: url,
+            includingPropertiesForKeys: nil,
+            options: all ? [] : [.skipsHiddenFiles]
+        )
+        for item in items {
+            print(item.lastPathComponent)
+        }
+    }
+}
+</code></pre><h2>Complete Code</h2><pre class="markdown-code-block language-swift"><code>// Sources/lsc/main.swift
+import ArgumentParser
+import Foundation
+
+@main
+struct Lsc: ParsableCommand {
+    @Flag(name: .shortAndLong, help: &quot;Display all files, including hidden.&quot;) var all = false
+    @Argument(help: &quot;Directories to list.&quot;) var paths: [String] = []
+    
+    func run() throws {
+        let fm = FileManager.default
+        let locations = paths.isEmpty ? [fm.currentDirectoryPath] : paths
+        
+        for path in locations {
+            let url = URL(fileURLWithPath: path)
+            let items = try fm.contentsOfDirectory(
+                at: url,
+                includingPropertiesForKeys: nil,
+                options: all ? [] : [.skipsHiddenFiles]
+            )
+            for item in items {
+                print(item.lastPathComponent)
+            }
+        }
+    }
+}
+</code></pre><p>Run the tool with <code>swift run lsc</code> or <code>swift run lsc -a</code>.</p><p><strong>Example Output:</strong></p><pre class="markdown-code-block"><code>Tests
+Package.resolved
+Package.swift
+Sources
+</code></pre><p><strong>With <code>-a</code> Flag:</strong></p><pre class="markdown-code-block"><code>.build
+Tests
+Package.resolved
+.gitignore
+Package.swift
+Sources
+</code></pre><p>Build a release version for distribution with <code>swift build -c release</code>, producing an executable at <code>.build/arm64-apple-macosx/release/lsc</code>. For cross-platform builds, refer to the <a href="https://www.swift.org/documentation/server/guides/building.html" target="_blank" rel="noopener noreferrer">Swift Build System</a> or <a href="https://www.swift.org/documentation/articles/static-linux-getting-started.html" target="_blank" rel="noopener noreferrer">Static Linux SDK</a>.</p><h2>Testing</h2><p>It is good practice to include tests to ensure reliability. Below is a sample test suite that verifies the tool’s output:</p><pre class="markdown-code-block language-swift"><code>// Tests/LsCloneTests.swift
+import Foundation
+import Testing
+@testable import lsc
+
+@Suite(&quot;LsClone Tests&quot;)
+struct LscTestSuite {
+    @Test(&quot;List Current Directory&quot;)
+    func testListCurrentDirectory() throws {
+        let output = try captureOutput {
+            try Lsc.parse([]).run()
+        }
+        #expect(output.contains(&quot;Package.swift&quot;))
+    }
+    
+    @Test(&quot;List Hidden Files&quot;)
+    func testListHiddenFiles() throws {
+        let output = try captureOutput {
+            try Lsc.parse([&quot;-a&quot;]).run()
+        }
+        #expect(output.contains(&quot;.gitignore&quot;))
+    }
+    
+    func captureOutput(_ closure: () throws -&gt; Void) throws -&gt; String {
+        let pipe = Pipe()
+        let original = dup(STDOUT_FILENO) 
+        defer { dup2(original, STDOUT_FILENO); close(original) }
+        dup2(pipe.fileHandleForWriting.fileDescriptor, STDOUT_FILENO)
+        try pipe.fileHandleForWriting.close()
+        try closure()
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        return String(decoding: data, as: UTF8.self)
+    }
+}
+</code></pre><p>Run tests with <code>swift test</code>.</p><p><strong>Example Test Output:</strong></p><pre class="markdown-code-block"><code>Test Suite &#39;All tests&#39; started at 2025-04-29 10:38:20.741
+Test Suite &#39;LscTestSuite&#39; started
+Test Case &#39;List Current Directory&#39; passed
+Test Case &#39;List Hidden Files&#39; passed
+Test Suite &#39;All tests&#39; passed
+Executed 2 tests, with 0 failures in 0.002 seconds
+</code></pre><h2>Beyond CLI Tools: Building Web Applications with Swift</h2><p>While Swift excels at command line tools, it’s also powerful for web development. This very website you’re reading is built using Swift with the <a href="https://github.com/maclong9/web-ui" target="_blank" rel="noopener noreferrer">WebUI framework</a>, demonstrating Swift’s versatility beyond mobile apps.</p><h3>Static Site Generation with Swift</h3><p>The portfolio site uses a custom Swift static site generator built on WebUI, which provides:</p><p><strong>Declarative Component Architecture</strong></p><pre class="markdown-code-block language-swift"><code>struct Layout: Element {
+    let title: String
+    let content: () -&gt; some Markup
+    
+    var body: some Markup {
+        HTML {
+            Head {
+                Title(title)
+                // Meta tags, stylesheets, etc.
+            }
+            Body {
+                Header()
+                Main { content() }  
+                Footer()
+            }
+        }
+    }
+}
+</code></pre><p><strong>Type-Safe HTML Generation</strong></p><pre class="markdown-code-block language-swift"><code>struct ArticleCard: Element {
+    let article: ArticleResponse
+    
+    var body: some Markup {
+        Link(to: &quot;/posts/\(article.slug)&quot;) {
+            Card {
+                Stack(classes: [&quot;flex&quot;, &quot;flex-col&quot;]) {
+                    Heading(.subtitle, article.title)
+                    Text(article.description)
+                    Text(&quot;\(article.readTime) • \(article.publishedDate)&quot;)
+                }
+            }
+        }
+    }
+}
+</code></pre><p><strong>Markdown Processing with WebUIMarkdown</strong></p><pre class="markdown-code-block language-swift"><code>public enum ArticlesService {
+    public static func fetchAllArticles() throws -&gt; [ArticleResponse] {
+        let fileURLs = try fetchMarkdownFiles(from: &quot;Articles&quot;)
+        return try fileURLs.map { url in
+            let content = try String(contentsOf: url, encoding: .utf8)
+            let parsed = try WebUIMarkdown().parseMarkdown(content)
+            return ArticleResponse(id: url.lastPathComponent, parsed: parsed)
+        }
+    }
+}
+</code></pre><h3>Build and Deployment Pipeline</h3><p>The Swift-based build system:</p><ol><li><p><strong>Compiles Swift code</strong> into a static site generator executable</p></li><li><p><strong>Processes Markdown articles</strong> with frontmatter metadata extraction</p></li><li><p><strong>Generates HTML files</strong> with TailwindCSS styling and progressive enhancement</p></li><li><p><strong>Deploys to Cloudflare Pages</strong> with automatic builds on Git push</p></li></ol><pre class="markdown-code-block language-bash"><code># Build the site generator
+swift build -c release
+
+# Generate the static site  
+swift run
+
+# Output ready for deployment in .output/dist/
+</code></pre><h3>Performance Benefits</h3><p>Using Swift for static site generation provides:</p><ul><li><p><strong>Compile-time safety</strong>: Type checking prevents runtime errors</p></li><li><p><strong>Performance</strong>: Native compilation yields fast build times</p></li><li><p><strong>Maintainability</strong>: Familiar Swift syntax for iOS developers</p></li><li><p><strong>Integration</strong>: Seamless use of Swift Package Manager dependencies</p></li></ul><p>The combination of Swift’s type safety, WebUI’s declarative syntax, and native performance creates a pleasant development experience for content-focused websites.</p><h2>Conclusion</h2><p>Swift is an excellent language for writing command line tools in a concise and efficient manner. From simple utilities like <code>ls</code> clones to complex web applications and static site generators, Swift’s versatility shines across domains.</p><p>If you’d like to see a more extensive CLI implementation, check out my tool <code>sls</code> at <a href="https://github.com/maclong9/list" target="_blank" rel="noopener noreferrer">List</a>. And for web development examples, explore the <a href="https://github.com/maclong9/web-ui" target="_blank" rel="noopener noreferrer">WebUI framework</a> that powers this very site.</p></div></div><script>// Style blockquote attributions
+document.addEventListener('DOMContentLoaded', function() {
+    const blockquotes = document.querySelectorAll('.prose blockquote');
+    blockquotes.forEach(blockquote => {
+        const paragraphs = blockquote.querySelectorAll('p');
+        paragraphs.forEach(p => {
+            const text = p.textContent.trim();
+            if (text.startsWith('—') || text.startsWith('- ')) {
+                p.classList.add('attribution');
+            }
+        });
+    });
+});</script></article></div></main><footer class="bg-white dark:bg-zinc-800 border-t border-zinc-200 dark:border-zinc-700 px-4 py-6 space-y-2 grid place-items-center"><div class="flex items-center space-x-2"><a href="/posts" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer"><i data-lucide="file-text" class="w-5 h-5"></i></a><a href="mailto:hello@maclong.uk" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer"><i data-lucide="mail" class="w-5 h-5"></i></a><a href="https://github.com/maclong9" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i></a></div><div class="text-zinc-500 dark:text-zinc-400 text-sm"><span>© 2025 </span><a href="https://maclong.uk" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Mac Long</a><span>.</span></div></footer></div></body><script src="/public/js/icons.js"></script></html>
