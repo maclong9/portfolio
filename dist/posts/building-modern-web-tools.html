@@ -1,0 +1,599 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Building Modern Web Tools - Mac Long | Mac Long</title><meta property="og:title" content="Building Modern Web Tools - Mac Long | Mac Long"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Building modern utility tools with TailwindCSS v4, Alpine.js, and progressive enhancement techniques for optimal developer experience."><meta property="og:description" content="Building modern utility tools with TailwindCSS v4, Alpine.js, and progressive enhancement techniques for optimal developer experience."><meta property="og:image" content="/public/og.jpg"><meta name="author" content="Mac Long"><meta name="keywords" content="article, blog, development, software engineer, swift developer, react developer, typescript, tailwindcss, frontend development, skateboarding, punk rock, web development, iOS development"><link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>👨‍💻</text></svg>"><script type="application/ld+json">
+{"givenName":"Mac","sameAs":["https://github.com/maclong9","https://orcid.org/0009-0002-4180-3822"],"url":"https://maclong.uk","@type":"Person","image":"https://avatars.githubusercontent.com/u/115668288?v=4","familyName":"Long","@context":"https://schema.org","jobTitle":"Software Engineer","name":"Mac Long","email":"hello@maclong.uk"}
+</script><script src="/public/js/theme.js"></script><script src="https://unpkg.com/@tailwindcss/browser@4"></script><script src="https://unpkg.com/lucide@latest"></script><meta name="generator" content="WebUI" /><link rel="preload" href="https://unpkg.com/@tailwindcss/browser@4" as="script"><link rel="preload" href="https://unpkg.com/lucide@latest" as="script"><link rel="dns-prefetch" href="//unpkg.com"><link rel="preload" href="/public/js/theme.js" as="script"><link rel="preload" href="/public/js/icons.js" as="script"><style type="text/tailwindcss">
+    @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+    
+    /* Hero animations */
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes avatarFadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    /* Progressive Reveal for Cards */
+    .reveal-card {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .reveal-card.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .reveal-card:nth-child(1) { transition-delay: 0.1s; }
+    .reveal-card:nth-child(2) { transition-delay: 0.2s; }
+    .reveal-card:nth-child(3) { transition-delay: 0.3s; }
+    .reveal-card:nth-child(4) { transition-delay: 0.4s; }
+    .reveal-card:nth-child(5) { transition-delay: 0.5s; }
+    .reveal-card:nth-child(6) { transition-delay: 0.6s; }
+    
+    /* Hero element animations */
+    .hero-avatar {
+        animation: avatarFadeIn 0.8s ease-out;
+    }
+    
+    .hero-name {
+        animation: slideUp 0.6s ease-out 0.1s both;
+    }
+    
+    .hero-description {
+        animation: slideUp 0.6s ease-out 0.3s both;
+    }
+    
+    /* Typography enhancements for prose content */
+    .prose {
+        @apply text-zinc-700 dark:text-zinc-300 leading-relaxed;
+    }
+
+    /* Paragraph spacing */
+    .prose p {
+        @apply mb-6 leading-relaxed;
+    }
+
+    /* Headings */
+    .prose h1 {
+        @apply text-3xl font-bold text-zinc-900 dark:text-zinc-100 mt-12 mb-6 leading-tight;
+    }
+    
+    .prose h2 {
+        @apply text-2xl font-bold text-zinc-900 dark:text-zinc-100 mt-10 mb-4 leading-tight;
+    }
+    
+    .prose h3 {
+        @apply text-xl font-semibold text-zinc-900 dark:text-zinc-100 mt-8 mb-3 leading-snug;
+    }
+    
+    .prose h4 {
+        @apply text-lg font-semibold text-zinc-900 dark:text-zinc-100 mt-6 mb-2;
+    }
+
+    /* Lists */
+    .prose ul {
+        @apply mb-6 pl-6;
+    }
+    
+    .prose ol {
+        @apply mb-6 pl-6;
+    }
+    
+    .prose li {
+        @apply mb-2 leading-relaxed;
+    }
+    
+    .prose ul > li {
+        @apply relative;
+    }
+    
+    .prose ul > li::before {
+        content: "•";
+        @apply absolute -left-4 text-teal-600 dark:text-teal-400 font-medium;
+    }
+
+    /* Links */
+    .prose a {
+        @apply text-teal-600 dark:text-teal-400 underline decoration-teal-600/30 underline-offset-2 transition-colors;
+    }
+    
+    .prose a:hover {
+        @apply text-teal-700 dark:text-teal-300 decoration-teal-600/60;
+    }
+
+    /* Blockquotes */
+    .prose blockquote {
+        @apply border-l-4 border-teal-500 pl-6 py-4 my-6 italic text-zinc-600 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-800/50 rounded-r;
+    }
+    
+    .prose blockquote p {
+        @apply mb-3 last:mb-0;
+    }
+    
+    /* Blockquote attribution styling */
+    .prose blockquote cite,
+    .prose blockquote footer {
+        @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3 block;
+    }
+    
+    .prose blockquote cite::before,
+    .prose blockquote footer::before {
+        content: "— ";
+    }
+    
+    /* Attribution styling for marked elements */
+    .prose blockquote p.attribution {
+        @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3;
+    }
+
+    /* Code block styling */
+    .prose pre {
+        @apply bg-zinc-900 dark:bg-zinc-800 text-zinc-100 text-xs p-4 rounded-lg my-6 overflow-x-auto;
+        border: 1px solid theme(colors.zinc.700);
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+    
+    .prose code:not(pre code) {
+        @apply bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-1.5 py-0.5 rounded text-sm font-mono;
+    }
+
+    /* Tables */
+    .prose table {
+        @apply w-full my-6 border-collapse;
+    }
+    
+    .prose th {
+        @apply bg-zinc-50 dark:bg-zinc-800 font-semibold text-left px-4 py-3 border-b border-zinc-200 dark:border-zinc-700;
+    }
+    
+    .prose td {
+        @apply px-4 py-3 border-b border-zinc-100 dark:border-zinc-800;
+    }
+
+    /* Horizontal rules */
+    .prose hr {
+        @apply my-8 border-t-2 border-zinc-200 dark:border-zinc-700;
+    }
+
+    /* Strong and emphasis */
+    .prose strong {
+        @apply font-semibold text-zinc-900 dark:text-zinc-100;
+    }
+    
+    .prose em {
+        @apply italic text-zinc-600 dark:text-zinc-400;
+    }
+
+    /* Accessibility: Hide animations on reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        .reveal-card,
+        .hero-avatar,
+        .hero-name, 
+        .hero-description {
+            animation: none !important;
+            transition: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    }
+</style></head><body class="bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 transition-colors duration-300"><div><div id="mobile-menu-container" data-mobile-menu-open="false"><div id="mobile-menu-overlay" class="fixed inset-y-0 right-0 w-64 bg-white dark:bg-zinc-800 border-l border-zinc-200 dark:border-zinc-700 px-6 py-8 shadow-xl transform translate-x-full transition-transform duration-300 ease-out z-100 hidden" data-mobile-menu="closed"><div class="flex flex-col space-y-3"><div class="flex items-center justify-between mb-4"><span class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Navigation</span><button id="mobile-menu-close" class="p-1 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200" aria-label="Close menu" onclick="window.closeMobileMenu()"><i data-lucide="x" class="w-5 h-5"></i></button></div><a href="/posts" class="flex items-center space-x-3 p-3 text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-lg transition-colors cursor-pointer" data-mobile-menu-link="posts"><i data-lucide="file-text" class="w-5 h-5"></i><span>Posts</span></a><a href="mailto:hello@maclong.uk" class="flex items-center space-x-3 p-3 text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-lg transition-colors cursor-pointer" data-mobile-menu-link="email"><i data-lucide="mail" class="w-5 h-5"></i><span>Email</span></a><a href="https://github.com/maclong9" class="flex items-center space-x-3 p-3 text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-lg transition-colors cursor-pointer" data-mobile-menu-link="github" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i><span>GitHub</span></a><div class="border-t border-zinc-200 dark:border-zinc-700 pt-4"><span class="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-3">Theme</span><div class="space-y-1"><button id="theme-system-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700" data-theme-option="system" onclick="if (window.setTheme) window.setTheme('system'); window.closeMobileMenu()"><div class="flex items-center space-x-3"><i data-lucide="monitor" class="w-4 h-4"></i><span>System</span></div></button><button id="theme-light-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700" data-theme-option="light" onclick="if (window.setTheme) window.setTheme('light'); window.closeMobileMenu()"><div class="flex items-center space-x-3"><i data-lucide="sun" class="w-4 h-4"></i><span>Light</span></div></button><button id="theme-dark-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700" data-theme-option="dark" onclick="if (window.setTheme) window.setTheme('dark'); window.closeMobileMenu()"><div class="flex items-center space-x-3"><i data-lucide="moon" class="w-4 h-4"></i><span>Dark</span></div></button></div></div></div></div></div><script>// Mobile Menu JavaScript - matches archive implementation
+(function() {
+    let mobileMenuOpen = false;
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const container = document.getElementById('mobile-menu-container');
+    const menuButton = document.getElementById('mobile-menu-button');
+    const closeButton = document.getElementById('mobile-menu-close');
+
+    function toggleMobileMenu(event) {
+        if (event) {
+            event.stopPropagation();
+        }
+        if (mobileMenuOpen) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    }
+
+    function openMobileMenu() {
+        if (!overlay) return;
+        console.log('Opening mobile menu...');
+        mobileMenuOpen = true;
+        
+        // Temporarily disable click outside to prevent immediate closing
+        clickOutsideEnabled = false;
+        setTimeout(() => {
+            clickOutsideEnabled = true;
+        }, 100);
+        
+        // Show menu by setting display and ensuring it's positioned off-screen initially
+        overlay.style.display = 'block';
+        overlay.style.zIndex = '99999';
+        overlay.style.transform = 'translateX(100%)'; // Start off-screen
+        
+        // Force reflow to ensure the element is visible before animating
+        overlay.offsetHeight;
+        
+        // Now slide it in
+        overlay.style.transform = 'translateX(-100%)';
+        overlay.dataset.mobileMenu = 'open';
+        container.dataset.mobileMenuOpen = 'true';
+
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+        if (!overlay) return;
+        console.log('Closing mobile menu...');
+        mobileMenuOpen = false;
+        
+        // Hide menu with slide-out animation
+        overlay.style.transform = 'translateX(100%)';
+        overlay.dataset.mobileMenu = 'closed';
+        container.dataset.mobileMenuOpen = 'false';
+        
+        // Restore body scroll
+        document.body.style.overflow = '';
+        
+        // Hide menu after transition by setting display to none
+        setTimeout(() => {
+            if (!mobileMenuOpen) {
+                overlay.style.display = 'none';
+            }
+        }, 300);
+    }
+
+    // Set up event listeners
+    if (menuButton) {
+        menuButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMobileMenu(e);
+        });
+    }
+    
+    if (closeButton) {
+        closeButton.addEventListener('click', closeMobileMenu);
+    }
+    
+    // Close menu when clicking links
+    const menuLinks = document.querySelectorAll('[data-mobile-menu-link]');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+    
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenuOpen) {
+            closeMobileMenu();
+        }
+    });
+
+    // Click outside to close (simulating Alpine's @click.outside)
+    // Add a small delay to prevent immediate closing when opening
+    let clickOutsideEnabled = true;
+    document.addEventListener('click', function(e) {
+        if (clickOutsideEnabled && mobileMenuOpen && overlay && !overlay.contains(e.target) && 
+            (!menuButton || !menuButton.contains(e.target))) {
+            closeMobileMenu();
+        }
+    });
+
+    // Make functions globally available
+    window.toggleMobileMenu = toggleMobileMenu;
+    window.openMobileMenu = openMobileMenu;
+    window.closeMobileMenu = closeMobileMenu;
+})();</script></div><div class="min-h-screen flex flex-col"><div><header id="main-header" class="fixed top-0 left-0 right-0 bg-white dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-700 px-4 py-6 z-30 transition-transform duration-300 ease-in-out"><div class="max-w-4xl mx-auto flex items-center justify-between"><div class="flex items-center justify-between w-full"><nav class="md:hidden flex items-center space-x-1 text-sm"><a href="/" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Mac Long</a><span class="text-zinc-400 dark:text-zinc-600">/</span><a href="/posts" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Posts</a><span class="text-zinc-400 dark:text-zinc-600">/</span><span class="text-zinc-900 dark:text-zinc-100 font-medium text-lg">Building Modern Web Tools</span></nav><nav class="hidden md:flex items-center space-x-1 text-sm"><a href="/" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Mac Long</a><span class="text-zinc-400 dark:text-zinc-600">/</span><a href="/posts" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Posts</a><span class="text-zinc-400 dark:text-zinc-600">/</span><span class="text-zinc-900 dark:text-zinc-100 font-medium">Building Modern Web Tools</span></nav><div class="flex items-center space-x-6"><div class="flex items-center space-x-2"><div class="md:hidden"><button id="mobile-menu-button" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Menu" onclick="toggleMobileMenu()"><i data-lucide="chevron-left" class="w-5 h-5"></i></button></div><div class="hidden md:flex items-center space-x-2"><a href="/posts" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Posts"><i data-lucide="file-text" class="w-5 h-5"></i></a><a href="mailto:hello@maclong.uk" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Email"><i data-lucide="mail" class="w-5 h-5"></i></a><a href="https://github.com/maclong9" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="View GitHub Profile" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i></a><div class="relative theme-dropdown"><button class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Change theme" data-theme-toggle="true"><i data-lucide="sun" theme-icon="light" class="hidden"></i><i data-lucide="moon" theme-icon="dark" class="hidden"></i><i data-lucide="palette" theme-icon="system" class="w-5 h-5"></i></button><div class="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-zinc-800 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700 py-1 z-50 theme-dropdown-menu hidden"><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="system"><i data-lucide="palette" class="w-5 h-5"></i><span>System</span></button><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="light"><i data-lucide="sun" class="w-5 h-5"></i><span>Light</span></button><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="dark"><i data-lucide="moon" class="w-5 h-5"></i><span>Dark</span></button></div><style>.theme-dropdown-menu {
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transition: opacity 0.15s ease-in, transform 0.15s ease-in;
+}
+
+.theme-dropdown-menu--open {
+    display: block;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.theme-option--active {
+    background-color: rgb(240 253 250);
+    color: rgb(15 118 110);
+}
+
+.dark .theme-option--active {
+    background-color: rgb(19 78 74 / 0.5);
+    color: rgb(94 234 212);
+}
+
+[data-theme-icon] {
+    display: none;
+}
+
+[data-theme-icon="system"] {
+    display: block;
+}</style><script>// Theme dropdown functionality - colocated with ThemeDropdown component
+(function() {
+    let isDropdownOpen = false;
+
+    function initThemeDropdown() {
+        // Listen for dropdown toggle
+        document.addEventListener('click', (e) => {
+            const themeToggle = e.target.closest('[data-theme-toggle]');
+            if (themeToggle) {
+                e.preventDefault();
+                toggleDropdown();
+                return;
+            }
+
+            const themeOption = e.target.closest('[data-theme-option]');
+            if (themeOption) {
+                e.preventDefault();
+                const theme = themeOption.dataset.themeOption;
+                setTheme(theme);
+                updateDropdownUI();
+                closeDropdown();
+                return;
+            }
+
+            // Close dropdown when clicking outside
+            if (isDropdownOpen && !e.target.closest('.theme-dropdown')) {
+                closeDropdown();
+            }
+        });
+
+        // Update UI initially and when theme changes
+        updateDropdownUI();
+        
+        // Listen for theme changes
+        const observer = new MutationObserver(() => {
+            updateDropdownUI();
+        });
+        
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
+    }
+
+    function toggleDropdown() {
+        if (isDropdownOpen) {
+            closeDropdown();
+        } else {
+            openDropdown();
+        }
+    }
+
+    function openDropdown() {
+        isDropdownOpen = true;
+        const dropdown = document.querySelector('.theme-dropdown-menu');
+        if (dropdown) {
+            dropdown.classList.remove('hidden');
+            // Trigger reflow for animation
+            dropdown.offsetHeight;
+            dropdown.classList.add('theme-dropdown-menu--open');
+        }
+    }
+
+    function closeDropdown() {
+        isDropdownOpen = false;
+        const dropdown = document.querySelector('.theme-dropdown-menu');
+        if (dropdown) {
+            dropdown.classList.remove('theme-dropdown-menu--open');
+            setTimeout(() => {
+                if (!isDropdownOpen) {
+                    dropdown.classList.add('hidden');
+                }
+            }, 200); // Match transition duration
+        }
+    }
+
+    function setTheme(theme) {
+        localStorage.setItem('theme', theme);
+        updateTheme();
+    }
+
+    function updateTheme() {
+        const themePreference = localStorage.getItem('theme') || 'system';
+        let actualTheme = 'light';
+
+        if (themePreference === 'dark') {
+            actualTheme = 'dark';
+        } else if (themePreference === 'system') {
+            actualTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        document.documentElement.setAttribute('data-theme', actualTheme);
+    }
+
+    function updateDropdownUI() {
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        
+        // Update theme toggle button icon
+        const toggleIcons = document.querySelectorAll('[data-theme-icon]');
+        toggleIcons.forEach(icon => {
+            icon.style.display = 'none';
+        });
+        
+        const activeIcon = document.querySelector(`[data-theme-icon="${savedTheme}"]`);
+        if (activeIcon) {
+            activeIcon.style.display = 'block';
+        }
+
+        // Update dropdown options
+        const options = document.querySelectorAll('[data-theme-option]');
+        options.forEach(option => {
+            const isActive = option.dataset.themeOption === savedTheme;
+            option.classList.toggle('theme-option--active', isActive);
+        });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initThemeDropdown);
+    } else {
+        initThemeDropdown();
+    }
+})();</script></div></div></div></div></div></div></header><script>// Header scroll behavior - hide on scroll down, show on scroll up
+(function() {
+    function initHeaderScrollBehavior() {
+        const header = document.getElementById('main-header');
+        if (!header) return;
+
+        // Ensure header is visible initially
+        header.style.transform = 'translateY(0)';
+
+        let lastScrollTop = 0;
+        let scrollThreshold = 10; // Minimum scroll distance before hiding/showing
+        let isScrolling = false;
+
+        function handleScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Don't hide header when at the very top
+            if (scrollTop <= 0) {
+                header.style.transform = 'translateY(0)';
+                lastScrollTop = scrollTop;
+                return;
+            }
+
+            // Only act on significant scroll changes
+            if (Math.abs(scrollTop - lastScrollTop) < scrollThreshold) {
+                return;
+            }
+
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down - hide header
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling up - show header
+                header.style.transform = 'translateY(-1px)';
+            }
+
+            lastScrollTop = scrollTop;
+        }
+
+        // Throttle scroll events for better performance
+        function throttledHandleScroll() {
+            if (!isScrolling) {
+                window.requestAnimationFrame(() => {
+                    handleScroll();
+                    isScrolling = false;
+                });
+                isScrolling = true;
+            }
+        }
+
+        // Add scroll event listener
+        window.addEventListener('scroll', throttledHandleScroll, { passive: true });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initHeaderScrollBehavior);
+    } else {
+        initHeaderScrollBehavior();
+    }
+
+    // Also initialize on window load as backup
+    window.addEventListener('load', initHeaderScrollBehavior);
+})();</script></div><main class="flex-1 px-4 py-8 pt-28"><div><article><div class="max-w-2xl mx-auto mb-8 pt-8"><div class="text-sm text-zinc-500 dark:text-zinc-400 mb-2"><span>July 25, 2025 • 6 min read</span></div><h1 class="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100 mb-4">Building Modern Web Tools</h1><p class="text-lg text-zinc-600 dark:text-zinc-400">Building modern utility tools with TailwindCSS v4, Alpine.js, and progressive enhancement techniques for optimal developer experience.</p></div><div class="max-w-2xl mx-auto prose"><div class="markdown-content"><p>Recently, I embarked on a project to modernize my collection of web-based utility tools. What started as a simple migration turned into an exploration of cutting-edge web technologies and developer experience improvements.</p><p>You can explore the live tools at <a href="https://tools.maclong.uk" target="_blank" rel="noopener noreferrer">tools.maclong.uk</a>, including a Schengen Area visit tracker and interactive guitar barre scales chart, with the complete source code available on <a href="https://github.com/maclong9/web" target="_blank" rel="noopener noreferrer">GitHub</a>.</p><h2>The Challenge</h2><p>My original tools were built with vanilla HTML, CSS, and JavaScript. While functional, they lacked consistency in design, had poor mobile responsiveness, and were becoming increasingly difficult to maintain. I needed a solution that would:</p><ul><li><p>Provide a consistent, modern design system</p></li><li><p>Offer excellent mobile responsiveness</p></li><li><p>Enable rapid development of new tools</p></li><li><p>Support advanced theming (light, dark, and system preferences)</p></li><li><p>Maintain minimal bundle sizes and fast loading times</p></li></ul><h2>The Tech Stack</h2><p>After evaluating several options, I settled on a stack that prioritizes developer experience and performance:</p><h3>TailwindCSS v4</h3><p>The latest version of Tailwind brings significant improvements, including the new <code>@tailwindcss/browser</code> CDN that compiles styles on-demand. This approach eliminated the need for a build step while maintaining all of Tailwind’s powerful utility classes.</p><pre class="markdown-code-block language-html"><code>&lt;script src=&quot;https://unpkg.com/@tailwindcss/browser@4&quot;&gt;&lt;/script&gt;
+&lt;style type=&quot;text/tailwindcss&quot;&gt;
+  @custom-variant dark (&amp;:where([data-theme=dark], [data-theme=dark] *));
+&lt;/style&gt;
+</code></pre><p>This setup provides:</p><ul><li><p>Zero build configuration required</p></li><li><p>Full utility class system available</p></li><li><p>Custom variant support for theme management</p></li><li><p>Excellent performance with tree-shaking</p></li></ul><h3>Alpine.js</h3><p>For interactivity, Alpine.js proved to be the perfect lightweight alternative to heavier frameworks. It provides reactive functionality while maintaining the simplicity of vanilla JavaScript.</p><pre class="markdown-code-block language-html"><code>&lt;div x-data=&quot;{ count: 0 }&quot; class=&quot;p-4&quot;&gt;
+  &lt;button x-on:click=&quot;count++&quot; class=&quot;bg-teal-600 text-white px-4 py-2 rounded&quot;&gt;
+    Increment
+  &lt;/button&gt;
+  &lt;span x-text=&quot;count&quot; class=&quot;ml-4 font-bold&quot;&gt;&lt;/span&gt;
+&lt;/div&gt;
+</code></pre><p>Alpine.js shines in its declarative syntax that feels natural within HTML, making it perfect for enhancing existing markup with reactive behavior without requiring a complex build process.</p><h2>Design System</h2><p>One of the most significant improvements was implementing a cohesive design system. I chose teal as the primary accent color throughout the interface, creating visual consistency while maintaining accessibility standards.</p><blockquote><p>“Consistency in design isn’t just about aesthetics—it’s about creating predictable, intuitive user experiences.”— Don Norman, <em>The Design of Everyday Things</em></p></blockquote><h3>Three-Way Theme System</h3><p>Modern users expect their applications to respect their system preferences while still providing manual override options. I implemented a three-way theme system supporting:</p><ul><li><p><strong>Light mode</strong> - Clean, bright interface</p></li><li><p><strong>Dark mode</strong> - Eye-friendly dark theme</p></li><li><p><strong>System mode</strong> - Automatically follows OS preference</p></li></ul><p>The theme toggle cycles through all three options, with appropriate icons (sun, moon, monitor) to clearly communicate the current state.</p><pre class="markdown-code-block language-javascript"><code>function setTheme(theme) {
+  localStorage.setItem(&#39;theme&#39;, theme);
+  const actualTheme = theme === &#39;system&#39; 
+    ? (window.matchMedia(&#39;(prefers-color-scheme: dark)&#39;).matches ? &#39;dark&#39; : &#39;light&#39;)
+    : theme;
+  document.documentElement.setAttribute(&#39;data-theme&#39;, actualTheme);
+}
+</code></pre><h2>Template-Driven Development</h2><p>To speed up future tool development, I created a comprehensive template system. New tools can be rapidly scaffolded by copying the base template and replacing the content area.</p><pre class="markdown-code-block language-html"><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot; data-theme=&quot;system&quot;&gt;
+  &lt;head&gt;
+    &lt;!-- Common meta tags, fonts, and styling --&gt;
+  &lt;/head&gt;
+  &lt;body class=&quot;bg-zinc-50 dark:bg-zinc-900&quot;&gt;
+    &lt;header&gt;&lt;!-- Consistent navigation --&gt;&lt;/header&gt;
+    &lt;main&gt;
+      &lt;!-- Tool-specific content goes here --&gt;
+      &lt;div x-data=&quot;toolApp()&quot; class=&quot;max-w-4xl mx-auto p-4&quot;&gt;
+        &lt;!-- Interactive tool interface --&gt;
+      &lt;/div&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;&lt;!-- Consistent footer --&gt;&lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>This approach ensures consistency across all tools while allowing for unique functionality within each one.</p><h2>Performance Optimizations</h2><h3>Progressive Enhancement</h3><p>Each tool is built with progressive enhancement in mind:</p><ol><li><p><strong>Base functionality works without JavaScript</strong> - Essential features remain accessible</p></li><li><p><strong>CSS enhances the presentation</strong> - Styling improves usability and aesthetics</p></li><li><p><strong>JavaScript adds interactivity</strong> - Advanced features enhance the user experience</p></li></ol><h3>Efficient Asset Loading</h3><p>The tools use optimized loading strategies:</p><pre class="markdown-code-block language-html"><code>&lt;!-- Critical resources loaded immediately --&gt;
+&lt;script src=&quot;https://unpkg.com/@tailwindcss/browser@4&quot;&gt;&lt;/script&gt;
+
+&lt;!-- Non-critical resources loaded asynchronously --&gt;
+&lt;script src=&quot;https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js&quot; defer&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/lucide@latest/dist/umd/lucide.js&quot; defer&gt;&lt;/script&gt;
+</code></pre><h3>Minimal JavaScript Footprint</h3><p>By choosing Alpine.js over larger frameworks, the total JavaScript payload remains minimal:</p><ul><li><p><strong>Alpine.js</strong>: ~15KB gzipped</p></li><li><p><strong>Lucide Icons</strong>: ~25KB gzipped</p></li><li><p><strong>Custom tool logic</strong>: 2-5KB per tool</p></li></ul><h2>Deployment &amp; Automation</h2><p>The entire project deploys to Cloudflare Pages with zero configuration. Every push to the main branch automatically triggers a deployment, ensuring the live site stays in sync with development through Cloudflare’s built-in Git integration.</p><pre class="markdown-code-block language-json"><code>{
+  &quot;scripts&quot;: {
+    &quot;build&quot;: &quot;echo &#39;No build step needed - static files&#39;&quot;,
+    &quot;dev&quot;: &quot;python -m http.server 8000&quot;,
+    &quot;deploy&quot;: &quot;echo &#39;Automated via Cloudflare Pages&#39;&quot;
+  }
+}
+</code></pre><p>This setup eliminates the need for complex CI/CD pipelines while providing:</p><ul><li><p>Instant previews for every commit</p></li><li><p>Automatic deployments for production</p></li><li><p>Global CDN distribution</p></li><li><p>Built-in analytics and performance monitoring</p></li></ul><h2>Example Tool: Schengen Area Tracker</h2><p>The Schengen Area visit tracker demonstrates the architecture in practice:</p><pre class="markdown-code-block language-html"><code>&lt;div x-data=&quot;schengenTracker()&quot; class=&quot;space-y-6&quot;&gt;
+  &lt;!-- Input form --&gt;
+  &lt;div class=&quot;bg-white dark:bg-zinc-800 rounded-lg p-6 border&quot;&gt;
+    &lt;h2 class=&quot;text-xl font-semibold mb-4&quot;&gt;Add Visit&lt;/h2&gt;
+    &lt;form x-on:submit.prevent=&quot;addVisit()&quot;&gt;
+      &lt;input x-model=&quot;newVisit.country&quot; type=&quot;text&quot; placeholder=&quot;Country&quot; /&gt;
+      &lt;input x-model=&quot;newVisit.entryDate&quot; type=&quot;date&quot; /&gt;
+      &lt;input x-model=&quot;newVisit.exitDate&quot; type=&quot;date&quot; /&gt;
+      &lt;button type=&quot;submit&quot;&gt;Add Visit&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+  
+  &lt;!-- Results display --&gt;
+  &lt;div class=&quot;bg-white dark:bg-zinc-800 rounded-lg p-6 border&quot;&gt;
+    &lt;h2 class=&quot;text-xl font-semibold mb-4&quot;&gt;Days Used&lt;/h2&gt;
+    &lt;div class=&quot;text-3xl font-bold&quot; :class=&quot;daysUsed &gt; 90 ? &#39;text-red-600&#39; : &#39;text-teal-600&#39;&quot;&gt;
+      &lt;span x-text=&quot;daysUsed&quot;&gt;&lt;/span&gt; / 90 days
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>The tool provides real-time calculation of days spent in the Schengen Area with visual feedback and export capabilities.</p><h2>Results</h2><p>The migration resulted in several significant improvements:</p><ul><li><p><strong>50% faster loading times</strong> through optimized assets and CDN delivery</p></li><li><p><strong>100% mobile responsiveness</strong> across all tools with consistent touch interactions</p></li><li><p><strong>Consistent user experience</strong> with proper dark mode support and theme persistence</p></li><li><p><strong>90% reduction in development time</strong> for new tools through the template system</p></li><li><p><strong>Zero maintenance overhead</strong> for builds and deployments</p></li></ul><h2>Developer Experience Improvements</h2><h3>Local Development</h3><p>The development workflow is streamlined and requires no build tools:</p><pre class="markdown-code-block language-bash"><code># Start local development server
+python -m http.server 8000
+
+# Or use any static file server
+npx serve .
+</code></pre><p>Changes are reflected immediately without compilation or bundling steps.</p><h3>Tool Creation Workflow</h3><p>Creating a new tool follows a simple pattern:</p><ol><li><p><strong>Copy the base template</strong> with common layout and styling</p></li><li><p><strong>Implement the tool logic</strong> in a single Alpine.js component</p></li><li><p><strong>Add tool-specific styles</strong> using Tailwind utility classes</p></li><li><p><strong>Test across themes and devices</strong> using browser dev tools</p></li><li><p><strong>Deploy automatically</strong> by pushing to the Git repository</p></li></ol><h2>Future Enhancements</h2><p>This foundation opens up exciting possibilities for future tools. The template system makes it trivial to add new utilities, and the modern tech stack ensures they’ll be fast, accessible, and maintainable.</p><p>Planned improvements include:</p><ul><li><p><strong>Offline functionality</strong> with service workers for critical tools</p></li><li><p><strong>Tool-specific URLs</strong> with client-side routing for better sharing</p></li><li><p><strong>Enhanced accessibility</strong> with improved screen reader support</p></li><li><p><strong>Performance monitoring</strong> with real user metrics collection</p></li><li><p><strong>Progressive Web App features</strong> for mobile installation</p></li></ul><h2>Lessons Learned</h2><h3>Embrace Modern Defaults</h3><p>Modern browsers provide excellent default behavior. Rather than fighting against browser defaults, the tools work with them:</p><ul><li><p>Native form validation</p></li><li><p>System theme preferences</p></li><li><p>Touch gesture support</p></li><li><p>Keyboard navigation</p></li></ul><h3>Prioritize Developer Experience</h3><p>The investment in tooling and templates pays dividends:</p><ul><li><p>Consistent patterns reduce cognitive load</p></li><li><p>Template-driven development accelerates feature delivery</p></li><li><p>Automated deployment eliminates manual steps</p></li><li><p>Modern CSS and JavaScript features improve code quality</p></li></ul><h3>Performance Through Simplicity</h3><p>The fastest code is the code you don’t ship:</p><ul><li><p>No bundling or compilation required</p></li><li><p>Minimal JavaScript dependencies</p></li><li><p>CSS-first styling approach</p></li><li><p>Progressive enhancement over JavaScript-heavy solutions</p></li></ul><h2>Conclusion</h2><p>Building modern web tools doesn’t require complex frameworks or elaborate build processes. By choosing the right combination of technologies - TailwindCSS v4, Alpine.js, and Cloudflare Pages - I created a development environment that prioritizes both developer experience and user experience.</p><p>The result is a collection of fast, accessible, and maintainable tools that can be rapidly extended with new functionality. The template-driven approach has transformed my development workflow, eliminating repetitive code while maintaining flexibility and performance.</p><p>For developers building utility tools or content-focused websites, this approach offers immediate and substantial workflow improvements that justify the minimal setup effort. Modern web development can be both powerful and simple.</p></div></div><script>// Style blockquote attributions
+document.addEventListener('DOMContentLoaded', function() {
+    const blockquotes = document.querySelectorAll('.prose blockquote');
+    blockquotes.forEach(blockquote => {
+        const paragraphs = blockquote.querySelectorAll('p');
+        paragraphs.forEach(p => {
+            const text = p.textContent.trim();
+            if (text.startsWith('—') || text.startsWith('- ')) {
+                p.classList.add('attribution');
+            }
+        });
+    });
+});</script></article></div></main><footer class="bg-white dark:bg-zinc-800 border-t border-zinc-200 dark:border-zinc-700 px-4 py-6 space-y-2 grid place-items-center"><div class="flex items-center space-x-2"><a href="/posts" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer"><i data-lucide="file-text" class="w-5 h-5"></i></a><a href="mailto:hello@maclong.uk" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer"><i data-lucide="mail" class="w-5 h-5"></i></a><a href="https://github.com/maclong9" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i></a></div><div class="text-zinc-500 dark:text-zinc-400 text-sm"><span>© 2025 </span><a href="https://maclong.uk" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Mac Long</a><span>.</span></div></footer></div></body><script src="/public/js/icons.js"></script></html>
