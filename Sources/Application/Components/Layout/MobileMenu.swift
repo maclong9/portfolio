@@ -27,12 +27,12 @@ public struct MobileMenu: Element {
             Stack(classes: ["flex", "items-center", "justify-between", "mb-4"]) {
               Text("Navigation", classes: ["text-lg", "font-semibold", "text-zinc-900", "dark:text-zinc-100"])
               Button(
-                onClick: "window.closeMobileMenu()",
                 id: "mobile-menu-close",
                 classes: [
                   "p-1", "text-zinc-500", "hover:text-zinc-700", "dark:text-zinc-400", "dark:hover:text-zinc-200",
                 ],
-                label: "Close menu"
+                label: "Close menu",
+                data: ["slide-menu-close": ""]
               ) {
                 Icon(name: "x", classes: ["w-5", "h-5"])
               }
@@ -85,7 +85,7 @@ public struct MobileMenu: Element {
               Text("Theme", classes: ["text-sm", "font-medium", "text-zinc-700", "dark:text-zinc-300", "mb-3"])
               Stack(classes: ["space-y-1"]) {
                 Button(
-                  onClick: "if (window.setTheme) window.setTheme('system'); window.closeMobileMenu()",
+                  onClick: "if (window.setTheme) window.setTheme('system'); window.closeSlideMenu('mobile-menu-container')",
                   id: "theme-system-mobile",
                   classes: [
                     "w-full", "flex", "items-center", "space-x-3", "px-3", "py-2", "rounded-lg",
@@ -101,7 +101,7 @@ public struct MobileMenu: Element {
                 }
 
                 Button(
-                  onClick: "if (window.setTheme) window.setTheme('light'); window.closeMobileMenu()",
+                  onClick: "if (window.setTheme) window.setTheme('light'); window.closeSlideMenu('mobile-menu-container')",
                   id: "theme-light-mobile",
                   classes: [
                     "w-full", "flex", "items-center", "space-x-3", "px-3", "py-2", "rounded-lg",
@@ -117,7 +117,7 @@ public struct MobileMenu: Element {
                 }
 
                 Button(
-                  onClick: "if (window.setTheme) window.setTheme('dark'); window.closeMobileMenu()",
+                  onClick: "if (window.setTheme) window.setTheme('dark'); window.closeSlideMenu('mobile-menu-container')",
                   id: "theme-dark-mobile",
                   classes: [
                     "w-full", "flex", "items-center", "space-x-3", "px-3", "py-2", "rounded-lg",
@@ -136,120 +136,11 @@ public struct MobileMenu: Element {
           }
         }
       }
-
-      Script(
-        content: {
-          """
-          // Mobile Menu JavaScript - matches archive implementation
-          (function() {
-              let mobileMenuOpen = false;
-              const overlay = document.getElementById('mobile-menu-overlay');
-              const container = document.getElementById('mobile-menu-container');
-              const menuButton = document.getElementById('mobile-menu-button');
-              const closeButton = document.getElementById('mobile-menu-close');
-
-              function toggleMobileMenu(event) {
-                  if (event) {
-                      event.stopPropagation();
-                  }
-                  if (mobileMenuOpen) {
-                      closeMobileMenu();
-                  } else {
-                      openMobileMenu();
-                  }
-              }
-
-              function openMobileMenu() {
-                  if (!overlay) return;
-                  console.log('Opening mobile menu...');
-                  mobileMenuOpen = true;
-                  
-                  // Temporarily disable click outside to prevent immediate closing
-                  clickOutsideEnabled = false;
-                  setTimeout(() => {
-                      clickOutsideEnabled = true;
-                  }, 100);
-                  
-                  // Show menu by setting display and ensuring it's positioned off-screen initially
-                  overlay.style.display = 'block';
-                  overlay.style.zIndex = '99999';
-                  overlay.style.transform = 'translateX(100%)'; // Start off-screen
-                  
-                  // Force reflow to ensure the element is visible before animating
-                  overlay.offsetHeight;
-                  
-                  // Now slide it in
-                  overlay.style.transform = 'translateX(-100%)';
-                  overlay.dataset.mobileMenu = 'open';
-                  container.dataset.mobileMenuOpen = 'true';
-
-                  // Prevent body scroll
-                  document.body.style.overflow = 'hidden';
-              }
-
-              function closeMobileMenu() {
-                  if (!overlay) return;
-                  console.log('Closing mobile menu...');
-                  mobileMenuOpen = false;
-                  
-                  // Hide menu with slide-out animation
-                  overlay.style.transform = 'translateX(100%)';
-                  overlay.dataset.mobileMenu = 'closed';
-                  container.dataset.mobileMenuOpen = 'false';
-                  
-                  // Restore body scroll
-                  document.body.style.overflow = '';
-                  
-                  // Hide menu after transition by setting display to none
-                  setTimeout(() => {
-                      if (!mobileMenuOpen) {
-                          overlay.style.display = 'none';
-                      }
-                  }, 300);
-              }
-
-              // Set up event listeners
-              if (menuButton) {
-                  menuButton.addEventListener('click', function(e) {
-                      e.stopPropagation();
-                      toggleMobileMenu(e);
-                  });
-              }
-              
-              if (closeButton) {
-                  closeButton.addEventListener('click', closeMobileMenu);
-              }
-              
-              // Close menu when clicking links
-              const menuLinks = document.querySelectorAll('[data-mobile-menu-link]');
-              menuLinks.forEach(link => {
-                  link.addEventListener('click', closeMobileMenu);
-              });
-              
-              // Close menu on escape key
-              document.addEventListener('keydown', function(e) {
-                  if (e.key === 'Escape' && mobileMenuOpen) {
-                      closeMobileMenu();
-                  }
-              });
-
-              // Click outside to close (simulating Alpine's @click.outside)
-              // Add a small delay to prevent immediate closing when opening
-              let clickOutsideEnabled = true;
-              document.addEventListener('click', function(e) {
-                  if (clickOutsideEnabled && mobileMenuOpen && overlay && !overlay.contains(e.target) && 
-                      (!menuButton || !menuButton.contains(e.target))) {
-                      closeMobileMenu();
-                  }
-              });
-
-              // Make functions globally available
-              window.toggleMobileMenu = toggleMobileMenu;
-              window.openMobileMenu = openMobileMenu;
-              window.closeMobileMenu = closeMobileMenu;
-          })();
-          """
-        }
+      .slideMenu(
+        overlayId: "mobile-menu-overlay",
+        from: .fromRight,
+        duration: 300,
+        toggleButtonSelector: "#mobile-menu-button"
       )
     }
   }

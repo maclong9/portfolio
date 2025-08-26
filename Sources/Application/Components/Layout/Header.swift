@@ -126,7 +126,7 @@ public struct LayoutHeader: Element {
                 // Mobile hamburger button
                 Stack(classes: ["md:hidden"]) {
                   Button(
-                    onClick: "toggleMobileMenu()",
+                    onClick: "toggleSlideMenu('mobile-menu-container')",
                     id: "mobile-menu-button",
                     classes: [
                       "p-2", "text-zinc-500", "hover:text-zinc-700", "dark:text-zinc-400",
@@ -185,77 +185,7 @@ public struct LayoutHeader: Element {
           }
         }
       }
-
-      Script(
-        content: {
-          """
-          // Header scroll behavior - hide on scroll down, show on scroll up
-          (function() {
-              function initHeaderScrollBehavior() {
-                  const header = document.getElementById('main-header');
-                  if (!header) return;
-
-                  // Ensure header is visible initially
-                  header.style.transform = 'translateY(0)';
-
-                  let lastScrollTop = 0;
-                  let scrollThreshold = 10; // Minimum scroll distance before hiding/showing
-                  let isScrolling = false;
-
-                  function handleScroll() {
-                      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-                      // Don't hide header when at the very top
-                      if (scrollTop <= 0) {
-                          header.style.transform = 'translateY(0)';
-                          lastScrollTop = scrollTop;
-                          return;
-                      }
-
-                      // Only act on significant scroll changes
-                      if (Math.abs(scrollTop - lastScrollTop) < scrollThreshold) {
-                          return;
-                      }
-
-                      if (scrollTop > lastScrollTop) {
-                          // Scrolling down - hide header
-                          header.style.transform = 'translateY(-100%)';
-                      } else {
-                          // Scrolling up - show header
-                          header.style.transform = 'translateY(-1px)';
-                      }
-
-                      lastScrollTop = scrollTop;
-                  }
-
-                  // Throttle scroll events for better performance
-                  function throttledHandleScroll() {
-                      if (!isScrolling) {
-                          window.requestAnimationFrame(() => {
-                              handleScroll();
-                              isScrolling = false;
-                          });
-                          isScrolling = true;
-                      }
-                  }
-
-                  // Add scroll event listener
-                  window.addEventListener('scroll', throttledHandleScroll, { passive: true });
-              }
-
-              // Initialize when DOM is ready
-              if (document.readyState === 'loading') {
-                  document.addEventListener('DOMContentLoaded', initHeaderScrollBehavior);
-              } else {
-                  initHeaderScrollBehavior();
-              }
-
-              // Also initialize on window load as backup
-              window.addEventListener('load', initHeaderScrollBehavior);
-          })();
-          """
-        }
-      )
+      .scrollHeader(threshold: 10, showOnTop: true, duration: 300)
     }
   }
 }

@@ -129,6 +129,9 @@ struct Home: Document {
           CardCollection(cards: projectCards)
         }
       }
+      
+      // Auto-inject behavior JavaScript
+      behaviorScripts
     }
   }
 }

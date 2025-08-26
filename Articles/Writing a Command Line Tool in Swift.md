@@ -53,7 +53,7 @@ let package = Package(
 )
 ```
 
-> The tool is named `lsc` (ls clone), but you may rename it as desired.
+> **Note**: The tool is named `lsc` (ls clone), but you may rename it as desired.
 
 ## Implementation
 
