@@ -114,11 +114,18 @@ struct SchengenTracker: Document {
             ]
           ) {
             Heading(.title, "Days Remaining", classes: ["text-lg", "font-semibold", "mb-2"])
-            Text(
-              "90",
-              id: "days-remaining",
-              classes: ["text-4xl", "font-bold", "text-green-600", "dark:text-green-400"]
-            )
+            Stack(classes: ["flex", "items-baseline", "gap-2"]) {
+              Text(
+                "90",
+                id: "days-remaining",
+                classes: ["text-4xl", "font-bold", "text-green-600", "dark:text-green-400"]
+              )
+              Text(
+                "",
+                id: "days-after-planned",
+                classes: ["text-2xl", "font-medium", "text-green-400", "dark:text-green-500", "opacity-60", "hidden"]
+              )
+            }
           }
         }
 
@@ -297,6 +304,7 @@ struct SchengenTracker: Document {
                 state.visits.sort((a, b) => new Date(a.entry) - new Date(b.entry));
                 saveVisits();
                 updateCalculations();
+                updateFutureTripDisplay();
 
                 // Clear form
                 document.getElementById('entry-date').value = '';
@@ -316,6 +324,7 @@ struct SchengenTracker: Document {
                 state.visits = state.visits.filter(visit => visit.id !== id);
                 saveVisits();
                 updateCalculations();
+                updateFutureTripDisplay();
                 
                 if (state.isSharedData) {
                     state.isSharedData = false;
@@ -323,6 +332,7 @@ struct SchengenTracker: Document {
                 }
                 
                 renderVisits();
+                updateFutureTripDisplay();
             };
 
             window.startEdit = function(id) {
@@ -370,6 +380,7 @@ struct SchengenTracker: Document {
                     
                     saveVisits();
                     updateCalculations();
+                    updateFutureTripDisplay();
                     renderVisits();
                 }
             };
@@ -628,6 +639,68 @@ struct SchengenTracker: Document {
                 }
             }
 
+            function calculateFutureTripImpact() {
+                const today = new Date();
+                
+                // Get all visits (past and future)
+                const allVisits = [...state.visits];
+                
+                // Separate current/past visits from future visits
+                const futureVisits = allVisits.filter(visit => {
+                    const entryDate = new Date(visit.entry);
+                    return entryDate > today;
+                });
+                
+                if (futureVisits.length === 0) {
+                    return null; // No future trips planned
+                }
+                
+                // Find the latest future trip exit date
+                const latestFutureExit = futureVisits.reduce((latest, visit) => {
+                    const exitDate = new Date(visit.exit);
+                    return exitDate > latest ? exitDate : latest;
+                }, new Date(0));
+                
+                // Calculate the 180-day window from the latest future trip
+                const futureCutoffDate = new Date(latestFutureExit);
+                futureCutoffDate.setDate(futureCutoffDate.getDate() - 180);
+                
+                // Calculate total days that will be used in this future window
+                let totalFutureDays = 0;
+                allVisits.forEach(visit => {
+                    const entryDate = new Date(visit.entry);
+                    const exitDate = new Date(visit.exit);
+                    
+                    // Check if this visit overlaps with the future 180-day window
+                    if (exitDate >= futureCutoffDate && entryDate <= latestFutureExit) {
+                        const startDate = entryDate < futureCutoffDate ? futureCutoffDate : entryDate;
+                        const endDate = exitDate > latestFutureExit ? latestFutureExit : exitDate;
+                        
+                        if (startDate <= endDate) {
+                            const days = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+                            totalFutureDays += Math.max(0, days);
+                        }
+                    }
+                });
+                
+                const futureDaysRemaining = Math.max(0, 90 - Math.min(totalFutureDays, 90));
+                return futureDaysRemaining;
+            }
+
+            function updateFutureTripDisplay() {
+                const futureDaysRemaining = calculateFutureTripImpact();
+                const daysAfterPlannedEl = document.getElementById('days-after-planned');
+                
+                if (daysAfterPlannedEl) {
+                    if (futureDaysRemaining !== null && futureDaysRemaining !== state.daysRemaining) {
+                        daysAfterPlannedEl.textContent = `(${futureDaysRemaining} after planned)`;
+                        daysAfterPlannedEl.classList.remove('hidden');
+                    } else {
+                        daysAfterPlannedEl.classList.add('hidden');
+                    }
+                }
+            }
+
             function updateAddButton() {
                 const entryDate = document.getElementById('entry-date').value;
                 const exitDate = document.getElementById('exit-date').value;
@@ -724,6 +797,7 @@ struct SchengenTracker: Document {
             function init() {
                 loadVisits();
                 updateCalculations();
+                updateFutureTripDisplay();
                 renderVisits();
                 updateSharedBanner();
 
