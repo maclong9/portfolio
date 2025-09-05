@@ -125,7 +125,7 @@ struct SchengenTracker: Document {
         // Next Reset
         Stack(classes: [
           "bg-white", "dark:bg-zinc-800", "p-6", "rounded-lg", "border", "border-zinc-200", "dark:border-zinc-700",
-          "mb-6",
+          "mb-6", "flex", "flex-col"
         ]) {
           Heading(.title, "Next Reset Date", classes: ["text-lg", "font-semibold", "mb-2"])
           Text("No visits yet", id: "next-reset", classes: ["text-2xl", "mb-4"])
