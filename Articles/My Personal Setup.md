@@ -2,6 +2,7 @@
 title: My Development Environment Setup
 description: Creating a development environment that sparks joy with modern tools, thoughtful automation, and comprehensive configuration.
 published: April 11, 2025
+emoji: ⚙️
 ---
 
 Look, I've been down the rabbit hole of development environment configuration more times than I care to admit. You know how it goes - you see someone's sleek terminal setup on Twitter, spend three hours configuring something you'll never use, and somehow end up with a development environment that's slower than before.

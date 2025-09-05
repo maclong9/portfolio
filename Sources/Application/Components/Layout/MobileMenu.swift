@@ -136,12 +136,12 @@ public struct MobileMenu: Element {
           }
         }
       }
-      .slideMenu(
-        overlayId: "mobile-menu-overlay",
-        from: .fromRight,
-        duration: 300,
-        toggleButtonSelector: "#mobile-menu-button"
-      )
+      // .slideMenu(
+      //   overlayId: "mobile-menu-overlay", 
+      //   from: .fromRight,
+      //   duration: 300,
+      //   toggleButtonSelector: "#mobile-menu-button"
+      // ) // Temporarily disabled
     }
   }
 }

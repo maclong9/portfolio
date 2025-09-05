@@ -7,6 +7,7 @@ public struct Layout: Element {
   let description: String
   let published: Date?
   let breadcrumbs: [Breadcrumb]?
+  let emoji: String?
   let content: MarkupContentBuilder
 
   public init(
@@ -15,6 +16,7 @@ public struct Layout: Element {
     description: String,
     published: Date? = nil,
     breadcrumbs: [Breadcrumb]? = nil,
+    emoji: String? = nil,
     @MarkupBuilder content: @escaping MarkupContentBuilder
   ) {
     self.path = path
@@ -22,6 +24,7 @@ public struct Layout: Element {
     self.description = description
     self.published = published
     self.breadcrumbs = breadcrumbs
+    self.emoji = emoji
     self.content = content
   }
 
@@ -36,7 +39,7 @@ public struct Layout: Element {
       Stack(classes: [
         "min-h-screen", "flex", "flex-col",
       ]) {
-        LayoutHeader(breadcrumbs: breadcrumbs)
+        LayoutHeader(breadcrumbs: breadcrumbs, emoji: emoji)
 
         Main(classes: ["flex-1", "px-4", "py-8", "pt-28"]) {
           Stack {

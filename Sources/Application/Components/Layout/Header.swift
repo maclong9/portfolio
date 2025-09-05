@@ -185,7 +185,7 @@ public struct LayoutHeader: Element {
           }
         }
       }
-      .scrollHeader(threshold: 10, showOnTop: true, duration: 300)
+      // .scrollHeader(threshold: 10, showOnTop: true, duration: 300) // Temporarily disabled
     }
   }
 }

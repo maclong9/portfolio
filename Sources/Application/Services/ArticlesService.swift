@@ -65,6 +65,7 @@ public struct ArticleResponse: Identifiable {
     public let publishedDate: Date?
     public let readTime: String?
     public let slug: String
+    public let emoji: String?
     
     public init(id: String, parsed: WebUIMarkdown.ParsedMarkdown) {
         self.id = id
@@ -82,6 +83,7 @@ public struct ArticleResponse: Identifiable {
             self.publishedDate = nil
         }
         self.readTime = Self.calculateReadTime(from: parsed.htmlContent)
+        self.emoji = parsed.frontMatter["emoji"] as? String
     }
     
     private static func parseDate(from dateString: String?) -> Date? {
@@ -108,7 +110,7 @@ public struct ArticleResponse: Identifiable {
             linkURL: "/posts/\(slug)",
             linkText: "Read more",
             newTab: false,
-            emoji: "📝", // Default article emoji
+            emoji: emoji ?? "📝", // Use article emoji or default
             publishedDate: publishedDate
         )
     }
