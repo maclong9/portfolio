@@ -120,11 +120,27 @@ struct SchengenTracker: Document {
                 id: "days-remaining",
                 classes: ["text-4xl", "font-bold", "text-green-600", "dark:text-green-400"]
               )
-              Text(
-                "",
-                id: "days-after-planned",
-                classes: ["text-2xl", "font-medium", "text-green-400", "dark:text-green-500", "opacity-60", "hidden"]
-              )
+              Stack(id: "days-after-planned-container", classes: ["flex", "items-baseline", "gap-1", "ml-1", "hidden"]) {
+                Text(
+                  "",
+                  id: "days-after-planned",
+                  classes: ["text-4xl", "font-bold", "text-green-600", "dark:text-green-400", "opacity-60"]
+                )
+                Stack(classes: ["relative", "group"]) {
+                  Icon(
+                    name: "info",
+                    classes: ["w-4", "h-4", "text-green-600", "dark:text-green-400", "opacity-60", "cursor-help"]
+                  )
+                  Stack(classes: [
+                    "absolute", "bottom-full", "left-1/2", "transform", "-translate-x-1/2", "mb-2",
+                    "bg-zinc-900", "dark:bg-zinc-700", "text-white", "text-xs", "rounded", "py-1", "px-2",
+                    "whitespace-nowrap", "opacity-0", "group-hover:opacity-100", "transition-opacity",
+                    "pointer-events-none", "z-10"
+                  ]) {
+                    Text("After planned trips")
+                  }
+                }
+              }
             }
           }
         }
@@ -652,14 +668,20 @@ struct SchengenTracker: Document {
                 });
                 
                 if (futureVisits.length === 0) {
-                    return null; // No future trips planned
+                    return { futureDaysRemaining: null, latestFutureVisitId: null };
                 }
                 
-                // Find the latest future trip exit date
-                const latestFutureExit = futureVisits.reduce((latest, visit) => {
+                // Find the latest future trip exit date and its visit
+                let latestFutureExit = new Date(0);
+                let latestFutureVisit = null;
+                
+                futureVisits.forEach(visit => {
                     const exitDate = new Date(visit.exit);
-                    return exitDate > latest ? exitDate : latest;
-                }, new Date(0));
+                    if (exitDate > latestFutureExit) {
+                        latestFutureExit = exitDate;
+                        latestFutureVisit = visit;
+                    }
+                });
                 
                 // Calculate the 180-day window from the latest future trip
                 const futureCutoffDate = new Date(latestFutureExit);
@@ -684,19 +706,31 @@ struct SchengenTracker: Document {
                 });
                 
                 const futureDaysRemaining = Math.max(0, 90 - Math.min(totalFutureDays, 90));
-                return futureDaysRemaining;
+                return {
+                    futureDaysRemaining: futureDaysRemaining,
+                    latestFutureVisitId: latestFutureVisit ? latestFutureVisit.id : null
+                };
             }
 
             function updateFutureTripDisplay() {
-                const futureDaysRemaining = calculateFutureTripImpact();
+                const futureImpact = calculateFutureTripImpact();
                 const daysAfterPlannedEl = document.getElementById('days-after-planned');
+                const daysAfterPlannedContainer = document.getElementById('days-after-planned-container');
+                const daysRemainingEl = document.getElementById('days-remaining');
                 
-                if (daysAfterPlannedEl) {
-                    if (futureDaysRemaining !== null && futureDaysRemaining !== state.daysRemaining) {
-                        daysAfterPlannedEl.textContent = `(${futureDaysRemaining} after planned)`;
-                        daysAfterPlannedEl.classList.remove('hidden');
+                // Update state with latest future visit ID
+                state.latestFutureVisitId = futureImpact.latestFutureVisitId;
+                
+                if (daysAfterPlannedEl && daysAfterPlannedContainer && daysRemainingEl) {
+                    if (futureImpact.futureDaysRemaining !== null && futureImpact.futureDaysRemaining !== state.daysRemaining) {
+                        // Show current remaining without change, and future remaining in faded container
+                        daysRemainingEl.textContent = state.daysRemaining;
+                        daysAfterPlannedEl.textContent = futureImpact.futureDaysRemaining;
+                        daysAfterPlannedContainer.classList.remove('hidden');
                     } else {
-                        daysAfterPlannedEl.classList.add('hidden');
+                        // Show current remaining and hide future container
+                        daysRemainingEl.textContent = state.daysRemaining;
+                        daysAfterPlannedContainer.classList.add('hidden');
                     }
                 }
             }
