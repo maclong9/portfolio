@@ -1,0 +1,859 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mac Long - Developer | Mac Long</title><meta property="og:title" content="Mac Long - Developer | Mac Long"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Swift, TypeScript, React and TailwindCSS developer crafting clean code and efficient forward-thinking solutions"><meta property="og:description" content="Swift, TypeScript, React and TailwindCSS developer crafting clean code and efficient forward-thinking solutions"><meta property="og:image" content="/public/og.jpg"><meta name="author" content="Mac Long"><meta name="keywords" content="software engineer, swift developer, react developer, typescript, tailwindcss, frontend development, skateboarding, punk rock, web development, iOS development"><link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>👨‍💻</text></svg>"><script type="application/ld+json">
+{"name":"Mac Long","@context":"https://schema.org","email":"hello@maclong.uk","givenName":"Mac","sameAs":["https://github.com/maclong9","https://orcid.org/0009-0002-4180-3822"],"image":"https://avatars.githubusercontent.com/u/115668288?v=4","@type":"Person","jobTitle":"Software Engineer","url":"https://maclong.uk","familyName":"Long"}
+</script><script src="/public/js/theme.js"></script><script src="https://unpkg.com/@tailwindcss/browser@4"></script><script src="https://unpkg.com/lucide@latest"></script><meta name="generator" content="WebUI" /><link rel="preload" href="https://unpkg.com/@tailwindcss/browser@4" as="script"><link rel="preload" href="https://unpkg.com/lucide@latest" as="script"><link rel="dns-prefetch" href="//unpkg.com"><link rel="preload" href="/public/js/theme.js" as="script"><link rel="preload" href="/public/js/icons.js" as="script"><style type="text/tailwindcss">
+    @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+    
+    /* Hero animations */
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes avatarFadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    /* Progressive Reveal for Cards */
+    .reveal-card {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .reveal-card.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .reveal-card:nth-child(1) { transition-delay: 0.1s; }
+    .reveal-card:nth-child(2) { transition-delay: 0.2s; }
+    .reveal-card:nth-child(3) { transition-delay: 0.3s; }
+    .reveal-card:nth-child(4) { transition-delay: 0.4s; }
+    .reveal-card:nth-child(5) { transition-delay: 0.5s; }
+    .reveal-card:nth-child(6) { transition-delay: 0.6s; }
+    
+    /* Hero element animations */
+    .hero-avatar {
+        animation: avatarFadeIn 0.8s ease-out;
+    }
+    
+    .hero-name {
+        animation: slideUp 0.6s ease-out 0.1s both;
+    }
+    
+    .hero-description {
+        animation: slideUp 0.6s ease-out 0.3s both;
+    }
+    
+    /* Typography enhancements for prose content */
+    .prose {
+        @apply text-zinc-700 dark:text-zinc-300 leading-relaxed;
+    }
+
+    /* Paragraph spacing */
+    .prose p {
+        @apply mb-6 leading-relaxed;
+    }
+
+    /* Headings */
+    .prose h1 {
+        @apply text-3xl font-bold text-zinc-900 dark:text-zinc-100 mt-12 mb-6 leading-tight;
+    }
+    
+    .prose h2 {
+        @apply text-2xl font-bold text-zinc-900 dark:text-zinc-100 mt-10 mb-4 leading-tight;
+    }
+    
+    .prose h3 {
+        @apply text-xl font-semibold text-zinc-900 dark:text-zinc-100 mt-8 mb-3 leading-snug;
+    }
+    
+    .prose h4 {
+        @apply text-lg font-semibold text-zinc-900 dark:text-zinc-100 mt-6 mb-2;
+    }
+
+    /* Lists */
+    .prose ul {
+        @apply mb-6 pl-6;
+    }
+    
+    .prose ol {
+        @apply mb-6 pl-6;
+    }
+    
+    .prose li {
+        @apply mb-2 leading-relaxed;
+    }
+    
+    .prose ul > li {
+        @apply relative;
+    }
+    
+    .prose ul > li::before {
+        content: "•";
+        @apply absolute -left-4 text-teal-600 dark:text-teal-400 font-medium;
+    }
+
+    /* Links */
+    .prose a {
+        @apply text-teal-600 dark:text-teal-400 underline decoration-teal-600/30 underline-offset-2 transition-colors;
+    }
+    
+    .prose a:hover {
+        @apply text-teal-700 dark:text-teal-300 decoration-teal-600/60;
+    }
+
+    /* Blockquotes */
+    .prose blockquote {
+        @apply border-l-4 border-teal-500 pl-6 py-4 my-6 italic text-zinc-600 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-800/50 rounded-r;
+    }
+    
+    .prose blockquote p {
+        @apply mb-3 last:mb-0;
+    }
+    
+    /* Blockquote attribution styling */
+    .prose blockquote cite,
+    .prose blockquote footer {
+        @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3 block;
+    }
+    
+    .prose blockquote cite::before,
+    .prose blockquote footer::before {
+        content: "— ";
+    }
+    
+    /* Attribution styling for marked elements */
+    .prose blockquote p.attribution {
+        @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3;
+    }
+
+    /* Code block styling */
+    .prose pre {
+        @apply bg-zinc-900 dark:bg-zinc-800 text-zinc-100 text-xs p-4 rounded-lg my-6 overflow-x-auto;
+        border: 1px solid theme(colors.zinc.700);
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+    
+    .prose code:not(pre code) {
+        @apply bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-1.5 py-0.5 rounded text-sm font-mono;
+    }
+
+    /* Tables */
+    .prose table {
+        @apply w-full my-6 border-collapse;
+    }
+    
+    .prose th {
+        @apply bg-zinc-50 dark:bg-zinc-800 font-semibold text-left px-4 py-3 border-b border-zinc-200 dark:border-zinc-700;
+    }
+    
+    .prose td {
+        @apply px-4 py-3 border-b border-zinc-100 dark:border-zinc-800;
+    }
+
+    /* Horizontal rules */
+    .prose hr {
+        @apply my-8 border-t-2 border-zinc-200 dark:border-zinc-700;
+    }
+
+    /* Strong and emphasis */
+    .prose strong {
+        @apply font-semibold text-zinc-900 dark:text-zinc-100;
+    }
+    
+    .prose em {
+        @apply italic text-zinc-600 dark:text-zinc-400;
+    }
+
+    /* Accessibility: Hide animations on reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        .reveal-card,
+        .hero-avatar,
+        .hero-name, 
+        .hero-description {
+            animation: none !important;
+            transition: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    }
+</style></head><body class="bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 transition-colors duration-300"><div><div id="mobile-menu-container" data-mobile-menu-open="false"><div id="mobile-menu-overlay" class="fixed inset-y-0 right-0 w-64 bg-white dark:bg-zinc-800 border-l border-zinc-200 dark:border-zinc-700 px-6 py-8 shadow-xl transform translate-x-full transition-transform duration-300 ease-out z-100 hidden" data-mobile-menu="closed"><div class="flex flex-col space-y-3"><div class="flex items-center justify-between mb-4"><span class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Navigation</span><button id="mobile-menu-close" class="p-1 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200" aria-label="Close menu"><i data-lucide="x" class="w-5 h-5"></i></button></div><a href="/posts" class="flex items-center space-x-3 p-3 text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-lg transition-colors cursor-pointer" data-mobile-menu-link="posts"><i data-lucide="file-text" class="w-5 h-5"></i><span>Posts</span></a><a href="mailto:hello@maclong.uk" class="flex items-center space-x-3 p-3 text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-lg transition-colors cursor-pointer" data-mobile-menu-link="email"><i data-lucide="mail" class="w-5 h-5"></i><span>Email</span></a><a href="https://github.com/maclong9" class="flex items-center space-x-3 p-3 text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-lg transition-colors cursor-pointer" data-mobile-menu-link="github" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i><span>GitHub</span></a><div class="border-t border-zinc-200 dark:border-zinc-700 pt-4"><span class="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-3">Theme</span><div class="space-y-1"><button id="theme-system-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700" data-theme-option="system" onclick="if (window.setTheme) window.setTheme('system'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="monitor" class="w-4 h-4"></i><span>System</span></div></button><button id="theme-light-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700" data-theme-option="light" onclick="if (window.setTheme) window.setTheme('light'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="sun" class="w-4 h-4"></i><span>Light</span></div></button><button id="theme-dark-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700" data-theme-option="dark" onclick="if (window.setTheme) window.setTheme('dark'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="moon" class="w-4 h-4"></i><span>Dark</span></div></button></div></div></div></div></div></div><div class="min-h-screen flex flex-col"><div><header id="main-header" class="fixed top-0 left-0 right-0 bg-white dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-700 px-4 py-6 z-30 transition-transform duration-300 ease-in-out"><div class="max-w-4xl mx-auto flex items-center justify-between"><div class="flex items-center justify-between w-full"><span class="text-zinc-900 dark:text-zinc-100 font-medium">Mac Long</span><div class="flex items-center space-x-6"><div class="flex items-center space-x-2"><div class="md:hidden"><button id="mobile-menu-button" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Menu" onclick="toggleSlideMenu('mobile-menu-container')"><i data-lucide="chevron-left" class="w-5 h-5"></i></button></div><div class="hidden md:flex items-center space-x-2"><a href="/posts" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Posts"><i data-lucide="file-text" class="w-5 h-5"></i></a><a href="mailto:hello@maclong.uk" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Email"><i data-lucide="mail" class="w-5 h-5"></i></a><a href="https://github.com/maclong9" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="View GitHub Profile" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i></a><div class="relative theme-dropdown"><button class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Change theme" data-theme-toggle="true"><i data-lucide="sun" theme-icon="light" class="hidden"></i><i data-lucide="moon" theme-icon="dark" class="hidden"></i><i data-lucide="palette" theme-icon="system" class="w-5 h-5"></i></button><div class="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-zinc-800 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700 py-1 z-50 theme-dropdown-menu hidden"><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="system"><i data-lucide="palette" class="w-5 h-5"></i><span>System</span></button><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="light"><i data-lucide="sun" class="w-5 h-5"></i><span>Light</span></button><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="dark"><i data-lucide="moon" class="w-5 h-5"></i><span>Dark</span></button></div><style>.theme-dropdown-menu {
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transition: opacity 0.15s ease-in, transform 0.15s ease-in;
+}
+
+.theme-dropdown-menu--open {
+    display: block;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.theme-option--active {
+    background-color: rgb(240 253 250);
+    color: rgb(15 118 110);
+}
+
+.dark .theme-option--active {
+    background-color: rgb(19 78 74 / 0.5);
+    color: rgb(94 234 212);
+}
+
+[data-theme-icon] {
+    display: none;
+}
+
+[data-theme-icon="system"] {
+    display: block;
+}</style><script>// Theme dropdown functionality - colocated with ThemeDropdown component
+(function() {
+    let isDropdownOpen = false;
+
+    function initThemeDropdown() {
+        // Listen for dropdown toggle
+        document.addEventListener('click', (e) => {
+            const themeToggle = e.target.closest('[data-theme-toggle]');
+            if (themeToggle) {
+                e.preventDefault();
+                toggleDropdown();
+                return;
+            }
+
+            const themeOption = e.target.closest('[data-theme-option]');
+            if (themeOption) {
+                e.preventDefault();
+                const theme = themeOption.dataset.themeOption;
+                setTheme(theme);
+                updateDropdownUI();
+                closeDropdown();
+                return;
+            }
+
+            // Close dropdown when clicking outside
+            if (isDropdownOpen && !e.target.closest('.theme-dropdown')) {
+                closeDropdown();
+            }
+        });
+
+        // Update UI initially and when theme changes
+        updateDropdownUI();
+        
+        // Listen for theme changes
+        const observer = new MutationObserver(() => {
+            updateDropdownUI();
+        });
+        
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
+    }
+
+    function toggleDropdown() {
+        if (isDropdownOpen) {
+            closeDropdown();
+        } else {
+            openDropdown();
+        }
+    }
+
+    function openDropdown() {
+        isDropdownOpen = true;
+        const dropdown = document.querySelector('.theme-dropdown-menu');
+        if (dropdown) {
+            dropdown.classList.remove('hidden');
+            // Trigger reflow for animation
+            dropdown.offsetHeight;
+            dropdown.classList.add('theme-dropdown-menu--open');
+        }
+    }
+
+    function closeDropdown() {
+        isDropdownOpen = false;
+        const dropdown = document.querySelector('.theme-dropdown-menu');
+        if (dropdown) {
+            dropdown.classList.remove('theme-dropdown-menu--open');
+            setTimeout(() => {
+                if (!isDropdownOpen) {
+                    dropdown.classList.add('hidden');
+                }
+            }, 200); // Match transition duration
+        }
+    }
+
+    function setTheme(theme) {
+        localStorage.setItem('theme', theme);
+        updateTheme();
+    }
+
+    function updateTheme() {
+        const themePreference = localStorage.getItem('theme') || 'system';
+        let actualTheme = 'light';
+
+        if (themePreference === 'dark') {
+            actualTheme = 'dark';
+        } else if (themePreference === 'system') {
+            actualTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        document.documentElement.setAttribute('data-theme', actualTheme);
+    }
+
+    function updateDropdownUI() {
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        
+        // Update theme toggle button icon
+        const toggleIcons = document.querySelectorAll('[data-theme-icon]');
+        toggleIcons.forEach(icon => {
+            icon.style.display = 'none';
+        });
+        
+        const activeIcon = document.querySelector(`[data-theme-icon="${savedTheme}"]`);
+        if (activeIcon) {
+            activeIcon.style.display = 'block';
+        }
+
+        // Update dropdown options
+        const options = document.querySelectorAll('[data-theme-option]');
+        options.forEach(option => {
+            const isActive = option.dataset.themeOption === savedTheme;
+            option.classList.toggle('theme-option--active', isActive);
+        });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initThemeDropdown);
+    } else {
+        initThemeDropdown();
+    }
+})();</script></div></div></div></div></div></div></header></div><main class="flex-1 px-4 py-8 pt-28"><div><div class="max-w-4xl mx-auto space-y-16"><section class="text-center mb-16"><div class="relative"><div><div class="particle-bg overflow-hidden absolute inset-0 w-full h-full opacity-80"></div><script>// Optimized particle network animation
+(function() {
+    function initParticleNetwork() {
+        const container = document.querySelector('.particle-bg');
+        if (!container) return;
+
+        // Prevent multiple initializations
+        if (container.dataset.initialized) return;
+        container.dataset.initialized = 'true';
+
+        // Clear existing animations
+        container.innerHTML = '';
+
+        // Add a slight delay to ensure container is properly sized
+        setTimeout(() => { createParticleNetwork(container); }, 100);
+    }
+
+    function createParticleNetwork(container) {
+        if (!container) return;
+
+        // Create SVG element for connected particle network
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        `;
+
+        container.appendChild(svg);
+
+        // Optimized animation state
+        let isVisible = true;
+        let animationId = null;
+        let lastConnectionUpdate = 0;
+        const connectionUpdateInterval = 100; // Update connections every 100ms instead of every frame
+
+        // Create particles with positions
+        const particles = [];
+        const numParticles = 24;
+        let animationStartTime = Date.now();
+
+        // Object pool for line elements to avoid constant DOM creation/destruction
+        const linePool = [];
+        let activeLinesCount = 0;
+
+        // Create particles with better distribution
+        for (let i = 0; i < numParticles; i++) {
+            let x, y;
+
+            // Distribute particles across regions
+            if (i < numParticles * 0.25) {
+                x = 5 + Math.random() * 30;
+                y = 10 + Math.random() * 80;
+            } else if (i < numParticles * 0.5) {
+                x = 25 + Math.random() * 30;
+                y = 15 + Math.random() * 70;
+            } else if (i < numParticles * 0.75) {
+                x = 45 + Math.random() * 30;
+                y = 20 + Math.random() * 60;
+            } else {
+                x = 65 + Math.random() * 30;
+                y = 10 + Math.random() * 80;
+            }
+
+            const particle = {
+                x: x,
+                y: y,
+                baseX: x,
+                baseY: y,
+                vx: (Math.random() - 0.5) * 0.03,
+                vy: (Math.random() - 0.5) * 0.03,
+                size: Math.random() * 2 + 1.5,
+                driftSpeed: 0.008 + Math.random() * 0.012,
+                driftAngle: Math.random() * Math.PI * 2,
+                region: Math.floor(i / (numParticles / 4)),
+            };
+
+            particles.push(particle);
+
+            // Create visual particle
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('r', particle.size);
+            circle.setAttribute('fill', 'rgba(20, 184, 166, 0.5)');
+            circle.setAttribute('opacity', '0.6');
+            particle.element = circle;
+            svg.appendChild(circle);
+        }
+
+        // Helper function to get or create a line element from pool
+        function getLineFromPool() {
+            if (linePool.length > activeLinesCount) {
+                const line = linePool[activeLinesCount];
+                line.style.display = '';
+                return line;
+            } else {
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('stroke', 'rgba(20, 184, 166, 0.25)');
+                line.setAttribute('stroke-width', '1');
+                svg.appendChild(line);
+                linePool.push(line);
+                return line;
+            }
+        }
+
+        // Helper function to hide unused lines
+        function hideUnusedLines() {
+            for (let i = activeLinesCount; i < linePool.length; i++) {
+                linePool[i].style.display = 'none';
+            }
+        }
+
+        // Optimized connection calculation (reduced frequency)
+        function updateConnections(timestamp, width, height) {
+            activeLinesCount = 0;
+            
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p1 = particles[i];
+                    const p2 = particles[j];
+                    const dx = p1.x - p2.x;
+                    const dy = p1.y - p2.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 30) {
+                        const line = getLineFromPool();
+                        const actualX1 = (p1.x / 100) * width;
+                        const actualY1 = (p1.y / 100) * height;
+                        const actualX2 = (p2.x / 100) * width;
+                        const actualY2 = (p2.y / 100) * height;
+
+                        line.setAttribute('x1', actualX1);
+                        line.setAttribute('y1', actualY1);
+                        line.setAttribute('x2', actualX2);
+                        line.setAttribute('y2', actualY2);
+                        line.setAttribute('opacity', (1 - distance / 30) * 0.7);
+                        activeLinesCount++;
+                    }
+                }
+            }
+            
+            hideUnusedLines();
+        }
+
+        // Visibility detection for performance optimization
+        const observer = new IntersectionObserver((entries) => {
+            isVisible = entries[0].isIntersecting;
+            if (!isVisible && animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            } else if (isVisible && !animationId) {
+                animate();
+            }
+        }, { threshold: 0.1 });
+        
+        observer.observe(container);
+
+        // Optimized animation function
+        const animate = (timestamp) => {
+            if (!isVisible) return;
+
+            const containerRect = container.getBoundingClientRect();
+            const width = containerRect.width;
+            const height = containerRect.height;
+            const currentTime = Date.now();
+            const elapsed = currentTime - animationStartTime;
+
+            // Update particle positions (this runs at 60fps)
+            particles.forEach((particle) => {
+                if (elapsed < 3000) {
+                    // Initial settling phase
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+
+                    particle.vx *= 0.995;
+                    particle.vy *= 0.995;
+
+                    // Bounce off edges
+                    if (particle.x <= 2) {
+                        particle.vx = Math.abs(particle.vx) * 0.3;
+                        particle.x = 2;
+                    }
+                    if (particle.x >= 98) {
+                        particle.vx = -Math.abs(particle.vx) * 0.3;
+                        particle.x = 98;
+                    }
+                    if (particle.y <= 2) {
+                        particle.vy = Math.abs(particle.vy) * 0.3;
+                        particle.y = 2;
+                    }
+                    if (particle.y >= 98) {
+                        particle.vy = -Math.abs(particle.vy) * 0.3;
+                        particle.y = 98;
+                    }
+                } else {
+                    // Continuous gentle movement
+                    particle.driftAngle += (Math.random() - 0.5) * 0.02;
+
+                    const driftX = Math.cos(particle.driftAngle) * particle.driftSpeed;
+                    const driftY = Math.sin(particle.driftAngle) * particle.driftSpeed;
+
+                    const returnForceX = (particle.baseX - particle.x) * 0.002;
+                    const returnForceY = (particle.baseY - particle.y) * 0.002;
+
+                    particle.x += driftX + returnForceX;
+                    particle.y += driftY + returnForceY;
+
+                    // Keep within bounds
+                    if (particle.x <= 2) {
+                        particle.x = 2;
+                        particle.driftAngle = Math.abs(particle.driftAngle);
+                    }
+                    if (particle.x >= 98) {
+                        particle.x = 98;
+                        particle.driftAngle = Math.PI - Math.abs(particle.driftAngle);
+                    }
+                    if (particle.y <= 2) {
+                        particle.y = 2;
+                        particle.driftAngle = -Math.abs(particle.driftAngle);
+                    }
+                    if (particle.y >= 98) {
+                        particle.y = 98;
+                        particle.driftAngle = Math.PI + Math.abs(particle.driftAngle);
+                    }
+                }
+
+                // Update visual position (60fps - light operation)
+                const actualX = (particle.x / 100) * width;
+                const actualY = (particle.y / 100) * height;
+                particle.element.setAttribute('cx', actualX);
+                particle.element.setAttribute('cy', actualY);
+            });
+
+            // Update connections only every 100ms instead of every frame
+            if (timestamp - lastConnectionUpdate > connectionUpdateInterval) {
+                updateConnections(timestamp, width, height);
+                lastConnectionUpdate = timestamp;
+            }
+
+            animationId = requestAnimationFrame(animate);
+        };
+
+        // Start animation
+        animate();
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initParticleNetwork);
+    } else {
+        initParticleNetwork();
+    }
+})();</script></div><div class="text-center z-20 max-w-xl mx-auto text-balance"><img src="https://avatars.githubusercontent.com/u/115668288?v=4" alt="Mac Long" / class="w-24 h-24 rounded-full border-2 border-teal-400 shadow-lg mx-auto mb-6 hero-avatar"><h1 class="text-4xl md:text-5xl font-bold mb-4 hero-name">Mac Long</h1><span class="text-xl mb-8 mx-auto hero-description">Passionate about creating modern software experiences with clean code and thoughtful design.</span></div></div></section><section class="mb-16"><h2 class="text-2xl font-bold mb-8 text-center">Technologies & Skills</h2><div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto auto-rows-min"><div class="flex flex-col justify-center bg-white dark:bg-zinc-800 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-700 p-6 hover:shadow-lg hover:shadow-teal-500/20 dark:hover:shadow-teal-400/20 transition-all duration-300 cursor-pointer card reveal-card min-h-[220px]"><div class="flex items-start justify-between mb-4"><div class="w-12 h-12 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center"><span class="text-2xl">📱</span></div></div><div class="flex flex-col"><h3 class="text-lg font-semibold mb-3 transition-colors">Apple Ecosystem</h3><span class="text-sm mb-4 flex-1">Native iOS and macOS development using Swift and SwiftUI for beautiful, performant applications.</span><div class="mt-auto"><div class="flex flex-wrap gap-2 mb-3"><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Swift</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">SwiftUI</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Xcode</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">iOS</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">macOS</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">App Store</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">UIKit</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Core Data</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">TestFlight</span></div></div></div></div><div class="flex flex-col justify-center bg-white dark:bg-zinc-800 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-700 p-6 hover:shadow-lg hover:shadow-teal-500/20 dark:hover:shadow-teal-400/20 transition-all duration-300 cursor-pointer card reveal-card min-h-[220px]"><div class="flex items-start justify-between mb-4"><div class="w-12 h-12 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center"><span class="text-2xl">☁️</span></div></div><div class="flex flex-col"><h3 class="text-lg font-semibold mb-3 transition-colors">Cloud & DevOps</h3><span class="text-sm mb-4 flex-1">Modern deployment and infrastructure management with automated CI/CD and cloud hosting.</span><div class="mt-auto"><div class="flex flex-wrap gap-2 mb-3"><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Cloudflare</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Vercel</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">AWS</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">GitHub</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Docker</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">CI/CD</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Kubernetes</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Git</span></div></div></div></div><div class="flex flex-col justify-center bg-white dark:bg-zinc-800 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-700 p-6 hover:shadow-lg hover:shadow-teal-500/20 dark:hover:shadow-teal-400/20 transition-all duration-300 cursor-pointer card reveal-card min-h-[220px]"><div class="flex items-start justify-between mb-4"><div class="w-12 h-12 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center"><span class="text-2xl">🖥️</span></div></div><div class="flex flex-col"><h3 class="text-lg font-semibold mb-3 transition-colors">Frontend</h3><span class="text-sm mb-4 flex-1">Creating responsive, interactive web experiences with modern frameworks and cutting-edge styling.</span><div class="mt-auto"><div class="flex flex-wrap gap-2 mb-3"><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">React</span><p class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Next.js</p><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">TypeScript</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">TailwindCSS</span><p class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Alpine.js</p><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">HTML5</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">CSS3</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">HTMX</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Vite</span></div></div></div></div><div class="flex flex-col justify-center bg-white dark:bg-zinc-800 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-700 p-6 hover:shadow-lg hover:shadow-teal-500/20 dark:hover:shadow-teal-400/20 transition-all duration-300 cursor-pointer card reveal-card min-h-[220px]"><div class="flex items-start justify-between mb-4"><div class="w-12 h-12 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center"><span class="text-2xl">⚙️</span></div></div><div class="flex flex-col"><h3 class="text-lg font-semibold mb-3 transition-colors">Backend</h3><span class="text-sm mb-4 flex-1">Building scalable server-side applications and APIs with robust databases and efficient data management.</span><div class="mt-auto"><div class="flex flex-wrap gap-2 mb-3"><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Swift</span><p class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Node.js</p><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Express</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">PostgreSQL</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Redis</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">REST APIs</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Websockets</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Hummingbird</span></div></div></div></div><script>// Card scroll animations - exact port from portfolio-archive
+(function() {
+    // Skip if already initialized globally
+    if (window.cardAnimationsInitialized) return;
+    window.cardAnimationsInitialized = true;
+
+    let lastScrollTop = 0;
+    let scrollVelocity = 0;
+    let isScrollingFast = false;
+    let scrollTimeout;
+
+    // Track scroll velocity
+    window.addEventListener('scroll', () => {
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        scrollVelocity = Math.abs(currentScrollTop - lastScrollTop);
+        lastScrollTop = currentScrollTop;
+
+        // Consider fast scrolling if velocity > 20px per frame
+        isScrollingFast = scrollVelocity > 20;
+
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            isScrollingFast = false;
+            scrollVelocity = 0;
+        }, 150);
+    }, { passive: true });
+
+    const observerOptions = {
+        threshold: 0.25,
+        rootMargin: '0px 0px 100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const card = entry.target;
+
+                // Apply dynamic animation based on scroll speed
+                if (isScrollingFast || scrollVelocity > 50) {
+                    // Fast scroll: instant or very quick animation
+                    card.style.transition = 'opacity 0.15s ease-out, transform 0.15s ease-out';
+                    card.style.transitionDelay = '0s';
+                } else if (scrollVelocity > 15) {
+                    // Medium scroll: faster animation
+                    card.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                    const baseDelay = parseFloat(card.dataset.originalDelay || '0');
+                    card.style.transitionDelay = `${baseDelay * 0.5}s`;
+                }
+                // Slow scroll keeps original timing
+
+                card.classList.add('in-view');
+            }
+        });
+    }, observerOptions);
+
+    // Shared scroll animations utility - exactly like portfolio-archive
+    function initCardScrollAnimations(gridSelectors = null) {
+        if (gridSelectors) {
+            let cardIndex = 0; // Global index across all grids for staggered animation
+            gridSelectors.forEach(selector => {
+                const grid = document.querySelector(selector);
+                if (grid && grid.children) {
+                    Array.from(grid.children).forEach((card) => {
+                        if (!card.classList.contains('reveal-card')) {
+                            card.classList.add('reveal-card');
+                        }
+                        const originalDelay = cardIndex * 0.1;
+                        card.style.transitionDelay = `${originalDelay}s`;
+                        card.dataset.originalDelay = originalDelay.toString();
+                        observer.observe(card);
+                        cardIndex++;
+                    });
+                }
+            });
+
+            // Also catch any existing .reveal-card elements not in the specified grids
+            const existingCards = document.querySelectorAll('.reveal-card');
+            existingCards.forEach((card) => {
+                if (!card.dataset.originalDelay) {
+                    const originalDelay = cardIndex * 0.1;
+                    card.style.transitionDelay = `${originalDelay}s`;
+                    card.dataset.originalDelay = originalDelay.toString();
+                    observer.observe(card);
+                    cardIndex++;
+                }
+            });
+        } else {
+            // Default behavior: observe all existing .reveal-card elements
+            const cards = document.querySelectorAll('.reveal-card');
+            cards.forEach((card, index) => {
+                const originalDelay = index * 0.1;
+                card.style.transitionDelay = `${originalDelay}s`;
+                card.dataset.originalDelay = originalDelay.toString();
+                observer.observe(card);
+            });
+        }
+    }
+
+    // Make the utility globally available
+    window.initCardScrollAnimations = initCardScrollAnimations;
+
+    // Auto-initialize for current grid
+    function initCurrentGrid() {
+        // Find the current grid (parent of this script)
+        const currentScript = document.currentScript || document.scripts[document.scripts.length - 1];
+        const currentGrid = currentScript.closest('.grid');
+        
+        if (currentGrid) {
+            // Give other scripts time to add their grids too
+            setTimeout(() => {
+                const allGrids = document.querySelectorAll('.grid');
+                const gridSelectors = Array.from(allGrids).map((grid, index) => {
+                    if (!grid.id) grid.id = `auto-grid-${index}`;
+                    return `#${grid.id}`;
+                });
+                initCardScrollAnimations(gridSelectors);
+            }, 200);
+        } else {
+            // Fallback to default behavior
+            setTimeout(() => initCardScrollAnimations(), 200);
+        }
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCurrentGrid);
+    } else {
+        initCurrentGrid();
+    }
+})();</script></div></section><section class="mb-16"><h2 class="text-2xl font-bold mb-8 text-center">Recent Projects</h2><div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto auto-rows-min"><a href="https://github.com/maclong9/constellate" target="_blank" rel="noreferrer"><div class="flex flex-col justify-center bg-white dark:bg-zinc-800 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-700 p-6 hover:shadow-lg hover:shadow-teal-500/20 dark:hover:shadow-teal-400/20 transition-all duration-300 cursor-pointer card reveal-card min-h-[220px]"><div class="flex items-start justify-between mb-4"><div class="w-12 h-12 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center"><span class="text-2xl">✨</span></div><div class="flex flex-wrap gap-1"><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Swift</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">WebUI</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">SwiftUI</span></div></div><div class="flex flex-col"><h3 class="text-lg font-semibold mb-3 transition-colors">Constellate - 🚧</h3><span class="text-sm mb-4 flex-1">Full stack SaaS application for increasing productivity among startups and small teams.</span><div class="mt-auto"><span class="text-sm font-medium text-teal-700 dark:text-teal-300 self-end">View here →</span></div></div></div></a><a href="/tools"><div class="flex flex-col justify-center bg-white dark:bg-zinc-800 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-700 p-6 hover:shadow-lg hover:shadow-teal-500/20 dark:hover:shadow-teal-400/20 transition-all duration-300 cursor-pointer card reveal-card min-h-[220px]"><div class="flex items-start justify-between mb-4"><div class="w-12 h-12 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center"><span class="text-2xl">🛠️</span></div><div class="flex flex-wrap gap-1"><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">TailwindCSS</span><p class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Alpine.js</p><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Cloudflare</span></div></div><div class="flex flex-col"><h3 class="text-lg font-semibold mb-3 transition-colors">Tools Collection</h3><p class="text-sm mb-4 flex-1">Modern utility tools built with TailwindCSS and Alpine.js for guitar training and travel planning.</p><div class="mt-auto"><span class="text-sm font-medium text-teal-700 dark:text-teal-300 self-end">Open Tools →</span></div></div></div></a><a href="https://github.com/maclong9/list" target="_blank" rel="noreferrer"><div class="flex flex-col justify-center bg-white dark:bg-zinc-800 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-700 p-6 hover:shadow-lg hover:shadow-teal-500/20 dark:hover:shadow-teal-400/20 transition-all duration-300 cursor-pointer card reveal-card min-h-[220px]"><div class="flex items-start justify-between mb-4"><div class="w-12 h-12 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center"><span class="text-2xl">🗂️</span></div><div class="flex flex-wrap gap-1"><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Swift</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">CLI</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">macOS</span></div></div><div class="flex flex-col"><h3 class="text-lg font-semibold mb-3 transition-colors">List</h3><span class="text-sm mb-4 flex-1">A modern Swift reimplementation of the UNIX ls command with colorized output and enhanced formatting.</span><div class="mt-auto"><span class="text-sm font-medium text-teal-700 dark:text-teal-300 self-end">View on GitHub →</span></div></div></div></a><a href="https://github.com/maclong9/web-ui" target="_blank" rel="noreferrer"><div class="flex flex-col justify-center bg-white dark:bg-zinc-800 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-700 p-6 hover:shadow-lg hover:shadow-teal-500/20 dark:hover:shadow-teal-400/20 transition-all duration-300 cursor-pointer card reveal-card min-h-[220px]"><div class="flex items-start justify-between mb-4"><div class="w-12 h-12 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center"><span class="text-2xl">🌐</span></div><div class="flex flex-wrap gap-1"><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Swift</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">TailwindCSS</span><span class="px-2 py-1 text-xs bg-zinc-100 dark:bg-zinc-700 rounded">Static Sites</span></div></div><div class="flex flex-col"><h3 class="text-lg font-semibold mb-3 transition-colors">WebUI</h3><span class="text-sm mb-4 flex-1">A Swift library for generating type-safe web user interfaces with consistency and ease of use.</span><div class="mt-auto"><span class="text-sm font-medium text-teal-700 dark:text-teal-300 self-end">View on GitHub →</span></div></div></div></a><script>// Card scroll animations - exact port from portfolio-archive
+(function() {
+    // Skip if already initialized globally
+    if (window.cardAnimationsInitialized) return;
+    window.cardAnimationsInitialized = true;
+
+    let lastScrollTop = 0;
+    let scrollVelocity = 0;
+    let isScrollingFast = false;
+    let scrollTimeout;
+
+    // Track scroll velocity
+    window.addEventListener('scroll', () => {
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        scrollVelocity = Math.abs(currentScrollTop - lastScrollTop);
+        lastScrollTop = currentScrollTop;
+
+        // Consider fast scrolling if velocity > 20px per frame
+        isScrollingFast = scrollVelocity > 20;
+
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            isScrollingFast = false;
+            scrollVelocity = 0;
+        }, 150);
+    }, { passive: true });
+
+    const observerOptions = {
+        threshold: 0.25,
+        rootMargin: '0px 0px 100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const card = entry.target;
+
+                // Apply dynamic animation based on scroll speed
+                if (isScrollingFast || scrollVelocity > 50) {
+                    // Fast scroll: instant or very quick animation
+                    card.style.transition = 'opacity 0.15s ease-out, transform 0.15s ease-out';
+                    card.style.transitionDelay = '0s';
+                } else if (scrollVelocity > 15) {
+                    // Medium scroll: faster animation
+                    card.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                    const baseDelay = parseFloat(card.dataset.originalDelay || '0');
+                    card.style.transitionDelay = `${baseDelay * 0.5}s`;
+                }
+                // Slow scroll keeps original timing
+
+                card.classList.add('in-view');
+            }
+        });
+    }, observerOptions);
+
+    // Shared scroll animations utility - exactly like portfolio-archive
+    function initCardScrollAnimations(gridSelectors = null) {
+        if (gridSelectors) {
+            let cardIndex = 0; // Global index across all grids for staggered animation
+            gridSelectors.forEach(selector => {
+                const grid = document.querySelector(selector);
+                if (grid && grid.children) {
+                    Array.from(grid.children).forEach((card) => {
+                        if (!card.classList.contains('reveal-card')) {
+                            card.classList.add('reveal-card');
+                        }
+                        const originalDelay = cardIndex * 0.1;
+                        card.style.transitionDelay = `${originalDelay}s`;
+                        card.dataset.originalDelay = originalDelay.toString();
+                        observer.observe(card);
+                        cardIndex++;
+                    });
+                }
+            });
+
+            // Also catch any existing .reveal-card elements not in the specified grids
+            const existingCards = document.querySelectorAll('.reveal-card');
+            existingCards.forEach((card) => {
+                if (!card.dataset.originalDelay) {
+                    const originalDelay = cardIndex * 0.1;
+                    card.style.transitionDelay = `${originalDelay}s`;
+                    card.dataset.originalDelay = originalDelay.toString();
+                    observer.observe(card);
+                    cardIndex++;
+                }
+            });
+        } else {
+            // Default behavior: observe all existing .reveal-card elements
+            const cards = document.querySelectorAll('.reveal-card');
+            cards.forEach((card, index) => {
+                const originalDelay = index * 0.1;
+                card.style.transitionDelay = `${originalDelay}s`;
+                card.dataset.originalDelay = originalDelay.toString();
+                observer.observe(card);
+            });
+        }
+    }
+
+    // Make the utility globally available
+    window.initCardScrollAnimations = initCardScrollAnimations;
+
+    // Auto-initialize for current grid
+    function initCurrentGrid() {
+        // Find the current grid (parent of this script)
+        const currentScript = document.currentScript || document.scripts[document.scripts.length - 1];
+        const currentGrid = currentScript.closest('.grid');
+        
+        if (currentGrid) {
+            // Give other scripts time to add their grids too
+            setTimeout(() => {
+                const allGrids = document.querySelectorAll('.grid');
+                const gridSelectors = Array.from(allGrids).map((grid, index) => {
+                    if (!grid.id) grid.id = `auto-grid-${index}`;
+                    return `#${grid.id}`;
+                });
+                initCardScrollAnimations(gridSelectors);
+            }, 200);
+        } else {
+            // Fallback to default behavior
+            setTimeout(() => initCardScrollAnimations(), 200);
+        }
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCurrentGrid);
+    } else {
+        initCurrentGrid();
+    }
+})();</script></div></section></div></div></main><footer class="bg-white dark:bg-zinc-800 border-t border-zinc-200 dark:border-zinc-700 px-4 py-6 space-y-2 grid place-items-center"><div class="flex items-center space-x-2"><a href="/posts" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer"><i data-lucide="file-text" class="w-5 h-5"></i></a><a href="mailto:hello@maclong.uk" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer"><i data-lucide="mail" class="w-5 h-5"></i></a><a href="https://github.com/maclong9" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i></a></div><div class="text-zinc-500 dark:text-zinc-400 text-sm"><span>© 2025 </span><a href="https://maclong.uk" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Mac Long</a><span>.</span></div></footer></div></body><script src="/public/js/icons.js"></script></html>
