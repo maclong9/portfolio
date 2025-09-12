@@ -93,7 +93,7 @@ struct Home: Document {
         // Hero
         Section(classes: ["text-center", "mb-16"]) {
           Stack(classes: ["relative"]) {
-            ParticleNetwork()
+            RandomBackground()
             Stack(classes: ["text-center", "z-20", "max-w-xl", "mx-auto", "text-balance"]) {
               Image(
                 source: "https://avatars.githubusercontent.com/u/115668288?v=4",
