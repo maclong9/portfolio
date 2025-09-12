@@ -24,16 +24,28 @@ struct GameOfLife: Element {
                   // Clear existing content
                   container.innerHTML = '';
 
-                  // Add a slight delay to ensure container is properly sized
-                  setTimeout(() => { createGameOfLife(container); }, 100);
+
+                  // Add a longer delay to ensure container is properly sized and visible
+                  setTimeout(() => { 
+                      const rect = container.getBoundingClientRect();
+                      if (rect.width > 0 && rect.height > 0) {
+                          createGameOfLife(container); 
+                      } else {
+                          // Try again with more delay if no dimensions yet
+                          setTimeout(() => { createGameOfLife(container); }, 500);
+                      }
+                  }, 250);
               }
 
               function createGameOfLife(container) {
                   if (!container) return;
 
+
                   // Create canvas element for Game of Life
                   const canvas = document.createElement('canvas');
                   const ctx = canvas.getContext('2d');
+                  
+                  if (!ctx) return;
                   
                   canvas.style.cssText = `
                       position: absolute;
@@ -65,8 +77,12 @@ struct GameOfLife: Element {
                       canvas.width = rect.width;
                       canvas.height = rect.height;
                       
+                      
                       cols = Math.floor(canvas.width / cellSize);
                       rows = Math.floor(canvas.height / cellSize);
+                      
+                      
+                      if (cols <= 0 || rows <= 0) return;
                       
                       grid = [];
                       nextGrid = [];
@@ -77,17 +93,18 @@ struct GameOfLife: Element {
                           for (let j = 0; j < cols; j++) {
                               // Create interesting patterns with clusters
                               let alive = false;
-                              if (Math.random() < 0.15) { // Lower density for better patterns
+                              if (Math.random() < 0.25) { // Increased density for better visibility
                                   alive = true;
                               }
                               // Create some glider patterns occasionally
-                              if (Math.random() < 0.005) {
+                              if (Math.random() < 0.01) {
                                   createGlider(i, j);
                               }
                               grid[i][j] = alive ? 1 : 0;
                               nextGrid[i][j] = 0;
                           }
                       }
+                      
                   }
 
                   // Create a glider pattern at position (row, col)
@@ -155,7 +172,11 @@ struct GameOfLife: Element {
 
                   // Draw the grid
                   function drawGrid() {
+                      if (!ctx || cols <= 0 || rows <= 0) return;
+                      
                       ctx.clearRect(0, 0, canvas.width, canvas.height);
+                      
+                      let liveCells = 0;
                       
                       for (let i = 0; i < rows; i++) {
                           for (let j = 0; j < cols; j++) {
@@ -163,12 +184,24 @@ struct GameOfLife: Element {
                                   const x = j * cellSize;
                                   const y = i * cellSize;
                                   
-                                  // Use teal color to match the particle network
-                                  ctx.fillStyle = 'rgba(20, 184, 166, 0.6)';
+                                  // Use multiple teal shades like the rest of the site
+                                  const tealColors = [
+                                      'rgba(20, 184, 166, 0.8)',   // teal-500
+                                      'rgba(13, 148, 136, 0.7)',   // teal-600 
+                                      'rgba(15, 118, 110, 0.6)',   // teal-700
+                                      'rgba(45, 212, 191, 0.5)',   // teal-400
+                                  ];
+                                  
+                                  // Use a subtle variation based on position for visual interest
+                                  const colorIndex = (i + j) % tealColors.length;
+                                  ctx.fillStyle = tealColors[colorIndex];
                                   ctx.fillRect(x, y, cellSize - 1, cellSize - 1);
+                                  
+                                  liveCells++;
                               }
                           }
                       }
+                      
                   }
 
                   // Periodically inject new random cells to keep it interesting
@@ -203,7 +236,7 @@ struct GameOfLife: Element {
                   observer.observe(container);
 
                   // Animation loop
-                  const animate = (timestamp) => {
+                  const animate = (timestamp = 0) => {
                       if (!isVisible) return;
 
                       if (timestamp - lastUpdate >= updateInterval) {
