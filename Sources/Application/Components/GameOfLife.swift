@@ -87,6 +87,7 @@ struct GameOfLife: Element {
                       grid = [];
                       nextGrid = [];
                       
+                      // Initialize empty grids first
                       for (let i = 0; i < rows; i++) {
                           grid[i] = [];
                           nextGrid[i] = [];
@@ -96,12 +97,17 @@ struct GameOfLife: Element {
                               if (Math.random() < 0.25) { // Increased density for better visibility
                                   alive = true;
                               }
-                              // Create some glider patterns occasionally
+                              grid[i][j] = alive ? 1 : 0;
+                              nextGrid[i][j] = 0;
+                          }
+                      }
+                      
+                      // Add glider patterns after grid is fully initialized
+                      for (let i = 0; i < rows; i++) {
+                          for (let j = 0; j < cols; j++) {
                               if (Math.random() < 0.01) {
                                   createGlider(i, j);
                               }
-                              grid[i][j] = alive ? 1 : 0;
-                              nextGrid[i][j] = 0;
                           }
                       }
                       
