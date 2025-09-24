@@ -27,7 +27,6 @@ struct DynamicArticle: Document {
                 Breadcrumb(title: "Posts", url: "/posts"),
                 Breadcrumb(title: article.title, url: "#"),
             ],
-            emoji: article.emoji
         ) {
             ArticleLayout(article: article, contentHTML: article.htmlContent)
         }
