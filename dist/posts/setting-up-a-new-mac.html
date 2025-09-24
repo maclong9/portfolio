@@ -1,0 +1,358 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Untitled - Mac Long | Mac Long</title><meta property="og:title" content="Untitled - Mac Long | Mac Long"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta property="og:image" content="/public/og.jpg"><meta name="author" content="Mac Long"><meta name="keywords" content="article, blog, development, software engineer, swift developer, react developer, typescript, tailwindcss, frontend development, skateboarding, punk rock, web development, iOS development"><link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>👨‍💻</text></svg>"><script type="application/ld+json">
+{"@context":"https://schema.org","givenName":"Mac","sameAs":["https://github.com/maclong9","https://orcid.org/0009-0002-4180-3822"],"email":"hello@maclong.uk","image":"https://avatars.githubusercontent.com/u/115668288?v=4","@type":"Person","name":"Mac Long","jobTitle":"Software Engineer","familyName":"Long","url":"https://maclong.uk"}
+</script><script src="/public/js/theme.js"></script><script src="https://unpkg.com/@tailwindcss/browser@4"></script><script src="https://unpkg.com/lucide@latest"></script><meta name="generator" content="WebUI" /><link rel="preload" href="https://unpkg.com/@tailwindcss/browser@4" as="script"><link rel="preload" href="https://unpkg.com/lucide@latest" as="script"><link rel="dns-prefetch" href="//unpkg.com"><link rel="preload" href="/public/js/theme.js" as="script"><link rel="preload" href="/public/js/icons.js" as="script"><style type="text/tailwindcss">
+    @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+    
+    /* Hero animations */
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes avatarFadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    /* Progressive Reveal for Cards */
+    .reveal-card {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .reveal-card.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .reveal-card:nth-child(1) { transition-delay: 0.1s; }
+    .reveal-card:nth-child(2) { transition-delay: 0.2s; }
+    .reveal-card:nth-child(3) { transition-delay: 0.3s; }
+    .reveal-card:nth-child(4) { transition-delay: 0.4s; }
+    .reveal-card:nth-child(5) { transition-delay: 0.5s; }
+    .reveal-card:nth-child(6) { transition-delay: 0.6s; }
+    
+    /* Hero element animations */
+    .hero-avatar {
+        animation: avatarFadeIn 0.8s ease-out;
+    }
+    
+    .hero-name {
+        animation: slideUp 0.6s ease-out 0.1s both;
+    }
+    
+    .hero-description {
+        animation: slideUp 0.6s ease-out 0.3s both;
+    }
+    
+    /* Typography enhancements for prose content */
+    .prose {
+        @apply text-zinc-700 dark:text-zinc-300 leading-relaxed;
+    }
+
+    /* Paragraph spacing */
+    .prose p {
+        @apply mb-6 leading-relaxed;
+    }
+
+    /* Headings */
+    .prose h1 {
+        @apply text-3xl font-bold text-zinc-900 dark:text-zinc-100 mt-12 mb-6 leading-tight;
+    }
+    
+    .prose h2 {
+        @apply text-2xl font-bold text-zinc-900 dark:text-zinc-100 mt-10 mb-4 leading-tight;
+    }
+    
+    .prose h3 {
+        @apply text-xl font-semibold text-zinc-900 dark:text-zinc-100 mt-8 mb-3 leading-snug;
+    }
+    
+    .prose h4 {
+        @apply text-lg font-semibold text-zinc-900 dark:text-zinc-100 mt-6 mb-2;
+    }
+
+    /* Lists */
+    .prose ul {
+        @apply mb-6 pl-6;
+    }
+    
+    .prose ol {
+        @apply mb-6 pl-6;
+    }
+    
+    .prose li {
+        @apply mb-2 leading-relaxed;
+    }
+    
+    .prose ul > li {
+        @apply relative;
+    }
+    
+    .prose ul > li::before {
+        content: "•";
+        @apply absolute -left-4 text-teal-600 dark:text-teal-400 font-medium;
+    }
+
+    /* Links */
+    .prose a {
+        @apply text-teal-600 dark:text-teal-400 underline decoration-teal-600/30 underline-offset-2 transition-colors;
+    }
+    
+    .prose a:hover {
+        @apply text-teal-700 dark:text-teal-300 decoration-teal-600/60;
+    }
+
+    /* Blockquotes */
+    .prose blockquote {
+        @apply border-l-4 border-teal-500 pl-6 py-4 my-6 italic text-zinc-600 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-800/50 rounded-r;
+    }
+    
+    .prose blockquote p {
+        @apply mb-3 last:mb-0;
+    }
+    
+    /* Blockquote attribution styling */
+    .prose blockquote cite,
+    .prose blockquote footer {
+        @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3 block;
+    }
+    
+    .prose blockquote cite::before,
+    .prose blockquote footer::before {
+        content: "— ";
+    }
+    
+    /* Attribution styling for marked elements */
+    .prose blockquote p.attribution {
+        @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3;
+    }
+
+    /* Code block styling */
+    .prose pre {
+        @apply bg-zinc-900 dark:bg-zinc-800 text-zinc-100 text-xs p-4 rounded-lg my-6 overflow-x-auto;
+        border: 1px solid theme(colors.zinc.700);
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+    
+    .prose code:not(pre code) {
+        @apply bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-1.5 py-0.5 rounded text-sm font-mono;
+    }
+
+    /* Tables */
+    .prose table {
+        @apply w-full my-6 border-collapse;
+    }
+    
+    .prose th {
+        @apply bg-zinc-50 dark:bg-zinc-800 font-semibold text-left px-4 py-3 border-b border-zinc-200 dark:border-zinc-700;
+    }
+    
+    .prose td {
+        @apply px-4 py-3 border-b border-zinc-100 dark:border-zinc-800;
+    }
+
+    /* Horizontal rules */
+    .prose hr {
+        @apply my-8 border-t-2 border-zinc-200 dark:border-zinc-700;
+    }
+
+    /* Strong and emphasis */
+    .prose strong {
+        @apply font-semibold text-zinc-900 dark:text-zinc-100;
+    }
+    
+    .prose em {
+        @apply italic text-zinc-600 dark:text-zinc-400;
+    }
+
+    /* Accessibility: Hide animations on reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        .reveal-card,
+        .hero-avatar,
+        .hero-name, 
+        .hero-description {
+            animation: none !important;
+            transition: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    }
+</style></head><body class="bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 transition-colors duration-300"><div><div id="mobile-menu-container" data-mobile-menu-open="false"><div id="mobile-menu-overlay" class="fixed inset-y-0 right-0 w-64 bg-white dark:bg-zinc-800 border-l border-zinc-200 dark:border-zinc-700 px-6 py-8 shadow-xl transform translate-x-full transition-transform duration-300 ease-out z-100 hidden" data-mobile-menu="closed"><div class="flex flex-col space-y-3"><div class="flex items-center justify-between mb-4"><span class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Navigation</span><button id="mobile-menu-close" class="p-1 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200" aria-label="Close menu"><i data-lucide="x" class="w-5 h-5"></i></button></div><a href="/posts" class="flex items-center space-x-3 p-3 text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-lg transition-colors cursor-pointer" data-mobile-menu-link="posts"><i data-lucide="file-text" class="w-5 h-5"></i><span>Posts</span></a><a href="mailto:hello@maclong.uk" class="flex items-center space-x-3 p-3 text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-lg transition-colors cursor-pointer" data-mobile-menu-link="email"><i data-lucide="mail" class="w-5 h-5"></i><span>Email</span></a><a href="https://github.com/maclong9" class="flex items-center space-x-3 p-3 text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-lg transition-colors cursor-pointer" data-mobile-menu-link="github" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i><span>GitHub</span></a><div class="border-t border-zinc-200 dark:border-zinc-700 pt-4"><span class="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-3">Theme</span><div class="space-y-1"><button id="theme-system-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700" data-theme-option="system" onclick="if (window.setTheme) window.setTheme('system'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="monitor" class="w-4 h-4"></i><span>System</span></div></button><button id="theme-light-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700" data-theme-option="light" onclick="if (window.setTheme) window.setTheme('light'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="sun" class="w-4 h-4"></i><span>Light</span></div></button><button id="theme-dark-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700" data-theme-option="dark" onclick="if (window.setTheme) window.setTheme('dark'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="moon" class="w-4 h-4"></i><span>Dark</span></div></button></div></div></div></div></div></div><div class="min-h-screen flex flex-col"><div><header id="main-header" class="fixed top-0 left-0 right-0 bg-white dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-700 px-4 py-6 z-30 transition-transform duration-300 ease-in-out"><div class="max-w-4xl mx-auto flex items-center justify-between"><div class="flex items-center justify-between w-full"><nav class="md:hidden flex items-center space-x-1 text-sm"><a href="/" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Mac Long</a><span class="text-zinc-400 dark:text-zinc-600">/</span><a href="/posts" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Posts</a><span class="text-zinc-400 dark:text-zinc-600">/</span><span class="text-zinc-900 dark:text-zinc-100 font-medium text-lg">Untitled</span></nav><nav class="hidden md:flex items-center space-x-1 text-sm"><a href="/" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Mac Long</a><span class="text-zinc-400 dark:text-zinc-600">/</span><a href="/posts" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Posts</a><span class="text-zinc-400 dark:text-zinc-600">/</span><span class="text-zinc-900 dark:text-zinc-100 font-medium">Untitled</span></nav><div class="flex items-center space-x-6"><div class="flex items-center space-x-2"><div class="md:hidden"><button id="mobile-menu-button" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Menu" onclick="toggleSlideMenu('mobile-menu-container')"><i data-lucide="chevron-left" class="w-5 h-5"></i></button></div><div class="hidden md:flex items-center space-x-2"><a href="/posts" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Posts"><i data-lucide="file-text" class="w-5 h-5"></i></a><a href="mailto:hello@maclong.uk" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Email"><i data-lucide="mail" class="w-5 h-5"></i></a><a href="https://github.com/maclong9" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="View GitHub Profile" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i></a><div class="relative theme-dropdown"><button class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Change theme" data-theme-toggle="true"><i data-lucide="sun" theme-icon="light" class="hidden"></i><i data-lucide="moon" theme-icon="dark" class="hidden"></i><i data-lucide="palette" theme-icon="system" class="w-5 h-5"></i></button><div class="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-zinc-800 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700 py-1 z-50 theme-dropdown-menu hidden"><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="system"><i data-lucide="palette" class="w-5 h-5"></i><span>System</span></button><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="light"><i data-lucide="sun" class="w-5 h-5"></i><span>Light</span></button><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="dark"><i data-lucide="moon" class="w-5 h-5"></i><span>Dark</span></button></div><style>.theme-dropdown-menu {
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transition: opacity 0.15s ease-in, transform 0.15s ease-in;
+}
+
+.theme-dropdown-menu--open {
+    display: block;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.theme-option--active {
+    background-color: rgb(240 253 250);
+    color: rgb(15 118 110);
+}
+
+.dark .theme-option--active {
+    background-color: rgb(19 78 74 / 0.5);
+    color: rgb(94 234 212);
+}
+
+[data-theme-icon] {
+    display: none;
+}
+
+[data-theme-icon="system"] {
+    display: block;
+}</style><script>// Theme dropdown functionality - colocated with ThemeDropdown component
+(function() {
+    let isDropdownOpen = false;
+
+    function initThemeDropdown() {
+        // Listen for dropdown toggle
+        document.addEventListener('click', (e) => {
+            const themeToggle = e.target.closest('[data-theme-toggle]');
+            if (themeToggle) {
+                e.preventDefault();
+                toggleDropdown();
+                return;
+            }
+
+            const themeOption = e.target.closest('[data-theme-option]');
+            if (themeOption) {
+                e.preventDefault();
+                const theme = themeOption.dataset.themeOption;
+                setTheme(theme);
+                updateDropdownUI();
+                closeDropdown();
+                return;
+            }
+
+            // Close dropdown when clicking outside
+            if (isDropdownOpen && !e.target.closest('.theme-dropdown')) {
+                closeDropdown();
+            }
+        });
+
+        // Update UI initially and when theme changes
+        updateDropdownUI();
+        
+        // Listen for theme changes
+        const observer = new MutationObserver(() => {
+            updateDropdownUI();
+        });
+        
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
+    }
+
+    function toggleDropdown() {
+        if (isDropdownOpen) {
+            closeDropdown();
+        } else {
+            openDropdown();
+        }
+    }
+
+    function openDropdown() {
+        isDropdownOpen = true;
+        const dropdown = document.querySelector('.theme-dropdown-menu');
+        if (dropdown) {
+            dropdown.classList.remove('hidden');
+            // Trigger reflow for animation
+            dropdown.offsetHeight;
+            dropdown.classList.add('theme-dropdown-menu--open');
+        }
+    }
+
+    function closeDropdown() {
+        isDropdownOpen = false;
+        const dropdown = document.querySelector('.theme-dropdown-menu');
+        if (dropdown) {
+            dropdown.classList.remove('theme-dropdown-menu--open');
+            setTimeout(() => {
+                if (!isDropdownOpen) {
+                    dropdown.classList.add('hidden');
+                }
+            }, 200); // Match transition duration
+        }
+    }
+
+    function setTheme(theme) {
+        localStorage.setItem('theme', theme);
+        updateTheme();
+    }
+
+    function updateTheme() {
+        const themePreference = localStorage.getItem('theme') || 'system';
+        let actualTheme = 'light';
+
+        if (themePreference === 'dark') {
+            actualTheme = 'dark';
+        } else if (themePreference === 'system') {
+            actualTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        document.documentElement.setAttribute('data-theme', actualTheme);
+    }
+
+    function updateDropdownUI() {
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        
+        // Update theme toggle button icon
+        const toggleIcons = document.querySelectorAll('[data-theme-icon]');
+        toggleIcons.forEach(icon => {
+            icon.style.display = 'none';
+        });
+        
+        const activeIcon = document.querySelector(`[data-theme-icon="${savedTheme}"]`);
+        if (activeIcon) {
+            activeIcon.style.display = 'block';
+        }
+
+        // Update dropdown options
+        const options = document.querySelectorAll('[data-theme-option]');
+        options.forEach(option => {
+            const isActive = option.dataset.themeOption === savedTheme;
+            option.classList.toggle('theme-option--active', isActive);
+        });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initThemeDropdown);
+    } else {
+        initThemeDropdown();
+    }
+})();</script></div></div></div></div></div></div></header></div><main class="flex-1 px-4 py-8 pt-28"><div><article><div class="max-w-2xl mx-auto mb-8 pt-8"><div class="text-sm text-zinc-500 dark:text-zinc-400 mb-2"><span>5 min read</span></div><h1 class="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100 mb-4">Untitled</h1><span class="text-lg text-zinc-600 dark:text-zinc-400"></span></div><div class="max-w-2xl mx-auto prose"><div class="markdown-content"><p>**Setting Up a New Mac **</p><p>**This guide outlines my streamlined process for configuring a new macOS system with modern development tools and automated setup. ******</p><p>I’ve been down the rabbit hole of Mac setup more times than I care to admit. What started as a manual, multi-hour process has evolved into a streamlined system that gets me back to productive development in minutes rather than hours.</p><p><strong>The Philosophy</strong>****</p><p>My approach to Mac setup is built around three core principles:</p><ul><li><p><strong>One command to rule them all</strong>: I should be able to nuke my machine and be productive again with a single command</p></li><li><p><strong>Automation over documentation</strong>: Scripts don’t forget steps or make typos</p></li><li><p><strong>Modern tooling</strong>: Use contemporary tools that solve problems better than legacy solutions</p></li></ul><p><strong>The One-Command Setup</strong>****</p><p>Everything is designed so I can get back up and running quickly:</p><p>curl -fsSL https://raw.githubusercontent.com/maclong9/dots/main/setup.sh | sh</p><p>This single command handles the entire setup process, but let me break down what’s happening behind the scenes.</p><p><strong>Migration Assistant (Optional)</strong>****</p><p>Apple provides <a href="https://support.apple.com/en-us/102613" target="_blank" rel="noopener noreferrer">Migration Assistant</a> to facilitate the transfer of documents, applications, user accounts, and settings from an old Mac to a new one. This saves significant time by eliminating the need to manually edit settings and re-download applications.</p><p>However, I often prefer a clean installation approach, especially when upgrading major macOS versions or switching between different Mac models.</p><p><strong>Modern Development Environment Setup</strong>****</p><p><strong>Package Management with mise</strong>****</p><p>The biggest game-changer in my setup is using <a href="https://mise.jdx.dev/" target="_blank" rel="noopener noreferrer">mise</a> for managing all development tools and languages. Gone are the days of juggling Homebrew, nvm, rbenv, and various other version managers.</p><h1>~/.config/mise/config.toml</h1><p>[settings]</p><p>experimental = true</p><p>idiomatic_version_file_enable_tools = [“swift”]</p><p>[tools]</p><p>github-cli = ‘latest’</p><p>helix = ‘latest’</p><p>node = ‘lts’</p><p>shellcheck = ‘latest’</p><p>shfmt = ‘latest’</p><p>zoxide = ‘latest’</p><p>‘spm:maclong9/list’ = ‘latest’</p><p>‘npm:@tailwindcss/language-server’ = ‘latest’</p><p>‘npm:typescript’ = ‘latest’</p><p>‘npm:wrangler’ = ‘latest’</p><p>This single configuration file manages everything from Node.js and TypeScript to my custom Swift tools and language servers.</p><p><strong>Dotfiles Architecture</strong>****</p><p>My <a href="https://github.com/maclong9/dots" target="_blank" rel="noopener noreferrer">dotfiles repo</a> uses a modular approach:</p><h1>Clone dotfiles to ~/.config</h1><p>git clone https://github.com/maclong9/dots ~/.config</p><h1>Symlink configuration files</h1><p>ln -sf ~/.config/zsh/.zshrc ~/.zshrc</p><p>ln -sf ~/.config/git/config ~/.gitconfig</p><p>ln -sf ~/.config/helix/config.toml ~/.config/helix/config.toml</p><p>The setup script automatically handles:</p><ul><li><p>Backing up existing configurations</p></li><li><p>Creating necessary directories</p></li><li><p>Symlinking all configuration files</p></li><li><p>Setting appropriate permissions</p></li></ul><p><strong>SSH and Git Security</strong>****</p><p>Modern Git security with SSH commit signing:</p><h1>Generate SSH key for GitHub</h1><p>ssh-keygen -t ed25519 -C “hello@maclong.uk” -f ~/.ssh/id_ed25519 -N “”</p><h1>Configure SSH agent</h1><p>eval “$(ssh-agent -s)”</p><p>ssh-add ~/.ssh/id_ed25519</p><h1>Set up Git signing</h1><p>git config –global user.signingkey “key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGf…”</p><p>git config –global commit.gpgsign true</p><p>git config –global gpg.format ssh</p><p><strong>Terminal Environment</strong>****</p><p><strong>Ghostty</strong> as the terminal emulator provides excellent performance with modern features:</p><h1>Font and appearance</h1><p>font-family = “SFMono Nerd Font”</p><p>font-size = 18</p><p>theme = “vesper”</p><p>background-opacity = 0.95</p><h1>macOS integration</h1><p>macos-option-as-alt = true</p><p>quit-after-last-window-closed = false</p><p><strong>Zsh</strong> configuration focuses on speed and productivity:</p><ul><li><p><strong>zoxide</strong> for intelligent directory navigation</p></li><li><p>Git status caching for large repositories</p></li><li><p>Command timing and performance monitoring</p></li><li><p>Thoughtful aliases for common workflows</p></li></ul><p><strong>macOS System Configuration</strong>****</p><p>The setup script handles macOS-specific optimizations:</p><p><strong>Touch ID for sudo</strong>****</p><h1>Enable Touch ID for sudo commands</h1><p>if [ “$(uname -s)” = “Darwin” ]; then</p><p> sudo cp /etc/pam.d/sudo_local.template /etc/pam.d/sudo_local</p><p> sudo sed -i ‘’ ‘3s/^#//’ /etc/pam.d/sudo_local</p><p>fi</p><p><strong>Xcode Command Line Tools</strong>****</p><h1>Install developer tools</h1><p>if ! xcode-select -p &gt;/dev/null 2&gt;&amp;1; then</p><p> xcode-select –install</p><p> # Wait for installation to complete</p><p> until xcode-select -p &gt;/dev/null 2&gt;&amp;1; do</p><p> sleep 5</p><p> done</p><p>fi</p><h1>Accept Xcode license</h1><p>if ! /usr/bin/xcrun clang &gt;/dev/null 2&gt;&amp;1; then</p><p> sudo xcodebuild -license accept</p><p>fi</p><p><strong>System Preferences</strong>****</p><p>Rather than using individual defaults commands, the setup leverages preference files and plists for consistent configuration:</p><ul><li><p>Optimized dock settings (auto-hide, position, size)</p></li><li><p>Finder preferences (show hidden files, extensions)</p></li><li><p>Trackpad and keyboard settings</p></li><li><p>Energy and display preferences</p></li></ul><p><strong>Testing and Validation</strong>****</p><p>The setup script includes comprehensive testing to ensure everything works correctly:</p><h1>Verify installations</h1><p>command -v hx &gt;/dev/null 2&gt;&amp;1 || { echo “Helix installation failed”; exit 1; }</p><p>command -v zoxide &gt;/dev/null 2&gt;&amp;1 || { echo “zoxide installation failed”; exit 1; }</p><p>command -v gh &gt;/dev/null 2&gt;&amp;1 || { echo “GitHub CLI installation failed”; exit 1; }</p><h1>Test Git signing</h1><p>git config –get commit.gpgsign | grep -q “true” || { echo “Git signing not enabled”; exit 1; }</p><h1>Verify SSH agent</h1><p>ssh-add -l &gt;/dev/null 2&gt;&amp;1 || { echo “SSH key not loaded”; exit 1; }</p><p><strong>Continuous Maintenance</strong>****</p><p>Keeping everything current is straightforward:</p><h1>Update all tools and languages</h1><p>mise upgrade</p><h1>Update dotfiles</h1><p>cd ~/.config &amp;&amp; git pull</p><h1>Update system and App Store apps</h1><p>softwareupdate -ia</p><p>mas upgrade</p><p>A weekly maintenance script runs automatically to handle routine updates and cleanup.</p><p><strong>Modern Tool Highlights</strong>****</p><p><strong>Essential Command Line Tools</strong>****</p><ul><li><p>**<a href="https://helix-editor.com/" target="_blank" rel="noopener noreferrer">Helix**</a>: Modern modal editor with excellent LSP integration</p></li><li><p>**<a href="https://github.com/ajeetdsouza/zoxide" target="_blank" rel="noopener noreferrer">zoxide**</a>: Intelligent directory navigation</p></li><li><p>**<a href="https://cli.github.com/" target="_blank" rel="noopener noreferrer">GitHub CLI**</a>: Streamlined Git workflow management</p></li><li><p>**<a href="https://mise.jdx.dev/" target="_blank" rel="noopener noreferrer">mise**</a>: Universal tool version manager</p></li></ul><p><strong>Development Languages and Runtimes</strong>****</p><ul><li><p><strong>Swift</strong>: For CLI tools and native macOS development</p></li><li><p><strong>Deno</strong>: Modern TypeScript runtime with built-in tooling</p></li><li><p><strong>Node.js LTS</strong>: For traditional JavaScript projects</p></li></ul><p><strong>LSP and Language Support</strong>****</p><p>The setup includes comprehensive language server support:</p><ul><li><p>TypeScript/JavaScript with advanced type checking</p></li><li><p>Swift with Xcode integration</p></li><li><p>Bash with ShellCheck validation</p></li><li><p>CSS/HTML with TailwindCSS integration</p></li><li><p>Markdown with prose linting</p></li></ul><p><strong>Lessons Learned</strong>****</p><p>After years of iteration, here’s what I’ve learned about Mac setup:</p><ol><li><p><strong>Automate everything</strong>: Manual steps will be forgotten or executed incorrectly</p></li><li><p><strong>Test on fresh machines</strong>: Your setup script is worthless if it only works on your already-configured system</p></li><li><p><strong>Use modern tools</strong>: Don’t cling to legacy solutions when better alternatives exist</p></li><li><p><strong>Document the weird stuff</strong>: Future you will thank present you for explaining unusual configuration choices</p></li><li><p><strong>Version control is non-negotiable</strong>: Everything should be in Git, always</p></li></ol><p><strong>The Complete Picture</strong>****</p><p>This setup creates a development environment that’s:</p><ul><li><p><strong>Reproducible</strong>: The same configuration works across different machines and macOS versions</p></li><li><p><strong>Maintainable</strong>: Updates and changes are centralized and automated</p></li><li><p><strong>Fast</strong>: Modern tools with performance optimizations throughout</p></li><li><p><strong>Comprehensive</strong>: Everything needed for full-stack development in one setup</p></li></ul><p>You can explore my complete configuration and setup scripts at <a href="https://github.com/maclong9/dots" target="_blank" rel="noopener noreferrer">github.com/maclong9/dots</a>. For a deeper dive into the specific tools and configurations, check out my detailed post on <a href="/posts/my-personal-setup">development environment setup</a>.</p><p>The investment in creating this automated setup has paid dividends in reduced friction and increased productivity. When your development environment is one command away, you can focus on building great software instead of fighting with tooling.</p></div></div><script>// Style blockquote attributions
+document.addEventListener('DOMContentLoaded', function() {
+    const blockquotes = document.querySelectorAll('.prose blockquote');
+    blockquotes.forEach(blockquote => {
+        const paragraphs = blockquote.querySelectorAll('p');
+        paragraphs.forEach(p => {
+            const text = p.textContent.trim();
+            if (text.startsWith('—') || text.startsWith('- ')) {
+                p.classList.add('attribution');
+            }
+        });
+    });
+});</script></article></div></main><footer class="bg-white dark:bg-zinc-800 border-t border-zinc-200 dark:border-zinc-700 px-4 py-6 space-y-2 grid place-items-center"><div class="flex items-center space-x-2"><a href="/posts" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer"><i data-lucide="file-text" class="w-5 h-5"></i></a><a href="mailto:hello@maclong.uk" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer"><i data-lucide="mail" class="w-5 h-5"></i></a><a href="https://github.com/maclong9" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i></a></div><div class="text-zinc-500 dark:text-zinc-400 text-sm"><span>© 2025 </span><a href="https://maclong.uk" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Mac Long</a><span>.</span></div></footer></div></body><script src="/public/js/icons.js"></script></html>
