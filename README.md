@@ -19,11 +19,12 @@ swift run
 ## Deployment
 
 This application is built with the [Build Static Site](https://github.com/maclong9/portfolio/blob/main/.github/workflows/build.yml) action,
-this updates the `static` branch with the new website content, the `static` branch is watched by [Cloudflare Pages](https://pages.cloudflare.com)
+this updates the `static` branch with the new website content and a JavaScript file for the workers API, the `static` branch is watched by a [Cloudflare Worker]()
 triggering an update of the live site.
 
 
 ## Tasks 
 
+- [ ] Ensure post likes are setup and working.
 - [ ] Slowly transition everything that is not written in a nice type safe addition of the WebUI DSL into new features of WebUI so that there aren't any awkward css or js files written in strings.
 - [ ] Look into Application configuration done via a `site.pkl` to see how that works.
