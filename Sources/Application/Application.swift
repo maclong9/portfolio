@@ -637,6 +637,14 @@ struct Application: Website {
           window.closeSlideMenu('mobile-menu-container');
         }
       });
+
+      // Open menu button functionality (CSP-safe: delegated listener)
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('#mobile-menu-button')) {
+          e.preventDefault();
+          window.toggleSlideMenu('mobile-menu-container');
+        }
+      });
       """
     
     let iconsJSContent = """

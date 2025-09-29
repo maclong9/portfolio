@@ -19,7 +19,7 @@ public struct MobileMenu: Element {
           classes: [
             "fixed", "inset-y-0", "right-0", "w-64", "bg-white", "dark:bg-zinc-800",
             "border-l", "border-zinc-200", "dark:border-zinc-700", "px-6", "py-8", "shadow-xl",
-            "transform", "translate-x-full", "transition-transform", "duration-300", "ease-out", "z-100", "hidden",
+            "transform", "translate-x-full", "transition-transform", "duration-300", "ease-out", "z-50", "hidden",
           ],
           data: ["mobile-menu": "closed"]
         ) {
@@ -145,3 +145,4 @@ public struct MobileMenu: Element {
     }
   }
 }
+
