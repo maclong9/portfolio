@@ -581,29 +581,29 @@ struct Application: Website {
         document.documentElement.setAttribute('data-theme', actualTheme);
       })();
 
-      // Mobile menu functions
+      // Mobile menu functions (class-based for smooth transitions)
       window.toggleSlideMenu = function(containerId) {
         const container = document.getElementById(containerId);
         const overlay = document.querySelector('#mobile-menu-overlay');
-        
         if (!container || !overlay) return;
-        
+
         const isOpen = container.dataset.mobileMenuOpen === 'true';
-        
         if (isOpen) {
-          // Close menu
-          overlay.style.transform = 'translateX(100%)';
+          // Close menu: translate to the right and then hide
+          overlay.classList.remove('translate-x-0');
+          overlay.classList.add('translate-x-full');
           setTimeout(() => {
             overlay.classList.add('hidden');
-          }, 300);
+          }, 300); // match duration-300
           container.dataset.mobileMenuOpen = 'false';
           overlay.dataset.mobileMenu = 'closed';
         } else {
-          // Open menu
+          // Open menu: show, then translate to 0 on next frame
           overlay.classList.remove('hidden');
-          setTimeout(() => {
-            overlay.style.transform = 'translateX(0)';
-          }, 10);
+          // Force reflow so the transition runs when classes change
+          overlay.getBoundingClientRect();
+          overlay.classList.remove('translate-x-full');
+          overlay.classList.add('translate-x-0');
           container.dataset.mobileMenuOpen = 'true';
           overlay.dataset.mobileMenu = 'open';
         }
@@ -612,11 +612,10 @@ struct Application: Website {
       window.closeSlideMenu = function(containerId) {
         const container = document.getElementById(containerId);
         const overlay = document.querySelector('#mobile-menu-overlay');
-        
         if (!container || !overlay) return;
-        
-        // Close menu
-        overlay.style.transform = 'translateX(100%)';
+
+        overlay.classList.remove('translate-x-0');
+        overlay.classList.add('translate-x-full');
         setTimeout(() => {
           overlay.classList.add('hidden');
         }, 300);
@@ -638,7 +637,7 @@ struct Application: Website {
         }
       });
 
-      // Open menu button functionality (CSP-safe: delegated listener)
+      // Open menu button functionality (delegated listener)
       document.addEventListener('click', function(e) {
         if (e.target.closest('#mobile-menu-button')) {
           e.preventDefault();

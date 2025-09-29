@@ -3,7 +3,7 @@ import WebUI
 struct GameOfLife: Element {
   public var body: some Markup {
     Stack {
-      Stack(classes: ["game-of-life-bg"])
+      Stack(classes: ["game-of-life-bg", "pointer-events-none", "z-0"])
         .overflow(.hidden)
         .position(.absolute, at: .all, offset: 0)
         .frame(width: .constant(.full), height: .constant(.full))
@@ -54,7 +54,7 @@ struct GameOfLife: Element {
                       width: 100%;
                       height: 100%;
                       pointer-events: none;
-                      z-index: -1;
+                      z-index: 0;
                   `;
 
                   container.appendChild(canvas);
@@ -94,7 +94,7 @@ struct GameOfLife: Element {
                           for (let j = 0; j < cols; j++) {
                               // Create interesting patterns with clusters
                               let alive = false;
-                              if (Math.random() < 0.25) { // Increased density for better visibility
+                              if (Math.random() < 0.06) { // Reduced density for better visibility
                                   alive = true;
                               }
                               grid[i][j] = alive ? 1 : 0;
@@ -105,7 +105,7 @@ struct GameOfLife: Element {
                       // Add glider patterns after grid is fully initialized
                       for (let i = 0; i < rows; i++) {
                           for (let j = 0; j < cols; j++) {
-                              if (Math.random() < 0.01) {
+                              if (Math.random() < 0.004) {
                                   createGlider(i, j);
                               }
                           }
@@ -212,8 +212,8 @@ struct GameOfLife: Element {
 
                   // Periodically inject new random cells to keep it interesting
                   function injectRandomCells() {
-                      if (Math.random() < 0.1) { // 10% chance every update cycle
-                          for (let i = 0; i < 3; i++) { // Add a few random cells
+                      if (Math.random() < 0.05) { // Reduced chance every update cycle
+                          for (let i = 0; i < 1; i++) { // Add fewer random cells
                               const row = Math.floor(Math.random() * rows);
                               const col = Math.floor(Math.random() * cols);
                               grid[row][col] = 1;
@@ -221,7 +221,7 @@ struct GameOfLife: Element {
                       }
                       
                       // Occasionally add a glider
-                      if (Math.random() < 0.05) {
+                      if (Math.random() < 0.02) {
                           const row = Math.floor(Math.random() * (rows - 3));
                           const col = Math.floor(Math.random() * (cols - 3));
                           createGlider(row, col);

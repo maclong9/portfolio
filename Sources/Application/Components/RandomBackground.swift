@@ -24,7 +24,7 @@ struct RandomBackground: Element {
                           height: 100%;
                           overflow: hidden;
                           opacity: 0.8;
-                          z-index: -1;
+                          z-index: 0;
                       `;
                       document.querySelector('.random-background').appendChild(particleContainer);
                       
@@ -42,7 +42,7 @@ struct RandomBackground: Element {
                           height: 100%;
                           overflow: hidden;
                           opacity: 0.8;
-                          z-index: -1;
+                          z-index: 0;
                       `;
                       document.querySelector('.random-background').appendChild(gameContainer);
                       
@@ -78,7 +78,7 @@ struct RandomBackground: Element {
                       width: 100%;
                       height: 100%;
                       pointer-events: none;
-                      z-index: -1;
+                      z-index: 0;
                   `;
 
                   container.appendChild(svg);
@@ -328,7 +328,7 @@ struct RandomBackground: Element {
                       width: 100%;
                       height: 100%;
                       pointer-events: none;
-                      z-index: -1;
+                      z-index: 0;
                   `;
 
                   container.appendChild(canvas);
@@ -366,7 +366,7 @@ struct RandomBackground: Element {
                           nextGrid[i] = [];
                           for (let j = 0; j < cols; j++) {
                               let alive = false;
-                              if (Math.random() < 0.15) { // Lower density for better patterns
+                              if (Math.random() < 0.06) { // Lower density for better patterns (changed from 0.15)
                                   alive = true;
                               }
                               grid[i][j] = alive ? 1 : 0;
@@ -377,7 +377,7 @@ struct RandomBackground: Element {
                       // 2) Sprinkle gliders after the grid exists
                       for (let i = 0; i < rows; i++) {
                           for (let j = 0; j < cols; j++) {
-                              if (Math.random() < 0.01) {
+                              if (Math.random() < 0.004) { // Changed from 0.01
                                   createGlider(i, j);
                               }
                           }
@@ -467,8 +467,8 @@ struct RandomBackground: Element {
 
                   // Periodically inject new random cells to keep it interesting
                   function injectRandomCells() {
-                      if (Math.random() < 0.1) { // 10% chance every update cycle
-                          for (let i = 0; i < 3; i++) { // Add a few random cells
+                      if (Math.random() < 0.05) { // Changed from 0.1
+                          for (let i = 0; i < 1; i++) { // Changed from 3
                               const row = Math.floor(Math.random() * rows);
                               const col = Math.floor(Math.random() * cols);
                               grid[row][col] = 1;
@@ -476,7 +476,7 @@ struct RandomBackground: Element {
                       }
                       
                       // Occasionally add a glider
-                      if (Math.random() < 0.05) {
+                      if (Math.random() < 0.02) { // Changed from 0.05
                           const row = Math.floor(Math.random() * (rows - 3));
                           const col = Math.floor(Math.random() * (cols - 3));
                           createGlider(row, col);
@@ -532,7 +532,7 @@ struct RandomBackground: Element {
           """
         }
       )
-      Stack(classes: ["random-background"])
+      Stack(classes: ["random-background", "pointer-events-none", "z-0"])
         .overflow(.hidden)
         .position(.absolute, at: .all, offset: 0)
         .frame(width: .constant(.full), height: .constant(.full))
@@ -540,3 +540,4 @@ struct RandomBackground: Element {
     }
   }
 }
+
