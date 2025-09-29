@@ -319,6 +319,7 @@ struct RandomBackground: Element {
                   // Create canvas element for Game of Life
                   const canvas = document.createElement('canvas');
                   const ctx = canvas.getContext('2d');
+                  if (!ctx) return;
                   
                   canvas.style.cssText = `
                       position: absolute;
@@ -353,24 +354,32 @@ struct RandomBackground: Element {
                       cols = Math.floor(canvas.width / cellSize);
                       rows = Math.floor(canvas.height / cellSize);
                       
+                      // Bail out if there’s no space yet (prevents neighbor errors)
+                      if (cols <= 0 || rows <= 0) return;
+                      
                       grid = [];
                       nextGrid = [];
                       
+                      // 1) Fully initialize grids first
                       for (let i = 0; i < rows; i++) {
                           grid[i] = [];
                           nextGrid[i] = [];
                           for (let j = 0; j < cols; j++) {
-                              // Create interesting patterns with clusters
                               let alive = false;
                               if (Math.random() < 0.15) { // Lower density for better patterns
                                   alive = true;
                               }
-                              // Create some glider patterns occasionally
-                              if (Math.random() < 0.005) {
-                                  createGlider(i, j);
-                              }
                               grid[i][j] = alive ? 1 : 0;
                               nextGrid[i][j] = 0;
+                          }
+                      }
+                      
+                      // 2) Sprinkle gliders after the grid exists
+                      for (let i = 0; i < rows; i++) {
+                          for (let j = 0; j < cols; j++) {
+                              if (Math.random() < 0.01) {
+                                  createGlider(i, j);
+                              }
                           }
                       }
                   }
@@ -411,24 +420,23 @@ struct RandomBackground: Element {
 
                   // Update grid according to Game of Life rules
                   function updateGrid() {
+                      if (cols <= 0 || rows <= 0) return;
                       for (let i = 0; i < rows; i++) {
                           for (let j = 0; j < cols; j++) {
                               const neighbors = countNeighbors(i, j);
                               const currentCell = grid[i][j];
                               
                               if (currentCell === 1) {
-                                  // Living cell
                                   if (neighbors < 2 || neighbors > 3) {
-                                      nextGrid[i][j] = 0; // Dies
+                                      nextGrid[i][j] = 0;
                                   } else {
-                                      nextGrid[i][j] = 1; // Survives
+                                      nextGrid[i][j] = 1;
                                   }
                               } else {
-                                  // Dead cell
                                   if (neighbors === 3) {
-                                      nextGrid[i][j] = 1; // Born
+                                      nextGrid[i][j] = 1;
                                   } else {
-                                      nextGrid[i][j] = 0; // Stays dead
+                                      nextGrid[i][j] = 0;
                                   }
                               }
                           }
@@ -440,6 +448,7 @@ struct RandomBackground: Element {
 
                   // Draw the grid
                   function drawGrid() {
+                      if (!ctx || cols <= 0 || rows <= 0) return;
                       ctx.clearRect(0, 0, canvas.width, canvas.height);
                       
                       for (let i = 0; i < rows; i++) {
