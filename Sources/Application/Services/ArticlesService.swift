@@ -30,8 +30,15 @@ public enum ArticlesService {
     }
 
     private static func fetchMarkdownFiles(from directoryPath: String) throws -> [URL] {
-        try FileManager.default.contentsOfDirectory(
-            at: URL(fileURLWithPath: directoryPath),
+        let directoryURL = URL(fileURLWithPath: directoryPath)
+
+        // If directory doesn't exist, return empty array instead of throwing
+        guard FileManager.default.fileExists(atPath: directoryURL.path) else {
+            return []
+        }
+
+        return try FileManager.default.contentsOfDirectory(
+            at: directoryURL,
             includingPropertiesForKeys: nil,
             options: .skipsHiddenFiles
         ).filter { $0.pathExtension == "md" }
