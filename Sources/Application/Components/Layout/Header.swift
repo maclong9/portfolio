@@ -154,6 +154,18 @@ public struct LayoutHeader: Element {
                   }
 
                   Link(
+                    to: "/photos",
+                    classes: [
+                      "p-2", "text-zinc-500", "hover:text-zinc-700", "dark:text-zinc-400",
+                      "dark:hover:text-zinc-200", "rounded-lg", "hover:bg-zinc-100",
+                      "dark:hover:bg-zinc-700", "transition-colors", "cursor-pointer",
+                    ],
+                    label: "Photos"
+                  ) {
+                    Icon(name: "image", classes: ["w-5", "h-5"])
+                  }
+
+                  Link(
                     to: "mailto:hello@maclong.uk",
                     classes: [
                       "p-2", "text-zinc-500", "hover:text-zinc-700", "dark:text-zinc-400",

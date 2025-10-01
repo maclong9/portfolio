@@ -45,15 +45,22 @@ struct Application: Website {
     get throws {
       Home()
       Posts()
+      Photos()
       Tools()
       BarreScales()
       SchengenTracker()
       Missing()
-      
+
       // Dynamic article routes - error handling moved to ArticlesService
       let articles = try ArticlesService.fetchAllArticles()
       for article in articles {
         DynamicArticle(article: article)
+      }
+
+      // Dynamic album routes
+      let albums = try PhotosService.fetchAllAlbums()
+      for album in albums {
+        DynamicAlbum(album: album)
       }
     }
   }
@@ -73,7 +80,29 @@ struct Application: Website {
     
     <style type="text/tailwindcss">
         @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-        
+
+        /* Apple-style glassmorphism support */
+        @supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
+            .backdrop-blur-sm {
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+            }
+            .backdrop-blur-xl {
+                backdrop-filter: blur(24px);
+                -webkit-backdrop-filter: blur(24px);
+            }
+            .backdrop-saturate-150 {
+                backdrop-filter: saturate(1.5);
+                -webkit-backdrop-filter: saturate(1.5);
+            }
+        }
+
+        /* Smooth transitions for interactive elements */
+        select, button, a {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         /* Hero animations */
         @keyframes slideUp {
             from {

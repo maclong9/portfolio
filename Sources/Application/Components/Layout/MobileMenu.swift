@@ -54,6 +54,19 @@ public struct MobileMenu: Element {
             }
 
             Link(
+              to: "/photos",
+              classes: [
+                "flex", "items-center", "space-x-3", "p-3", "text-zinc-600", "dark:text-zinc-400",
+                "hover:text-teal-600", "dark:hover:text-teal-400", "hover:bg-zinc-50",
+                "dark:hover:bg-zinc-700", "rounded-lg", "transition-colors", "cursor-pointer",
+              ],
+              data: ["mobile-menu-link": "photos"]
+            ) {
+              Icon(name: "image", classes: ["w-5", "h-5"])
+              Text("Photos")
+            }
+
+            Link(
               to: "mailto:hello@maclong.uk",
               classes: [
                 "flex", "items-center", "space-x-3", "p-3", "text-zinc-600", "dark:text-zinc-400",
