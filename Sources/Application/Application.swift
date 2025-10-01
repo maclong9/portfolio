@@ -307,6 +307,9 @@ struct Application: Website {
       let application = Application()
       try application.build(to: URL(filePath: ".output/dist"))
 
+      // Copy Photos directory to output
+      try copyPhotosToOutput()
+
       // Write embedded configuration files to output directory
       try writeConfigurationFiles()
 
@@ -314,6 +317,47 @@ struct Application: Website {
     } catch {
       print("⨉ Failed to build application: \(error)")
     }
+  }
+
+  private static func copyPhotosToOutput() throws {
+    let photosSourceDir = URL(filePath: "Photos")
+    let outputPhotosDir = URL(filePath: ".output/dist/public/photos")
+
+    // Check if Photos directory exists
+    guard FileManager.default.fileExists(atPath: photosSourceDir.path) else {
+      print("⚠️  Photos directory not found, skipping photo copy")
+      return
+    }
+
+    // Remove existing photos directory in output if it exists
+    if FileManager.default.fileExists(atPath: outputPhotosDir.path) {
+      try FileManager.default.removeItem(at: outputPhotosDir)
+    }
+
+    // Create output directory
+    try FileManager.default.createDirectory(at: outputPhotosDir, withIntermediateDirectories: true)
+
+    // Copy Photos directory contents
+    let albumDirs = try FileManager.default.contentsOfDirectory(
+      at: photosSourceDir,
+      includingPropertiesForKeys: nil,
+      options: .skipsHiddenFiles
+    )
+
+    for albumDir in albumDirs {
+      var isDirectory: ObjCBool = false
+      guard FileManager.default.fileExists(atPath: albumDir.path, isDirectory: &isDirectory),
+            isDirectory.boolValue else {
+        continue
+      }
+
+      let albumName = albumDir.lastPathComponent
+      let destinationAlbumDir = outputPhotosDir.appendingPathComponent(albumName)
+
+      try FileManager.default.copyItem(at: albumDir, to: destinationAlbumDir)
+    }
+
+    print("✓ Photos copied to output directory")
   }
 
   private static func writeConfigurationFiles() throws {

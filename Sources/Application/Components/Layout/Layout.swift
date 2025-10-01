@@ -41,7 +41,7 @@ public struct Layout: Element {
       ]) {
         LayoutHeader(breadcrumbs: breadcrumbs, emoji: emoji)
 
-        Main(classes: ["flex-1", "px-4", "py-8", "pt-28"]) {
+        Main(classes: ["flex-1", "px-4", "py-8", "pt-32"]) {
           Stack {
             MarkupString(content: content().map { $0.render() }.joined())
           }

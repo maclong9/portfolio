@@ -95,11 +95,15 @@ public enum PhotosService {
         // Create photo responses with metadata
         let photos = photoURLs.compactMap { photoURL -> PhotoResponse? in
             let metadata = extractPhotoMetadata(from: photoURL)
+            // Build relative path: AlbumName/filename.jpg
+            let albumName = url.lastPathComponent
+            let relativePath = "\(albumName)/\(photoURL.lastPathComponent)"
+
             return PhotoResponse(
                 id: photoURL.deletingPathExtension().lastPathComponent,
                 fileName: photoURL.lastPathComponent,
                 path: photoURL.path,
-                relativePath: photoURL.path.replacingOccurrences(of: basePath + "/", with: ""),
+                relativePath: relativePath,
                 metadata: metadata
             )
         }
@@ -372,7 +376,9 @@ public struct PhotoResponse: Identifiable {
     }
 
     public var webPath: String {
-        "/public/photos/\(relativePath)"
+        // URL-encode the path to handle spaces and special characters
+        let encodedPath = relativePath.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? relativePath
+        return "/public/photos/\(encodedPath)"
     }
 
     public var altText: String {

@@ -27,17 +27,17 @@ public struct LayoutHeader: Element {
       Header(
         id: "main-header",
         classes: [
-          "fixed", "top-0", "left-0", "right-0",
-          "bg-white/70", "dark:bg-zinc-900/70",
-          "backdrop-blur-xl", "backdrop-saturate-150",
-          "border-b",
-          "border-white/20", "dark:border-zinc-800/50",
-          "px-4", "py-6", "z-30",
-          "transition-transform", "duration-300", "ease-in-out",
-          "shadow-sm", "shadow-zinc-200/50", "dark:shadow-zinc-950/50",
+          "fixed", "top-4", "left-4", "right-4",
+          "bg-white/60", "dark:bg-zinc-900/60",
+          "backdrop-blur-2xl", "backdrop-saturate-200",
+          "border", "border-white/40", "dark:border-zinc-700/40",
+          "rounded-2xl",
+          "px-6", "py-4", "z-30",
+          "transition-all", "duration-300", "ease-in-out",
+          "shadow-lg", "shadow-zinc-900/5", "dark:shadow-zinc-950/30",
         ]
       ) {
-        Stack(classes: ["max-w-4xl", "mx-auto", "flex", "items-center", "justify-between"]) {
+        Stack(classes: ["max-w-6xl", "mx-auto", "flex", "items-center", "justify-between"]) {
           Stack(classes: ["flex", "items-center", "justify-between", "w-full"]) {
             // Navigation or site title
             if let breadcrumbs = breadcrumbs {
@@ -117,8 +117,8 @@ public struct LayoutHeader: Element {
               Text("Mac Long", classes: ["text-zinc-900", "dark:text-zinc-100", "font-medium"])
             }
 
-            Stack(classes: ["flex", "items-center", "space-x-6"]) {
-              Stack(classes: ["flex", "items-center", "space-x-2"]) {
+            Stack(classes: ["flex", "items-center", "space-x-4"]) {
+              Stack(classes: ["flex", "items-center", "space-x-1"]) {
                 // Tool controls if provided
                 if let toolControls = toolControls {
                   MarkupString(content: toolControls().map { $0.render() }.joined())

@@ -46,7 +46,7 @@ public struct MobileMenu: Element {
                 classes: [
                   "flex", "items-center", "space-x-3", "p-3", "text-zinc-600", "dark:text-zinc-400",
                   "hover:text-teal-600", "dark:hover:text-teal-400", "hover:bg-zinc-50",
-                  "dark:hover:bg-zinc-700", "rounded-lg", "transition-colors", "cursor-pointer",
+                  "dark:hover:bg-zinc-700/30", "rounded-lg", "transition-colors", "cursor-pointer",
                 ],
                 data: ["mobile-menu-link": "posts"]
               ) {
@@ -60,7 +60,7 @@ public struct MobileMenu: Element {
               classes: [
                 "flex", "items-center", "space-x-3", "p-3", "text-zinc-600", "dark:text-zinc-400",
                 "hover:text-teal-600", "dark:hover:text-teal-400", "hover:bg-zinc-50",
-                "dark:hover:bg-zinc-700", "rounded-lg", "transition-colors", "cursor-pointer",
+                "dark:hover:bg-zinc-700/30", "rounded-lg", "transition-colors", "cursor-pointer",
               ],
               data: ["mobile-menu-link": "photos"]
             ) {
@@ -73,7 +73,7 @@ public struct MobileMenu: Element {
               classes: [
                 "flex", "items-center", "space-x-3", "p-3", "text-zinc-600", "dark:text-zinc-400",
                 "hover:text-teal-600", "dark:hover:text-teal-400", "hover:bg-zinc-50",
-                "dark:hover:bg-zinc-700", "rounded-lg", "transition-colors", "cursor-pointer",
+                "dark:hover:bg-zinc-700/30", "rounded-lg", "transition-colors", "cursor-pointer",
               ],
               data: ["mobile-menu-link": "email"]
             ) {
@@ -87,7 +87,7 @@ public struct MobileMenu: Element {
               classes: [
                 "flex", "items-center", "space-x-3", "p-3", "text-zinc-600", "dark:text-zinc-400",
                 "hover:text-teal-600", "dark:hover:text-teal-400", "hover:bg-zinc-50",
-                "dark:hover:bg-zinc-700", "rounded-lg", "transition-colors", "cursor-pointer",
+                "dark:hover:bg-zinc-700/30", "rounded-lg", "transition-colors", "cursor-pointer",
               ],
               data: ["mobile-menu-link": "github"]
             ) {
@@ -105,7 +105,7 @@ public struct MobileMenu: Element {
                   classes: [
                     "w-full", "flex", "items-center", "space-x-3", "px-3", "py-2", "rounded-lg",
                     "text-sm", "transition-colors", "cursor-pointer",
-                    "text-zinc-700", "dark:text-zinc-300", "hover:bg-zinc-50", "dark:hover:bg-zinc-700",
+                    "text-zinc-700", "dark:text-zinc-300", "hover:bg-zinc-50", "dark:hover:bg-zinc-700/30",
                   ],
                   data: ["theme-option": "system"]
                 ) {
@@ -121,7 +121,7 @@ public struct MobileMenu: Element {
                   classes: [
                     "w-full", "flex", "items-center", "space-x-3", "px-3", "py-2", "rounded-lg",
                     "text-sm", "transition-colors", "cursor-pointer",
-                    "text-zinc-700", "dark:text-zinc-300", "hover:bg-zinc-50", "dark:hover:bg-zinc-700",
+                    "text-zinc-700", "dark:text-zinc-300", "hover:bg-zinc-50", "dark:hover:bg-zinc-700/30",
                   ],
                   data: ["theme-option": "light"]
                 ) {
@@ -137,7 +137,7 @@ public struct MobileMenu: Element {
                   classes: [
                     "w-full", "flex", "items-center", "space-x-3", "px-3", "py-2", "rounded-lg",
                     "text-sm", "transition-colors", "cursor-pointer",
-                    "text-zinc-700", "dark:text-zinc-300", "hover:bg-zinc-50", "dark:hover:bg-zinc-700",
+                    "text-zinc-700", "dark:text-zinc-300", "hover:bg-zinc-50", "dark:hover:bg-zinc-700/30",
                   ],
                   data: ["theme-option": "dark"]
                 ) {
