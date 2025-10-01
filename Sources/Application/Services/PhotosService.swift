@@ -292,6 +292,16 @@ public struct AlbumResponse: Identifiable {
         )
     }
 
+    // Get random photos for animated cover (up to 5)
+    public var randomCoverPhotos: [PhotoResponse] {
+        let count = min(5, photos.count)
+        guard count > 0 else { return [] }
+
+        // Use seeded random for consistent order per album
+        var generator = SeededRandomNumberGenerator(seed: UInt64(abs(slug.hashValue)))
+        return photos.shuffled(using: &generator).prefix(count).map { $0 }
+    }
+
     // Convert to Card component
     public func toCard() -> Card {
         let photoCount = "\(photos.count) photo\(photos.count == 1 ? "" : "s")"
@@ -304,6 +314,20 @@ public struct AlbumResponse: Identifiable {
             newTab: false,
             publishedDate: date
         )
+    }
+}
+
+// Seeded random number generator for consistent shuffling
+struct SeededRandomNumberGenerator: RandomNumberGenerator {
+    private var state: UInt64
+
+    init(seed: UInt64) {
+        state = seed
+    }
+
+    mutating func next() -> UInt64 {
+        state = state &* 6364136223846793005 &+ 1442695040888963407
+        return state
     }
 }
 

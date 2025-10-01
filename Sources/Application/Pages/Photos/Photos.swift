@@ -53,9 +53,11 @@ struct Photos: Document {
             Text("Check back soon for photo albums!", classes: ["opacity-75"])
           }
         } else {
-          CardCollection(
-            cards: albums.map { $0.toCard() }
-          )
+          Stack(classes: ["grid", "md:grid-cols-2", "gap-6", "max-w-4xl", "mx-auto", "auto-rows-min"]) {
+            for album in albums {
+              AnimatedAlbumCard(album: album)
+            }
+          }
         }
       }
     }

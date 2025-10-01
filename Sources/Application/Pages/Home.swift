@@ -55,7 +55,7 @@ struct Home: Document {
       title: "Tools Collection",
       description:
         "Modern utility tools built with TailwindCSS and Alpine.js for guitar training and travel planning.",
-      tags: ["TailwindCSS", "Alpine.js", "Cloudflare"],
+      tags: ["WebUI", "Swift", "Cloudflare"],
       linkURL: "/tools",
       linkText: "Open Tools",
       emoji: "🛠️",
@@ -74,7 +74,7 @@ struct Home: Document {
       title: "WebUI",
       description:
         "A Swift library for generating type-safe web user interfaces with consistency and ease of use.",
-      tags: ["Swift", "TailwindCSS", "Static Sites"],
+      tags: ["Swift", "TailwindCSS", "SSG"],
       linkURL: "https://github.com/maclong9/web-ui",
       linkText: "View on GitHub",
       newTab: true,
@@ -93,7 +93,7 @@ struct Home: Document {
         // Hero
         Section(classes: ["text-center", "mb-16"]) {
           Stack(classes: ["relative"]) {
-            RandomBackground()
+            GameOfLife()
             Stack(classes: ["text-center", "z-20", "max-w-xl", "mx-auto", "text-balance"]) {
               Image(
                 source: "https://avatars.githubusercontent.com/u/115668288?v=4",

@@ -27,9 +27,14 @@ public struct LayoutHeader: Element {
       Header(
         id: "main-header",
         classes: [
-          "fixed", "top-0", "left-0", "right-0", "bg-white", "dark:bg-zinc-800", "border-b",
-          "border-zinc-200", "dark:border-zinc-700", "px-4", "py-6", "z-30",
+          "fixed", "top-0", "left-0", "right-0",
+          "bg-white/70", "dark:bg-zinc-900/70",
+          "backdrop-blur-xl", "backdrop-saturate-150",
+          "border-b",
+          "border-white/20", "dark:border-zinc-800/50",
+          "px-4", "py-6", "z-30",
           "transition-transform", "duration-300", "ease-in-out",
+          "shadow-sm", "shadow-zinc-200/50", "dark:shadow-zinc-950/50",
         ]
       ) {
         Stack(classes: ["max-w-4xl", "mx-auto", "flex", "items-center", "justify-between"]) {
@@ -164,6 +169,11 @@ public struct LayoutHeader: Element {
                   ) {
                     Icon(name: "image", classes: ["w-5", "h-5"])
                   }
+
+                  // Separator between navigation and site controls
+                  Stack(classes: [
+                    "w-px", "h-6", "bg-zinc-300/50", "dark:bg-zinc-600/50",
+                  ])
 
                   Link(
                     to: "mailto:hello@maclong.uk",

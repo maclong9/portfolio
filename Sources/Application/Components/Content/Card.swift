@@ -35,33 +35,47 @@ public struct Card: Element {
 
   public var body: some Markup {
     let cardContent = Stack(classes: [
-      "flex", "flex-col", "justify-center", "bg-white", "dark:bg-zinc-800", "rounded-lg",
-      "shadow-sm", "border", "border-zinc-200", "dark:border-zinc-700", "p-6",
-      "hover:shadow-lg", "hover:shadow-teal-500/20",
-      "dark:hover:shadow-teal-400/20",
-      "transition-all", "duration-300", "cursor-pointer", "card", "reveal-card", "min-h-[220px]",
+      "flex", "flex-col", "justify-center",
+      "bg-white/70", "dark:bg-zinc-800/70",
+      "backdrop-blur-xl", "backdrop-saturate-150",
+      "rounded-2xl",
+      "shadow-lg", "shadow-zinc-200/50", "dark:shadow-zinc-950/50",
+      "border", "border-white/20", "dark:border-zinc-700/50",
+      "p-6",
+      "hover:shadow-md", "hover:shadow-teal-500/15",
+      "dark:hover:shadow-teal-400/15",
+      "hover:scale-[1.02]",
+      "transition-shadow", "duration-[800ms]", "ease-in-out",
+      "transition-transform", "duration-300", "ease-out",
+      "cursor-pointer", "card", "reveal-card", "min-h-[220px]",
     ]) {
 
       // Header row: icon/emoji + tags
       Stack(classes: ["flex", "items-start", "justify-between", "mb-4"]) {
         if let emoji {
           Stack(classes: [
-            "w-12", "h-12", "bg-teal-100", "dark:bg-teal-900",
-            "rounded-lg", "flex", "items-center", "justify-center",
+            "w-12", "h-12",
+            "bg-teal-50/80", "dark:bg-teal-950/50",
+            "backdrop-blur-sm",
+            "rounded-xl",
+            "flex", "items-center", "justify-center",
+            "border", "border-teal-200/50", "dark:border-teal-800/50",
           ]) {
             Text(emoji, classes: ["text-2xl"])
           }
         }
 
         if !tags.isEmpty && tags.count <= 3 {
-          Stack(classes: ["flex", "flex-wrap", "gap-1"]) {
+          Stack(classes: ["flex", "flex-wrap", "gap-2"]) {
             for tag in tags {
               Text(
                 tag,
                 classes: [
-                  "px-2", "py-1", "text-xs",
-                  "bg-zinc-100", "dark:bg-zinc-700",
-                  "rounded",
+                  "px-2.5", "py-1", "text-xs", "font-medium",
+                  "bg-zinc-100/80", "dark:bg-zinc-700/80",
+                  "backdrop-blur-sm",
+                  "rounded-full",
+                  "border", "border-zinc-200/50", "dark:border-zinc-600/50",
                 ]
               )
             }
@@ -94,22 +108,24 @@ public struct Card: Element {
           Text(
             description,
             classes: [
-              "text-sm", "mb-4", "flex-1",
+              "text-sm", "flex-1",
             ]
           )
         }
 
         // Footer: tags + link text
-        Stack(classes: ["mt-auto"]) {
+        Stack(classes: ["mt-auto", "pt-6"]) {
           if tags.count > 3 {
             Stack(classes: ["flex", "flex-wrap", "gap-2", "mb-3"]) {
               for tag in tags {
                 Text(
                   tag,
                   classes: [
-                    "px-2", "py-1", "text-xs",
-                    "bg-zinc-100", "dark:bg-zinc-700",
-                    "rounded",
+                    "px-2.5", "py-1", "text-xs", "font-medium",
+                    "bg-zinc-100/80", "dark:bg-zinc-700/80",
+                    "backdrop-blur-sm",
+                    "rounded-full",
+                    "border", "border-zinc-200/50", "dark:border-zinc-600/50",
                   ]
                 )
               }
@@ -120,9 +136,14 @@ public struct Card: Element {
             Text(
               linkText + " →",
               classes: [
-                "text-sm", "font-medium",
-                "text-teal-700", "dark:text-teal-300",
+                "text-sm", "font-semibold",
+                "text-teal-600", "dark:text-teal-400",
                 "self-end",
+                "px-4", "py-2",
+                "bg-teal-50/80", "dark:bg-teal-950/30",
+                "backdrop-blur-sm",
+                "rounded-full",
+                "border", "border-teal-200/50", "dark:border-teal-800/50",
               ]
             )
           }

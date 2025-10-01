@@ -611,6 +611,7 @@ struct Application: Website {
       })();
 
       // Mobile menu functions (class-based for smooth transitions)
+      // Define immediately so inline onclick handlers can use them
       window.toggleSlideMenu = function(containerId) {
         const container = document.getElementById(containerId);
         const overlay = document.querySelector('#mobile-menu-overlay');
@@ -652,26 +653,37 @@ struct Application: Website {
         overlay.dataset.mobileMenu = 'closed';
       };
 
-      // Close menu when clicking on mobile menu links
-      document.addEventListener('click', function(e) {
-        if (e.target.closest('[data-mobile-menu-link]')) {
-          window.closeSlideMenu('mobile-menu-container');
-        }
-      });
+      // Set up event listeners when DOM is ready
+      document.addEventListener('DOMContentLoaded', function() {
+        // Close menu when clicking on mobile menu links
+        document.addEventListener('click', function(e) {
+          if (e.target.closest('[data-mobile-menu-link]')) {
+            window.closeSlideMenu('mobile-menu-container');
+          }
+        });
 
-      // Close menu button functionality
-      document.addEventListener('click', function(e) {
-        if (e.target.closest('[data-slide-menu-close]')) {
-          window.closeSlideMenu('mobile-menu-container');
-        }
-      });
+        // Close menu button functionality
+        document.addEventListener('click', function(e) {
+          if (e.target.closest('[data-slide-menu-close]')) {
+            window.closeSlideMenu('mobile-menu-container');
+          }
+        });
 
-      // Open menu button functionality (delegated listener)
-      document.addEventListener('click', function(e) {
-        if (e.target.closest('#mobile-menu-button')) {
-          e.preventDefault();
-          window.toggleSlideMenu('mobile-menu-container');
-        }
+        // Close menu when clicking outside of it
+        document.addEventListener('click', function(e) {
+          const container = document.getElementById('mobile-menu-container');
+          const overlay = document.querySelector('#mobile-menu-overlay');
+          const button = document.getElementById('mobile-menu-button');
+          if (!container || !overlay) return;
+
+          const isOpen = container.dataset.mobileMenuOpen === 'true';
+          // Check if click is outside overlay and not on the button
+          const clickedOutside = !overlay.contains(e.target) && !button.contains(e.target);
+
+          if (isOpen && clickedOutside) {
+            window.closeSlideMenu('mobile-menu-container');
+          }
+        });
       });
       """
     

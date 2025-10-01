@@ -92,23 +92,28 @@ struct GameOfLife: Element {
                           grid[i] = [];
                           nextGrid[i] = [];
                           for (let j = 0; j < cols; j++) {
-                              // Create interesting patterns with clusters
-                              let alive = false;
-                              if (Math.random() < 0.06) { // Reduced density for better visibility
-                                  alive = true;
-                              }
-                              grid[i][j] = alive ? 1 : 0;
+                              grid[i][j] = 0;
                               nextGrid[i][j] = 0;
                           }
                       }
-                      
-                      // Add glider patterns after grid is fully initialized
-                      for (let i = 0; i < rows; i++) {
-                          for (let j = 0; j < cols; j++) {
-                              if (Math.random() < 0.004) {
-                                  createGlider(i, j);
-                              }
-                          }
+
+                      // Start with a small cluster in the center for organic growth
+                      const centerRow = Math.floor(rows / 2);
+                      const centerCol = Math.floor(cols / 2);
+
+                      // Add a few small patterns to seed the growth
+                      // R-pentomino pattern (creates complex long-term evolution)
+                      if (centerRow > 1 && centerCol > 1) {
+                          grid[centerRow][centerCol + 1] = 1;
+                          grid[centerRow][centerCol + 2] = 1;
+                          grid[centerRow + 1][centerCol] = 1;
+                          grid[centerRow + 1][centerCol + 1] = 1;
+                          grid[centerRow + 2][centerCol + 1] = 1;
+                      }
+
+                      // Add a glider in a corner
+                      if (rows > 10 && cols > 10) {
+                          createGlider(5, 5);
                       }
                       
                   }
@@ -210,23 +215,6 @@ struct GameOfLife: Element {
                       
                   }
 
-                  // Periodically inject new random cells to keep it interesting
-                  function injectRandomCells() {
-                      if (Math.random() < 0.05) { // Reduced chance every update cycle
-                          for (let i = 0; i < 1; i++) { // Add fewer random cells
-                              const row = Math.floor(Math.random() * rows);
-                              const col = Math.floor(Math.random() * cols);
-                              grid[row][col] = 1;
-                          }
-                      }
-                      
-                      // Occasionally add a glider
-                      if (Math.random() < 0.02) {
-                          const row = Math.floor(Math.random() * (rows - 3));
-                          const col = Math.floor(Math.random() * (cols - 3));
-                          createGlider(row, col);
-                      }
-                  }
 
                   // Visibility detection for performance optimization
                   const observer = new IntersectionObserver((entries) => {
@@ -247,7 +235,6 @@ struct GameOfLife: Element {
 
                       if (timestamp - lastUpdate >= updateInterval) {
                           updateGrid();
-                          injectRandomCells();
                           drawGrid();
                           lastUpdate = timestamp;
                       }

@@ -27,9 +27,11 @@ public struct MobileMenu: Element {
             Stack(classes: ["flex", "items-center", "justify-between", "mb-4"]) {
               Text("Navigation", classes: ["text-lg", "font-semibold", "text-zinc-900", "dark:text-zinc-100"])
               Button(
+                onClick: "closeSlideMenu('mobile-menu-container')",
                 id: "mobile-menu-close",
                 classes: [
                   "p-1", "text-zinc-500", "hover:text-zinc-700", "dark:text-zinc-400", "dark:hover:text-zinc-200",
+                  "cursor-pointer",
                 ],
                 label: "Close menu",
                 data: ["slide-menu-close": ""]
