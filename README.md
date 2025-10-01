@@ -27,4 +27,3 @@ triggering an update of the live site.
 
 - [ ] Ensure post likes are setup and working.
 - [ ] Slowly transition everything that is not written in a nice type safe addition of the WebUI DSL into new features of WebUI so that there aren't any awkward css or js files written in strings.
-- [ ] Look into Application configuration done via a `site.pkl` to see how that works.
