@@ -434,9 +434,10 @@ public struct PhotoResponse: Identifiable {
     }
 
     public var webPath: String {
+        // R2 public URL - photos are served directly from R2 bucket
         // URL-encode the path to handle spaces and special characters
         let encodedPath = relativePath.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? relativePath
-        return "/public/photos/\(encodedPath)"
+        return "https://75227482a9e9e9a84210e78d9ef47434.r2.cloudflarestorage.com/portfolio-media/photos/\(encodedPath)"
     }
 
     public var altText: String {

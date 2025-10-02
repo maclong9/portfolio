@@ -305,8 +305,8 @@ struct Application: Website {
       let application = Application()
       try application.build(to: URL(filePath: ".output/dist"))
 
-      // Copy Photos directory to output
-      try copyPhotosToOutput()
+      // Upload Photos to R2 storage
+      try uploadPhotosToR2()
 
       // Write embedded configuration files to output directory
       try writeConfigurationFiles()
@@ -317,30 +317,24 @@ struct Application: Website {
     }
   }
 
-  private static func copyPhotosToOutput() throws {
+  private static func uploadPhotosToR2() throws {
     let photosSourceDir = URL(filePath: "Photos")
-    let outputPhotosDir = URL(filePath: ".output/dist/public/photos")
 
     // Check if Photos directory exists
     guard FileManager.default.fileExists(atPath: photosSourceDir.path) else {
-      print("⚠️  Photos directory not found, skipping photo copy")
+      print("⚠️  Photos directory not found, skipping R2 upload")
       return
     }
 
-    // Remove existing photos directory in output if it exists
-    if FileManager.default.fileExists(atPath: outputPhotosDir.path) {
-      try FileManager.default.removeItem(at: outputPhotosDir)
-    }
-
-    // Create output directory
-    try FileManager.default.createDirectory(at: outputPhotosDir, withIntermediateDirectories: true)
-
-    // Copy Photos directory contents
+    // Get all album directories
     let albumDirs = try FileManager.default.contentsOfDirectory(
       at: photosSourceDir,
       includingPropertiesForKeys: nil,
       options: .skipsHiddenFiles
     )
+
+    var totalFiles = 0
+    var uploadedFiles = 0
 
     for albumDir in albumDirs {
       var isDirectory: ObjCBool = false
@@ -350,12 +344,62 @@ struct Application: Website {
       }
 
       let albumName = albumDir.lastPathComponent
-      let destinationAlbumDir = outputPhotosDir.appendingPathComponent(albumName)
 
-      try FileManager.default.copyItem(at: albumDir, to: destinationAlbumDir)
+      // Get all files in album
+      let files = try FileManager.default.contentsOfDirectory(
+        at: albumDir,
+        includingPropertiesForKeys: nil,
+        options: .skipsHiddenFiles
+      )
+
+      totalFiles += files.count
+
+      // Upload each file to R2
+      for fileURL in files {
+        let fileName = fileURL.lastPathComponent
+        let r2Key = "photos/\(albumName)/\(fileName)"
+
+        // Use wrangler CLI to upload to R2
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
+        process.arguments = [
+          "wrangler", "r2", "object", "put",
+          "portfolio-media/\(r2Key)",
+          "--file", fileURL.path,
+          "--content-type", contentType(for: fileURL.pathExtension)
+        ]
+
+        let pipe = Pipe()
+        process.standardOutput = pipe
+        process.standardError = pipe
+
+        try process.run()
+        process.waitUntilExit()
+
+        if process.terminationStatus == 0 {
+          uploadedFiles += 1
+        } else {
+          let data = pipe.fileHandleForReading.readDataToEndOfFile()
+          let output = String(data: data, encoding: .utf8) ?? ""
+          print("⚠️  Failed to upload \(r2Key): \(output)")
+        }
+      }
     }
 
-    print("✓ Photos copied to output directory")
+    print("✓ Uploaded \(uploadedFiles)/\(totalFiles) photos to R2 storage")
+  }
+
+  private static func contentType(for fileExtension: String) -> String {
+    switch fileExtension.lowercased() {
+    case "jpg", "jpeg": return "image/jpeg"
+    case "png": return "image/png"
+    case "gif": return "image/gif"
+    case "webp": return "image/webp"
+    case "heic": return "image/heic"
+    case "mov": return "video/quicktime"
+    case "mp4": return "video/mp4"
+    default: return "application/octet-stream"
+    }
   }
 
   private static func writeConfigurationFiles() throws {
@@ -381,6 +425,10 @@ struct Application: Website {
       [[kv_namespaces]]
       binding = "LIKES_KV"
       id = "88a8b09d81654afca89d0c740f7977b6"
+
+      [[r2_buckets]]
+      binding = "PORTFOLIO_MEDIA"
+      bucket_name = "portfolio-media"
 
       [observability.logs]
       enabled = true
