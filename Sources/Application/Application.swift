@@ -58,7 +58,7 @@ struct Application: Website {
       }
 
       // Dynamic album routes
-      let albums = try PhotosService.fetchAllAlbums()
+      let albums = try PhotosService.fetchAllAlbumsWithAll()
       for album in albums {
         DynamicAlbum(album: album)
       }

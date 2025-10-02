@@ -35,24 +35,20 @@ struct Posts: Document {
         Breadcrumb(title: "Posts", url: "/posts"),
       ]
     ) {
-      Stack(classes: ["max-w-4xl", "mx-auto"]) {
-        // Page Header
-        Stack(classes: ["text-center", "mb-12"]) {
-          Heading(.largeTitle, "Posts", classes: ["text-3xl", "md:text-4xl", "font-bold", "mb-4"])
-          Text(
-            "Thoughts on development, technology, and building for the web.",
-            classes: ["text-lg", "max-w-2xl", "mx-auto"]
-          )
+      if articles.isEmpty {
+        Stack(classes: ["max-w-4xl", "mx-auto", "text-center", "py-12", "bg-white/50", "dark:bg-zinc-800/50", "backdrop-blur-xl", "border", "border-white/50", "dark:border-white/10", "rounded-2xl", "shadow-sm"]) {
+          Icon(name: "file-text", classes: ["w-12", "h-12", "mx-auto", "mb-4", "opacity-50"])
+          Heading(.headline, "No posts yet", classes: ["text-lg", "font-semibold", "mb-2"])
+          Text("Check back soon for new content!", classes: ["opacity-75"])
         }
-
-        // Posts List
-        if articles.isEmpty {
-          Stack(classes: ["text-center", "py-12"]) {
-            Icon(name: "file-text", classes: ["w-12", "h-12", "mx-auto", "mb-4", "opacity-50"])
-            Heading(.headline, "No posts yet", classes: ["text-lg", "font-semibold", "mb-2"])
-            Text("Check back soon for new content!", classes: ["opacity-75"])
-          }
-        } else {
+      } else {
+        StandardPageLayout(
+          title: "Posts",
+          iconName: "file-text",
+          count: articles.count,
+          countLabel: "post",
+          description: "Thoughts on development, technology, and building for the web."
+        ) {
           CardCollection(
             cards: articles.map { $0.toCard() }
           )

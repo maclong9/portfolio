@@ -27,7 +27,8 @@ public struct LayoutHeader: Element {
       Header(
         id: "main-header",
         classes: [
-          "fixed", "top-4", "left-4", "right-4",
+          "fixed", "top-4", "left-1/2", "-translate-x-1/2",
+          "max-w-5xl", "w-[calc(100%-2rem)]",
           "bg-white/60", "dark:bg-zinc-900/60",
           "backdrop-blur-2xl", "backdrop-saturate-200",
           "border", "border-white/40", "dark:border-zinc-700/40",
@@ -37,7 +38,7 @@ public struct LayoutHeader: Element {
           "shadow-lg", "shadow-zinc-900/5", "dark:shadow-zinc-950/30",
         ]
       ) {
-        Stack(classes: ["max-w-6xl", "mx-auto", "flex", "items-center", "justify-between"]) {
+        Stack(classes: ["flex", "items-center", "justify-between"]) {
           Stack(classes: ["flex", "items-center", "justify-between", "w-full"]) {
             // Navigation or site title
             if let breadcrumbs = breadcrumbs {
@@ -167,7 +168,19 @@ public struct LayoutHeader: Element {
                     ],
                     label: "Photos"
                   ) {
-                    Icon(name: "image", classes: ["w-5", "h-5"])
+                    Icon(name: "camera", classes: ["w-5", "h-5"])
+                  }
+
+                  Link(
+                    to: "/tools",
+                    classes: [
+                      "p-2", "text-zinc-500", "hover:text-zinc-700", "dark:text-zinc-400",
+                      "dark:hover:text-zinc-200", "rounded-lg", "hover:bg-zinc-100",
+                      "dark:hover:bg-zinc-700", "transition-colors", "cursor-pointer",
+                    ],
+                    label: "Tools"
+                  ) {
+                    Icon(name: "wrench", classes: ["w-5", "h-5"])
                   }
 
                   // Separator between navigation and site controls

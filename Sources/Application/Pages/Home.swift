@@ -14,47 +14,47 @@ struct Home: Document {
       title: "Apple Ecosystem",
       description:
         "Native iOS and macOS development using Swift and SwiftUI for beautiful, performant applications.",
-      tags: ["Swift", "SwiftUI", "Xcode", "iOS", "macOS", "App Store", "UIKit", "Core Data", "TestFlight"],
+      tags: ["Swift", "SwiftUI", "Xcode", "iOS", "macOS", "UIKit", "Core Data", "TestFlight"],
       emoji: "📱"
+    ),
+    Card(
+      title: "Systems Programming",
+      description:
+        "Low-level programming and command-line tools with UNIX systems expertise and efficient C implementations.",
+      tags: ["C", "UNIX Shell", "CLI Tools", "POSIX", "System APIs", "Make", "GCC", "LLVM"],
+      emoji: "🔧"
+    ),
+    Card(
+      title: "Web Development",
+      description:
+        "Full-stack web applications with modern frameworks, responsive design, and scalable backend systems.",
+      tags: ["React", "TypeScript", "Node.js", "HTML", "CSS", "JavaScript", "REST", "WebSockets"],
+      emoji: "🌐"
     ),
     Card(
       title: "Cloud & DevOps",
       description: "Modern deployment and infrastructure management with automated CI/CD and cloud hosting.",
-      tags: ["Cloudflare", "Vercel", "AWS", "GitHub", "Docker", "CI/CD", "Kubernetes", "Git"],
+      tags: ["Cloudflare", "Vercel", "AWS", "GitHub", "Docker", "CI/CD", "Git", "Kubernetes"],
       emoji: "☁️"
-    ),
-    Card(
-      title: "Frontend",
-      description:
-        "Creating responsive, interactive web experiences with modern frameworks and cutting-edge styling.",
-      tags: ["React", "Next.js", "TypeScript", "TailwindCSS", "Alpine.js", "HTML5", "CSS3", "HTMX", "Vite"],
-      emoji: "🖥️"
-    ),
-    Card(
-      title: "Backend",
-      description:
-        "Building scalable server-side applications and APIs with robust databases and efficient data management.",
-      tags: ["Swift", "Node.js", "Express", "PostgreSQL", "Redis", "REST APIs", "Websockets", "Hummingbird"],
-      emoji: "⚙️"
     ),
   ]
 
   // MARK: - Skill Cards
   let projectCards: [Card] = [
     Card(
-      title: "Constellate - 🚧",
+      title: "Guest List - 🚧",
       description:
-        "Full stack SaaS application for increasing productivity among startups and small teams.",
-      tags: ["Swift", "WebUI", "SwiftUI"],
-      linkURL: "https://github.com/maclong9/constellate",
+        "Full stack web application with iOS app for ",
+      tags: ["Hummingbird", "WebUI", "SwiftUI"],
+      linkURL: "https://github.com/maclong9/guest-list",
       linkText: "View here",
       newTab: true,
-      emoji: "✨",
+      emoji: "📋",
     ),
     Card(
       title: "Tools Collection",
       description:
-        "Modern utility tools built with TailwindCSS and Alpine.js for guitar training and travel planning.",
+        "Modern utility tools built with WebUI for guitar training, travel planning and more.",
       tags: ["WebUI", "Swift", "Cloudflare"],
       linkURL: "/tools",
       linkText: "Open Tools",

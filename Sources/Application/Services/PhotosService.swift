@@ -32,6 +32,27 @@ public enum PhotosService {
         }
     }
 
+    public static func fetchAllAlbumsWithAll(
+        from directoryPath: String = "Photos"
+    ) throws -> [AlbumResponse] {
+        var albums = try fetchAllAlbums(from: directoryPath)
+
+        // Create "All" album that combines all photos
+        let allPhotos = albums.flatMap { $0.photos }
+        if !allPhotos.isEmpty {
+            let allAlbum = AlbumResponse(
+                id: "all",
+                name: "All Photos",
+                coverPhoto: allPhotos.first,
+                photos: allPhotos,
+                date: allPhotos.compactMap { $0.creationDate }.min()
+            )
+            albums.insert(allAlbum, at: 0)
+        }
+
+        return albums
+    }
+
     public static func getUniqueLocations(from albums: [AlbumResponse]) -> [String] {
         let locations = albums.flatMap { album in
             album.photos.compactMap { $0.metadata.locationName }
@@ -121,6 +142,13 @@ public enum PhotosService {
     }
 
     private static func extractPhotoMetadata(from url: URL) -> PhotoMetadata {
+        // Check if file is RAW
+        let rawExtensions = ["dng", "cr2", "cr3", "nef", "arw", "orf", "rw2", "raw"]
+        let isRaw = rawExtensions.contains(url.pathExtension.lowercased())
+
+        // Get file size
+        let fileSize = (try? url.resourceValues(forKeys: [.fileSizeKey]))?.fileSize
+
         guard let imageSource = CGImageSourceCreateWithURL(url as CFURL, nil),
               let properties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [String: Any] else {
             // Fallback to file metadata if EXIF extraction fails
@@ -134,7 +162,12 @@ public enum PhotosService {
                 focalLength: nil,
                 aperture: nil,
                 shutterSpeed: nil,
-                iso: nil
+                iso: nil,
+                keywords: [],
+                isRaw: isRaw,
+                width: nil,
+                height: nil,
+                fileSize: fileSize
             )
         }
 
@@ -183,6 +216,13 @@ public enum PhotosService {
         let shutterSpeed = exif?[kCGImagePropertyExifExposureTime as String] as? Double
         let iso = exif?[kCGImagePropertyExifISOSpeedRatings as String] as? [Int]
 
+        // Extract keywords from IPTC
+        let keywords = (iptc?[kCGImagePropertyIPTCKeywords as String] as? [String]) ?? []
+
+        // Extract image dimensions
+        let width = properties[kCGImagePropertyPixelWidth as String] as? Int
+        let height = properties[kCGImagePropertyPixelHeight as String] as? Int
+
         return PhotoMetadata(
             caption: caption,
             dateTaken: dateTaken,
@@ -192,7 +232,12 @@ public enum PhotosService {
             focalLength: focalLength,
             aperture: aperture,
             shutterSpeed: shutterSpeed,
-            iso: iso?.first
+            iso: iso?.first,
+            keywords: keywords,
+            isRaw: isRaw,
+            width: width,
+            height: height,
+            fileSize: fileSize
         )
     }
 
@@ -346,6 +391,11 @@ public struct PhotoMetadata {
     public let aperture: Double?
     public let shutterSpeed: Double?
     public let iso: Int?
+    public let keywords: [String]
+    public let isRaw: Bool
+    public let width: Int?
+    public let height: Int?
+    public let fileSize: Int?
 
     public var locationName: String? {
         guard let location = location else { return nil }
@@ -356,6 +406,14 @@ public struct PhotoMetadata {
 
     public var hasLocation: Bool {
         location != nil
+    }
+
+    public var formattedFileSize: String? {
+        guard let size = fileSize else { return nil }
+        let formatter = ByteCountFormatter()
+        formatter.allowedUnits = [.useKB, .useMB]
+        formatter.countStyle = .file
+        return formatter.string(fromByteCount: Int64(size))
     }
 }
 
