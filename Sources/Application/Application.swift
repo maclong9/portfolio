@@ -101,6 +101,26 @@ struct Application: Website {
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* Respect user's motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .reveal-card {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+
+            .game-of-life-bg {
+                display: none !important;
+            }
+        }
+
         /* Hero animations */
         @keyframes slideUp {
             from {

@@ -47,6 +47,20 @@ public struct MasonryCardLayout: Element {
               if (window.cardAnimationsInitialized) return;
               window.cardAnimationsInitialized = true;
 
+              // Check for prefers-reduced-motion
+              const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+              if (prefersReducedMotion) {
+                  // Skip animations if user prefers reduced motion
+                  const cards = document.querySelectorAll('.reveal-card');
+                  cards.forEach(card => {
+                      card.classList.add('in-view');
+                      card.style.opacity = '1';
+                      card.style.transform = 'none';
+                  });
+                  return;
+              }
+
               let lastScrollTop = 0;
               let scrollVelocity = 0;
               let isScrollingFast = false;

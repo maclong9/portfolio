@@ -13,6 +13,18 @@ struct GameOfLife: Element {
           """
           // Conway's Game of Life implementation
           (function() {
+              // Check for prefers-reduced-motion
+              const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+              if (prefersReducedMotion) {
+                  // Don't initialize Game of Life if user prefers reduced motion
+                  const container = document.querySelector('.game-of-life-bg');
+                  if (container) {
+                      container.style.display = 'none';
+                  }
+                  return;
+              }
+
               function initGameOfLife() {
                   const container = document.querySelector('.game-of-life-bg');
                   if (!container) return;
