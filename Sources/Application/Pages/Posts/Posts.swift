@@ -33,26 +33,24 @@ struct Posts: Document {
       breadcrumbs: [
         Breadcrumb(title: "Mac Long", url: "/"),
         Breadcrumb(title: "Posts", url: "/posts"),
-      ]
+      ],
+      showPageHeader: !articles.isEmpty,
+      pageTitle: "Posts",
+      iconName: "file-text",
+      count: articles.count,
+      countLabel: "post",
+      pageDescription: "Thoughts on development, technology, and building for the web."
     ) {
       if articles.isEmpty {
-        Stack(classes: ["max-w-4xl", "mx-auto", "text-center", "py-12", "bg-white/50", "dark:bg-zinc-800/50", "backdrop-blur-xl", "border", "border-white/50", "dark:border-white/10", "rounded-2xl", "shadow-sm"]) {
-          Icon(name: "file-text", classes: ["w-12", "h-12", "mx-auto", "mb-4", "opacity-50"])
-          Heading(.headline, "No posts yet", classes: ["text-lg", "font-semibold", "mb-2"])
-          Text("Check back soon for new content!", classes: ["opacity-75"])
-        }
-      } else {
-        StandardPageLayout(
-          title: "Posts",
+        EmptyState(
           iconName: "file-text",
-          count: articles.count,
-          countLabel: "post",
-          description: "Thoughts on development, technology, and building for the web."
-        ) {
-          CardCollection(
-            cards: articles.map { $0.toCard() }
-          )
-        }
+          title: "No posts yet",
+          message: "Check back soon for new content!"
+        )
+      } else {
+        MasonryCardLayout(
+          cards: articles.map { $0.toCard() }
+        )
       }
     }
   }

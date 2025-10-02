@@ -44,28 +44,32 @@ struct Photos: Document {
       breadcrumbs: [
         Breadcrumb(title: "Mac Long", url: "/"),
         Breadcrumb(title: "Photos", url: "/photos"),
-      ]
+      ],
+      showPageHeader: !albums.isEmpty,
+      pageTitle: "Photos",
+      iconName: "camera",
+      count: totalPhotoCount,
+      countLabel: "photo",
+      pageDescription: "Photo albums from travels and life."
     ) {
       if albums.isEmpty {
-        Stack(classes: ["max-w-4xl", "mx-auto", "text-center", "py-12", "bg-white/50", "dark:bg-zinc-800/50", "backdrop-blur-xl", "border", "border-white/50", "dark:border-white/10", "rounded-2xl", "shadow-sm"]) {
-          Icon(name: "camera", classes: ["w-12", "h-12", "mx-auto", "mb-4", "opacity-50"])
-          Heading(.headline, "No albums yet", classes: ["text-lg", "font-semibold", "mb-2"])
-          Text("Check back soon for photo albums!", classes: ["opacity-75"])
-        }
-      } else {
-        StandardPageLayout(
-          title: "Photos",
+        EmptyState(
           iconName: "camera",
-          count: totalPhotoCount,
-          countLabel: "photo",
-          description: "Photo albums from travels and life."
-        ) {
-          Stack(classes: ["grid", "md:grid-cols-2", "gap-6", "max-w-4xl", "mx-auto", "auto-rows-min"]) {
-            for album in albums {
-              AnimatedAlbumCard(album: album)
-            }
+          title: "No albums yet",
+          message: "Check back soon for photo albums!"
+        )
+      } else {
+        MasonryCardLayout(
+          cards: albums.map { album in
+            Card(
+              title: album.name,
+              description: "\(album.photos.count) photo\(album.photos.count == 1 ? "" : "s")",
+              linkURL: "/photos/\(album.slug)",
+              linkText: "View album",
+              publishedDate: album.date
+            )
           }
-        }
+        )
       }
     }
   }

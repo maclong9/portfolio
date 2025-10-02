@@ -8,6 +8,15 @@ public struct Layout: Element {
   let published: Date?
   let breadcrumbs: [Breadcrumb]?
   let emoji: String?
+
+  // Page header configuration
+  let showPageHeader: Bool
+  let pageTitle: String?
+  let iconName: String?
+  let count: Int?
+  let countLabel: String?
+  let pageDescription: String?
+
   let content: MarkupContentBuilder
 
   public init(
@@ -17,6 +26,12 @@ public struct Layout: Element {
     published: Date? = nil,
     breadcrumbs: [Breadcrumb]? = nil,
     emoji: String? = nil,
+    showPageHeader: Bool = false,
+    pageTitle: String? = nil,
+    iconName: String? = nil,
+    count: Int? = nil,
+    countLabel: String? = nil,
+    pageDescription: String? = nil,
     @MarkupBuilder content: @escaping MarkupContentBuilder
   ) {
     self.path = path
@@ -25,6 +40,12 @@ public struct Layout: Element {
     self.published = published
     self.breadcrumbs = breadcrumbs
     self.emoji = emoji
+    self.showPageHeader = showPageHeader
+    self.pageTitle = pageTitle
+    self.iconName = iconName
+    self.count = count
+    self.countLabel = countLabel
+    self.pageDescription = pageDescription
     self.content = content
   }
 
@@ -42,8 +63,41 @@ public struct Layout: Element {
         LayoutHeader(breadcrumbs: breadcrumbs, emoji: emoji)
 
         Main(classes: ["flex-1", "px-4", "py-8", "pt-32"]) {
-          Stack {
-            MarkupString(content: content().map { $0.render() }.joined())
+          Stack(classes: ["max-w-4xl", "mx-auto"]) {
+            if showPageHeader {
+              // Page Header with inline metadata
+              Stack(classes: ["mb-8"]) {
+                if let pageTitle = pageTitle {
+                  Heading(.largeTitle, pageTitle, classes: ["text-3xl", "md:text-4xl", "font-bold", "mb-4"])
+                }
+
+                if let iconName = iconName, let count = count, let countLabel = countLabel, let pageDescription = pageDescription {
+                  Stack(classes: ["flex", "items-center", "justify-between", "flex-wrap", "gap-4"]) {
+                    // Left side: Count with icon
+                    Stack(classes: ["flex", "items-center", "gap-2", "text-sm"]) {
+                      Icon(name: iconName, classes: ["w-4", "h-4"])
+                      Text("\(count) \(countLabel)\(count == 1 ? "" : "s")")
+                    }
+
+                    // Right side: Description text
+                    Text(
+                      pageDescription,
+                      classes: ["text-sm", "text-zinc-600", "dark:text-zinc-400"]
+                    )
+                  }
+                }
+              }
+
+              // Main content container (invisible wrapper)
+              for item in content() {
+                item
+              }
+            } else {
+              // No header - just render content (for home page)
+              for item in content() {
+                item
+              }
+            }
           }
         }
 

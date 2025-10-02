@@ -44,7 +44,7 @@ struct Home: Document {
     Card(
       title: "Guest List - 🚧",
       description:
-        "Full stack web application with iOS app for ",
+        "Full stack web application with iOS app for gig venues and music fans.",
       tags: ["Hummingbird", "WebUI", "SwiftUI"],
       linkURL: "https://github.com/maclong9/guest-list",
       linkText: "View here",
@@ -87,48 +87,49 @@ struct Home: Document {
     Layout(
       path: "index",
       title: "Mac Long - Developer Portfolio",
-      description: "Full-stack developer specializing in modern web technologies"
+      description: "Full-stack developer specializing in modern web technologies",
+      showPageHeader: false
     ) {
       Stack(classes: ["max-w-4xl", "mx-auto", "space-y-16"]) {
-        // Hero
-        Section(classes: ["text-center", "mb-16"]) {
-          Stack(classes: ["relative"]) {
-            GameOfLife()
-            Stack(classes: ["text-center", "z-20", "max-w-xl", "mx-auto", "text-balance"]) {
-              Image(
-                source: "https://avatars.githubusercontent.com/u/115668288?v=4",
-                description: "Mac Long"
-              )
-                .frame(width: .spacing(24), height: .spacing(24))
-                .addClasses([
-                  "rounded-full", "border-2", "border-teal-400", "shadow-lg",
-                  "mx-auto", "mb-6", "hero-avatar",
-                ])
+          // Hero
+          Section(classes: ["text-center", "mb-16"]) {
+            Stack(classes: ["relative"]) {
+              GameOfLife()
+              Stack(classes: ["text-center", "z-20", "max-w-xl", "mx-auto", "text-balance"]) {
+                Image(
+                  source: "https://avatars.githubusercontent.com/u/115668288?v=4",
+                  description: "Mac Long"
+                )
+                  .frame(width: .spacing(24), height: .spacing(24))
+                  .addClasses([
+                    "rounded-full", "border-2", "border-teal-400", "shadow-lg",
+                    "mx-auto", "mb-6", "hero-avatar",
+                  ])
 
-              Heading(.largeTitle, "Mac Long")
-                .addClasses(["text-4xl", "md:text-5xl", "font-bold", "mb-4", "hero-name"])
+                Heading(.largeTitle, "Mac Long")
+                  .addClasses(["text-4xl", "md:text-5xl", "font-bold", "mb-4", "hero-name"])
 
-              Text("Passionate about creating modern software experiences with clean code and thoughtful design.")
-                .addClasses([
-                  "text-xl", "mb-8", "mx-auto",
-                  "hero-description",
-                ])
+                Text("Passionate about creating modern software experiences with clean code and thoughtful design.")
+                  .addClasses([
+                    "text-xl", "mb-8", "mx-auto",
+                    "hero-description",
+                  ])
+              }
             }
           }
-        }
 
-        // Skills Section
-        Section(classes: ["mb-16"]) {
-          Heading(.title, "Technologies & Skills", classes: ["text-2xl", "font-bold", "mb-8", "text-center"])
-          CardCollection(cards: skillsCards)
-        }
+          // Skills Section
+          Section(classes: ["mb-16"]) {
+            Heading(.title, "Technologies & Skills", classes: ["text-2xl", "font-bold", "mb-8", "text-center"])
+            CardCollection(cards: skillsCards)
+          }
 
-        // Projects Section
-        Section(classes: ["mb-16"]) {
-          Heading(.title, "Recent Projects", classes: ["text-2xl", "font-bold", "mb-8", "text-center"])
-          CardCollection(cards: projectCards)
+          // Projects Section
+          Section(classes: ["mb-16"]) {
+            Heading(.title, "Recent Projects", classes: ["text-2xl", "font-bold", "mb-8", "text-center"])
+            CardCollection(cards: projectCards)
+          }
         }
       }
     }
   }
-}

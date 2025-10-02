@@ -51,15 +51,13 @@ struct Application: Website {
       SchengenTracker()
       Missing()
 
-      // Dynamic article routes - error handling moved to ArticlesService
-      let articles = try ArticlesService.fetchAllArticles()
-      for article in articles {
+      // Dynamic article routes
+      for article in try ArticlesService.fetchAllArticles() {
         DynamicArticle(article: article)
       }
 
       // Dynamic album routes
-      let albums = try PhotosService.fetchAllAlbumsWithAll()
-      for album in albums {
+      for album in try PhotosService.fetchAllAlbumsWithAll() {
         DynamicAlbum(album: album)
       }
     }

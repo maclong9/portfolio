@@ -224,8 +224,8 @@ struct DynamicAlbum: Document {
           </button>
 
           <!-- Image container -->
-          <div class="max-w-5xl max-h-full flex items-center justify-center">
-            <img id="lightbox-image" src="" alt="" class="max-w-full max-h-[80vh] object-contain rounded-2xl" />
+          <div class="max-w-5xl max-h-full flex items-center justify-center mb-24">
+            <img id="lightbox-image" src="" alt="" class="max-w-full max-h-[70vh] object-contain rounded-2xl" />
           </div>
 
           <!-- Navigation: Next -->
@@ -235,7 +235,7 @@ struct DynamicAlbum: Document {
         </div>
 
         <!-- Thumbnails strip at bottom -->
-        <div id="lightbox-thumbnails" class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 max-w-4xl overflow-x-auto px-6"></div>
+        <div id="lightbox-thumbnails" class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 max-w-4xl overflow-x-auto px-6 py-2 bg-black/50 backdrop-blur-xl rounded-2xl"></div>
 
         <!-- Metadata panel (hidden by default) -->
         <div id="metadata-panel" class="hidden absolute top-6 right-6 md:top-6 md:right-6 left-6 md:left-auto bottom-6 md:bottom-auto md:w-96 w-auto max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-3rem)] max-w-md mx-auto md:mx-0 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl overflow-y-auto shadow-2xl rounded-2xl border border-white/50 dark:border-white/10">

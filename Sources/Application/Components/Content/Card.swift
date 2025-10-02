@@ -47,7 +47,10 @@ public struct Card: Element {
       "hover:scale-[1.02]",
       "transition-shadow", "duration-[800ms]", "ease-in-out",
       "transition-transform", "duration-300", "ease-out",
-      "cursor-pointer", "card", "reveal-card", "min-h-[220px]",
+      "cursor-pointer", "card", "reveal-card",
+      "group-[.masonry-small]/masonry:min-h-[180px]",
+      "group-[.masonry-medium]/masonry:min-h-[200px]",
+      "min-h-[220px]",
     ]) {
 
       // Header row: icon/emoji + tags
