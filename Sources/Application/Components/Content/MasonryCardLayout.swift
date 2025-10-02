@@ -10,7 +10,7 @@ public struct MasonryCardLayout: Element {
   }
 
   public var body: some Markup {
-    Stack(classes: ["space-y-6", "group/masonry"]) {
+    Stack(classes: ["space-y-8", "group/masonry"]) {
       // First card: full width
       if cards.count > 0 {
         cards[0]
@@ -18,7 +18,7 @@ public struct MasonryCardLayout: Element {
 
       // Next 2 cards: half width
       if cards.count > 1 {
-        Stack(classes: ["grid", "md:grid-cols-2", "gap-6", "group/masonry", "masonry-medium"]) {
+        Stack(classes: ["grid", "md:grid-cols-2", "gap-8", "group/masonry", "masonry-medium"]) {
           if cards.count > 1 {
             cards[1]
           }
@@ -30,7 +30,7 @@ public struct MasonryCardLayout: Element {
 
       // Remaining cards: 3 per row, smaller size
       if cards.count > 3 {
-        Stack(classes: ["grid", "md:grid-cols-3", "gap-4", "group/masonry", "masonry-small"]) {
+        Stack(classes: ["grid", "md:grid-cols-3", "gap-6", "group/masonry", "masonry-small"]) {
           for card in cards.dropFirst(3) {
             card
           }
