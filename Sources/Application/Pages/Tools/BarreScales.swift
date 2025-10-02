@@ -506,7 +506,7 @@ struct BarreScales: Document {
                 if (!container) return;
 
                 container.innerHTML = progressions.map((progression, index) => `
-                    <div onclick="selectProgression(progressions[${index}])" 
+                    <div onclick='selectProgression(${JSON.stringify(progression)})'
                          class="bg-zinc-50 dark:bg-zinc-700 rounded-lg p-4 border border-zinc-200 dark:border-zinc-600 cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-600 transition-colors">
                         <h4 class="font-semibold text-zinc-900 dark:text-zinc-100 mb-2">${progression.name}</h4>
                         <div class="text-sm text-zinc-600 dark:text-zinc-300 mb-1">${progression.formula}</div>

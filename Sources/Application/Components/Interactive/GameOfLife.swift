@@ -70,6 +70,7 @@ struct GameOfLife: Element {
                   let rows = 0;
                   let grid = [];
                   let nextGrid = [];
+                  let cellAge = []; // Track age of each cell
 
                   // Initialize grid with random cells
                   function initializeGrid() {
@@ -86,14 +87,17 @@ struct GameOfLife: Element {
                       
                       grid = [];
                       nextGrid = [];
-                      
+                      cellAge = [];
+
                       // Initialize empty grids first
                       for (let i = 0; i < rows; i++) {
                           grid[i] = [];
                           nextGrid[i] = [];
+                          cellAge[i] = [];
                           for (let j = 0; j < cols; j++) {
                               grid[i][j] = 0;
                               nextGrid[i][j] = 0;
+                              cellAge[i][j] = 0;
                           }
                       }
 
@@ -158,25 +162,29 @@ struct GameOfLife: Element {
                           for (let j = 0; j < cols; j++) {
                               const neighbors = countNeighbors(i, j);
                               const currentCell = grid[i][j];
-                              
+
                               if (currentCell === 1) {
                                   // Living cell
                                   if (neighbors < 2 || neighbors > 3) {
                                       nextGrid[i][j] = 0; // Dies
+                                      cellAge[i][j] = 0;
                                   } else {
                                       nextGrid[i][j] = 1; // Survives
+                                      cellAge[i][j] = Math.min(cellAge[i][j] + 1, 10); // Cap age at 10
                                   }
                               } else {
                                   // Dead cell
                                   if (neighbors === 3) {
                                       nextGrid[i][j] = 1; // Born
+                                      cellAge[i][j] = 1; // New cell starts at age 1
                                   } else {
                                       nextGrid[i][j] = 0; // Stays dead
+                                      cellAge[i][j] = 0;
                                   }
                               }
                           }
                       }
-                      
+
                       // Swap grids
                       [grid, nextGrid] = [nextGrid, grid];
                   }
@@ -194,20 +202,20 @@ struct GameOfLife: Element {
                               if (grid[i][j] === 1) {
                                   const x = j * cellSize;
                                   const y = i * cellSize;
-                                  
-                                  // Use multiple teal shades like the rest of the site
-                                  const tealColors = [
-                                      'rgba(20, 184, 166, 0.8)',   // teal-500
-                                      'rgba(13, 148, 136, 0.7)',   // teal-600 
-                                      'rgba(15, 118, 110, 0.6)',   // teal-700
-                                      'rgba(45, 212, 191, 0.5)',   // teal-400
-                                  ];
-                                  
-                                  // Use a subtle variation based on position for visual interest
-                                  const colorIndex = (i + j) % tealColors.length;
-                                  ctx.fillStyle = tealColors[colorIndex];
+
+                                  // Color based on cell age - younger cells are brighter/lighter
+                                  const age = cellAge[i][j];
+                                  const ageNormalized = age / 10; // Normalize to 0-1
+
+                                  // Interpolate between teal-400 (young) and teal-700 (old)
+                                  const r = Math.floor(45 - (45 - 15) * ageNormalized);
+                                  const g = Math.floor(212 - (212 - 118) * ageNormalized);
+                                  const b = Math.floor(191 - (191 - 110) * ageNormalized);
+                                  const alpha = 0.9 - (ageNormalized * 0.3); // Fade older cells slightly
+
+                                  ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
                                   ctx.fillRect(x, y, cellSize - 1, cellSize - 1);
-                                  
+
                                   liveCells++;
                               }
                           }
