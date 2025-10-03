@@ -142,10 +142,6 @@ public enum PhotosService {
     }
 
     private static func extractPhotoMetadata(from url: URL) -> PhotoMetadata {
-        // Check if file is RAW
-        let rawExtensions = ["dng", "cr2", "cr3", "nef", "arw", "orf", "rw2", "raw"]
-        let isRaw = rawExtensions.contains(url.pathExtension.lowercased())
-
         // Get file size
         let fileSize = (try? url.resourceValues(forKeys: [.fileSizeKey]))?.fileSize
 
@@ -164,12 +160,25 @@ public enum PhotosService {
                 shutterSpeed: nil,
                 iso: nil,
                 keywords: [],
-                isRaw: isRaw,
+                isRaw: false,
                 width: nil,
                 height: nil,
                 fileSize: fileSize
             )
         }
+
+        // Check if file is actually RAW by checking the image type from metadata
+        let rawExtensions = ["dng", "cr2", "cr3", "nef", "arw", "orf", "rw2", "raw"]
+        let extensionIsRaw = rawExtensions.contains(url.pathExtension.lowercased())
+
+        // Also check the actual image format type from CGImageSource
+        let imageType = CGImageSourceGetType(imageSource) as String?
+        let typeIsRaw = imageType?.contains("raw") ?? false ||
+                       imageType?.contains("dng") ?? false ||
+                       imageType?.contains("cr2") ?? false ||
+                       imageType?.contains("nef") ?? false
+
+        let isRaw = extensionIsRaw || typeIsRaw
 
         // Extract EXIF data
         let exif = properties[kCGImagePropertyExifDictionary as String] as? [String: Any]

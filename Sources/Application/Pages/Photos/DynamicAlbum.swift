@@ -207,12 +207,12 @@ struct DynamicAlbum: Document {
     MarkupString(content: """
       <div id="lightbox-modal" class="hidden fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
         <!-- Close button -->
-        <button onclick="closeLightbox()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center z-50">
+        <button onclick="closeLightbox()" class="absolute top-[1.875rem] right-[1.375rem] w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center z-50">
           <i data-lucide="x" class="w-6 h-6 text-white"></i>
         </button>
 
         <!-- Metadata toggle button -->
-        <button id="metadata-toggle-btn" onclick="toggleMetadata()" class="absolute top-6 right-24 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center z-50">
+        <button id="metadata-toggle-btn" onclick="toggleMetadata()" class="absolute top-[1.875rem] right-[5.875rem] w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center z-50">
           <i id="metadata-toggle-icon" data-lucide="info" class="w-6 h-6 text-white"></i>
         </button>
 
@@ -238,7 +238,7 @@ struct DynamicAlbum: Document {
         <div id="lightbox-thumbnails" class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 max-w-4xl overflow-x-auto px-6 py-2 bg-black/50 backdrop-blur-xl rounded-2xl"></div>
 
         <!-- Metadata panel (hidden by default) -->
-        <div id="metadata-panel" class="hidden absolute top-6 right-6 md:top-6 md:right-6 left-6 md:left-auto bottom-6 md:bottom-auto md:w-96 w-auto max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-3rem)] max-w-md mx-auto md:mx-0 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl overflow-y-auto shadow-2xl rounded-2xl border border-white/50 dark:border-white/10">
+        <div id="metadata-panel" class="hidden absolute top-[1.875rem] right-[1.375rem] md:top-[1.875rem] md:right-[1.375rem] left-6 md:left-auto bottom-6 md:bottom-auto md:w-96 w-auto max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-3rem)] max-w-md mx-auto md:mx-0 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl overflow-y-auto shadow-2xl rounded-2xl border border-white/50 dark:border-white/10">
           <div class="p-6">
             <div class="mb-6">
               <h3 class="text-xl font-bold">Photo Info</h3>
@@ -543,29 +543,16 @@ struct DynamicAlbum: Document {
 
         window.toggleMetadata = function() {
           const panel = document.getElementById('metadata-panel');
-          const icon = document.getElementById('metadata-toggle-icon');
 
           if (panel.classList.contains('hidden')) {
             // Show panel with jelly animation
             panel.classList.remove('hidden');
             panel.classList.add('active');
             updateMetadataPanel();
-
-            // Change icon to X
-            icon.setAttribute('data-lucide', 'x');
-            if (typeof lucide !== 'undefined') {
-              lucide.createIcons();
-            }
           } else {
             // Hide panel
             panel.classList.remove('active');
             setTimeout(() => panel.classList.add('hidden'), 200);
-
-            // Change icon back to info
-            icon.setAttribute('data-lucide', 'info');
-            if (typeof lucide !== 'undefined') {
-              lucide.createIcons();
-            }
           }
         };
 
@@ -669,6 +656,180 @@ struct DynamicAlbum: Document {
           content.innerHTML = html;
         }
 
+        // Swipe gesture handling
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchStartTime = 0;
+        let isDragging = false;
+        const lightboxImage = document.getElementById('lightbox-image');
+
+        function getSwipeDirection(deltaX, deltaY, velocity) {
+          const absX = Math.abs(deltaX);
+          const absY = Math.abs(deltaY);
+          const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+
+          // Require minimum distance and velocity for swipe
+          const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+          if (distance < 50 || velocity < 0.3) return null;
+
+          // Determine direction based on angle
+          // Right: -22.5 to 22.5
+          if (angle >= -22.5 && angle <= 22.5) return 'right';
+          // Up-Right: 22.5 to 67.5
+          if (angle > 22.5 && angle <= 67.5) return 'up-right';
+          // Up: 67.5 to 112.5
+          if (angle > 67.5 && angle <= 112.5) return 'up';
+          // Up-Left: 112.5 to 157.5
+          if (angle > 112.5 && angle <= 157.5) return 'up-left';
+          // Left: 157.5 to 180 or -180 to -157.5
+          if (angle > 157.5 || angle <= -157.5) return 'left';
+          // Down-Left: -157.5 to -112.5
+          if (angle > -157.5 && angle <= -112.5) return 'down-left';
+          // Down: -112.5 to -67.5
+          if (angle > -112.5 && angle <= -67.5) return 'down';
+          // Down-Right: -67.5 to -22.5
+          if (angle > -67.5 && angle <= -22.5) return 'down-right';
+
+          return null;
+        }
+
+        function applySwipeTransform(deltaX, deltaY) {
+          const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+          const opacity = Math.max(0.3, 1 - distance / 500);
+          const rotation = (deltaX / 20) * (deltaY > 0 ? 1 : -1);
+
+          lightboxImage.style.transform = `translate(${deltaX}px, ${deltaY}px) rotate(${rotation}deg) scale(${Math.max(0.7, 1 - distance / 1000)})`;
+          lightboxImage.style.opacity = opacity;
+          lightboxImage.style.transition = 'none';
+        }
+
+        function animateSwipeOff(direction) {
+          const multiplier = 1500;
+          let targetX = 0;
+          let targetY = 0;
+
+          switch(direction) {
+            case 'left': targetX = -multiplier; break;
+            case 'right': targetX = multiplier; break;
+            case 'up': targetY = -multiplier; break;
+            case 'down': targetY = multiplier; break;
+            case 'up-left': targetX = -multiplier; targetY = -multiplier; break;
+            case 'up-right': targetX = multiplier; targetY = -multiplier; break;
+            case 'down-left': targetX = -multiplier; targetY = multiplier; break;
+            case 'down-right': targetX = multiplier; targetY = multiplier; break;
+          }
+
+          const rotation = (targetX / 20) * (targetY > 0 ? 1 : -1);
+
+          lightboxImage.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease-out';
+          lightboxImage.style.transform = `translate(${targetX}px, ${targetY}px) rotate(${rotation}deg) scale(0.5)`;
+          lightboxImage.style.opacity = '0';
+
+          setTimeout(() => {
+            // Navigate to next photo
+            navigateLightbox(1);
+
+            // Reset transform
+            lightboxImage.style.transition = 'none';
+            lightboxImage.style.transform = '';
+            lightboxImage.style.opacity = '1';
+
+            // Force reflow
+            void lightboxImage.offsetWidth;
+
+            // Fade in new image
+            lightboxImage.style.transition = 'opacity 0.3s ease-in';
+          }, 400);
+        }
+
+        function resetSwipeTransform() {
+          lightboxImage.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out';
+          lightboxImage.style.transform = '';
+          lightboxImage.style.opacity = '1';
+        }
+
+        // Touch events
+        lightboxImage.addEventListener('touchstart', (e) => {
+          const touch = e.touches[0];
+          touchStartX = touch.clientX;
+          touchStartY = touch.clientY;
+          touchStartTime = Date.now();
+          isDragging = true;
+        }, { passive: true });
+
+        lightboxImage.addEventListener('touchmove', (e) => {
+          if (!isDragging) return;
+
+          const touch = e.touches[0];
+          const deltaX = touch.clientX - touchStartX;
+          const deltaY = touch.clientY - touchStartY;
+
+          applySwipeTransform(deltaX, deltaY);
+        }, { passive: true });
+
+        lightboxImage.addEventListener('touchend', (e) => {
+          if (!isDragging) return;
+          isDragging = false;
+
+          const touch = e.changedTouches[0];
+          const deltaX = touch.clientX - touchStartX;
+          const deltaY = touch.clientY - touchStartY;
+          const deltaTime = Date.now() - touchStartTime;
+          const velocity = Math.sqrt(deltaX * deltaX + deltaY * deltaY) / deltaTime;
+
+          const direction = getSwipeDirection(deltaX, deltaY, velocity);
+
+          if (direction) {
+            animateSwipeOff(direction);
+          } else {
+            resetSwipeTransform();
+          }
+        }, { passive: true });
+
+        // Mouse events for desktop
+        let mouseDown = false;
+
+        lightboxImage.addEventListener('mousedown', (e) => {
+          touchStartX = e.clientX;
+          touchStartY = e.clientY;
+          touchStartTime = Date.now();
+          mouseDown = true;
+          isDragging = true;
+          lightboxImage.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+          if (!mouseDown || !isDragging) return;
+
+          const deltaX = e.clientX - touchStartX;
+          const deltaY = e.clientY - touchStartY;
+
+          applySwipeTransform(deltaX, deltaY);
+        });
+
+        document.addEventListener('mouseup', (e) => {
+          if (!mouseDown) return;
+          mouseDown = false;
+          isDragging = false;
+          lightboxImage.style.cursor = 'grab';
+
+          const deltaX = e.clientX - touchStartX;
+          const deltaY = e.clientY - touchStartY;
+          const deltaTime = Date.now() - touchStartTime;
+          const velocity = Math.sqrt(deltaX * deltaX + deltaY * deltaY) / deltaTime;
+
+          const direction = getSwipeDirection(deltaX, deltaY, velocity);
+
+          if (direction) {
+            animateSwipeOff(direction);
+          } else {
+            resetSwipeTransform();
+          }
+        });
+
+        // Add cursor style
+        lightboxImage.style.cursor = 'grab';
+
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
           const modal = document.getElementById('lightbox-modal');
@@ -689,6 +850,36 @@ struct DynamicAlbum: Document {
             }
           });
         });
+
+        // Initialize card scroll animations if the global utility is available
+        if (typeof window.initCardScrollAnimations === 'function') {
+          document.addEventListener('DOMContentLoaded', function() {
+            window.initCardScrollAnimations(['#photo-grid']);
+          });
+        } else {
+          // Fallback: manually initialize photo grid animations
+          document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+              threshold: 0.25,
+              rootMargin: '0px 0px 100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('in-view');
+                }
+              });
+            }, observerOptions);
+
+            const photoItems = document.querySelectorAll('#photo-grid .reveal-card');
+            photoItems.forEach((item, index) => {
+              const delay = index * 0.1;
+              item.style.transitionDelay = `${delay}s`;
+              observer.observe(item);
+            });
+          });
+        }
       })();
       """
     }
