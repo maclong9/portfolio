@@ -325,8 +325,8 @@ struct Application: Website {
       let application = Application()
       try application.build(to: URL(filePath: ".output/dist"))
 
-      // Copy Photos to output directory
-      try copyPhotosToOutput()
+      // Upload photos to R2 and export metadata
+      try uploadPhotosToR2AndExportMetadata()
 
       // Write embedded configuration files to output directory
       try writeConfigurationFiles()
@@ -337,18 +337,25 @@ struct Application: Website {
     }
   }
 
-  private static func copyPhotosToOutput() throws {
-    let photosSourceDir = URL(filePath: "Photos")
-    let outputPhotosDir = URL(filePath: ".output/dist/public/photos")
+  private static func uploadPhotosToR2AndExportMetadata() throws {
+    print("\n🚀 Starting R2 upload process...")
+
+    // Fetch all albums and extract metadata
+    let albums = try PhotosService.fetchAllAlbums(from: "Photos")
+
+    // Export metadata to JSON file in output directory
+    let outputDir = URL(filePath: ".output/dist/public")
+    try FileManager.default.createDirectory(at: outputDir, withIntermediateDirectories: true)
+
+    let metadataPath = outputDir.appendingPathComponent("photos-metadata.json").path
+    try PhotosService.exportAlbumsMetadata(albums, to: metadataPath)
 
     // Check if Photos directory exists
+    let photosSourceDir = URL(filePath: "Photos")
     guard FileManager.default.fileExists(atPath: photosSourceDir.path) else {
-      print("⚠️  Photos directory not found, skipping photo copy")
+      print("⚠️  Photos directory not found, skipping R2 upload")
       return
     }
-
-    // Create output photos directory
-    try FileManager.default.createDirectory(at: outputPhotosDir, withIntermediateDirectories: true)
 
     // Get all album directories
     let albumDirs = try FileManager.default.contentsOfDirectory(
@@ -357,9 +364,7 @@ struct Application: Website {
       options: .skipsHiddenFiles
     )
 
-    var totalFiles = 0
-    var copiedFiles = 0
-
+    // Upload each album to R2
     for albumDir in albumDirs {
       var isDirectory: ObjCBool = false
       guard FileManager.default.fileExists(atPath: albumDir.path, isDirectory: &isDirectory),
@@ -368,37 +373,10 @@ struct Application: Website {
       }
 
       let albumName = albumDir.lastPathComponent
-      let outputAlbumDir = outputPhotosDir.appendingPathComponent(albumName)
-
-      // Create album directory in output
-      try FileManager.default.createDirectory(at: outputAlbumDir, withIntermediateDirectories: true)
-
-      // Get all files in album
-      let files = try FileManager.default.contentsOfDirectory(
-        at: albumDir,
-        includingPropertiesForKeys: nil,
-        options: .skipsHiddenFiles
-      )
-
-      totalFiles += files.count
-
-      // Copy each file to output
-      for fileURL in files {
-        let fileName = fileURL.lastPathComponent
-        let outputFileURL = outputAlbumDir.appendingPathComponent(fileName)
-
-        // Remove existing file if it exists
-        if FileManager.default.fileExists(atPath: outputFileURL.path) {
-          try FileManager.default.removeItem(at: outputFileURL)
-        }
-
-        // Copy file
-        try FileManager.default.copyItem(at: fileURL, to: outputFileURL)
-        copiedFiles += 1
-      }
+      try R2Service.uploadAlbum(albumPath: albumDir.path, albumName: albumName)
     }
 
-    print("✓ Copied \(copiedFiles)/\(totalFiles) photos to output directory")
+    print("\n✓ R2 upload process completed")
   }
 
   private static func writeConfigurationFiles() throws {
@@ -424,10 +402,12 @@ struct Application: Website {
       [[kv_namespaces]]
       binding = "LIKES_KV"
       id = "88a8b09d81654afca89d0c740f7977b6"
+      preview_id = "88a8b09d81654afca89d0c740f7977b6"
 
       [[r2_buckets]]
       binding = "PORTFOLIO_MEDIA"
       bucket_name = "portfolio-media"
+      preview_bucket_name = "portfolio-media"
 
       [observability.logs]
       enabled = true
@@ -454,6 +434,11 @@ struct Application: Website {
           // Handle API requests for likes
           if (url.pathname.startsWith("/api/likes/")) {
             return handleLikesAPI(request, env, url);
+          }
+
+          // Handle media requests from R2
+          if (url.pathname.startsWith("/media/")) {
+            return handleR2Media(request, env, url);
           }
 
           // Determine asset path
@@ -646,6 +631,43 @@ struct Application: Website {
             status: 500,
             headers: corsHeaders,
           });
+        }
+      }
+
+      async function handleR2Media(request, env, url) {
+        try {
+          // Extract the path after /media/
+          // e.g., /media/photos/AlbumName/photo.jpg -> photos/AlbumName/photo.jpg
+          const encodedPath = url.pathname.substring(7); // Remove "/media/"
+          const objectKey = decodeURIComponent(encodedPath);
+
+          console.log('R2 Request:', {
+            originalPath: url.pathname,
+            encodedPath: encodedPath,
+            objectKey: objectKey
+          });
+
+          // Get object from R2
+          const object = await env.PORTFOLIO_MEDIA.get(objectKey);
+
+          if (object === null) {
+            console.log('R2 object not found:', objectKey);
+            return new Response(`Media not found: ${objectKey}`, { status: 404 });
+          }
+
+          console.log('R2 object found:', objectKey);
+
+          // Return the object with appropriate headers
+          const headers = new Headers();
+          object.writeHttpMetadata(headers);
+          headers.set("Cache-Control", "public, max-age=31536000, immutable");
+
+          return new Response(object.body, {
+            headers,
+          });
+        } catch (error) {
+          console.error("R2 media error:", error);
+          return new Response("Internal server error", { status: 500 });
         }
       }
 

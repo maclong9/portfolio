@@ -2,6 +2,9 @@ import Foundation
 import WebUI
 import ImageIO
 import CoreLocation
+#if canImport(Contacts)
+import Contacts
+#endif
 
 /// Security-related errors for photo processing
 enum PhotoSecurityError: Error, LocalizedError {
@@ -17,6 +20,79 @@ enum PhotoSecurityError: Error, LocalizedError {
 
 public enum PhotosService {
     private static let supportedImageExtensions = ["jpg", "jpeg", "png", "gif", "heic", "webp"]
+
+    // Cache for reverse geocoding to avoid repeated API calls for same locations
+    private static let geocodingCacheLock = NSLock()
+    private nonisolated(unsafe) static var geocodingCache: [String: String] = [:]
+
+    private static func reverseGeocode(_ coordinate: CLLocationCoordinate2D) -> String? {
+        let cacheKey = String(format: "%.4f,%.4f", coordinate.latitude, coordinate.longitude)
+
+        // Check cache first
+        geocodingCacheLock.lock()
+        let cached = geocodingCache[cacheKey]
+        geocodingCacheLock.unlock()
+
+        if let cached = cached {
+            return cached
+        }
+
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        let geocoder = CLGeocoder()
+        var result: String?
+        let semaphore = DispatchSemaphore(value: 0)
+
+        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+            defer { semaphore.signal() }
+
+            guard error == nil, let placemark = placemarks?.first else {
+                return
+            }
+
+            // Build a nice location string from available data
+            var components: [String] = []
+
+            // Add specific location name if available
+            if let name = placemark.name, !name.isEmpty {
+                components.append(name)
+            }
+
+            // Add locality (city)
+            if let locality = placemark.locality, !locality.isEmpty {
+                if components.isEmpty || !components.contains(locality) {
+                    components.append(locality)
+                }
+            }
+
+            // Add administrative area (state/province)
+            if let area = placemark.administrativeArea, !area.isEmpty {
+                if components.count < 2 {
+                    components.append(area)
+                }
+            }
+
+            // Add country
+            if let country = placemark.country, !country.isEmpty {
+                if components.count < 2 {
+                    components.append(country)
+                }
+            }
+
+            result = components.joined(separator: ", ")
+        }
+
+        // Wait for geocoding to complete (with timeout)
+        _ = semaphore.wait(timeout: .now() + 5.0)
+
+        // Cache the result
+        if let name = result {
+            geocodingCacheLock.lock()
+            geocodingCache[cacheKey] = name
+            geocodingCacheLock.unlock()
+        }
+
+        return result
+    }
 
     public static func fetchAllAlbums(
         from directoryPath: String = "Photos"
@@ -72,6 +148,33 @@ public enum PhotosService {
             album.photos.compactMap { $0.metadata.dateTaken }
         }
         return (dates.min(), dates.max())
+    }
+
+    /// Export album metadata to JSON file
+    public static func exportAlbumsMetadata(_ albums: [AlbumResponse], to outputPath: String) throws {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+
+        let data = try encoder.encode(albums)
+        let url = URL(fileURLWithPath: outputPath)
+        try data.write(to: url)
+
+        print("✓ Exported metadata for \(albums.count) albums to \(outputPath)")
+    }
+
+    /// Import album metadata from JSON file
+    public static func importAlbumsMetadata(from inputPath: String) throws -> [AlbumResponse] {
+        let url = URL(fileURLWithPath: inputPath)
+        let data = try Data(contentsOf: url)
+
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+
+        let albums = try decoder.decode([AlbumResponse].self, from: data)
+        print("✓ Imported metadata for \(albums.count) albums from \(inputPath)")
+
+        return albums
     }
 
     private static func fetchAlbumDirectories(from directoryPath: String) throws -> [URL] {
@@ -153,6 +256,7 @@ public enum PhotosService {
                 caption: nil,
                 dateTaken: fileDate,
                 location: nil,
+                locationName: nil,
                 camera: nil,
                 lens: nil,
                 focalLength: nil,
@@ -206,6 +310,7 @@ public enum PhotosService {
 
         // Extract location from GPS
         var location: CLLocationCoordinate2D?
+        var locationName: String?
         if let gps = gps,
            let latitude = gps[kCGImagePropertyGPSLatitude as String] as? Double,
            let longitude = gps[kCGImagePropertyGPSLongitude as String] as? Double,
@@ -213,7 +318,15 @@ public enum PhotosService {
            let lonRef = gps[kCGImagePropertyGPSLongitudeRef as String] as? String {
             let lat = latRef == "S" ? -latitude : latitude
             let lon = lonRef == "W" ? -longitude : longitude
-            location = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+            location = coordinate
+
+            // Reverse geocode to get location name
+            locationName = reverseGeocode(coordinate)
+            if locationName == nil {
+                // Fallback to coordinates if reverse geocoding fails
+                locationName = String(format: "%.4f, %.4f", coordinate.latitude, coordinate.longitude)
+            }
         }
 
         // Extract camera info
@@ -241,6 +354,7 @@ public enum PhotosService {
             caption: caption,
             dateTaken: dateTaken,
             location: location,
+            locationName: locationName,
             camera: camera.isEmpty ? nil : camera,
             lens: lens,
             focalLength: focalLength,
@@ -285,7 +399,7 @@ public struct PhotoFilter {
 }
 
 // MARK: - Album Response
-public struct AlbumResponse: Identifiable {
+public struct AlbumResponse: Identifiable, Codable {
     public let id: String
     public let name: String
     public let coverPhoto: PhotoResponse?
@@ -395,10 +509,12 @@ struct SeededRandomNumberGenerator: RandomNumberGenerator {
 }
 
 // MARK: - Photo Metadata
-public struct PhotoMetadata {
+public struct PhotoMetadata: Codable {
     public let caption: String?
     public let dateTaken: Date?
-    public let location: CLLocationCoordinate2D?
+    public let latitude: Double?
+    public let longitude: Double?
+    public let locationName: String?
     public let camera: String?
     public let lens: String?
     public let focalLength: Double?
@@ -411,15 +527,13 @@ public struct PhotoMetadata {
     public let height: Int?
     public let fileSize: Int?
 
-    public var locationName: String? {
-        guard let location = location else { return nil }
-        // In a production app, you'd reverse geocode this
-        // For now, return coordinates
-        return String(format: "%.4f, %.4f", location.latitude, location.longitude)
+    public var location: CLLocationCoordinate2D? {
+        guard let lat = latitude, let lon = longitude else { return nil }
+        return CLLocationCoordinate2D(latitude: lat, longitude: lon)
     }
 
     public var hasLocation: Bool {
-        location != nil
+        latitude != nil && longitude != nil
     }
 
     public var formattedFileSize: String? {
@@ -429,10 +543,29 @@ public struct PhotoMetadata {
         formatter.countStyle = .file
         return formatter.string(fromByteCount: Int64(size))
     }
+
+    init(caption: String?, dateTaken: Date?, location: CLLocationCoordinate2D?, locationName: String?, camera: String?, lens: String?, focalLength: Double?, aperture: Double?, shutterSpeed: Double?, iso: Int?, keywords: [String], isRaw: Bool, width: Int?, height: Int?, fileSize: Int?) {
+        self.caption = caption
+        self.dateTaken = dateTaken
+        self.latitude = location?.latitude
+        self.longitude = location?.longitude
+        self.locationName = locationName
+        self.camera = camera
+        self.lens = lens
+        self.focalLength = focalLength
+        self.aperture = aperture
+        self.shutterSpeed = shutterSpeed
+        self.iso = iso
+        self.keywords = keywords
+        self.isRaw = isRaw
+        self.width = width
+        self.height = height
+        self.fileSize = fileSize
+    }
 }
 
 // MARK: - Photo Response
-public struct PhotoResponse: Identifiable {
+public struct PhotoResponse: Identifiable, Codable {
     public let id: String
     public let fileName: String
     public let path: String
@@ -448,8 +581,8 @@ public struct PhotoResponse: Identifiable {
     }
 
     public var webPath: String {
-        // Serve photos from the local output directory
-        "/public/photos/\(relativePath)"
+        // Serve photos from R2 storage via worker
+        "/media/photos/\(relativePath)"
     }
 
     public var altText: String {

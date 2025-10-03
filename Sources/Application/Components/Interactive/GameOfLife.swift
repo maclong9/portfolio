@@ -140,8 +140,8 @@ struct GameOfLife: Element {
                     }
                   }
             
-                  // Pick 1–5 seeds from known life-friendly patterns
-                  const clusterCount = Math.floor(Math.random() * 5) + 1;
+                  // Pick 2–6 seeds from known life-friendly patterns (minimum 2 for healthy propagation)
+                  const clusterCount = Math.floor(Math.random() * 5) + 2;
                   for (let c = 0; c < clusterCount; c++) {
                     let pattern;
                     if (Math.random() < 0.1) {
