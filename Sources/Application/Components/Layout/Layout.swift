@@ -133,7 +133,7 @@ public struct Layout: Element {
           "bg-white", "dark:bg-zinc-800", "border-t", "border-zinc-200", "dark:border-zinc-700",
           "px-4", "py-6", "space-y-2", "grid", "place-items-center",
         ]) {
-          Stack(classes: ["flex", "items-center", "space-x-2"]) {
+          Stack(classes: ["flex", "flex-row", "items-center", "space-x-2"]) {
             // Posts link
             Link(
               to: "/posts",

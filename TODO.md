@@ -1,0 +1,3 @@
+- [ ] All photos display "Raw" even if they are not, there are some taken on an iPhone 12 that are not Raw.
+- [ ] Keep the information icon as information, do not change it to an x, move those controls, the information and lightbox close, down by about 3 pixels and to left by 2
+- [ ] Figure out why the pictures display in the card cover with the swipe animation and also in the lightbox but not on the individual photo album collection pages.

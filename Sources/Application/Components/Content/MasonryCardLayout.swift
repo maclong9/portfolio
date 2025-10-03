@@ -39,7 +39,7 @@ public struct MasonryCardLayout: Element {
         }
       }
 
-      // Card scroll animations script
+      // Combined animations script
       Script(
         placement: .body,
         content: {
@@ -110,6 +110,94 @@ public struct MasonryCardLayout: Element {
                   card.dataset.originalDelay = originalDelay.toString();
                   observer.observe(card);
               });
+          })();
+
+          // Animated photo stack
+          (function() {
+              if (window.photoStackInitialized) return;
+              window.photoStackInitialized = true;
+
+              // Random number between min and max
+              function random(min, max) {
+                  return Math.random() * (max - min) + min;
+              }
+
+              // Initialize all photo stacks
+              function initPhotoStacks() {
+                  const stacks = document.querySelectorAll('[data-photo-stack]');
+
+                  stacks.forEach(stack => {
+                      const photos = stack.querySelectorAll('.photo-stack-item');
+                      if (photos.length === 0) return;
+
+                      // Initialize positions with random rotations
+                      // Use smaller angles for wider photos (w-64)
+                      const isWidePhoto = photos[0].offsetWidth > 150;
+                      const maxRotation = isWidePhoto ? 8 : 15;
+
+                      photos.forEach((photo, index) => {
+                          const rotation = random(-maxRotation, maxRotation);
+                          const zIndex = photos.length - index;
+
+                          photo.style.zIndex = zIndex;
+                          photo.style.transform = `rotate(${rotation}deg) translateY(${index * 2}px)`;
+                      });
+
+                      // Start animation cycle
+                      let currentIndex = 0;
+
+                      setInterval(() => {
+                          const topPhoto = photos[currentIndex % photos.length];
+                          const nextIndex = (currentIndex + 1) % photos.length;
+
+                          // Random direction: left or right
+                          const direction = Math.random() > 0.5 ? 1 : -1;
+                          const xOffset = direction * 200;
+
+                          // Get current rotation from the top photo
+                          const currentRotation = parseFloat(topPhoto.style.transform.match(/rotate\\(([^)]+)\\)/)?.[1] || 0);
+
+                          // Animate top photo swiping away
+                          topPhoto.style.transition = 'transform 0.7175s ease-out, opacity 0.7175s ease-out';
+                          topPhoto.style.transform = `translateX(${xOffset}px) rotate(${currentRotation * 1.5}deg)`;
+                          topPhoto.style.opacity = '0';
+
+                          // After swipe animation completes, reset and fade in at back
+                          setTimeout(() => {
+                              // Prepare the new rotation for the back
+                              const rotation = random(-maxRotation, maxRotation);
+
+                              // Update z-indices so the swiped photo will appear at the back
+                              photos.forEach((photo, index) => {
+                                  const adjustedIndex = (index - nextIndex + photos.length) % photos.length;
+                                  photo.style.zIndex = photos.length - adjustedIndex;
+                              });
+
+                              // Move swiped photo to back position instantly (no transition)
+                              topPhoto.style.transition = 'none';
+                              topPhoto.style.zIndex = '1';
+                              topPhoto.style.transform = `rotate(${rotation}deg) translateY(${(photos.length - 1) * 2}px)`;
+                              topPhoto.style.opacity = '0';
+
+                              // Force reflow
+                              topPhoto.offsetHeight;
+
+                              // Fade in at the back
+                              topPhoto.style.transition = 'opacity 0.7175s ease-in';
+                              topPhoto.style.opacity = '1';
+                          }, 718); // Start halfway through the swipe
+
+                          currentIndex = nextIndex;
+                      }, 1538);
+                  });
+              }
+
+              // Wait for images to load
+              if (document.readyState === 'loading') {
+                  document.addEventListener('DOMContentLoaded', initPhotoStacks);
+              } else {
+                  initPhotoStacks();
+              }
           })();
           """
         }

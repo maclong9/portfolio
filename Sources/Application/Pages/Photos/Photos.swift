@@ -64,7 +64,8 @@ struct Photos: Document {
               description: "\(album.photos.count) photo\(album.photos.count == 1 ? "" : "s")",
               linkURL: "/photos/\(album.slug)",
               linkText: "View album",
-              imageURL: album.coverPhoto?.webPath
+              photoStackURLs: album.randomCoverPhotos.map { $0.webPath },
+              photoStackId: album.id
             )
           }
         )

@@ -212,8 +212,8 @@ struct DynamicAlbum: Document {
         </button>
 
         <!-- Metadata toggle button -->
-        <button onclick="toggleMetadata()" class="absolute top-6 right-24 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center z-50">
-          <i data-lucide="info" class="w-6 h-6 text-white"></i>
+        <button id="metadata-toggle-btn" onclick="toggleMetadata()" class="absolute top-6 right-24 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center z-50">
+          <i id="metadata-toggle-icon" data-lucide="info" class="w-6 h-6 text-white"></i>
         </button>
 
         <!-- Main content area -->
@@ -240,11 +240,8 @@ struct DynamicAlbum: Document {
         <!-- Metadata panel (hidden by default) -->
         <div id="metadata-panel" class="hidden absolute top-6 right-6 md:top-6 md:right-6 left-6 md:left-auto bottom-6 md:bottom-auto md:w-96 w-auto max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-3rem)] max-w-md mx-auto md:mx-0 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl overflow-y-auto shadow-2xl rounded-2xl border border-white/50 dark:border-white/10">
           <div class="p-6">
-            <div class="flex items-center justify-between mb-6">
+            <div class="mb-6">
               <h3 class="text-xl font-bold">Photo Info</h3>
-              <button onclick="toggleMetadata()" class="w-8 h-8 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 flex items-center justify-center transition-colors">
-                <i data-lucide="x" class="w-5 h-5"></i>
-              </button>
             </div>
 
             <div id="metadata-content" class="space-y-6"></div>
@@ -546,12 +543,16 @@ struct DynamicAlbum: Document {
 
         window.toggleMetadata = function() {
           const panel = document.getElementById('metadata-panel');
+          const icon = document.getElementById('metadata-toggle-icon');
 
           if (panel.classList.contains('hidden')) {
             // Show panel with jelly animation
             panel.classList.remove('hidden');
             panel.classList.add('active');
             updateMetadataPanel();
+
+            // Change icon to X
+            icon.setAttribute('data-lucide', 'x');
             if (typeof lucide !== 'undefined') {
               lucide.createIcons();
             }
@@ -559,6 +560,12 @@ struct DynamicAlbum: Document {
             // Hide panel
             panel.classList.remove('active');
             setTimeout(() => panel.classList.add('hidden'), 200);
+
+            // Change icon back to info
+            icon.setAttribute('data-lucide', 'info');
+            if (typeof lucide !== 'undefined') {
+              lucide.createIcons();
+            }
           }
         };
 
@@ -605,7 +612,7 @@ struct DynamicAlbum: Document {
           if (photo.metadata.focalLength || photo.metadata.aperture || photo.metadata.shutterSpeed || photo.metadata.iso) {
             html += '<div><div class="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-2">Settings</div><div class="grid grid-cols-2 gap-2 text-sm">';
 
-            if (photo.metadata.focalLength) html += `<div><span class="text-zinc-500">Focal:</span> ${photo.metadata.focalLength}mm</div>`;
+            if (photo.metadata.focalLength) html += `<div><span class="text-zinc-500">Focal:</span> ${Math.round(photo.metadata.focalLength)}mm</div>`;
             if (photo.metadata.aperture) html += `<div><span class="text-zinc-500">Aperture:</span> f/${photo.metadata.aperture}</div>`;
             if (photo.metadata.shutterSpeed) html += `<div><span class="text-zinc-500">Shutter:</span> 1/${Math.round(1/photo.metadata.shutterSpeed)}s</div>`;
             if (photo.metadata.iso) html += `<div><span class="text-zinc-500">ISO:</span> ${photo.metadata.iso}</div>`;

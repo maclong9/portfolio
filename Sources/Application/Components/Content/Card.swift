@@ -12,6 +12,8 @@ public struct Card: Element {
 
   public let emoji: String?
   public let imageURL: String?
+  public let photoStackURLs: [String]?
+  public let photoStackId: String?
   public let publishedDate: Date?
   public let readTime: String?
 
@@ -24,6 +26,8 @@ public struct Card: Element {
     newTab: Bool = false,
     emoji: String? = nil,
     imageURL: String? = nil,
+    photoStackURLs: [String]? = nil,
+    photoStackId: String? = nil,
     publishedDate: Date? = nil,
     readTime: String? = nil
   ) {
@@ -35,6 +39,8 @@ public struct Card: Element {
     self.newTab = newTab
     self.emoji = emoji
     self.imageURL = imageURL
+    self.photoStackURLs = photoStackURLs
+    self.photoStackId = photoStackId
     self.publishedDate = publishedDate
     self.readTime = readTime
   }
@@ -59,8 +65,10 @@ public struct Card: Element {
       "min-h-[220px]",
     ]) {
 
-      // Cover image if provided
-      if let imageURL = imageURL {
+      // Cover image or photo stack if provided
+      if let photoStackURLs = photoStackURLs, let photoStackId = photoStackId, !photoStackURLs.isEmpty {
+        AnimatedPhotoStack(photos: photoStackURLs, albumId: photoStackId)
+      } else if let imageURL = imageURL {
         Image(
           source: imageURL,
           description: title,
