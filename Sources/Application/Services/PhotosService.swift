@@ -19,7 +19,7 @@ enum PhotoSecurityError: Error, LocalizedError {
 }
 
 public enum PhotosService {
-    private static let supportedImageExtensions = ["jpg", "jpeg", "png", "gif", "heic", "webp"]
+    private static let supportedImageExtensions = ["jpg", "jpeg", "png", "gif", "heic", "webp", "dng"]
 
     // Cache for reverse geocoding to avoid repeated API calls for same locations
     private static let geocodingCacheLock = NSLock()
@@ -322,11 +322,12 @@ public enum PhotosService {
             location = coordinate
 
             // Reverse geocode to get location name
-            locationName = reverseGeocode(coordinate)
-            if locationName == nil {
-                // Fallback to coordinates if reverse geocoding fails
-                locationName = String(format: "%.4f, %.4f", coordinate.latitude, coordinate.longitude)
-            }
+            // TEMPORARY: Skip reverse geocoding to avoid hanging on large DNG files
+            // locationName = reverseGeocode(coordinate)
+            // if locationName == nil {
+            //     // Fallback to coordinates if reverse geocoding fails
+            locationName = String(format: "%.4f, %.4f", coordinate.latitude, coordinate.longitude)
+            // }
         }
 
         // Extract camera info

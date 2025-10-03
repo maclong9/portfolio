@@ -16,7 +16,11 @@ struct Missing: Document {
     Layout(
       path: "404",
       title: metadata.title ?? "",
-      description: metadata.description ?? ""
+      description: metadata.description ?? "",
+      breadcrumbs: [
+        Breadcrumb(title: "Mac Long", url: "/"),
+        Breadcrumb(title: "404", url: "#"),
+      ]
     ) {
       Stack(classes: [
         "flex", "flex-col", "items-center", "justify-center", "text-center", "px-4",

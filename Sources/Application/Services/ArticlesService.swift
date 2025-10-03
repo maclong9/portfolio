@@ -189,8 +189,11 @@ public struct ArticleResponse: Identifiable {
                     .trimmingCharacters(in: .whitespacesAndNewlines)
 
                 // Convert relative range to absolute range for removal
-                let absoluteStart = cleanedContent.distance(from: cleanedContent.startIndex, to: summaryMatch.lowerBound) + cleanedContent.distance(from: cleanedContent.startIndex, to: afterPublished)
-                let absoluteEnd = cleanedContent.distance(from: cleanedContent.startIndex, to: summaryMatch.upperBound) + cleanedContent.distance(from: cleanedContent.startIndex, to: afterPublished)
+                let relativeStart = remainingContent.distance(from: remainingContent.startIndex, to: summaryMatch.lowerBound)
+                let relativeEnd = remainingContent.distance(from: remainingContent.startIndex, to: summaryMatch.upperBound)
+                let baseOffset = cleanedContent.distance(from: cleanedContent.startIndex, to: afterPublished)
+                let absoluteStart = baseOffset + relativeStart
+                let absoluteEnd = baseOffset + relativeEnd
                 let absoluteRange = cleanedContent.index(cleanedContent.startIndex, offsetBy: absoluteStart)..<cleanedContent.index(cleanedContent.startIndex, offsetBy: absoluteEnd)
                 contentToRemove.append(absoluteRange)
             } else if let summaryMatch = remainingContent.range(of: summaryLiteralPattern, options: .regularExpression) {
@@ -201,8 +204,11 @@ public struct ArticleResponse: Identifiable {
                     .trimmingCharacters(in: .whitespacesAndNewlines)
 
                 // Convert relative range to absolute range for removal
-                let absoluteStart = cleanedContent.distance(from: cleanedContent.startIndex, to: summaryMatch.lowerBound) + cleanedContent.distance(from: cleanedContent.startIndex, to: afterPublished)
-                let absoluteEnd = cleanedContent.distance(from: cleanedContent.startIndex, to: summaryMatch.upperBound) + cleanedContent.distance(from: cleanedContent.startIndex, to: afterPublished)
+                let relativeStart = remainingContent.distance(from: remainingContent.startIndex, to: summaryMatch.lowerBound)
+                let relativeEnd = remainingContent.distance(from: remainingContent.startIndex, to: summaryMatch.upperBound)
+                let baseOffset = cleanedContent.distance(from: cleanedContent.startIndex, to: afterPublished)
+                let absoluteStart = baseOffset + relativeStart
+                let absoluteEnd = baseOffset + relativeEnd
                 let absoluteRange = cleanedContent.index(cleanedContent.startIndex, offsetBy: absoluteStart)..<cleanedContent.index(cleanedContent.startIndex, offsetBy: absoluteEnd)
                 contentToRemove.append(absoluteRange)
             }

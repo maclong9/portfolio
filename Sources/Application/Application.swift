@@ -46,6 +46,7 @@ struct Application: Website {
       Home()
       Posts()
       Photos()
+      Music()
       Tools()
       BarreScales()
       SchengenTracker()

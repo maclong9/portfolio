@@ -140,12 +140,12 @@ struct GameOfLife: Element {
                     }
                   }
             
-                  // Pick 2–6 seeds from known life-friendly patterns (minimum 2 for healthy propagation)
-                  const clusterCount = Math.floor(Math.random() * 5) + 2;
+                  // Pick 4–10 seeds from known life-friendly patterns (increased for better propagation)
+                  const clusterCount = Math.floor(Math.random() * 7) + 4;
                   for (let c = 0; c < clusterCount; c++) {
                     let pattern;
-                    if (Math.random() < 0.1) {
-                      // 10% chance: always a LWSS
+                    if (Math.random() < 0.25) {
+                      // 25% chance: always a LWSS (increased from 10%)
                       pattern = patterns[4]; // LWSS
                     } else {
                       // Otherwise: random from other life-friendly seeds
@@ -155,12 +155,12 @@ struct GameOfLife: Element {
                     const col = Math.floor(Math.random() * (cols - pattern[0].length));
                     placePattern(pattern, row, col);
                   }
-            
-                  // Add a sprinkle of random noise (low chance)
+
+                  // Add a sprinkle of random noise (increased chance for more activity)
                   for (let i = 0; i < rows; i++) {
                     for (let j = 0; j < cols; j++) {
-                      if (Math.random() < 0.005) {
-                        // 0.5% chance alive
+                      if (Math.random() < 0.012) {
+                        // 1.2% chance alive (increased from 0.5%)
                         grid[i][j] = 1;
                         cellAge[i][j] = 1;
                       }

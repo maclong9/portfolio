@@ -3,7 +3,7 @@ import WebUI
 
 public enum PageHeaderType {
   case collection(name: String, description: String)
-  case post(title: String, date: Date, keywords: [String])
+  case post(title: String, description: String, date: Date, keywords: [String])
   case photos(albumName: String, filterButtons: MarkupContentBuilder?)
   case tool(name: String, emoji: String?, controls: MarkupContentBuilder?)
 }
@@ -69,10 +69,13 @@ public struct Layout: Element {
                   // Right: Collection Description
                   Text(description, classes: ["text-sm", "text-zinc-600", "dark:text-zinc-400"])
 
-                case .post(let title, let date, let keywords):
-                  // Left: Title with metadata below
+                case .post(let title, let description, let date, let keywords):
+                  // Left: Title with description and metadata below
                   Stack {
                     Heading(.largeTitle, title, classes: ["text-2xl", "font-bold", "text-zinc-900", "dark:text-zinc-100", "mb-2"])
+                    if !description.isEmpty {
+                      Text(description, classes: ["text-base", "text-zinc-600", "dark:text-zinc-400", "mb-3"])
+                    }
                     Stack(classes: ["flex", "items-center", "gap-2", "text-sm", "text-zinc-600", "dark:text-zinc-400"]) {
                       Text(date.formatAsMonthDayYear())
                       if !keywords.isEmpty {
@@ -136,11 +139,11 @@ public struct Layout: Element {
           // Gradient border
           "border-t", "border-zinc-200/50", "dark:border-zinc-700/50",
           // Layout
-          "px-4", "py-8", "space-y-4", "grid", "place-items-center",
+          "px-4", "py-8", "space-y-4", "flex", "flex-col", "items-center", "justify-center",
           // Subtle shadow for depth
           "shadow-[0_-4px_16px_rgba(0,0,0,0.04)]", "dark:shadow-[0_-4px_16px_rgba(0,0,0,0.2)]",
         ]) {
-          Stack(classes: ["flex", "flex-row", "items-center", "gap-3"]) {
+          Stack(classes: ["flex", "flex-row", "items-center", "gap-3", "flex-wrap", "justify-center"]) {
             // Posts link
             Link(
               to: "/posts",
@@ -202,6 +205,9 @@ public struct Layout: Element {
             Text(".")
           }
         }
+
+        // Mini Player for non-music pages
+        MiniPlayer()
       }
     }
   }

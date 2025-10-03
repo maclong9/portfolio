@@ -29,6 +29,7 @@ struct DynamicArticle: Document {
             ],
             pageHeader: .post(
                 title: article.title,
+                description: article.description,
                 date: article.publishedDate ?? Date(),
                 keywords: article.keywords
             )
