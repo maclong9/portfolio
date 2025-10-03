@@ -180,9 +180,9 @@ public struct Card: Element {
               )
             }
           }
-        } // Close main content Stack
-      } // Close content section Stack
-    } // Close card container Stack
+        }
+      }
+    }
 
     if let url = linkURL {
       return AnyMarkup(

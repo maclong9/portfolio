@@ -337,7 +337,7 @@ struct DynamicAlbum: Document {
 
       return """
       {
-        "src": "\(photo.webPath)",
+        "src": "/\(photo.webPath)",
         "alt": "\(photo.altText)",
         "caption": \(photo.caption != nil ? "\"\(photo.caption!)\"" : "null"),
         "metadata": {

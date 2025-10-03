@@ -1,3 +1,5 @@
 - [ ] All photos display "Raw" even if they are not, there are some taken on an iPhone 12 that are not Raw.
 - [ ] Keep the information icon as information, do not change it to an x, move those controls, the information and lightbox close, down by about 3 pixels and to left by 2
-- [ ] Figure out why the pictures display in the card cover with the swipe animation and also in the lightbox but not on the individual photo album collection pages.
+- [ ] Figure out why the pictures display in the card cover with the swipe animation and also in the lightbox but not on the individual photo album collection pages. It seems to be because of the `reveal-card` class which isn't being targeted by the js animation please see elsewhere as to why that would be the case and rather than duplicating that code ensure that it's on all pages.
+- [ ] Ensure `MarkupString` is not used and all web based code is handled with WebUI elements, reference `~/Developer/tooling/web-ui` for the library information and elements.
+- [ ] Can we go through and clean up the excessive strings of CSS and JS by moving them into various directories and files within @Public/ and referencing them from where they are needed instead.
