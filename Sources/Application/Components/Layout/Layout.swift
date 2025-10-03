@@ -1,6 +1,13 @@
 import Foundation
 import WebUI
 
+public enum PageHeaderType {
+  case collection(name: String, description: String)
+  case post(title: String, date: Date, keywords: [String])
+  case photos(albumName: String, filterButtons: MarkupContentBuilder?)
+  case tool(name: String, emoji: String?, controls: MarkupContentBuilder?)
+}
+
 public struct Layout: Element {
   public let path: String?
   let title: String
@@ -10,12 +17,7 @@ public struct Layout: Element {
   let emoji: String?
 
   // Page header configuration
-  let showPageHeader: Bool
-  let pageTitle: String?
-  let iconName: String?
-  let count: Int?
-  let countLabel: String?
-  let pageDescription: String?
+  let pageHeader: PageHeaderType?
 
   let content: MarkupContentBuilder
 
@@ -26,12 +28,7 @@ public struct Layout: Element {
     published: Date? = nil,
     breadcrumbs: [Breadcrumb]? = nil,
     emoji: String? = nil,
-    showPageHeader: Bool = false,
-    pageTitle: String? = nil,
-    iconName: String? = nil,
-    count: Int? = nil,
-    countLabel: String? = nil,
-    pageDescription: String? = nil,
+    pageHeader: PageHeaderType? = nil,
     @MarkupBuilder content: @escaping MarkupContentBuilder
   ) {
     self.path = path
@@ -40,12 +37,7 @@ public struct Layout: Element {
     self.published = published
     self.breadcrumbs = breadcrumbs
     self.emoji = emoji
-    self.showPageHeader = showPageHeader
-    self.pageTitle = pageTitle
-    self.iconName = iconName
-    self.count = count
-    self.countLabel = countLabel
-    self.pageDescription = pageDescription
+    self.pageHeader = pageHeader
     self.content = content
   }
 
@@ -64,39 +56,75 @@ public struct Layout: Element {
 
         Main(classes: ["flex-1", "px-4", "py-8", "pt-32"]) {
           Stack(classes: ["max-w-4xl", "mx-auto"]) {
-            if showPageHeader {
-              // Page Header with inline metadata
-              Stack(classes: ["mb-8"]) {
-                if let pageTitle = pageTitle {
-                  Heading(.largeTitle, pageTitle, classes: ["text-3xl", "md:text-4xl", "font-bold", "mb-4"])
-                }
+            if let pageHeader = pageHeader {
+              // Render page header based on type
+              Stack(classes: [
+                "flex", "items-center", "justify-between", "mb-6", "pb-4",
+                "border-b", "border-zinc-200", "dark:border-zinc-700"
+              ]) {
+                switch pageHeader {
+                case .collection(let name, let description):
+                  // Left: Collection Name
+                  Heading(.largeTitle, name, classes: ["text-2xl", "font-bold", "text-zinc-900", "dark:text-zinc-100"])
+                  // Right: Collection Description
+                  Text(description, classes: ["text-sm", "text-zinc-600", "dark:text-zinc-400"])
 
-                if let iconName = iconName, let count = count, let countLabel = countLabel, let pageDescription = pageDescription {
-                  Stack(classes: ["flex", "items-center", "justify-between", "flex-wrap", "gap-4"]) {
-                    // Left side: Count with icon
-                    Stack(classes: ["flex", "items-center", "gap-2", "text-sm"]) {
-                      Icon(name: iconName, classes: ["w-4", "h-4"])
-                      Text("\(count) \(countLabel)\(count == 1 ? "" : "s")")
+                case .post(let title, let date, let keywords):
+                  // Left: Title with metadata below
+                  Stack {
+                    Heading(.largeTitle, title, classes: ["text-2xl", "font-bold", "text-zinc-900", "dark:text-zinc-100", "mb-2"])
+                    Stack(classes: ["flex", "items-center", "gap-2", "text-sm", "text-zinc-600", "dark:text-zinc-400"]) {
+                      Text(date.formatAsMonthDayYear())
+                      if !keywords.isEmpty {
+                        Text("•")
+                        Text(keywords.joined(separator: ", "))
+                      }
                     }
+                  }
+                  // Right: Like button
+                  Button(
+                    onClick: "handleLike()",
+                    classes: [
+                      "p-2", "text-zinc-500", "hover:text-zinc-700", "dark:text-zinc-400",
+                      "dark:hover:text-zinc-200", "rounded-lg", "hover:bg-zinc-100",
+                      "dark:hover:bg-zinc-700", "transition-colors", "cursor-pointer",
+                    ],
+                    label: "Like"
+                  ) {
+                    Icon(name: "heart", classes: ["w-5", "h-5"])
+                  }
 
-                    // Right side: Description text
-                    Text(
-                      pageDescription,
-                      classes: ["text-sm", "text-zinc-600", "dark:text-zinc-400"]
-                    )
+                case .photos(let albumName, let filterButtons):
+                  // Left: Album Name
+                  Heading(.largeTitle, albumName, classes: ["text-2xl", "font-bold", "text-zinc-900", "dark:text-zinc-100"])
+                  // Right: Filter Buttons
+                  if let filterButtons = filterButtons {
+                    Stack(classes: ["flex", "items-center", "gap-2"]) {
+                      MarkupString(content: filterButtons().map { $0.render() }.joined())
+                    }
+                  }
+
+                case .tool(let name, let emoji, let controls):
+                  // Left: Tool Name with emoji
+                  Stack(classes: ["flex", "items-center", "gap-3"]) {
+                    if let emoji = emoji {
+                      Text(emoji, classes: ["text-2xl"])
+                    }
+                    Heading(.largeTitle, name, classes: ["text-2xl", "font-bold", "text-zinc-900", "dark:text-zinc-100"])
+                  }
+                  // Right: Tool Controls
+                  if let controls = controls {
+                    Stack(classes: ["flex", "items-center", "gap-2"]) {
+                      MarkupString(content: controls().map { $0.render() }.joined())
+                    }
                   }
                 }
               }
+            }
 
-              // Main content container (invisible wrapper)
-              for item in content() {
-                item
-              }
-            } else {
-              // No header - just render content (for home page)
-              for item in content() {
-                item
-              }
+            // Main content container
+            for item in content() {
+              item
             }
           }
         }

@@ -18,15 +18,11 @@ struct SchengenTracker: Document {
         Breadcrumb(title: "Mac Long", url: "/"),
         Breadcrumb(title: "Tools", url: "/tools"),
         Breadcrumb(title: "Schengen Tracker", url: "/tools/schengen-tracker"),
-      ]
-    ) {
-      LayoutHeader(
-        breadcrumbs: [
-          Breadcrumb(title: "Mac Long", url: "/"),
-          Breadcrumb(title: "Tools", url: "/tools"),
-          Breadcrumb(title: "Schengen Tracker", url: "/tools/schengen-tracker"),
-        ],
-        toolControls: {
+      ],
+      pageHeader: .tool(
+        name: "Schengen Tracker",
+        emoji: "✈️",
+        controls: {
           [
             Button(
               onClick: "showShare()",
@@ -52,9 +48,9 @@ struct SchengenTracker: Document {
               Icon(name: "info", classes: ["w-5", "h-5"])
             },
           ]
-        },
-        emoji: "✈️"
+        }
       )
+    ) {
 
       Stack(classes: ["max-w-4xl", "mx-auto"]) {
         // Shared data banner

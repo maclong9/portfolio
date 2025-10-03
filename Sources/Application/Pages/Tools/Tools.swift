@@ -40,12 +40,10 @@ struct Tools: Document {
         Breadcrumb(title: "Mac Long", url: "/"),
         Breadcrumb(title: "Tools", url: "/tools"),
       ],
-      showPageHeader: true,
-      pageTitle: "Tools",
-      iconName: "wrench",
-      count: tools.count,
-      countLabel: "tool",
-      pageDescription: "Utility collection for everyday tasks."
+      pageHeader: .collection(
+        name: "Tools",
+        description: "Utility collection for everyday tasks"
+      )
     ) {
       CardCollection(
         cards: tools.map { tool in

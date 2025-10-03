@@ -34,12 +34,10 @@ struct Posts: Document {
         Breadcrumb(title: "Mac Long", url: "/"),
         Breadcrumb(title: "Posts", url: "/posts"),
       ],
-      showPageHeader: !articles.isEmpty,
-      pageTitle: "Posts",
-      iconName: "file-text",
-      count: articles.count,
-      countLabel: "post",
-      pageDescription: "Thoughts on development, technology, and building for the web."
+      pageHeader: articles.isEmpty ? nil : .collection(
+        name: "Posts",
+        description: "Thoughts on development, technology, and building for the web"
+      )
     ) {
       if articles.isEmpty {
         EmptyState(

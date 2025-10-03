@@ -18,15 +18,11 @@ struct BarreScales: Document {
         Breadcrumb(title: "Mac Long", url: "/"),
         Breadcrumb(title: "Tools", url: "/tools"),
         Breadcrumb(title: "Barre Scales", url: "/tools/barre-scales"),
-      ]
-    ) {
-      LayoutHeader(
-        breadcrumbs: [
-          Breadcrumb(title: "Mac Long", url: "/"),
-          Breadcrumb(title: "Tools", url: "/tools"),
-          Breadcrumb(title: "Barre Scales", url: "/tools/barre-scales"),
-        ],
-        toolControls: {
+      ],
+      pageHeader: .tool(
+        name: "Barre Scales",
+        emoji: "🎸",
+        controls: {
           [
             Button(
               onClick: "toggleProgressions()",
@@ -52,9 +48,9 @@ struct BarreScales: Document {
               Icon(name: "info", classes: ["w-5", "h-5"])
             },
           ]
-        },
-        emoji: "🎸"
+        }
       )
+    ) {
 
       Stack(classes: ["flex"]) {
         // Sidebar for chord progressions

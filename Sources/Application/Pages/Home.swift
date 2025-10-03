@@ -28,7 +28,7 @@ struct Home: Document {
       title: "Web Development",
       description:
         "Full-stack web applications with modern frameworks, responsive design, and scalable backend systems.",
-      tags: ["React", "TypeScript", "Node.js", "HTML", "CSS", "JavaScript", "REST", "WebSockets"],
+      tags: ["React", "TypeScript", "Node.js", "HTML", "CSS", "Hummingbird", "REST", "WebSockets"],
       emoji: "🌐"
     ),
     Card(
@@ -87,8 +87,7 @@ struct Home: Document {
     Layout(
       path: "index",
       title: "Mac Long - Developer Portfolio",
-      description: "Full-stack developer specializing in modern web technologies",
-      showPageHeader: false
+      description: "Full-stack developer specializing in modern web technologies"
     ) {
       Stack(classes: ["max-w-4xl", "mx-auto", "space-y-16"]) {
           // Hero

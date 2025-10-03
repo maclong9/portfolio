@@ -27,8 +27,32 @@ struct DynamicArticle: Document {
                 Breadcrumb(title: "Posts", url: "/posts"),
                 Breadcrumb(title: article.title, url: "#"),
             ],
+            pageHeader: .post(
+                title: article.title,
+                date: article.publishedDate ?? Date(),
+                keywords: article.keywords
+            )
         ) {
-            ArticleLayout(article: article, contentHTML: article.htmlContent)
+            // Article content
+            Article {
+                Stack(classes: ["max-w-2xl", "mx-auto", "prose", "prose-lg"]) {
+                    article.htmlContent
+                }
+
+                // Back to posts link
+                Stack(classes: ["max-w-2xl", "mx-auto", "mt-12", "pt-8", "border-t", "border-zinc-200", "dark:border-zinc-800"]) {
+                    Link(
+                        "← Back to Posts",
+                        to: "/posts",
+                        classes: [
+                            "inline-flex", "items-center", "gap-2",
+                            "text-teal-600", "dark:text-teal-400",
+                            "hover:text-teal-700", "dark:hover:text-teal-300",
+                            "transition-colors",
+                        ]
+                    )
+                }
+            }
         }
     }
 }

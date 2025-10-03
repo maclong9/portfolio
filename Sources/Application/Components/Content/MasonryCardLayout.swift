@@ -13,7 +13,9 @@ public struct MasonryCardLayout: Element {
     Stack(classes: ["space-y-8", "group/masonry"]) {
       // First card: full width
       if cards.count > 0 {
-        cards[0]
+        Stack(classes: ["mb-4"]) {
+          cards[0]
+        }
       }
 
       // Next 2 cards: half width

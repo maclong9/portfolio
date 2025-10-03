@@ -54,7 +54,10 @@ public struct LayoutHeader: Element {
                         "dark:hover:text-teal-400", "transition-colors", "cursor-pointer",
                       ]
                     )
-                    Text("/", classes: ["text-zinc-400", "dark:text-zinc-600"])
+                    // Only show separator if there's an emoji or icon to follow
+                    if emoji != nil || icon != nil {
+                      Text("/", classes: ["text-zinc-400", "dark:text-zinc-600"])
+                    }
                   } else if index == breadcrumbs.count - 1 {
                     Text(
                       crumb.title,
@@ -84,12 +87,8 @@ public struct LayoutHeader: Element {
                       icon,
                       classes: ["text-zinc-900", "dark:text-zinc-100", "font-medium", "text-lg"]
                     )
-                  } else {
-                    Text(
-                      breadcrumbs[2].title,
-                      classes: ["text-zinc-900", "dark:text-zinc-100", "font-medium", "text-lg"]
-                    )
                   }
+                  // Skip showing the third breadcrumb title on mobile to prevent overflow
                 }
               }
 

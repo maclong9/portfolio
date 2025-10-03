@@ -45,12 +45,10 @@ struct Photos: Document {
         Breadcrumb(title: "Mac Long", url: "/"),
         Breadcrumb(title: "Photos", url: "/photos"),
       ],
-      showPageHeader: !albums.isEmpty,
-      pageTitle: "Photos",
-      iconName: "camera",
-      count: totalPhotoCount,
-      countLabel: "photo",
-      pageDescription: "Photo albums from travels and life."
+      pageHeader: albums.isEmpty ? nil : .collection(
+        name: "Photos",
+        description: "Photo albums from travels and life"
+      )
     ) {
       if albums.isEmpty {
         EmptyState(
@@ -66,7 +64,7 @@ struct Photos: Document {
               description: "\(album.photos.count) photo\(album.photos.count == 1 ? "" : "s")",
               linkURL: "/photos/\(album.slug)",
               linkText: "View album",
-              publishedDate: album.date
+              imageURL: album.coverPhoto?.webPath
             )
           }
         )

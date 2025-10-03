@@ -182,13 +182,18 @@ public enum PhotosService {
             ?? (exif?[kCGImagePropertyExifUserComment as String] as? String)
             ?? (tiff?[kCGImagePropertyTIFFImageDescription as String] as? String)
 
-        // Extract date
+        // Extract date from EXIF, fallback to file creation date if not available
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy:MM:dd HH:mm:ss"
         let dateString = exif?[kCGImagePropertyExifDateTimeOriginal as String] as? String
             ?? exif?[kCGImagePropertyExifDateTimeDigitized as String] as? String
             ?? tiff?[kCGImagePropertyTIFFDateTime as String] as? String
-        let dateTaken = dateString.flatMap { dateFormatter.date(from: $0) }
+        let exifDate = dateString.flatMap { dateFormatter.date(from: $0) }
+
+        // Fallback to file creation or modification date if EXIF date is not available
+        let fileDate = (try? url.resourceValues(forKeys: [.creationDateKey, .contentModificationDateKey]))?.creationDate
+            ?? (try? url.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate
+        let dateTaken = exifDate ?? fileDate
 
         // Extract location from GPS
         var location: CLLocationCoordinate2D?
@@ -434,10 +439,8 @@ public struct PhotoResponse: Identifiable {
     }
 
     public var webPath: String {
-        // R2 public URL - photos are served directly from R2 bucket
-        // URL-encode the path to handle spaces and special characters
-        let encodedPath = relativePath.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? relativePath
-        return "https://75227482a9e9e9a84210e78d9ef47434.r2.cloudflarestorage.com/portfolio-media/photos/\(encodedPath)"
+        // Serve photos from the local output directory
+        "/public/photos/\(relativePath)"
     }
 
     public var altText: String {
