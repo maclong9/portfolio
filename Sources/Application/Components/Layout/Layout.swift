@@ -130,52 +130,73 @@ public struct Layout: Element {
         }
 
         Footer(classes: [
-          "bg-white", "dark:bg-zinc-800", "border-t", "border-zinc-200", "dark:border-zinc-700",
-          "px-4", "py-6", "space-y-2", "grid", "place-items-center",
+          // Glassmorphic background
+          "bg-white/80", "dark:bg-zinc-900/80",
+          "backdrop-blur-xl", "backdrop-saturate-150",
+          // Gradient border
+          "border-t", "border-zinc-200/50", "dark:border-zinc-700/50",
+          // Layout
+          "px-4", "py-8", "space-y-4", "grid", "place-items-center",
+          // Subtle shadow for depth
+          "shadow-[0_-4px_16px_rgba(0,0,0,0.04)]", "dark:shadow-[0_-4px_16px_rgba(0,0,0,0.2)]",
         ]) {
-          Stack(classes: ["flex", "flex-row", "items-center", "space-x-2"]) {
+          Stack(classes: ["flex", "flex-row", "items-center", "gap-3"]) {
             // Posts link
             Link(
               to: "/posts",
               classes: [
-                "p-2", "text-zinc-500", "hover:text-zinc-700",
-                "dark:text-zinc-400", "dark:hover:text-zinc-200",
-                "rounded-lg", "hover:bg-zinc-100", "dark:hover:bg-zinc-700",
-                "transition-colors", "cursor-pointer",
+                "p-3", "text-zinc-600", "hover:text-teal-600",
+                "dark:text-zinc-400", "dark:hover:text-teal-400",
+                "rounded-xl",
+                "bg-zinc-100/50", "dark:bg-zinc-800/50",
+                "hover:bg-zinc-100", "dark:hover:bg-zinc-800",
+                "border", "border-zinc-200/50", "dark:border-zinc-700/50",
+                "transition-all", "duration-300", "cursor-pointer",
+                "hover:scale-105", "hover:shadow-lg",
               ]
-            ) { Icon(name: "file-text") }
+            ) { Icon(name: "file-text", classes: ["w-5", "h-5"]) }
 
             // Email link
             Link(
               to: "mailto:hello@maclong.uk",
               classes: [
-                "p-2", "text-zinc-500", "hover:text-zinc-700",
-                "dark:text-zinc-400", "dark:hover:text-zinc-200",
-                "rounded-lg", "hover:bg-zinc-100", "dark:hover:bg-zinc-700",
-                "transition-colors", "cursor-pointer",
+                "p-3", "text-zinc-600", "hover:text-teal-600",
+                "dark:text-zinc-400", "dark:hover:text-teal-400",
+                "rounded-xl",
+                "bg-zinc-100/50", "dark:bg-zinc-800/50",
+                "hover:bg-zinc-100", "dark:hover:bg-zinc-800",
+                "border", "border-zinc-200/50", "dark:border-zinc-700/50",
+                "transition-all", "duration-300", "cursor-pointer",
+                "hover:scale-105", "hover:shadow-lg",
               ]
-            ) { Icon(name: "mail") }
+            ) { Icon(name: "mail", classes: ["w-5", "h-5"]) }
 
             // GitHub link
             Link(
               to: "https://github.com/maclong9",
               newTab: true,
               classes: [
-                "p-2", "text-zinc-500", "hover:text-zinc-700",
-                "dark:text-zinc-400", "dark:hover:text-zinc-200",
-                "rounded-lg", "hover:bg-zinc-100", "dark:hover:bg-zinc-700",
-                "transition-colors", "cursor-pointer",
+                "p-3", "text-zinc-600", "hover:text-teal-600",
+                "dark:text-zinc-400", "dark:hover:text-teal-400",
+                "rounded-xl",
+                "bg-zinc-100/50", "dark:bg-zinc-800/50",
+                "hover:bg-zinc-100", "dark:hover:bg-zinc-800",
+                "border", "border-zinc-200/50", "dark:border-zinc-700/50",
+                "transition-all", "duration-300", "cursor-pointer",
+                "hover:scale-105", "hover:shadow-lg",
               ]
-            ) { Icon(name: "github") }
+            ) { Icon(name: "github", classes: ["w-5", "h-5"]) }
           }
 
-          Stack(classes: ["text-zinc-500", "dark:text-zinc-400", "text-sm"]) {
+          Stack(classes: ["text-zinc-500", "dark:text-zinc-400", "text-sm", "font-medium"]) {
             Text("© \(Date().formatAsYear()) ")
             Link(
               "Mac Long",
               to: "https://maclong.uk",
               classes: [
-                "hover:text-teal-600", "dark:hover:text-teal-400", "transition-colors",
+                "hover:text-teal-600", "dark:hover:text-teal-400",
+                "transition-colors", "duration-300",
+                "font-semibold",
               ]
             )
             Text(".")
