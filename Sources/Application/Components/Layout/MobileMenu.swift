@@ -46,7 +46,7 @@ public struct MobileMenu: Element {
         Stack(
           id: "mobile-menu-overlay",
           classes: [
-            "fixed", "top-[85px]", "right-4", "w-80", "max-w-[calc(100vw-2rem)]",
+            "fixed", "top-[88px]", "right-4", "w-80", "max-w-[calc(100vw-2rem)]",
             "max-h-[calc(100vh-6rem)]", "overflow-y-auto",
             "bg-white/95", "dark:bg-zinc-900/95",
             "backdrop-blur-2xl", "backdrop-saturate-150",

@@ -8,6 +8,25 @@ struct Music: Document {
     Metadata(from: Application().metadata, title: "Music")
   }
 
+  // Load music data
+  private var musicData: (songs: [Song], albums: [Album], artists: [Artist]) {
+    // Try to load real data, fall back to sample data
+    do {
+      let songs = try MusicService.fetchAllSongs()
+      let albums = try MusicService.fetchAllAlbums()
+      let artists = try MusicService.fetchAllArtists()
+
+      // If no music files found, use sample data
+      if songs.isEmpty {
+        return MusicService.getSampleData()
+      }
+
+      return (songs, albums, artists)
+    } catch {
+      return MusicService.getSampleData()
+    }
+  }
+
   var body: some Markup {
     BodyWrapper(classes: [
       "bg-zinc-50", "dark:bg-zinc-900", "text-zinc-900", "dark:text-zinc-100",
@@ -88,80 +107,119 @@ struct Music: Document {
 
                 // Album grid
                 Stack(classes: ["grid", "grid-cols-1", "md:grid-cols-2", "lg:grid-cols-3", "gap-4"]) {
-                  // Album card
-                  MarkupString(
-                    content: """
-                      <div class="bg-white/80 dark:bg-zinc-800/80 backdrop-blur-xl backdrop-saturate-150 rounded-lg p-4 border border-zinc-200 dark:border-zinc-700 hover:shadow-lg transition-all cursor-pointer" onclick="showAlbum('untitled')">
-                        <div class="aspect-square bg-gradient-to-br from-teal-400 to-blue-500 rounded-lg mb-3 flex items-center justify-center">
-                          <i data-lucide="disc" class="w-16 h-16 text-white/70"></i>
-                        </div>
-                        <div class="font-semibold text-zinc-900 dark:text-zinc-100 mb-1">Untitled</div>
-                        <div class="text-sm text-zinc-600 dark:text-zinc-400">1 song</div>
-                      </div>
-                      """
-                  )
+                  // Generate album cards
+                  if musicData.albums.isEmpty {
+                    Stack(classes: [
+                      "p-8", "text-center", "text-zinc-500", "dark:text-zinc-400",
+                      "bg-white/50", "dark:bg-zinc-800/50", "rounded-lg", "border",
+                      "border-zinc-200", "dark:border-zinc-700", "col-span-full",
+                    ]) {
+                      Icon(name: "disc", classes: ["w-12", "h-12", "mx-auto", "mb-2", "opacity-50"])
+                      Text("No albums available", classes: ["text-sm"])
+                    }
+                  } else {
+                    for album in musicData.albums {
+                      let gradients = [
+                        "from-teal-400 to-blue-500",
+                        "from-purple-400 to-pink-500",
+                        "from-orange-400 to-red-500",
+                        "from-green-400 to-cyan-500",
+                        "from-indigo-400 to-purple-500"
+                      ]
+                      let gradient = gradients[abs(album.id.hashValue) % gradients.count]
+
+                      MarkupString(
+                        content: """
+                          <div class="bg-white/80 dark:bg-zinc-800/80 backdrop-blur-xl backdrop-saturate-150 rounded-lg p-4 border border-zinc-200 dark:border-zinc-700 hover:shadow-lg transition-all cursor-pointer" onclick="showAlbum('\(album.id)')">
+                            <div class="aspect-square bg-gradient-to-br \(gradient) rounded-lg mb-3 flex items-center justify-center">
+                              <i data-lucide="disc" class="w-16 h-16 text-white/70"></i>
+                            </div>
+                            <div class="font-semibold text-zinc-900 dark:text-zinc-100 mb-1">\(album.title)</div>
+                            <div class="text-sm text-zinc-600 dark:text-zinc-400">\(album.artist)</div>
+                            <div class="text-xs text-zinc-500 dark:text-zinc-500">\(album.songCount) song\(album.songCount == 1 ? "" : "s")</div>
+                          </div>
+                          """
+                      )
+                    }
+                  }
                 }
               }
 
-              // Album Detail View
-              Stack(id: "view-album-detail", classes: ["mb-8", "music-view", "hidden"]) {
-                MarkupString(
-                  content: """
-                    <button onclick="switchView('albums')" class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors mb-4">
-                      <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                      Back to Albums
-                    </button>
-                    """
-                )
+              // Album Detail Views (one for each album)
+              for album in musicData.albums {
+                let gradients = [
+                  "from-teal-400 to-blue-500",
+                  "from-purple-400 to-pink-500",
+                  "from-orange-400 to-red-500",
+                  "from-green-400 to-cyan-500",
+                  "from-indigo-400 to-purple-500"
+                ]
+                let gradient = gradients[abs(album.id.hashValue) % gradients.count]
 
-                Stack(classes: ["flex", "flex-col", "items-center", "gap-4", "mb-6"]) {
-                  // Album cover
-                  Stack(classes: [
-                    "w-48", "h-48", "bg-gradient-to-br",
-                    "from-teal-400", "to-blue-500",
-                    "rounded-lg", "flex", "items-center",
-                    "justify-center", "flex-shrink-0",
-                  ]) {
-                    Icon(name: "disc", classes: ["w-24", "h-24", "text-white/70"])
-                  }
+                Stack(id: "view-album-\(album.id)", classes: ["mb-8", "music-view", "hidden"]) {
+                  MarkupString(
+                    content: """
+                      <button onclick="switchView('albums')" class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors mb-4">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        Back to Albums
+                      </button>
 
-                  // Album info (vertical on all screens)
-                  Stack(classes: ["flex", "flex-col", "items-center", "text-center", "gap-1"]) {
-                    Text(
-                      "Untitled",
-                      classes: [
-                        "text-2xl", "font-bold",
-                        "text-zinc-900", "dark:text-zinc-100",
-                      ]
-                    )
-                    Text(
-                      "Unknown Artist",
-                      classes: [
-                        "text-base", "text-zinc-600", "dark:text-zinc-400",
-                      ]
-                    )
-                    Text("1 song", classes: ["text-sm", "text-zinc-500", "dark:text-zinc-500"])
-                  }
-                }
+                      <div class="flex flex-col items-center gap-4 mb-6">
+                        <!-- Album cover -->
+                        <div class="w-48 h-48 bg-gradient-to-br \(gradient) rounded-lg flex items-center justify-center flex-shrink-0">
+                          <i data-lucide="disc" class="w-24 h-24 text-white/70"></i>
+                        </div>
 
-                // Album songs
-                Heading(
-                  .title,
-                  "Songs",
-                  classes: [
-                    "text-xl", "font-semibold", "mb-3",
-                    "text-zinc-900", "dark:text-zinc-100",
-                  ]
-                )
+                        <!-- Album info -->
+                        <div class="flex flex-col items-center text-center gap-1">
+                          <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">\(album.title)</h2>
+                          <p class="text-base text-zinc-600 dark:text-zinc-400">\(album.artist)</p>
+                          <p class="text-sm text-zinc-500 dark:text-zinc-500">\(album.songCount) song\(album.songCount == 1 ? "" : "s")</p>
+                        </div>
+                      </div>
+                      """
+                  )
 
-                Stack(classes: ["space-y-2"]) {
-                  Stack(classes: [
-                    "p-8", "text-center", "text-zinc-500", "dark:text-zinc-400",
-                    "bg-white/50", "dark:bg-zinc-800/50", "rounded-lg", "border",
-                    "border-zinc-200", "dark:border-zinc-700",
-                  ]) {
-                    Icon(name: "music", classes: ["w-12", "h-12", "mx-auto", "mb-2", "opacity-50"])
-                    Text("No songs available", classes: ["text-sm"])
+                  // Album songs
+                  Heading(
+                    .title,
+                    "Songs",
+                    classes: [
+                      "text-xl", "font-semibold", "mb-3",
+                      "text-zinc-900", "dark:text-zinc-100",
+                    ]
+                  )
+
+                  Stack(classes: ["space-y-2"]) {
+                    if album.songs.isEmpty {
+                      Stack(classes: [
+                        "p-8", "text-center", "text-zinc-500", "dark:text-zinc-400",
+                        "bg-white/50", "dark:bg-zinc-800/50", "rounded-lg", "border",
+                        "border-zinc-200", "dark:border-zinc-700",
+                      ]) {
+                        Icon(name: "music", classes: ["w-12", "h-12", "mx-auto", "mb-2", "opacity-50"])
+                        Text("No songs available", classes: ["text-sm"])
+                      }
+                    } else {
+                      for song in album.songs {
+                        MarkupString(
+                          content: """
+                            <div class="flex items-center gap-3 p-3 bg-white/50 dark:bg-zinc-800/50 rounded-lg border border-zinc-200 dark:border-zinc-700 hover:bg-white/80 dark:hover:bg-zinc-800/80 transition-all cursor-pointer group">
+                              <button onclick="playTrack('\(song.url)', '\(song.title.replacingOccurrences(of: "'", with: "\\'"))', '\(song.artist.replacingOccurrences(of: "'", with: "\\'"))')" class="p-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors">
+                                <i data-lucide="play" class="w-4 h-4"></i>
+                              </button>
+                              <div class="flex-1">
+                                <p class="font-medium text-zinc-900 dark:text-zinc-100">\(song.title)</p>
+                                <p class="text-sm text-zinc-600 dark:text-zinc-400">\(song.artist)</p>
+                              </div>
+                              <button onclick="addToQueue('\(song.url)', '\(song.title.replacingOccurrences(of: "'", with: "\\'"))', '\(song.artist.replacingOccurrences(of: "'", with: "\\'"))'); event.stopPropagation();" class="p-2 text-zinc-600 dark:text-zinc-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors opacity-0 group-hover:opacity-100">
+                                <i data-lucide="plus" class="w-4 h-4"></i>
+                              </button>
+                            </div>
+                            """
+                        )
+                      }
+                    }
                   }
                 }
               }
@@ -179,13 +237,34 @@ struct Music: Document {
 
                 // Song list
                 Stack(classes: ["space-y-2"]) {
-                  Stack(classes: [
-                    "p-8", "text-center", "text-zinc-500", "dark:text-zinc-400",
-                    "bg-white/50", "dark:bg-zinc-800/50", "rounded-lg", "border",
-                    "border-zinc-200", "dark:border-zinc-700",
-                  ]) {
-                    Icon(name: "music", classes: ["w-12", "h-12", "mx-auto", "mb-2", "opacity-50"])
-                    Text("No songs available", classes: ["text-sm"])
+                  if musicData.songs.isEmpty {
+                    Stack(classes: [
+                      "p-8", "text-center", "text-zinc-500", "dark:text-zinc-400",
+                      "bg-white/50", "dark:bg-zinc-800/50", "rounded-lg", "border",
+                      "border-zinc-200", "dark:border-zinc-700",
+                    ]) {
+                      Icon(name: "music", classes: ["w-12", "h-12", "mx-auto", "mb-2", "opacity-50"])
+                      Text("No songs available", classes: ["text-sm"])
+                    }
+                  } else {
+                    for song in musicData.songs {
+                      MarkupString(
+                        content: """
+                          <div class="flex items-center gap-3 p-3 bg-white/50 dark:bg-zinc-800/50 rounded-lg border border-zinc-200 dark:border-zinc-700 hover:bg-white/80 dark:hover:bg-zinc-800/80 transition-all cursor-pointer group">
+                            <button onclick="playTrack('\(song.url)', '\(song.title.replacingOccurrences(of: "'", with: "\\'"))', '\(song.artist.replacingOccurrences(of: "'", with: "\\'"))')" class="p-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors">
+                              <i data-lucide="play" class="w-4 h-4"></i>
+                            </button>
+                            <div class="flex-1">
+                              <p class="font-medium text-zinc-900 dark:text-zinc-100">\(song.title)</p>
+                              <p class="text-sm text-zinc-600 dark:text-zinc-400">\(song.artist) • \(song.album)</p>
+                            </div>
+                            <button onclick="addToQueue('\(song.url)', '\(song.title.replacingOccurrences(of: "'", with: "\\'"))', '\(song.artist.replacingOccurrences(of: "'", with: "\\'"))'); event.stopPropagation();" class="p-2 text-zinc-600 dark:text-zinc-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors opacity-0 group-hover:opacity-100">
+                              <i data-lucide="plus" class="w-4 h-4"></i>
+                            </button>
+                          </div>
+                          """
+                      )
+                    }
                   }
                 }
               }
@@ -203,13 +282,151 @@ struct Music: Document {
 
                 // Artist grid
                 Stack(classes: ["grid", "grid-cols-1", "md:grid-cols-2", "lg:grid-cols-3", "gap-4"]) {
-                  Stack(classes: [
-                    "p-8", "text-center", "text-zinc-500", "dark:text-zinc-400",
-                    "bg-white/50", "dark:bg-zinc-800/50", "rounded-lg", "border",
-                    "border-zinc-200", "dark:border-zinc-700", "col-span-full",
-                  ]) {
-                    Icon(name: "user", classes: ["w-12", "h-12", "mx-auto", "mb-2", "opacity-50"])
-                    Text("No artists available", classes: ["text-sm"])
+                  if musicData.artists.isEmpty {
+                    Stack(classes: [
+                      "p-8", "text-center", "text-zinc-500", "dark:text-zinc-400",
+                      "bg-white/50", "dark:bg-zinc-800/50", "rounded-lg", "border",
+                      "border-zinc-200", "dark:border-zinc-700", "col-span-full",
+                    ]) {
+                      Icon(name: "user", classes: ["w-12", "h-12", "mx-auto", "mb-2", "opacity-50"])
+                      Text("No artists available", classes: ["text-sm"])
+                    }
+                  } else {
+                    for artist in musicData.artists {
+                      let gradients = [
+                        "from-teal-400 to-blue-500",
+                        "from-purple-400 to-pink-500",
+                        "from-orange-400 to-red-500",
+                        "from-green-400 to-cyan-500",
+                        "from-indigo-400 to-purple-500"
+                      ]
+                      let gradient = gradients[abs(artist.id.hashValue) % gradients.count]
+
+                      MarkupString(
+                        content: """
+                          <div class="bg-white/80 dark:bg-zinc-800/80 backdrop-blur-xl backdrop-saturate-150 rounded-lg p-4 border border-zinc-200 dark:border-zinc-700 hover:shadow-lg transition-all cursor-pointer" onclick="showArtist('\(artist.id)')">
+                            <div class="aspect-square bg-gradient-to-br \(gradient) rounded-full mb-3 flex items-center justify-center">
+                              <i data-lucide="user" class="w-16 h-16 text-white/70"></i>
+                            </div>
+                            <div class="text-center">
+                              <div class="font-semibold text-zinc-900 dark:text-zinc-100 mb-1">\(artist.name)</div>
+                              <div class="text-sm text-zinc-600 dark:text-zinc-400">\(artist.songCount) song\(artist.songCount == 1 ? "" : "s")</div>
+                              <div class="text-xs text-zinc-500 dark:text-zinc-500">\(artist.albums.count) album\(artist.albums.count == 1 ? "" : "s")</div>
+                            </div>
+                          </div>
+                          """
+                      )
+                    }
+                  }
+                }
+              }
+
+              // Artist Detail Views (one for each artist)
+              for artist in musicData.artists {
+                let gradients = [
+                  "from-teal-400 to-blue-500",
+                  "from-purple-400 to-pink-500",
+                  "from-orange-400 to-red-500",
+                  "from-green-400 to-cyan-500",
+                  "from-indigo-400 to-purple-500"
+                ]
+                let gradient = gradients[abs(artist.id.hashValue) % gradients.count]
+
+                // Get all songs by this artist
+                let artistSongs = musicData.songs.filter { $0.artist == artist.name }
+                let artistAlbums = musicData.albums.filter { $0.artist == artist.name }
+
+                Stack(id: "view-artist-\(artist.id)", classes: ["mb-8", "music-view", "hidden"]) {
+                  MarkupString(
+                    content: """
+                      <button onclick="switchView('artists')" class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors mb-4">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        Back to Artists
+                      </button>
+
+                      <div class="flex flex-col items-center gap-4 mb-6">
+                        <!-- Artist avatar -->
+                        <div class="w-48 h-48 bg-gradient-to-br \(gradient) rounded-full flex items-center justify-center flex-shrink-0">
+                          <i data-lucide="user" class="w-24 h-24 text-white/70"></i>
+                        </div>
+
+                        <!-- Artist info -->
+                        <div class="flex flex-col items-center text-center gap-1">
+                          <h2 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">\(artist.name)</h2>
+                          <p class="text-base text-zinc-600 dark:text-zinc-400">\(artist.songCount) song\(artist.songCount == 1 ? "" : "s") • \(artist.albums.count) album\(artist.albums.count == 1 ? "" : "s")</p>
+                        </div>
+                      </div>
+                      """
+                  )
+
+                  // Albums section
+                  if !artistAlbums.isEmpty {
+                    Heading(
+                      .title,
+                      "Albums",
+                      classes: [
+                        "text-xl", "font-semibold", "mb-3",
+                        "text-zinc-900", "dark:text-zinc-100",
+                      ]
+                    )
+
+                    Stack(classes: ["grid", "grid-cols-1", "md:grid-cols-2", "lg:grid-cols-3", "gap-4", "mb-6"]) {
+                      for album in artistAlbums {
+                        MarkupString(
+                          content: """
+                            <div class="bg-white/80 dark:bg-zinc-800/80 backdrop-blur-xl backdrop-saturate-150 rounded-lg p-4 border border-zinc-200 dark:border-zinc-700 hover:shadow-lg transition-all cursor-pointer" onclick="showAlbum('\(album.id)')">
+                              <div class="aspect-square bg-gradient-to-br \(gradient) rounded-lg mb-3 flex items-center justify-center">
+                                <i data-lucide="disc" class="w-12 h-12 text-white/70"></i>
+                              </div>
+                              <div class="font-semibold text-zinc-900 dark:text-zinc-100 mb-1">\(album.title)</div>
+                              <div class="text-sm text-zinc-600 dark:text-zinc-400">\(album.songCount) song\(album.songCount == 1 ? "" : "s")</div>
+                            </div>
+                            """
+                        )
+                      }
+                    }
+                  }
+
+                  // Songs section
+                  Heading(
+                    .title,
+                    "All Songs",
+                    classes: [
+                      "text-xl", "font-semibold", "mb-3",
+                      "text-zinc-900", "dark:text-zinc-100",
+                    ]
+                  )
+
+                  Stack(classes: ["space-y-2"]) {
+                    if artistSongs.isEmpty {
+                      Stack(classes: [
+                        "p-8", "text-center", "text-zinc-500", "dark:text-zinc-400",
+                        "bg-white/50", "dark:bg-zinc-800/50", "rounded-lg", "border",
+                        "border-zinc-200", "dark:border-zinc-700",
+                      ]) {
+                        Icon(name: "music", classes: ["w-12", "h-12", "mx-auto", "mb-2", "opacity-50"])
+                        Text("No songs available", classes: ["text-sm"])
+                      }
+                    } else {
+                      for song in artistSongs {
+                        MarkupString(
+                          content: """
+                            <div class="flex items-center gap-3 p-3 bg-white/50 dark:bg-zinc-800/50 rounded-lg border border-zinc-200 dark:border-zinc-700 hover:bg-white/80 dark:hover:bg-zinc-800/80 transition-all cursor-pointer group">
+                              <button onclick="playTrack('\(song.url)', '\(song.title.replacingOccurrences(of: "'", with: "\\'"))', '\(song.artist.replacingOccurrences(of: "'", with: "\\'"))')" class="p-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors">
+                                <i data-lucide="play" class="w-4 h-4"></i>
+                              </button>
+                              <div class="flex-1">
+                                <p class="font-medium text-zinc-900 dark:text-zinc-100">\(song.title)</p>
+                                <p class="text-sm text-zinc-600 dark:text-zinc-400">\(song.album)</p>
+                              </div>
+                              <button onclick="addToQueue('\(song.url)', '\(song.title.replacingOccurrences(of: "'", with: "\\'"))', '\(song.artist.replacingOccurrences(of: "'", with: "\\'"))'); event.stopPropagation();" class="p-2 text-zinc-600 dark:text-zinc-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors opacity-0 group-hover:opacity-100">
+                                <i data-lucide="plus" class="w-4 h-4"></i>
+                              </button>
+                            </div>
+                            """
+                        )
+                      }
+                    }
                   }
                 }
               }
@@ -482,7 +699,35 @@ struct Music: Document {
 
               // Show album detail view
               function showAlbum(albumId) {
-                switchView('album-detail');
+                // Hide all views
+                document.querySelectorAll('.music-view').forEach(view => {
+                  view.classList.add('hidden');
+                });
+
+                // Show the specific album detail view
+                const albumView = document.getElementById('view-album-' + albumId);
+                if (albumView) {
+                  albumView.classList.remove('hidden');
+                }
+
+                // Reinitialize icons
+                if (typeof lucide !== 'undefined') {
+                  lucide.createIcons();
+                }
+              }
+
+              // Show artist detail view
+              function showArtist(artistId) {
+                // Hide all views
+                document.querySelectorAll('.music-view').forEach(view => {
+                  view.classList.add('hidden');
+                });
+
+                // Show the specific artist detail view
+                const artistView = document.getElementById('view-artist-' + artistId);
+                if (artistView) {
+                  artistView.classList.remove('hidden');
+                }
 
                 // Reinitialize icons
                 if (typeof lucide !== 'undefined') {
