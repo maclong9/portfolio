@@ -28,7 +28,7 @@ struct Music: Document {
 
         // Main content area with sidebar and queue
         Stack(classes: ["flex-1", "flex", "pt-24", "overflow-hidden"]) {
-          // Left Sidebar
+          // Left Sidebar (desktop only)
           Stack(classes: [
             "w-64", "bg-white/80", "dark:bg-zinc-900/80",
             "backdrop-blur-xl", "backdrop-saturate-150",
@@ -65,7 +65,7 @@ struct Music: Document {
           }
 
           // Main content area
-          Stack(id: "main-content", classes: ["flex-1", "overflow-y-auto", "pb-24"]) {
+          Stack(id: "main-content", classes: ["flex-1", "overflow-y-auto", "pb-32", "md:pb-24"]) {
             Stack(classes: ["p-6", "max-w-6xl", "mx-auto"]) {
 
               // Albums View
@@ -99,25 +99,25 @@ struct Music: Document {
                 </button>
                 """)
 
-                Stack(classes: ["flex", "items-start", "gap-6", "mb-6"]) {
+                Stack(classes: ["flex", "flex-col", "md:flex-row", "items-center", "md:items-start", "gap-6", "mb-6"]) {
                   // Album cover
                   Stack(classes: [
-                    "w-48", "h-48", "bg-gradient-to-br",
+                    "w-40", "h-40", "md:w-48", "md:h-48", "bg-gradient-to-br",
                     "from-teal-400", "to-blue-500",
                     "rounded-lg", "flex", "items-center",
                     "justify-center", "flex-shrink-0"
                   ]) {
-                    Icon(name: "disc", classes: ["w-24", "h-24", "text-white/70"])
+                    Icon(name: "disc", classes: ["w-20", "h-20", "md:w-24", "md:h-24", "text-white/70"])
                   }
 
                   // Album info
-                  Stack(classes: ["flex-1"]) {
+                  Stack(classes: ["flex-1", "text-center", "md:text-left", "w-full"]) {
                     Text("Untitled", classes: [
-                      "text-3xl", "font-bold", "mb-2",
+                      "text-2xl", "md:text-3xl", "font-bold", "mb-2",
                       "text-zinc-900", "dark:text-zinc-100"
                     ])
                     Text("Unknown Artist", classes: [
-                      "text-lg", "text-zinc-600", "dark:text-zinc-400", "mb-4"
+                      "text-base", "md:text-lg", "text-zinc-600", "dark:text-zinc-400", "mb-4"
                     ])
                     Text("1 song", classes: ["text-sm", "text-zinc-500", "dark:text-zinc-500"])
                   }
@@ -131,16 +131,16 @@ struct Music: Document {
 
                 Stack(classes: ["space-y-2"]) {
                   MarkupString(content: """
-                  <div class="flex items-center gap-4 p-3 bg-white/80 dark:bg-zinc-800/80 backdrop-blur-xl backdrop-saturate-150 rounded-lg border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer group" onclick="playTrack('/public/audio/white-noise.wav', 'White Noise', 'Unknown Artist')">
+                  <div class="flex items-center gap-4 p-3 bg-white/80 dark:bg-zinc-800/80 backdrop-blur-xl backdrop-saturate-150 rounded-lg border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer group" onclick="playTrack('/public/audio/ambient.wav', 'Ambient', 'Unknown Artist')">
                     <div class="w-10 h-10 rounded-lg bg-teal-500 flex items-center justify-center group-hover:bg-teal-600 transition-colors">
                       <i data-lucide="play" class="w-5 h-5 text-white"></i>
                     </div>
                     <div class="flex-1">
-                      <div class="font-medium text-zinc-900 dark:text-zinc-100">White Noise</div>
+                      <div class="font-medium text-zinc-900 dark:text-zinc-100">Ambient</div>
                       <div class="text-sm text-zinc-600 dark:text-zinc-400">Unknown Artist</div>
                     </div>
                     <div class="text-sm text-zinc-600 dark:text-zinc-400">0:10</div>
-                    <button onclick="addToQueue('/public/audio/white-noise.wav', 'White Noise', 'Unknown Artist'); event.stopPropagation();" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors" aria-label="Add to queue">
+                    <button onclick="addToQueue('/public/audio/ambient.wav', 'Ambient', 'Unknown Artist'); event.stopPropagation();" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors" aria-label="Add to queue">
                       <i data-lucide="list-plus" class="w-5 h-5"></i>
                     </button>
                   </div>
@@ -158,16 +158,16 @@ struct Music: Document {
                 // Song list
                 Stack(classes: ["space-y-2"]) {
                   MarkupString(content: """
-                  <div class="flex items-center gap-4 p-3 bg-white/80 dark:bg-zinc-800/80 backdrop-blur-xl backdrop-saturate-150 rounded-lg border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer group" onclick="playTrack('/public/audio/white-noise.wav', 'White Noise', 'Unknown Artist')">
+                  <div class="flex items-center gap-4 p-3 bg-white/80 dark:bg-zinc-800/80 backdrop-blur-xl backdrop-saturate-150 rounded-lg border border-zinc-200 dark:border-zinc-707 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer group" onclick="playTrack('/public/audio/ambient.wav', 'Ambient', 'Unknown Artist')">
                     <div class="w-10 h-10 rounded-lg bg-teal-500 flex items-center justify-center group-hover:bg-teal-600 transition-colors">
                       <i data-lucide="play" class="w-5 h-5 text-white"></i>
                     </div>
                     <div class="flex-1">
-                      <div class="font-medium text-zinc-900 dark:text-zinc-100">White Noise</div>
+                      <div class="font-medium text-zinc-900 dark:text-zinc-100">Ambient</div>
                       <div class="text-sm text-zinc-600 dark:text-zinc-400">Unknown Artist</div>
                     </div>
                     <div class="text-sm text-zinc-600 dark:text-zinc-400">0:10</div>
-                    <button onclick="addToQueue('/public/audio/white-noise.wav', 'White Noise', 'Unknown Artist'); event.stopPropagation();" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors" aria-label="Add to queue">
+                    <button onclick="addToQueue('/public/audio/ambient.wav', 'Ambient', 'Unknown Artist'); event.stopPropagation();" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors" aria-label="Add to queue">
                       <i data-lucide="list-plus" class="w-5 h-5"></i>
                     </button>
                   </div>
@@ -220,9 +220,50 @@ struct Music: Document {
           }
         }
 
-        // Now Playing Bar
+        // Mobile Tab Bar (visible only on mobile, below now playing)
+        Stack(classes: [
+          "md:hidden", "fixed", "bottom-0", "left-0", "right-0",
+          "bg-white/95", "dark:bg-zinc-900/95",
+          "backdrop-blur-xl", "backdrop-saturate-150",
+          "border-t", "border-zinc-200", "dark:border-zinc-800",
+          "z-40", "safe-area-inset-bottom"
+        ]) {
+          Stack(classes: ["flex", "items-center", "justify-around", "px-2", "py-2"]) {
+            MarkupString(content: """
+            <button onclick="switchView('artists')" class="flex flex-col items-center justify-center gap-1 p-2 flex-1 text-zinc-600 dark:text-zinc-400 transition-colors cursor-pointer nav-link" data-view="artists">
+              <i data-lucide="user" class="w-6 h-6"></i>
+              <span class="text-xs font-medium">Artists</span>
+            </button>
+
+            <button onclick="switchView('songs')" class="flex flex-col items-center justify-center gap-1 p-2 flex-1 text-zinc-600 dark:text-zinc-400 transition-colors cursor-pointer nav-link" data-view="songs">
+              <i data-lucide="music" class="w-6 h-6"></i>
+              <span class="text-xs font-medium">Songs</span>
+            </button>
+
+            <button onclick="switchView('albums')" class="flex flex-col items-center justify-center gap-1 p-2 flex-1 text-teal-500 dark:text-teal-400 transition-colors cursor-pointer nav-link active-tab" data-view="albums">
+              <i data-lucide="disc" class="w-6 h-6"></i>
+              <span class="text-xs font-medium">Albums</span>
+            </button>
+            """)
+          }
+        }
+
+        // Now Playing Bar (above mobile tab bar on mobile)
+        MarkupString(content: """
+        <style>
+          #now-playing-bar {
+            bottom: 4rem;
+          }
+          @media (min-width: 768px) {
+            #now-playing-bar {
+              bottom: 0;
+            }
+          }
+        </style>
+        """)
+
         Stack(id: "now-playing-bar", classes: [
-          "fixed", "bottom-0", "left-0", "right-0",
+          "fixed", "left-0", "right-0",
           "bg-white/95", "dark:bg-zinc-900/95",
           "backdrop-blur-xl", "backdrop-saturate-150",
           "border-t", "border-zinc-200", "dark:border-zinc-800",
@@ -346,12 +387,20 @@ struct Music: Document {
               targetView.classList.remove('hidden');
             }
 
-            // Update active state in sidebar
+            // Update active state in sidebar (desktop)
             document.querySelectorAll('.nav-link').forEach(link => {
               if (link.dataset.view === viewName) {
+                // Desktop sidebar styling
                 link.classList.add('bg-zinc-100', 'dark:bg-zinc-800');
+                // Mobile tab bar styling - remove inactive colors, add active colors
+                link.classList.remove('text-zinc-600', 'dark:text-zinc-400');
+                link.classList.add('text-teal-500', 'dark:text-teal-400');
               } else {
+                // Desktop sidebar styling
                 link.classList.remove('bg-zinc-100', 'dark:bg-zinc-800');
+                // Mobile tab bar styling - add inactive colors, remove active colors
+                link.classList.add('text-zinc-600', 'dark:text-zinc-400');
+                link.classList.remove('text-teal-500', 'dark:text-teal-400');
               }
             });
 

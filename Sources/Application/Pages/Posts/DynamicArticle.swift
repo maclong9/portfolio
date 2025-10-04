@@ -37,6 +37,11 @@ struct DynamicArticle: Document {
             // Article content
             Article {
                 Stack(classes: ["max-w-2xl", "mx-auto", "prose", "prose-lg"]) {
+                    // Summary as first paragraph (bold)
+                    if !article.description.isEmpty {
+                        Text(article.description, classes: ["font-bold", "text-lg", "mb-4"])
+                    }
+
                     article.htmlContent
                 }
 

@@ -765,6 +765,41 @@ struct Application: Website {
         overlay.dataset.mobileMenu = 'closed';
       };
 
+      // Like functionality for posts
+      window.handleLike = async function() {
+        try {
+          // Extract post slug from URL path
+          const pathParts = window.location.pathname.split('/').filter(Boolean);
+          const postSlug = pathParts[pathParts.length - 1].replace('.html', '');
+
+          if (!postSlug) {
+            console.error('Could not determine post slug');
+            return;
+          }
+
+          // Make API request to like the post
+          const response = await fetch(`/api/likes/${postSlug}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ action: 'like' })
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log('Post liked:', data);
+
+          // You can update UI here to show like count or change button state
+          // For now, just log success
+        } catch (error) {
+          console.error('Failed to like post:', error);
+        }
+      };
+
       // Set up event listeners when DOM is ready
       document.addEventListener('DOMContentLoaded', function() {
         // Close menu when clicking on mobile menu links

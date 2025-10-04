@@ -67,15 +67,12 @@ public struct Layout: Element {
                   // Left: Collection Name
                   Heading(.largeTitle, name, classes: ["text-2xl", "font-bold", "text-zinc-900", "dark:text-zinc-100"])
                   // Right: Collection Description
-                  Text(description, classes: ["text-sm", "text-zinc-600", "dark:text-zinc-400"])
+                  Text(description, classes: ["text-sm", "text-zinc-600", "dark:text-zinc-400", "max-w-xs", "md:max-w-none", "text-right", "md:text-left"])
 
-                case .post(let title, let description, let date, let keywords):
-                  // Left: Title with description and metadata below
+                case .post(let title, _, let date, let keywords):
+                  // Left: Title with metadata below
                   Stack {
                     Heading(.largeTitle, title, classes: ["text-2xl", "font-bold", "text-zinc-900", "dark:text-zinc-100", "mb-2"])
-                    if !description.isEmpty {
-                      Text(description, classes: ["text-base", "text-zinc-600", "dark:text-zinc-400", "mb-3"])
-                    }
                     Stack(classes: ["flex", "items-center", "gap-2", "text-sm", "text-zinc-600", "dark:text-zinc-400"]) {
                       Text(date.formatAsMonthDayYear())
                       if !keywords.isEmpty {
