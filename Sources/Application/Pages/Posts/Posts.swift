@@ -39,7 +39,7 @@ struct Posts: Document {
         ? nil
         : .collection(
           name: "Posts",
-          description: "Thoughts on development, technology, and building for the web"
+          description: "Thoughts on technology, and other science"
         )
     ) {
       if articles.isEmpty {

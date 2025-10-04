@@ -13,7 +13,7 @@ public struct Icon: Element {
 
   public var body: some Markup {
     let classString = classes?.joined(separator: " ") ?? "w-5 h-5"
-    let dataAttributes = data?.map { " \($0.key)=\"\($0.value)\"" }.joined() ?? ""
+    let dataAttributes = data?.map { " data-\($0.key)=\"\($0.value)\"" }.joined() ?? ""
     return """
       <i data-lucide="\(name)"\(dataAttributes) class="\(classString)"></i>
       """
