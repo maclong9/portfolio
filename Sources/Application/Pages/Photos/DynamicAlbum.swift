@@ -80,18 +80,17 @@ struct DynamicAlbum: Document {
               MarkupString(
                 content: """
                   <div class="filter-dropdown-container relative">
-                    <button onclick="toggleFilterDropdown('gps')"
+                    <button onclick="toggleFilterDropdown('location')"
                             class="filter-icon-btn w-10 h-10 rounded-full bg-white/50 dark:bg-zinc-800/50 backdrop-blur-xl border border-white/50 dark:border-white/10 shadow-sm hover:shadow-md hover:bg-white/70 dark:hover:bg-zinc-800/70 transition-all duration-200 flex items-center justify-center cursor-pointer hover:-translate-y-0.5 active:translate-y-0">
-                      <i data-lucide="map" class="w-4 h-4"></i>
+                      <i data-lucide="map-pin" class="w-4 h-4"></i>
                     </button>
-                    <div id="gps-dropdown" class="filter-dropdown hidden absolute top-12 right-0 w-56 bg-white/90 dark:bg-zinc-800/90 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/50 dark:border-white/10 overflow-hidden z-50">
+                    <div id="location-dropdown" class="filter-dropdown hidden absolute top-12 right-0 w-56 bg-white/90 dark:bg-zinc-800/90 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/50 dark:border-white/10 overflow-hidden z-50">
                       <div class="p-3 border-b border-zinc-200/50 dark:border-zinc-700/50">
-                        <div class="text-xs font-semibold text-zinc-600 dark:text-zinc-400">GPS Data</div>
+                        <div class="text-xs font-semibold text-zinc-600 dark:text-zinc-400">Location</div>
                       </div>
                       <div class="max-h-64 overflow-y-auto">
-                        <button onclick="selectFilter('gps', '')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="gps" data-filter-value="">All photos</button>
-                        <button onclick="selectFilter('gps', 'true')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="gps" data-filter-value="true">With location</button>
-                        <button onclick="selectFilter('gps', 'false')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="gps" data-filter-value="false">Without location</button>
+                        <button onclick="selectFilter('location', '')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="location" data-filter-value="">All locations</button>
+                        \(getUniqueLocations().map { "<button onclick=\"selectFilter('location', '\($0)')\" class=\"filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors\" data-filter-type=\"location\" data-filter-value=\"\($0)\">\($0)</button>" }.joined())
                       </div>
                     </div>
                   </div>
@@ -363,7 +362,7 @@ struct DynamicAlbum: Document {
         let currentPhotoIndex = 0;
         let activeFilters = {
           camera: '',
-          gps: '',
+          location: '',
           keyword: ''
         };
 
@@ -429,7 +428,7 @@ struct DynamicAlbum: Document {
               show = false;
             }
 
-            if (activeFilters.gps && item.dataset.hasLocation !== activeFilters.gps) {
+            if (activeFilters.location && item.dataset.location !== activeFilters.location) {
               show = false;
             }
 
@@ -458,7 +457,7 @@ struct DynamicAlbum: Document {
         window.resetFilters = function() {
           activeFilters = {
             camera: '',
-            gps: '',
+            location: '',
             keyword: ''
           };
 

@@ -183,17 +183,47 @@ struct SchengenTracker: Document {
           }
           Stack(classes: ["mb-4"]) {
             Text("Location", classes: ["block", "text-sm", "font-medium", "mb-2"])
-            Input(
-              name: "location",
-              type: .text,
-              placeholder: "e.g., Paris, France",
-              id: "location",
-              classes: [
-                "w-full", "px-3", "py-3", "border", "border-zinc-300",
-                "dark:border-zinc-600", "bg-white", "dark:bg-gray-700",
-                "rounded-lg", "focus:ring-2", "focus:ring-teal-500",
-                "focus:border-teal-500", "dark:focus:ring-teal-400", "dark:focus:border-teal-400",
-              ]
+            MarkupString(
+              content: """
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  list="schengen-countries"
+                  placeholder="e.g., Paris, France"
+                  class="w-full px-3 py-3 border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:focus:ring-teal-400 dark:focus:border-teal-400">
+                <datalist id="schengen-countries">
+                  <option value="Austria">
+                  <option value="Belgium">
+                  <option value="Bulgaria">
+                  <option value="Croatia">
+                  <option value="Czech Republic">
+                  <option value="Denmark">
+                  <option value="Estonia">
+                  <option value="Finland">
+                  <option value="France">
+                  <option value="Germany">
+                  <option value="Greece">
+                  <option value="Hungary">
+                  <option value="Iceland">
+                  <option value="Italy">
+                  <option value="Latvia">
+                  <option value="Liechtenstein">
+                  <option value="Lithuania">
+                  <option value="Luxembourg">
+                  <option value="Malta">
+                  <option value="Netherlands">
+                  <option value="Norway">
+                  <option value="Poland">
+                  <option value="Portugal">
+                  <option value="Romania">
+                  <option value="Slovakia">
+                  <option value="Slovenia">
+                  <option value="Spain">
+                  <option value="Sweden">
+                  <option value="Switzerland">
+                </datalist>
+                """
             )
           }
           Button(
@@ -781,7 +811,7 @@ struct SchengenTracker: Document {
                                             <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 text-sm mb-3 sm:mb-0">
                                                 <input type="date" id="edit-entry-${visit.id}" value="${visit.entry}" class="px-2 py-1.5 sm:p-2 border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded text-sm">
                                                 <input type="date" id="edit-exit-${visit.id}" value="${visit.exit}" class="px-2 py-1.5 sm:p-2 border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded text-sm">
-                                                <input type="text" id="edit-location-${visit.id}" value="${visit.location}" placeholder="Location" class="px-2 py-1.5 sm:p-2 border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded text-sm sm:col-span-1">
+                                                <input type="text" id="edit-location-${visit.id}" value="${visit.location}" placeholder="Location" list="schengen-countries" class="px-2 py-1.5 sm:p-2 border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded text-sm sm:col-span-1">
                                                 <div class="flex items-center">
                                                     <span class="text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/50 px-2 py-1 rounded text-xs">${visit.days} ${visit.days === 1 ? 'day' : 'days'}</span>
                                                 </div>

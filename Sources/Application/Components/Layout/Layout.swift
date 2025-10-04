@@ -92,17 +92,28 @@ public struct Layout: Element {
                       }
                     }
                   }
-                  // Right: Like button
-                  Button(
-                    onClick: "handleLike()",
-                    classes: [
-                      "p-2", "text-zinc-500", "hover:text-zinc-700", "dark:text-zinc-400",
-                      "dark:hover:text-zinc-200", "rounded-lg", "hover:bg-zinc-100",
-                      "dark:hover:bg-zinc-700", "transition-colors", "cursor-pointer",
-                    ],
-                    label: "Like"
-                  ) {
-                    Icon(name: "heart", classes: ["w-5", "h-5"])
+                  // Right: Like button with count
+                  Stack(classes: ["flex", "items-center", "gap-2"]) {
+                    Button(
+                      onClick: "handleLike()",
+                      classes: [
+                        "p-2", "text-zinc-500", "hover:text-zinc-700", "dark:text-zinc-400",
+                        "dark:hover:text-zinc-200", "rounded-lg", "hover:bg-zinc-100",
+                        "dark:hover:bg-zinc-700", "transition-colors", "cursor-pointer",
+                      ],
+                      label: "Like",
+                      data: ["like-button": "true"]
+                    ) {
+                      Icon(name: "heart", classes: ["w-5", "h-5"], data: ["like-icon": "true"])
+                    }
+                    Text(
+                      "0",
+                      classes: [
+                        "text-sm", "font-medium", "text-zinc-600", "dark:text-zinc-400", "min-w-[1.5rem]",
+                        "text-center",
+                      ],
+                      data: ["like-count": "true"]
+                    )
                   }
 
                 case .photos(let albumName, let filterButtons):

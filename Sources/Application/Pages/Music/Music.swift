@@ -30,10 +30,12 @@ struct Music: Document {
         Stack(classes: ["flex-1", "flex", "pt-24", "overflow-hidden"]) {
           // Left Sidebar (desktop only)
           Stack(classes: [
-            "w-64", "bg-white/80", "dark:bg-zinc-900/80",
+            "w-64", "bg-white/60", "dark:bg-zinc-900/60",
             "backdrop-blur-xl", "backdrop-saturate-150",
-            "border-r", "border-zinc-200", "dark:border-zinc-800",
+            "border", "border-zinc-200/50", "dark:border-zinc-700/50",
+            "rounded-2xl", "shadow-xl",
             "overflow-y-auto", "hidden", "md:block",
+            "ml-4", "my-4", "h-[calc(100vh-10rem)]",
           ]) {
             // Sidebar navigation
             Stack(classes: ["p-4", "space-y-6"]) {
@@ -239,10 +241,12 @@ struct Music: Document {
           Stack(
             id: "queue-panel",
             classes: [
-              "w-80", "bg-white/80", "dark:bg-zinc-900/80",
+              "w-80", "bg-white/60", "dark:bg-zinc-900/60",
               "backdrop-blur-xl", "backdrop-saturate-150",
-              "border-l", "border-zinc-200", "dark:border-zinc-800",
+              "border", "border-zinc-200/50", "dark:border-zinc-700/50",
+              "rounded-2xl", "shadow-xl",
               "overflow-y-auto", "hidden", "lg:block", "p-4",
+              "mr-4", "my-4", "h-[calc(100vh-10rem)]",
             ]
           ) {
             Text(
@@ -319,88 +323,9 @@ struct Music: Document {
             "px-4", "py-3", "hidden", "z-50",
           ]
         ) {
-          Stack(classes: [
-            "max-w-7xl", "mx-auto", "flex", "flex-col", "md:flex-row", "items-center", "gap-3", "md:gap-4",
-          ]) {
-            // Track info
-            Stack(classes: ["flex", "items-center", "gap-3", "w-full", "md:flex-1"]) {
-              // Album art
-              Stack(classes: [
-                "w-12", "h-12", "rounded-lg",
-                "bg-gradient-to-br", "from-teal-400", "to-blue-500",
-                "flex", "items-center", "justify-center", "flex-shrink-0",
-              ]) {
-                Icon(name: "disc", classes: ["w-5", "h-5", "text-white/70"])
-              }
-
-              Stack(classes: ["flex-1", "min-w-0"]) {
-                Text(
-                  "",
-                  id: "now-playing-title",
-                  classes: [
-                    "font-medium", "text-zinc-900", "dark:text-zinc-100", "truncate", "text-sm", "md:text-base",
-                  ]
-                )
-                Text(
-                  "",
-                  id: "now-playing-artist",
-                  classes: [
-                    "text-xs", "md:text-sm", "text-zinc-600", "dark:text-zinc-400", "truncate",
-                  ]
-                )
-              }
-            }
-
-            // Playback controls
-            Stack(classes: ["flex", "items-center", "gap-2", "justify-center"]) {
-              Button(
-                onClick: "previousTrack()",
-                classes: [
-                  "p-2", "text-zinc-600", "hover:text-zinc-900",
-                  "dark:text-zinc-400", "dark:hover:text-zinc-100",
-                  "rounded-lg", "hover:bg-zinc-100",
-                  "dark:hover:bg-zinc-800", "transition-colors",
-                ],
-                label: "Previous"
-              ) {
-                Icon(name: "skip-back", classes: ["w-4", "h-4", "md:w-5", "md:h-5"])
-              }
-
-              MarkupString(
-                content: """
-                  <button onclick="togglePlayPause()" id="play-pause-btn" class="p-2 md:p-3 bg-teal-500 hover:bg-teal-600 text-white rounded-full transition-colors" aria-label="Play/Pause">
-                    <i data-lucide="play" id="play-pause-icon" class="w-5 h-5 md:w-6 md:h-6"></i>
-                  </button>
-                  """
-              )
-
-              Button(
-                onClick: "nextTrack()",
-                classes: [
-                  "p-2", "text-zinc-600", "hover:text-zinc-900",
-                  "dark:text-zinc-400", "dark:hover:text-zinc-100",
-                  "rounded-lg", "hover:bg-zinc-100",
-                  "dark:hover:bg-zinc-800", "transition-colors",
-                ],
-                label: "Next"
-              ) {
-                Icon(name: "skip-forward", classes: ["w-4", "h-4", "md:w-5", "md:h-5"])
-              }
-
-              // Time on mobile
-              Stack(classes: ["md:hidden"]) {
-                Text(
-                  "0:00",
-                  id: "current-time-mobile",
-                  classes: [
-                    "text-xs", "text-zinc-600", "dark:text-zinc-400",
-                  ]
-                )
-              }
-            }
-
-            // Progress bar (desktop only)
-            Stack(classes: ["flex-1", "hidden", "md:block"]) {
+          Stack(classes: ["max-w-7xl", "mx-auto", "flex", "flex-col", "gap-2"]) {
+            // Progress bar (full width on top)
+            Stack(classes: ["w-full"]) {
               MarkupString(
                 content: """
                   <input type="range" id="progress-bar" min="0" max="100" value="0" class="w-full" oninput="seekTrack(this.value)">
@@ -408,16 +333,96 @@ struct Music: Document {
               )
             }
 
-            // Volume and time (desktop only)
-            Stack(classes: ["items-center", "gap-3", "hidden", "md:flex"]) {
-              Text(
-                "0:00",
-                id: "current-time",
-                classes: [
-                  "text-sm", "text-zinc-600", "dark:text-zinc-400", "w-12",
-                ]
-              )
-              Icon(name: "volume-2", classes: ["w-5", "h-5", "text-zinc-600", "dark:text-zinc-400"])
+            // Controls row
+            Stack(classes: ["flex", "flex-row", "items-center", "gap-3", "md:gap-4"]) {
+              // Track info
+              Stack(classes: ["flex", "items-center", "gap-3", "w-full", "md:flex-1"]) {
+                // Album art
+                Stack(classes: [
+                  "w-12", "h-12", "rounded-lg",
+                  "bg-gradient-to-br", "from-teal-400", "to-blue-500",
+                  "flex", "items-center", "justify-center", "flex-shrink-0",
+                ]) {
+                  Icon(name: "disc", classes: ["w-5", "h-5", "text-white/70"])
+                }
+
+                Stack(classes: ["flex-1", "min-w-0", "space-y-0.5"]) {
+                  Text(
+                    "",
+                    id: "now-playing-title",
+                    classes: [
+                      "font-medium", "text-zinc-900", "dark:text-zinc-100", "truncate", "text-sm", "md:text-base",
+                    ]
+                  )
+                  Text(
+                    "",
+                    id: "now-playing-artist",
+                    classes: [
+                      "text-xs", "md:text-sm", "text-zinc-600", "dark:text-zinc-400", "truncate",
+                    ]
+                  )
+                }
+              }
+
+              // Playback controls
+              Stack(classes: ["flex", "items-center", "gap-2", "justify-center"]) {
+                Button(
+                  onClick: "previousTrack()",
+                  classes: [
+                    "p-2", "text-zinc-600", "hover:text-zinc-900",
+                    "dark:text-zinc-400", "dark:hover:text-zinc-100",
+                    "rounded-lg", "hover:bg-zinc-100",
+                    "dark:hover:bg-zinc-800", "transition-colors",
+                  ],
+                  label: "Previous"
+                ) {
+                  Icon(name: "skip-back", classes: ["w-4", "h-4", "md:w-5", "md:h-5"])
+                }
+
+                MarkupString(
+                  content: """
+                    <button onclick="togglePlayPause()" id="play-pause-btn" class="p-2 md:p-3 bg-teal-500 hover:bg-teal-600 text-white rounded-full transition-colors" aria-label="Play/Pause">
+                      <i data-lucide="play" id="play-pause-icon" class="w-5 h-5 md:w-6 md:h-6"></i>
+                    </button>
+                    """
+                )
+
+                Button(
+                  onClick: "nextTrack()",
+                  classes: [
+                    "p-2", "text-zinc-600", "hover:text-zinc-900",
+                    "dark:text-zinc-400", "dark:hover:text-zinc-100",
+                    "rounded-lg", "hover:bg-zinc-100",
+                    "dark:hover:bg-zinc-800", "transition-colors",
+                  ],
+                  label: "Next"
+                ) {
+                  Icon(name: "skip-forward", classes: ["w-4", "h-4", "md:w-5", "md:h-5"])
+                }
+
+                // Time on mobile
+                Stack(classes: ["md:hidden"]) {
+                  Text(
+                    "0:00",
+                    id: "current-time-mobile",
+                    classes: [
+                      "text-xs", "text-zinc-600", "dark:text-zinc-400",
+                    ]
+                  )
+                }
+              }
+
+              // Volume and time (desktop only)
+              Stack(classes: ["items-center", "gap-3", "hidden", "md:flex"]) {
+                Text(
+                  "0:00",
+                  id: "current-time",
+                  classes: [
+                    "text-sm", "text-zinc-600", "dark:text-zinc-400", "w-12",
+                  ]
+                )
+                Icon(name: "volume-2", classes: ["w-5", "h-5", "text-zinc-600", "dark:text-zinc-400"])
+              }
             }
           }
         }
@@ -510,20 +515,26 @@ struct Music: Document {
                 if (!audioPlayer) return;
 
                 audioPlayer.src = url;
-                audioPlayer.play();
+                const playPromise = audioPlayer.play();
 
-                document.getElementById('now-playing-title').textContent = title;
-                document.getElementById('now-playing-artist').textContent = artist;
-                document.getElementById('now-playing-bar').classList.remove('hidden');
-                document.getElementById('play-pause-icon').setAttribute('data-lucide', 'pause');
+                if (playPromise !== undefined) {
+                  playPromise.then(() => {
+                    document.getElementById('now-playing-title').textContent = title;
+                    document.getElementById('now-playing-artist').textContent = artist;
+                    document.getElementById('now-playing-bar').classList.remove('hidden');
+                    document.getElementById('play-pause-icon').setAttribute('data-lucide', 'pause');
 
-                // Sync with mini player
-                if (typeof updateMiniPlayer === 'function') {
-                  updateMiniPlayer(title, artist, true);
-                }
+                    // Sync with mini player
+                    if (typeof updateMiniPlayer === 'function') {
+                      updateMiniPlayer(title, artist, true);
+                    }
 
-                if (typeof lucide !== 'undefined') {
-                  lucide.createIcons();
+                    if (typeof lucide !== 'undefined') {
+                      lucide.createIcons();
+                    }
+                  }).catch(error => {
+                    console.error('Playback failed:', error);
+                  });
                 }
               }
 
@@ -531,14 +542,24 @@ struct Music: Document {
                 if (!audioPlayer) return;
 
                 if (audioPlayer.paused) {
-                  audioPlayer.play();
-                  document.getElementById('play-pause-icon').setAttribute('data-lucide', 'pause');
+                  const playPromise = audioPlayer.play();
+                  if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                      document.getElementById('play-pause-icon').setAttribute('data-lucide', 'pause');
 
-                  // Sync with mini player
-                  const title = document.getElementById('now-playing-title').textContent;
-                  const artist = document.getElementById('now-playing-artist').textContent;
-                  if (typeof updateMiniPlayer === 'function') {
-                    updateMiniPlayer(title, artist, true);
+                      // Sync with mini player
+                      const title = document.getElementById('now-playing-title').textContent;
+                      const artist = document.getElementById('now-playing-artist').textContent;
+                      if (typeof updateMiniPlayer === 'function') {
+                        updateMiniPlayer(title, artist, true);
+                      }
+
+                      if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                      }
+                    }).catch(error => {
+                      console.error('Playback failed:', error);
+                    });
                   }
                 } else {
                   audioPlayer.pause();
@@ -550,10 +571,10 @@ struct Music: Document {
                   if (typeof updateMiniPlayer === 'function') {
                     updateMiniPlayer(title, artist, false);
                   }
-                }
 
-                if (typeof lucide !== 'undefined') {
-                  lucide.createIcons();
+                  if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                  }
                 }
               }
 
