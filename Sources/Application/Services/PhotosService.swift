@@ -327,12 +327,11 @@ public enum PhotosService {
       location = coordinate
 
       // Reverse geocode to get location name
-      // TEMPORARY: Skip reverse geocoding to avoid hanging on large DNG files
-      // locationName = reverseGeocode(coordinate)
-      // if locationName == nil {
-      //     // Fallback to coordinates if reverse geocoding fails
-      locationName = String(format: "%.4f, %.4f", coordinate.latitude, coordinate.longitude)
-      // }
+      locationName = reverseGeocode(coordinate)
+      if locationName == nil {
+        // Fallback to coordinates if reverse geocoding fails
+        locationName = String(format: "%.4f, %.4f", coordinate.latitude, coordinate.longitude)
+      }
     }
 
     // Extract camera info

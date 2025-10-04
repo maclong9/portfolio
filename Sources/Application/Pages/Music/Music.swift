@@ -873,6 +873,98 @@ struct Music: Document {
             </script>
           """
       )
+
+      // Footer
+      Footer(classes: [
+        // Glassmorphic background
+        "bg-white/80", "dark:bg-zinc-900/80",
+        "backdrop-blur-xl", "backdrop-saturate-150",
+        // Gradient border
+        "border-t", "border-zinc-200/50", "dark:border-zinc-700/50",
+        // Layout
+        "px-4", "py-8", "space-y-4", "flex", "flex-col", "items-center", "justify-center",
+        // Subtle shadow for depth
+        "shadow-[0_-4px_16px_rgba(0,0,0,0.04)]", "dark:shadow-[0_-4px_16px_rgba(0,0,0,0.2)]",
+        // Make sure it's above mobile tab bar
+        "mb-16", "md:mb-0",
+      ]) {
+        Stack(classes: ["flex", "flex-row", "items-center", "gap-3", "flex-wrap", "justify-center"]) {
+          // Photos link
+          Link(
+            to: "/photos",
+            classes: [
+              "p-3", "text-zinc-600", "hover:text-teal-600",
+              "dark:text-zinc-400", "dark:hover:text-teal-400",
+              "rounded-xl",
+              "bg-zinc-100/50", "dark:bg-zinc-800/50",
+              "hover:bg-zinc-100", "dark:hover:bg-zinc-800",
+              "border", "border-zinc-200/50", "dark:border-zinc-700/50",
+              "transition-all", "duration-300", "cursor-pointer",
+              "hover:scale-105", "hover:shadow-lg",
+            ]
+          ) { Icon(name: "image", classes: ["w-5", "h-5"]) }
+
+          // Posts link
+          Link(
+            to: "/posts",
+            classes: [
+              "p-3", "text-zinc-600", "hover:text-teal-600",
+              "dark:text-zinc-400", "dark:hover:text-teal-400",
+              "rounded-xl",
+              "bg-zinc-100/50", "dark:bg-zinc-800/50",
+              "hover:bg-zinc-100", "dark:hover:bg-zinc-800",
+              "border", "border-zinc-200/50", "dark:border-zinc-700/50",
+              "transition-all", "duration-300", "cursor-pointer",
+              "hover:scale-105", "hover:shadow-lg",
+            ]
+          ) { Icon(name: "file-text", classes: ["w-5", "h-5"]) }
+
+          // Email link
+          Link(
+            to: "mailto:hello@maclong.uk",
+            classes: [
+              "p-3", "text-zinc-600", "hover:text-teal-600",
+              "dark:text-zinc-400", "dark:hover:text-teal-400",
+              "rounded-xl",
+              "bg-zinc-100/50", "dark:bg-zinc-800/50",
+              "hover:bg-zinc-100", "dark:hover:bg-zinc-800",
+              "border", "border-zinc-200/50", "dark:border-zinc-700/50",
+              "transition-all", "duration-300", "cursor-pointer",
+              "hover:scale-105", "hover:shadow-lg",
+            ]
+          ) { Icon(name: "mail", classes: ["w-5", "h-5"]) }
+
+          // GitHub link
+          Link(
+            to: "https://github.com/maclong9",
+            newTab: true,
+            classes: [
+              "p-3", "text-zinc-600", "hover:text-teal-600",
+              "dark:text-zinc-400", "dark:hover:text-teal-400",
+              "rounded-xl",
+              "bg-zinc-100/50", "dark:bg-zinc-800/50",
+              "hover:bg-zinc-100", "dark:hover:bg-zinc-800",
+              "border", "border-zinc-200/50", "dark:border-zinc-700/50",
+              "transition-all", "duration-300", "cursor-pointer",
+              "hover:scale-105", "hover:shadow-lg",
+            ]
+          ) { Icon(name: "github", classes: ["w-5", "h-5"]) }
+        }
+
+        Stack(classes: ["text-zinc-500", "dark:text-zinc-400", "text-sm", "font-medium"]) {
+          Text("© \(Date().formatAsYear()) ")
+          Link(
+            "Mac Long",
+            to: "https://maclong.uk",
+            classes: [
+              "hover:text-teal-600", "dark:hover:text-teal-400",
+              "transition-colors", "duration-300",
+              "font-semibold",
+            ]
+          )
+          Text(".")
+        }
+      }
     }
   }
 }
