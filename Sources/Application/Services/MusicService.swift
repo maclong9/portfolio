@@ -76,7 +76,7 @@ public enum MusicService {
       }
 
       let fileName = (file as NSString).deletingPathExtension
-      let url = "/audio/\(file)"
+      let url = "/public/audio/\(file)"
 
       // For now, use filename as title and unknown artist
       // In the future, this could parse ID3 tags or use metadata
@@ -167,7 +167,7 @@ public enum MusicService {
         artist: "Lo-Fi Collective",
         album: "Chill Vibes",
         duration: 180,
-        url: "/audio/sample-1.mp3"
+        url: "/public/audio/sample-1.mp3"
       ),
       Song(
         id: "sample-2",
@@ -175,7 +175,7 @@ public enum MusicService {
         artist: "Lo-Fi Collective",
         album: "Chill Vibes",
         duration: 210,
-        url: "/audio/sample-2.mp3"
+        url: "/public/audio/sample-2.mp3"
       ),
       Song(
         id: "sample-3",
@@ -183,7 +183,7 @@ public enum MusicService {
         artist: "Ambient Waves",
         album: "Nature Sounds",
         duration: 240,
-        url: "/audio/sample-3.mp3"
+        url: "/public/audio/sample-3.mp3"
       ),
     ]
 

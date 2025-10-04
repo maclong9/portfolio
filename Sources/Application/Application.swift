@@ -754,9 +754,7 @@ struct Application: Website {
         if (!container || !overlay) return;
 
         overlay.classList.remove('active');
-        setTimeout(() => {
-          overlay.classList.add('hidden');
-        }, 400); // match jelly animation duration
+        overlay.classList.add('hidden');
         container.dataset.mobileMenuOpen = 'false';
         overlay.dataset.mobileMenu = 'closed';
       };

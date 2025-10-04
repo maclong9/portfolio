@@ -99,7 +99,7 @@ public struct MobileMenu: Element {
               ],
               data: ["mobile-menu-link": "photos"]
             ) {
-              Icon(name: "image", classes: ["w-5", "h-5"])
+              Icon(name: "camera", classes: ["w-5", "h-5"])
               Text("Photos")
             }
 

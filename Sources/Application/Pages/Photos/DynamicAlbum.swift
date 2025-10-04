@@ -608,15 +608,6 @@ struct DynamicAlbum: Document {
               html += `<div><span class="text-zinc-500">File:</span> ${photo.metadata.fileSize}</div>`;
             }
 
-            // RAW indicator
-            html += `
-              <div class="flex items-center gap-2 mt-2">
-                <div class="px-2 py-1 rounded text-xs font-semibold ${photo.metadata.isRaw ? 'bg-teal-500 text-white' : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-500'}">
-                  RAW
-                </div>
-              </div>
-            `;
-
             html += '</div></div>';
           }
 
