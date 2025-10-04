@@ -10,6 +10,33 @@ public struct MobileMenu: Element {
 
   public var body: some Markup {
     Stack {
+      // Jelly animation styles
+      MarkupString(content: """
+      <style>
+        @keyframes jellyIn {
+          0% {
+            opacity: 0;
+            transform: scale(0.8) translateY(-10px);
+          }
+          50% {
+            transform: scale(1.05) translateY(0);
+          }
+          70% {
+            transform: scale(0.95);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+
+        #mobile-menu-overlay.active {
+          display: block;
+          animation: jellyIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+      </style>
+      """)
+
       Stack(
         id: "mobile-menu-container",
         data: ["mobile-menu-open": "false"]
@@ -17,13 +44,15 @@ public struct MobileMenu: Element {
         Stack(
           id: "mobile-menu-overlay",
           classes: [
-            "fixed", "inset-y-0", "right-0", "w-64",
-            "bg-white/80", "dark:bg-zinc-900/80",
-            "backdrop-blur-xl", "backdrop-saturate-150",
-            "border-l", "border-white/20", "dark:border-zinc-700/50",
-            "px-6", "py-8",
-            "shadow-[0_8px_32px_rgba(0,0,0,0.1)]", "dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)]",
-            "transform", "translate-x-full", "transition-transform", "duration-300", "ease-out", "z-50", "hidden",
+            "fixed", "top-20", "right-4", "w-80", "max-w-[calc(100vw-2rem)]",
+            "max-h-[calc(100vh-6rem)]", "overflow-y-auto",
+            "bg-white/90", "dark:bg-zinc-900/90",
+            "backdrop-blur-2xl", "backdrop-saturate-150",
+            "border", "border-white/50", "dark:border-white/10",
+            "px-6", "py-6",
+            "shadow-2xl",
+            "rounded-2xl",
+            "z-50", "hidden",
           ],
           data: ["mobile-menu": "closed"]
         ) {

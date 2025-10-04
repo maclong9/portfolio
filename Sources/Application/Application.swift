@@ -731,21 +731,17 @@ struct Application: Website {
 
         const isOpen = container.dataset.mobileMenuOpen === 'true';
         if (isOpen) {
-          // Close menu: translate to the right and then hide
-          overlay.classList.remove('translate-x-0');
-          overlay.classList.add('translate-x-full');
+          // Close menu: remove active class, then hide after animation
+          overlay.classList.remove('active');
           setTimeout(() => {
             overlay.classList.add('hidden');
-          }, 300); // match duration-300
+          }, 400); // match jelly animation duration
           container.dataset.mobileMenuOpen = 'false';
           overlay.dataset.mobileMenu = 'closed';
         } else {
-          // Open menu: show, then translate to 0 on next frame
+          // Open menu: show with jelly animation
           overlay.classList.remove('hidden');
-          // Force reflow so the transition runs when classes change
-          overlay.getBoundingClientRect();
-          overlay.classList.remove('translate-x-full');
-          overlay.classList.add('translate-x-0');
+          overlay.classList.add('active');
           container.dataset.mobileMenuOpen = 'true';
           overlay.dataset.mobileMenu = 'open';
         }
@@ -756,11 +752,10 @@ struct Application: Website {
         const overlay = document.querySelector('#mobile-menu-overlay');
         if (!container || !overlay) return;
 
-        overlay.classList.remove('translate-x-0');
-        overlay.classList.add('translate-x-full');
+        overlay.classList.remove('active');
         setTimeout(() => {
           overlay.classList.add('hidden');
-        }, 300);
+        }, 400); // match jelly animation duration
         container.dataset.mobileMenuOpen = 'false';
         overlay.dataset.mobileMenu = 'closed';
       };
