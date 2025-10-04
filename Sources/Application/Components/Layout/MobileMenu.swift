@@ -17,8 +17,12 @@ public struct MobileMenu: Element {
         Stack(
           id: "mobile-menu-overlay",
           classes: [
-            "fixed", "inset-y-0", "right-0", "w-64", "bg-white", "dark:bg-zinc-800",
-            "border-l", "border-zinc-200", "dark:border-zinc-700", "px-6", "py-8", "shadow-xl",
+            "fixed", "inset-y-0", "right-0", "w-64",
+            "bg-white/80", "dark:bg-zinc-900/80",
+            "backdrop-blur-xl", "backdrop-saturate-150",
+            "border-l", "border-white/20", "dark:border-zinc-700/50",
+            "px-6", "py-8",
+            "shadow-[0_8px_32px_rgba(0,0,0,0.1)]", "dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)]",
             "transform", "translate-x-full", "transition-transform", "duration-300", "ease-out", "z-50", "hidden",
           ],
           data: ["mobile-menu": "closed"]
@@ -44,9 +48,11 @@ public struct MobileMenu: Element {
               Link(
                 to: "/posts",
                 classes: [
-                  "flex", "items-center", "space-x-3", "p-3", "text-zinc-600", "dark:text-zinc-400",
-                  "hover:text-teal-600", "dark:hover:text-teal-400", "hover:bg-zinc-50",
-                  "dark:hover:bg-zinc-700/30", "rounded-lg", "transition-colors", "cursor-pointer",
+                  "flex", "items-center", "space-x-3", "p-3", "text-zinc-700", "dark:text-zinc-200",
+                  "hover:text-teal-600", "dark:hover:text-teal-400",
+                  "hover:bg-white/50", "dark:hover:bg-white/5",
+                  "rounded-xl", "transition-all", "cursor-pointer",
+                  "backdrop-blur-sm",
                 ],
                 data: ["mobile-menu-link": "posts"]
               ) {
@@ -58,9 +64,11 @@ public struct MobileMenu: Element {
             Link(
               to: "/photos",
               classes: [
-                "flex", "items-center", "space-x-3", "p-3", "text-zinc-600", "dark:text-zinc-400",
-                "hover:text-teal-600", "dark:hover:text-teal-400", "hover:bg-zinc-50",
-                "dark:hover:bg-zinc-700/30", "rounded-lg", "transition-colors", "cursor-pointer",
+                "flex", "items-center", "space-x-3", "p-3", "text-zinc-700", "dark:text-zinc-200",
+                "hover:text-teal-600", "dark:hover:text-teal-400",
+                "hover:bg-white/50", "dark:hover:bg-white/5",
+                "rounded-xl", "transition-all", "cursor-pointer",
+                "backdrop-blur-sm",
               ],
               data: ["mobile-menu-link": "photos"]
             ) {
@@ -71,9 +79,11 @@ public struct MobileMenu: Element {
             Link(
               to: "/music",
               classes: [
-                "flex", "items-center", "space-x-3", "p-3", "text-zinc-600", "dark:text-zinc-400",
-                "hover:text-teal-600", "dark:hover:text-teal-400", "hover:bg-zinc-50",
-                "dark:hover:bg-zinc-700/30", "rounded-lg", "transition-colors", "cursor-pointer",
+                "flex", "items-center", "space-x-3", "p-3", "text-zinc-700", "dark:text-zinc-200",
+                "hover:text-teal-600", "dark:hover:text-teal-400",
+                "hover:bg-white/50", "dark:hover:bg-white/5",
+                "rounded-xl", "transition-all", "cursor-pointer",
+                "backdrop-blur-sm",
               ],
               data: ["mobile-menu-link": "music"]
             ) {
@@ -84,9 +94,11 @@ public struct MobileMenu: Element {
             Link(
               to: "/tools",
               classes: [
-                "flex", "items-center", "space-x-3", "p-3", "text-zinc-600", "dark:text-zinc-400",
-                "hover:text-teal-600", "dark:hover:text-teal-400", "hover:bg-zinc-50",
-                "dark:hover:bg-zinc-700/30", "rounded-lg", "transition-colors", "cursor-pointer",
+                "flex", "items-center", "space-x-3", "p-3", "text-zinc-700", "dark:text-zinc-200",
+                "hover:text-teal-600", "dark:hover:text-teal-400",
+                "hover:bg-white/50", "dark:hover:bg-white/5",
+                "rounded-xl", "transition-all", "cursor-pointer",
+                "backdrop-blur-sm",
               ],
               data: ["mobile-menu-link": "tools"]
             ) {
@@ -97,9 +109,11 @@ public struct MobileMenu: Element {
             Link(
               to: "mailto:hello@maclong.uk",
               classes: [
-                "flex", "items-center", "space-x-3", "p-3", "text-zinc-600", "dark:text-zinc-400",
-                "hover:text-teal-600", "dark:hover:text-teal-400", "hover:bg-zinc-50",
-                "dark:hover:bg-zinc-700/30", "rounded-lg", "transition-colors", "cursor-pointer",
+                "flex", "items-center", "space-x-3", "p-3", "text-zinc-700", "dark:text-zinc-200",
+                "hover:text-teal-600", "dark:hover:text-teal-400",
+                "hover:bg-white/50", "dark:hover:bg-white/5",
+                "rounded-xl", "transition-all", "cursor-pointer",
+                "backdrop-blur-sm",
               ],
               data: ["mobile-menu-link": "email"]
             ) {
@@ -111,9 +125,11 @@ public struct MobileMenu: Element {
               to: "https://github.com/maclong9",
               newTab: true,
               classes: [
-                "flex", "items-center", "space-x-3", "p-3", "text-zinc-600", "dark:text-zinc-400",
-                "hover:text-teal-600", "dark:hover:text-teal-400", "hover:bg-zinc-50",
-                "dark:hover:bg-zinc-700/30", "rounded-lg", "transition-colors", "cursor-pointer",
+                "flex", "items-center", "space-x-3", "p-3", "text-zinc-700", "dark:text-zinc-200",
+                "hover:text-teal-600", "dark:hover:text-teal-400",
+                "hover:bg-white/50", "dark:hover:bg-white/5",
+                "rounded-xl", "transition-all", "cursor-pointer",
+                "backdrop-blur-sm",
               ],
               data: ["mobile-menu-link": "github"]
             ) {
@@ -122,16 +138,18 @@ public struct MobileMenu: Element {
             }
 
             // Theme Selection in Mobile Menu
-            Stack(classes: ["border-t", "border-zinc-200", "dark:border-zinc-700", "pt-4"]) {
+            Stack(classes: ["border-t", "border-white/20", "dark:border-zinc-700/50", "pt-4", "mt-2"]) {
               Text("Theme", classes: ["text-sm", "font-medium", "text-zinc-700", "dark:text-zinc-300", "mb-3"])
               Stack(classes: ["space-y-1"]) {
                 Button(
                   onClick: "if (window.setTheme) window.setTheme('system'); window.closeSlideMenu('mobile-menu-container')",
                   id: "theme-system-mobile",
                   classes: [
-                    "w-full", "flex", "items-center", "space-x-3", "px-3", "py-2", "rounded-lg",
-                    "text-sm", "transition-colors", "cursor-pointer",
-                    "text-zinc-700", "dark:text-zinc-300", "hover:bg-zinc-50", "dark:hover:bg-zinc-700/30",
+                    "w-full", "flex", "items-center", "space-x-3", "px-3", "py-2", "rounded-xl",
+                    "text-sm", "transition-all", "cursor-pointer",
+                    "text-zinc-700", "dark:text-zinc-200",
+                    "hover:bg-white/50", "dark:hover:bg-white/5",
+                    "backdrop-blur-sm",
                   ],
                   data: ["theme-option": "system"]
                 ) {
@@ -145,9 +163,11 @@ public struct MobileMenu: Element {
                   onClick: "if (window.setTheme) window.setTheme('light'); window.closeSlideMenu('mobile-menu-container')",
                   id: "theme-light-mobile",
                   classes: [
-                    "w-full", "flex", "items-center", "space-x-3", "px-3", "py-2", "rounded-lg",
-                    "text-sm", "transition-colors", "cursor-pointer",
-                    "text-zinc-700", "dark:text-zinc-300", "hover:bg-zinc-50", "dark:hover:bg-zinc-700/30",
+                    "w-full", "flex", "items-center", "space-x-3", "px-3", "py-2", "rounded-xl",
+                    "text-sm", "transition-all", "cursor-pointer",
+                    "text-zinc-700", "dark:text-zinc-200",
+                    "hover:bg-white/50", "dark:hover:bg-white/5",
+                    "backdrop-blur-sm",
                   ],
                   data: ["theme-option": "light"]
                 ) {
@@ -161,9 +181,11 @@ public struct MobileMenu: Element {
                   onClick: "if (window.setTheme) window.setTheme('dark'); window.closeSlideMenu('mobile-menu-container')",
                   id: "theme-dark-mobile",
                   classes: [
-                    "w-full", "flex", "items-center", "space-x-3", "px-3", "py-2", "rounded-lg",
-                    "text-sm", "transition-colors", "cursor-pointer",
-                    "text-zinc-700", "dark:text-zinc-300", "hover:bg-zinc-50", "dark:hover:bg-zinc-700/30",
+                    "w-full", "flex", "items-center", "space-x-3", "px-3", "py-2", "rounded-xl",
+                    "text-sm", "transition-all", "cursor-pointer",
+                    "text-zinc-700", "dark:text-zinc-200",
+                    "hover:bg-white/50", "dark:hover:bg-white/5",
+                    "backdrop-blur-sm",
                   ],
                   data: ["theme-option": "dark"]
                 ) {

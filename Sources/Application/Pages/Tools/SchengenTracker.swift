@@ -162,20 +162,20 @@ struct SchengenTracker: Document {
           "mb-6",
         ]) {
           Heading(.title, "Add New Visit", classes: ["text-xl", "font-semibold", "mb-4"])
-          Stack(classes: ["grid", "md:grid-cols-2", "gap-4", "mb-4"]) {
-            Stack {
+          Stack(classes: ["grid", "grid-cols-1", "md:grid-cols-2", "gap-4", "mb-4"]) {
+            Stack(classes: ["min-w-0"]) {
               Text("Entry Date", classes: ["block", "text-sm", "font-medium", "mb-2"])
               MarkupString(
                 content: """
-                      <input type="date" id="entry-date" class="w-full px-3 py-3 border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:focus:ring-teal-400 dark:focus:border-teal-400">
+                      <input type="date" id="entry-date" class="w-full max-w-full px-3 py-3 border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:focus:ring-teal-400 dark:focus:border-teal-400">
                   """
               )
             }
-            Stack {
+            Stack(classes: ["min-w-0"]) {
               Text("Exit Date", classes: ["block", "text-sm", "font-medium", "mb-2"])
               MarkupString(
                 content: """
-                      <input type="date" id="exit-date" class="w-full px-3 py-3 border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:focus:ring-teal-400 dark:focus:border-teal-400">
+                      <input type="date" id="exit-date" class="w-full max-w-full px-3 py-3 border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:focus:ring-teal-400 dark:focus:border-teal-400">
                   """
               )
             }

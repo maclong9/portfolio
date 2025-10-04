@@ -99,25 +99,25 @@ struct Music: Document {
                 </button>
                 """)
 
-                Stack(classes: ["flex", "flex-col", "md:flex-row", "items-center", "md:items-start", "gap-6", "mb-6"]) {
+                Stack(classes: ["flex", "flex-col", "items-center", "gap-4", "mb-6"]) {
                   // Album cover
                   Stack(classes: [
-                    "w-40", "h-40", "md:w-48", "md:h-48", "bg-gradient-to-br",
+                    "w-48", "h-48", "bg-gradient-to-br",
                     "from-teal-400", "to-blue-500",
                     "rounded-lg", "flex", "items-center",
                     "justify-center", "flex-shrink-0"
                   ]) {
-                    Icon(name: "disc", classes: ["w-20", "h-20", "md:w-24", "md:h-24", "text-white/70"])
+                    Icon(name: "disc", classes: ["w-24", "h-24", "text-white/70"])
                   }
 
-                  // Album info
-                  Stack(classes: ["flex-1", "text-center", "md:text-left", "w-full"]) {
+                  // Album info (vertical on all screens)
+                  Stack(classes: ["flex", "flex-col", "items-center", "text-center", "gap-1"]) {
                     Text("Untitled", classes: [
-                      "text-2xl", "md:text-3xl", "font-bold", "mb-2",
+                      "text-2xl", "font-bold",
                       "text-zinc-900", "dark:text-zinc-100"
                     ])
                     Text("Unknown Artist", classes: [
-                      "text-base", "md:text-lg", "text-zinc-600", "dark:text-zinc-400", "mb-4"
+                      "text-base", "text-zinc-600", "dark:text-zinc-400"
                     ])
                     Text("1 song", classes: ["text-sm", "text-zinc-500", "dark:text-zinc-500"])
                   }
@@ -230,17 +230,17 @@ struct Music: Document {
         ]) {
           Stack(classes: ["flex", "items-center", "justify-around", "px-2", "py-2"]) {
             MarkupString(content: """
-            <button onclick="switchView('artists')" class="flex flex-col items-center justify-center gap-1 p-2 flex-1 text-zinc-600 dark:text-zinc-400 transition-colors cursor-pointer nav-link" data-view="artists">
+            <button onclick="switchView('artists')" class="flex flex-col items-center justify-center gap-1 p-2 px-6 flex-1 text-zinc-600 dark:text-zinc-400 transition-all cursor-pointer nav-link rounded-xl" data-view="artists">
               <i data-lucide="user" class="w-6 h-6"></i>
               <span class="text-xs font-medium">Artists</span>
             </button>
 
-            <button onclick="switchView('songs')" class="flex flex-col items-center justify-center gap-1 p-2 flex-1 text-zinc-600 dark:text-zinc-400 transition-colors cursor-pointer nav-link" data-view="songs">
+            <button onclick="switchView('songs')" class="flex flex-col items-center justify-center gap-1 p-2 px-6 flex-1 text-zinc-600 dark:text-zinc-400 transition-all cursor-pointer nav-link rounded-xl" data-view="songs">
               <i data-lucide="music" class="w-6 h-6"></i>
               <span class="text-xs font-medium">Songs</span>
             </button>
 
-            <button onclick="switchView('albums')" class="flex flex-col items-center justify-center gap-1 p-2 flex-1 text-teal-500 dark:text-teal-400 transition-colors cursor-pointer nav-link active-tab" data-view="albums">
+            <button onclick="switchView('albums')" class="flex flex-col items-center justify-center gap-1 p-2 px-6 flex-1 text-teal-500 dark:text-teal-400 bg-teal-500/10 dark:bg-teal-400/10 transition-all cursor-pointer nav-link active-tab rounded-xl" data-view="albums">
               <i data-lucide="disc" class="w-6 h-6"></i>
               <span class="text-xs font-medium">Albums</span>
             </button>
@@ -267,32 +267,32 @@ struct Music: Document {
           "bg-white/95", "dark:bg-zinc-900/95",
           "backdrop-blur-xl", "backdrop-saturate-150",
           "border-t", "border-zinc-200", "dark:border-zinc-800",
-          "p-4", "hidden", "z-50"
+          "px-4", "py-3", "hidden", "z-50"
         ]) {
-          Stack(classes: ["max-w-7xl", "mx-auto", "flex", "items-center", "gap-4"]) {
+          Stack(classes: ["max-w-7xl", "mx-auto", "flex", "flex-col", "md:flex-row", "items-center", "gap-3", "md:gap-4"]) {
             // Track info
-            Stack(classes: ["flex", "items-center", "gap-3", "flex-1"]) {
+            Stack(classes: ["flex", "items-center", "gap-3", "w-full", "md:flex-1"]) {
               // Album art
               Stack(classes: [
-                "w-14", "h-14", "rounded-lg",
+                "w-12", "h-12", "rounded-lg",
                 "bg-gradient-to-br", "from-teal-400", "to-blue-500",
-                "flex", "items-center", "justify-center"
+                "flex", "items-center", "justify-center", "flex-shrink-0"
               ]) {
-                Icon(name: "disc", classes: ["w-6", "h-6", "text-white/70"])
+                Icon(name: "disc", classes: ["w-5", "h-5", "text-white/70"])
               }
 
-              Stack(classes: ["flex-1"]) {
+              Stack(classes: ["flex-1", "min-w-0"]) {
                 Text("", id: "now-playing-title", classes: [
-                  "font-medium", "text-zinc-900", "dark:text-zinc-100"
+                  "font-medium", "text-zinc-900", "dark:text-zinc-100", "truncate", "text-sm", "md:text-base"
                 ])
                 Text("", id: "now-playing-artist", classes: [
-                  "text-sm", "text-zinc-600", "dark:text-zinc-400"
+                  "text-xs", "md:text-sm", "text-zinc-600", "dark:text-zinc-400", "truncate"
                 ])
               }
             }
 
             // Playback controls
-            Stack(classes: ["flex", "items-center", "gap-2"]) {
+            Stack(classes: ["flex", "items-center", "gap-2", "justify-center"]) {
               Button(
                 onClick: "previousTrack()",
                 classes: [
@@ -303,12 +303,12 @@ struct Music: Document {
                 ],
                 label: "Previous"
               ) {
-                Icon(name: "skip-back", classes: ["w-5", "h-5"])
+                Icon(name: "skip-back", classes: ["w-4", "h-4", "md:w-5", "md:h-5"])
               }
 
               MarkupString(content: """
-              <button onclick="togglePlayPause()" id="play-pause-btn" class="p-3 bg-teal-500 hover:bg-teal-600 text-white rounded-full transition-colors" aria-label="Play/Pause">
-                <i data-lucide="play" id="play-pause-icon" class="w-6 h-6"></i>
+              <button onclick="togglePlayPause()" id="play-pause-btn" class="p-2 md:p-3 bg-teal-500 hover:bg-teal-600 text-white rounded-full transition-colors" aria-label="Play/Pause">
+                <i data-lucide="play" id="play-pause-icon" class="w-5 h-5 md:w-6 md:h-6"></i>
               </button>
               """)
 
@@ -322,19 +322,26 @@ struct Music: Document {
                 ],
                 label: "Next"
               ) {
-                Icon(name: "skip-forward", classes: ["w-5", "h-5"])
+                Icon(name: "skip-forward", classes: ["w-4", "h-4", "md:w-5", "md:h-5"])
+              }
+
+              // Time on mobile
+              Stack(classes: ["md:hidden"]) {
+                Text("0:00", id: "current-time-mobile", classes: [
+                  "text-xs", "text-zinc-600", "dark:text-zinc-400"
+                ])
               }
             }
 
-            // Progress bar
+            // Progress bar (desktop only)
             Stack(classes: ["flex-1", "hidden", "md:block"]) {
               MarkupString(content: """
               <input type="range" id="progress-bar" min="0" max="100" value="0" class="w-full" oninput="seekTrack(this.value)">
               """)
             }
 
-            // Volume and time
-            Stack(classes: ["flex", "items-center", "gap-3"]) {
+            // Volume and time (desktop only)
+            Stack(classes: ["items-center", "gap-3", "hidden", "md:flex"]) {
               Text("0:00", id: "current-time", classes: [
                 "text-sm", "text-zinc-600", "dark:text-zinc-400", "w-12"
               ])
@@ -360,8 +367,14 @@ struct Music: Document {
               const duration = audioPlayer.duration || 0;
               const percent = duration > 0 ? (current / duration) * 100 : 0;
 
-              document.getElementById('progress-bar').value = percent;
-              document.getElementById('current-time').textContent = formatTime(current);
+              const progressBar = document.getElementById('progress-bar');
+              if (progressBar) progressBar.value = percent;
+
+              const currentTime = document.getElementById('current-time');
+              if (currentTime) currentTime.textContent = formatTime(current);
+
+              const currentTimeMobile = document.getElementById('current-time-mobile');
+              if (currentTimeMobile) currentTimeMobile.textContent = formatTime(current);
             });
 
             audioPlayer.addEventListener('ended', function() {
@@ -392,15 +405,15 @@ struct Music: Document {
               if (link.dataset.view === viewName) {
                 // Desktop sidebar styling
                 link.classList.add('bg-zinc-100', 'dark:bg-zinc-800');
-                // Mobile tab bar styling - remove inactive colors, add active colors
+                // Mobile tab bar styling - remove inactive colors, add active colors and background
                 link.classList.remove('text-zinc-600', 'dark:text-zinc-400');
-                link.classList.add('text-teal-500', 'dark:text-teal-400');
+                link.classList.add('text-teal-500', 'dark:text-teal-400', 'bg-teal-500/10', 'dark:bg-teal-400/10');
               } else {
                 // Desktop sidebar styling
                 link.classList.remove('bg-zinc-100', 'dark:bg-zinc-800');
-                // Mobile tab bar styling - add inactive colors, remove active colors
+                // Mobile tab bar styling - add inactive colors, remove active colors and background
                 link.classList.add('text-zinc-600', 'dark:text-zinc-400');
-                link.classList.remove('text-teal-500', 'dark:text-teal-400');
+                link.classList.remove('text-teal-500', 'dark:text-teal-400', 'bg-teal-500/10', 'dark:bg-teal-400/10');
               }
             });
 
