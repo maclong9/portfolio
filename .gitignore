@@ -2,3 +2,5 @@
 .build/
 .output/
 .swiftpm/
+.wrangler/
+node_modules/
