@@ -1,0 +1,28 @@
+compatibility_date = "2025-08-16"
+main = "index.js"
+name = "portfolio"
+
+[assets]
+binding = "ASSETS"
+directory = "dist/"
+not_found_handling = "404-page"
+
+[[kv_namespaces]]
+binding = "LIKES_KV"
+id = "88a8b09d81654afca89d0c740f7977b6"
+preview_id = "88a8b09d81654afca89d0c740f7977b6"
+
+[[r2_buckets]]
+binding = "PORTFOLIO_MEDIA"
+bucket_name = "portfolio-media"
+preview_bucket_name = "portfolio-media"
+
+[observability.logs]
+enabled = true
+
+[placement]
+mode = "smart"
+
+[[routes]]
+pattern = "maclong.uk"
+custom_domain = true
