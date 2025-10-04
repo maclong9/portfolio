@@ -14,7 +14,8 @@ struct Posts: Document {
       return try ArticlesService.fetchAllArticles().sorted { (lhs, rhs) in
         // Sort by date descending (newest first)
         guard let lhsDate = lhs.publishedDate,
-              let rhsDate = rhs.publishedDate else {
+          let rhsDate = rhs.publishedDate
+        else {
           return false
         }
         return lhsDate > rhsDate
@@ -34,10 +35,12 @@ struct Posts: Document {
         Breadcrumb(title: "Mac Long", url: "/"),
         Breadcrumb(title: "Posts", url: "/posts"),
       ],
-      pageHeader: articles.isEmpty ? nil : .collection(
-        name: "Posts",
-        description: "Thoughts on development, technology, and building for the web"
-      )
+      pageHeader: articles.isEmpty
+        ? nil
+        : .collection(
+          name: "Posts",
+          description: "Thoughts on development, technology, and building for the web"
+        )
     ) {
       if articles.isEmpty {
         EmptyState(

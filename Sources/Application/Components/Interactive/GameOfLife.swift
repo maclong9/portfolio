@@ -284,4 +284,3 @@ struct GameOfLife: Element {
     }
   }
 }
-

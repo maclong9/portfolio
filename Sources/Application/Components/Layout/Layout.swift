@@ -60,20 +60,31 @@ public struct Layout: Element {
               // Render page header based on type
               Stack(classes: [
                 "flex", "items-center", "justify-between", "mb-6", "pb-4",
-                "border-b", "border-zinc-200", "dark:border-zinc-700"
+                "border-b", "border-zinc-200", "dark:border-zinc-700",
               ]) {
                 switch pageHeader {
                 case .collection(let name, let description):
                   // Left: Collection Name
                   Heading(.largeTitle, name, classes: ["text-2xl", "font-bold", "text-zinc-900", "dark:text-zinc-100"])
                   // Right: Collection Description
-                  Text(description, classes: ["text-sm", "text-zinc-600", "dark:text-zinc-400", "max-w-xs", "md:max-w-none", "text-right", "md:text-left"])
+                  Text(
+                    description,
+                    classes: [
+                      "text-sm", "text-zinc-600", "dark:text-zinc-400", "max-w-xs", "md:max-w-none", "text-right",
+                      "md:text-left",
+                    ]
+                  )
 
                 case .post(let title, _, let date, let keywords):
                   // Left: Title with metadata below
                   Stack {
-                    Heading(.largeTitle, title, classes: ["text-2xl", "font-bold", "text-zinc-900", "dark:text-zinc-100", "mb-2"])
-                    Stack(classes: ["flex", "items-center", "gap-2", "text-sm", "text-zinc-600", "dark:text-zinc-400"]) {
+                    Heading(
+                      .largeTitle,
+                      title,
+                      classes: ["text-2xl", "font-bold", "text-zinc-900", "dark:text-zinc-100", "mb-2"]
+                    )
+                    Stack(classes: ["flex", "items-center", "gap-2", "text-sm", "text-zinc-600", "dark:text-zinc-400"])
+                    {
                       Text(date.formatAsMonthDayYear())
                       if !keywords.isEmpty {
                         Text("•")
@@ -96,7 +107,11 @@ public struct Layout: Element {
 
                 case .photos(let albumName, let filterButtons):
                   // Left: Album Name
-                  Heading(.largeTitle, albumName, classes: ["text-2xl", "font-bold", "text-zinc-900", "dark:text-zinc-100"])
+                  Heading(
+                    .largeTitle,
+                    albumName,
+                    classes: ["text-2xl", "font-bold", "text-zinc-900", "dark:text-zinc-100"]
+                  )
                   // Right: Filter Buttons
                   if let filterButtons = filterButtons {
                     Stack(classes: ["flex", "items-center", "gap-2"]) {
@@ -110,7 +125,11 @@ public struct Layout: Element {
                     if let emoji = emoji {
                       Text(emoji, classes: ["text-2xl"])
                     }
-                    Heading(.largeTitle, name, classes: ["text-2xl", "font-bold", "text-zinc-900", "dark:text-zinc-100"])
+                    Heading(
+                      .largeTitle,
+                      name,
+                      classes: ["text-2xl", "font-bold", "text-zinc-900", "dark:text-zinc-100"]
+                    )
                   }
                   // Right: Tool Controls
                   if let controls = controls {

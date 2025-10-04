@@ -76,7 +76,7 @@ struct Application: Website {
     <link rel="dns-prefetch" href="//unpkg.com">
     <link rel="preload" href="/public/js/theme.js" as="script">
     <link rel="preload" href="/public/js/icons.js" as="script">
-    
+
     <style type="text/tailwindcss">
         @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
@@ -369,7 +369,8 @@ struct Application: Website {
     for albumDir in albumDirs {
       var isDirectory: ObjCBool = false
       guard FileManager.default.fileExists(atPath: albumDir.path, isDirectory: &isDirectory),
-            isDirectory.boolValue else {
+        isDirectory.boolValue
+      else {
         continue
       }
 
@@ -384,11 +385,11 @@ struct Application: Website {
     let outputDir = URL(filePath: ".output")
     let publicDir = outputDir.appendingPathComponent("dist/public")
     let jsDir = publicDir.appendingPathComponent("js")
-    
+
     // Ensure directories exist
     try FileManager.default.createDirectory(at: outputDir, withIntermediateDirectories: true)
     try FileManager.default.createDirectory(at: jsDir, withIntermediateDirectories: true)
-    
+
     // Write wrangler.toml
     let wranglerContent = """
       compatibility_date = "2025-08-16"
@@ -420,11 +421,11 @@ struct Application: Website {
       pattern = "maclong.uk"
       custom_domain = true
       """
-    
+
     let wranglerURL = outputDir.appendingPathComponent("wrangler.toml")
     try wranglerContent.write(to: wranglerURL, atomically: true, encoding: .utf8)
     print("✓ wrangler.toml written to output directory")
-    
+
     // Write index.js
     let indexJSContent = """
       export default {
@@ -704,7 +705,7 @@ struct Application: Website {
         return newResponse;
       }
       """
-    
+
     // Write JavaScript files for CSP compliance
     let themeJSContent = """
       // Prevent FOUC by setting theme immediately
@@ -828,21 +829,21 @@ struct Application: Website {
         });
       });
       """
-    
+
     let iconsJSContent = """
       // Initialize Lucide icons
       if (typeof lucide !== 'undefined') {
         lucide.createIcons();
       }
       """
-    
+
     let themeJSURL = jsDir.appendingPathComponent("theme.js")
     let iconsJSURL = jsDir.appendingPathComponent("icons.js")
-    
+
     try themeJSContent.write(to: themeJSURL, atomically: true, encoding: .utf8)
     try iconsJSContent.write(to: iconsJSURL, atomically: true, encoding: .utf8)
     print("✓ JavaScript files written for CSP compliance")
-    
+
     let indexJSURL = outputDir.appendingPathComponent("index.js")
     try indexJSContent.write(to: indexJSURL, atomically: true, encoding: .utf8)
     print("✓ index.js written to output directory")

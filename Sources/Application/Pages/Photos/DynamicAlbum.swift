@@ -55,79 +55,90 @@ struct DynamicAlbum: Document {
             Stack(classes: ["flex", "items-center", "gap-2"]) {
               // Camera filter button
               if !getUniqueCameras().isEmpty {
-                MarkupString(content: """
-                  <div class="filter-dropdown-container relative">
-                    <button onclick="toggleFilterDropdown('camera')"
-                            class="filter-icon-btn w-10 h-10 rounded-full bg-white/50 dark:bg-zinc-800/50 backdrop-blur-xl border border-white/50 dark:border-white/10 shadow-sm hover:shadow-md hover:bg-white/70 dark:hover:bg-zinc-800/70 transition-all duration-200 flex items-center justify-center cursor-pointer hover:-translate-y-0.5 active:translate-y-0">
-                      <i data-lucide="aperture" class="w-4 h-4"></i>
-                    </button>
-                    <div id="camera-dropdown" class="filter-dropdown hidden absolute top-12 right-0 w-56 bg-white/90 dark:bg-zinc-800/90 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/50 dark:border-white/10 overflow-hidden z-50">
-                      <div class="p-3 border-b border-zinc-200/50 dark:border-zinc-700/50">
-                        <div class="text-xs font-semibold text-zinc-600 dark:text-zinc-400">Camera</div>
-                      </div>
-                      <div class="max-h-64 overflow-y-auto">
-                        <button onclick="selectFilter('camera', '')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="camera" data-filter-value="">All cameras</button>
-                        \(getUniqueCameras().map { "<button onclick=\"selectFilter('camera', '\($0)')\" class=\"filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors\" data-filter-type=\"camera\" data-filter-value=\"\($0)\">\($0)</button>" }.joined())
+                MarkupString(
+                  content: """
+                    <div class="filter-dropdown-container relative">
+                      <button onclick="toggleFilterDropdown('camera')"
+                              class="filter-icon-btn w-10 h-10 rounded-full bg-white/50 dark:bg-zinc-800/50 backdrop-blur-xl border border-white/50 dark:border-white/10 shadow-sm hover:shadow-md hover:bg-white/70 dark:hover:bg-zinc-800/70 transition-all duration-200 flex items-center justify-center cursor-pointer hover:-translate-y-0.5 active:translate-y-0">
+                        <i data-lucide="aperture" class="w-4 h-4"></i>
+                      </button>
+                      <div id="camera-dropdown" class="filter-dropdown hidden absolute top-12 right-0 w-56 bg-white/90 dark:bg-zinc-800/90 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/50 dark:border-white/10 overflow-hidden z-50">
+                        <div class="p-3 border-b border-zinc-200/50 dark:border-zinc-700/50">
+                          <div class="text-xs font-semibold text-zinc-600 dark:text-zinc-400">Camera</div>
+                        </div>
+                        <div class="max-h-64 overflow-y-auto">
+                          <button onclick="selectFilter('camera', '')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="camera" data-filter-value="">All cameras</button>
+                          \(getUniqueCameras().map { "<button onclick=\"selectFilter('camera', '\($0)')\" class=\"filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors\" data-filter-type=\"camera\" data-filter-value=\"\($0)\">\($0)</button>" }.joined())
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  """)
+                    """
+                )
               }
 
               // GPS filter button
-              MarkupString(content: """
-                <div class="filter-dropdown-container relative">
-                  <button onclick="toggleFilterDropdown('gps')"
-                          class="filter-icon-btn w-10 h-10 rounded-full bg-white/50 dark:bg-zinc-800/50 backdrop-blur-xl border border-white/50 dark:border-white/10 shadow-sm hover:shadow-md hover:bg-white/70 dark:hover:bg-zinc-800/70 transition-all duration-200 flex items-center justify-center cursor-pointer hover:-translate-y-0.5 active:translate-y-0">
-                    <i data-lucide="map" class="w-4 h-4"></i>
-                  </button>
-                  <div id="gps-dropdown" class="filter-dropdown hidden absolute top-12 right-0 w-56 bg-white/90 dark:bg-zinc-800/90 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/50 dark:border-white/10 overflow-hidden z-50">
-                    <div class="p-3 border-b border-zinc-200/50 dark:border-zinc-700/50">
-                      <div class="text-xs font-semibold text-zinc-600 dark:text-zinc-400">GPS Data</div>
-                    </div>
-                    <div class="max-h-64 overflow-y-auto">
-                      <button onclick="selectFilter('gps', '')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="gps" data-filter-value="">All photos</button>
-                      <button onclick="selectFilter('gps', 'true')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="gps" data-filter-value="true">With location</button>
-                      <button onclick="selectFilter('gps', 'false')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="gps" data-filter-value="false">Without location</button>
+              MarkupString(
+                content: """
+                  <div class="filter-dropdown-container relative">
+                    <button onclick="toggleFilterDropdown('gps')"
+                            class="filter-icon-btn w-10 h-10 rounded-full bg-white/50 dark:bg-zinc-800/50 backdrop-blur-xl border border-white/50 dark:border-white/10 shadow-sm hover:shadow-md hover:bg-white/70 dark:hover:bg-zinc-800/70 transition-all duration-200 flex items-center justify-center cursor-pointer hover:-translate-y-0.5 active:translate-y-0">
+                      <i data-lucide="map" class="w-4 h-4"></i>
+                    </button>
+                    <div id="gps-dropdown" class="filter-dropdown hidden absolute top-12 right-0 w-56 bg-white/90 dark:bg-zinc-800/90 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/50 dark:border-white/10 overflow-hidden z-50">
+                      <div class="p-3 border-b border-zinc-200/50 dark:border-zinc-700/50">
+                        <div class="text-xs font-semibold text-zinc-600 dark:text-zinc-400">GPS Data</div>
+                      </div>
+                      <div class="max-h-64 overflow-y-auto">
+                        <button onclick="selectFilter('gps', '')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="gps" data-filter-value="">All photos</button>
+                        <button onclick="selectFilter('gps', 'true')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="gps" data-filter-value="true">With location</button>
+                        <button onclick="selectFilter('gps', 'false')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="gps" data-filter-value="false">Without location</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-                """)
+                  """
+              )
 
               // Keywords filter button
               if !getUniqueKeywords().isEmpty {
-                MarkupString(content: """
-                  <div class="filter-dropdown-container relative">
-                    <button onclick="toggleFilterDropdown('keyword')"
-                            class="filter-icon-btn w-10 h-10 rounded-full bg-white/50 dark:bg-zinc-800/50 backdrop-blur-xl border border-white/50 dark:border-white/10 shadow-sm hover:shadow-md hover:bg-white/70 dark:hover:bg-zinc-800/70 transition-all duration-200 flex items-center justify-center cursor-pointer hover:-translate-y-0.5 active:translate-y-0">
-                      <i data-lucide="tag" class="w-4 h-4"></i>
-                    </button>
-                    <div id="keyword-dropdown" class="filter-dropdown hidden absolute top-12 right-0 w-56 bg-white/90 dark:bg-zinc-800/90 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/50 dark:border-white/10 overflow-hidden z-50">
-                      <div class="p-3 border-b border-zinc-200/50 dark:border-zinc-700/50">
-                        <div class="text-xs font-semibold text-zinc-600 dark:text-zinc-400">Keywords</div>
-                      </div>
-                      <div class="max-h-64 overflow-y-auto">
-                        <button onclick="selectFilter('keyword', '')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="keyword" data-filter-value="">All keywords</button>
-                        \(getUniqueKeywords().map { "<button onclick=\"selectFilter('keyword', '\($0)')\" class=\"filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors\" data-filter-type=\"keyword\" data-filter-value=\"\($0)\">\($0)</button>" }.joined())
+                MarkupString(
+                  content: """
+                    <div class="filter-dropdown-container relative">
+                      <button onclick="toggleFilterDropdown('keyword')"
+                              class="filter-icon-btn w-10 h-10 rounded-full bg-white/50 dark:bg-zinc-800/50 backdrop-blur-xl border border-white/50 dark:border-white/10 shadow-sm hover:shadow-md hover:bg-white/70 dark:hover:bg-zinc-800/70 transition-all duration-200 flex items-center justify-center cursor-pointer hover:-translate-y-0.5 active:translate-y-0">
+                        <i data-lucide="tag" class="w-4 h-4"></i>
+                      </button>
+                      <div id="keyword-dropdown" class="filter-dropdown hidden absolute top-12 right-0 w-56 bg-white/90 dark:bg-zinc-800/90 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/50 dark:border-white/10 overflow-hidden z-50">
+                        <div class="p-3 border-b border-zinc-200/50 dark:border-zinc-700/50">
+                          <div class="text-xs font-semibold text-zinc-600 dark:text-zinc-400">Keywords</div>
+                        </div>
+                        <div class="max-h-64 overflow-y-auto">
+                          <button onclick="selectFilter('keyword', '')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="keyword" data-filter-value="">All keywords</button>
+                          \(getUniqueKeywords().map { "<button onclick=\"selectFilter('keyword', '\($0)')\" class=\"filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors\" data-filter-type=\"keyword\" data-filter-value=\"\($0)\">\($0)</button>" }.joined())
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  """)
+                    """
+                )
               }
 
               // Reset filter button
-              MarkupString(content: """
-                <button onclick="resetFilters()"
-                        class="px-4 py-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-white/60 dark:bg-zinc-800/60 hover:bg-white/80 dark:hover:bg-zinc-800/80 backdrop-blur-xl rounded-full shadow-sm shadow-black/5 border border-white/50 dark:border-white/10 transition-all duration-200 cursor-pointer hover:-translate-y-0.5 active:translate-y-0">
-                  Reset
-                </button>
-                """)
+              MarkupString(
+                content: """
+                  <button onclick="resetFilters()"
+                          class="px-4 py-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-white/60 dark:bg-zinc-800/60 hover:bg-white/80 dark:hover:bg-zinc-800/80 backdrop-blur-xl rounded-full shadow-sm shadow-black/5 border border-white/50 dark:border-white/10 transition-all duration-200 cursor-pointer hover:-translate-y-0.5 active:translate-y-0">
+                    Reset
+                  </button>
+                  """
+              )
             }
           }
         }
 
         // Photo Grid with container
-        Stack(classes: ["p-8", "bg-gradient-to-br", "from-zinc-50/70", "to-white/70", "dark:from-zinc-900/70", "dark:to-zinc-800/70", "backdrop-blur-xl", "border", "border-white/50", "dark:border-white/10", "rounded-2xl", "shadow-sm", "mb-12"]) {
+        Stack(classes: [
+          "p-8", "bg-gradient-to-br", "from-zinc-50/70", "to-white/70", "dark:from-zinc-900/70", "dark:to-zinc-800/70",
+          "backdrop-blur-xl", "border", "border-white/50", "dark:border-white/10", "rounded-2xl", "shadow-sm", "mb-12",
+        ]) {
           Stack(
             id: "photo-grid",
             classes: [
@@ -135,24 +146,26 @@ struct DynamicAlbum: Document {
             ]
           ) {
             for (index, photo) in album.photos.enumerated() {
-              MarkupString(content: """
-                <div class="group relative overflow-hidden rounded-2xl aspect-square bg-gradient-to-br from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 shadow-md hover:shadow-2xl hover:shadow-teal-500/10 dark:hover:shadow-teal-400/10 transition-all duration-500 ease-out reveal-card photo-item border border-zinc-200/50 dark:border-zinc-700/50 hover:scale-[1.02] cursor-pointer"
-                     data-photo-index="\(index)"
-                     data-location="\(photo.metadata.locationName ?? "")"
-                     data-camera="\(photo.metadata.camera ?? "")"
-                     data-has-location="\(photo.metadata.hasLocation ? "true" : "false")"
-                     data-keywords="\(photo.metadata.keywords.joined(separator: ","))"
-                     onclick="openLightbox(\(index))">
-                  <div class="relative w-full h-full">
-                    <img src="\(photo.webPath)" alt="\(photo.altText)" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" loading="lazy" />
-                    \(photo.caption != nil ? """
+              MarkupString(
+                content: """
+                  <div class="group relative overflow-hidden rounded-2xl aspect-square bg-gradient-to-br from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 shadow-md hover:shadow-2xl hover:shadow-teal-500/10 dark:hover:shadow-teal-400/10 transition-all duration-500 ease-out reveal-card photo-item border border-zinc-200/50 dark:border-zinc-700/50 hover:scale-[1.02] cursor-pointer"
+                       data-photo-index="\(index)"
+                       data-location="\(photo.metadata.locationName ?? "")"
+                       data-camera="\(photo.metadata.camera ?? "")"
+                       data-has-location="\(photo.metadata.hasLocation ? "true" : "false")"
+                       data-keywords="\(photo.metadata.keywords.joined(separator: ","))"
+                       onclick="openLightbox(\(index))">
+                    <div class="relative w-full h-full">
+                      <img src="\(photo.webPath)" alt="\(photo.altText)" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" loading="lazy" />
+                      \(photo.caption != nil ? """
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent backdrop-blur-sm p-4 flex items-end opacity-0 group-hover:opacity-100 transition-all duration-500">
                       <span class="text-white text-sm font-medium leading-relaxed line-clamp-3 drop-shadow-lg">\(photo.caption!)</span>
                     </div>
                     """ : "")
+                    </div>
                   </div>
-                </div>
-                """)
+                  """
+              )
             }
           }
         }
@@ -183,123 +196,127 @@ struct DynamicAlbum: Document {
 
   // Helper method to create lightbox modal
   private func createLightboxModal() -> some Markup {
-    MarkupString(content: """
-      <div id="lightbox-modal" class="hidden fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
-        <!-- Close button -->
-        <button onclick="closeLightbox()" class="absolute top-[1.875rem] right-[1.375rem] w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center z-50">
-          <i data-lucide="x" class="w-6 h-6 text-white"></i>
-        </button>
-
-        <!-- Metadata toggle button -->
-        <button id="metadata-toggle-btn" onclick="toggleMetadata()" class="absolute top-[1.875rem] right-[5.875rem] w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center z-50">
-          <i id="metadata-toggle-icon" data-lucide="info" class="w-6 h-6 text-white"></i>
-        </button>
-
-        <!-- Main content area -->
-        <div class="flex items-center justify-center w-full h-full p-6">
-          <!-- Navigation: Previous -->
-          <button onclick="navigateLightbox(-1)" class="absolute left-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center">
-            <i data-lucide="chevron-left" class="w-6 h-6 text-white"></i>
+    MarkupString(
+      content: """
+        <div id="lightbox-modal" class="hidden fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
+          <!-- Close button -->
+          <button onclick="closeLightbox()" class="absolute top-[1.875rem] right-[1.375rem] w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center z-50">
+            <i data-lucide="x" class="w-6 h-6 text-white"></i>
           </button>
 
-          <!-- Image container -->
-          <div class="max-w-5xl max-h-full flex items-center justify-center mb-24">
-            <img id="lightbox-image" src="" alt="" class="max-w-full max-h-[70vh] object-contain rounded-2xl" />
-          </div>
-
-          <!-- Navigation: Next -->
-          <button onclick="navigateLightbox(1)" class="absolute right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center">
-            <i data-lucide="chevron-right" class="w-6 h-6 text-white"></i>
+          <!-- Metadata toggle button -->
+          <button id="metadata-toggle-btn" onclick="toggleMetadata()" class="absolute top-[1.875rem] right-[5.875rem] w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center z-50">
+            <i id="metadata-toggle-icon" data-lucide="info" class="w-6 h-6 text-white"></i>
           </button>
-        </div>
 
-        <!-- Thumbnails strip at bottom -->
-        <div id="lightbox-thumbnails" class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 max-w-4xl overflow-x-auto px-6 py-2 bg-black/50 backdrop-blur-xl rounded-2xl"></div>
+          <!-- Main content area -->
+          <div class="flex items-center justify-center w-full h-full p-6">
+            <!-- Navigation: Previous -->
+            <button onclick="navigateLightbox(-1)" class="absolute left-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center">
+              <i data-lucide="chevron-left" class="w-6 h-6 text-white"></i>
+            </button>
 
-        <!-- Metadata panel (hidden by default) -->
-        <div id="metadata-panel" class="hidden absolute top-[1.875rem] right-[1.375rem] md:top-[1.875rem] md:right-[1.375rem] left-6 md:left-auto bottom-6 md:bottom-auto md:w-96 w-auto max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-3rem)] max-w-md mx-auto md:mx-0 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl overflow-y-auto shadow-2xl rounded-2xl border border-white/50 dark:border-white/10">
-          <div class="p-6">
-            <div class="mb-6">
-              <h3 class="text-xl font-bold">Photo Info</h3>
+            <!-- Image container -->
+            <div class="max-w-5xl max-h-full flex items-center justify-center mb-24">
+              <img id="lightbox-image" src="" alt="" class="max-w-full max-h-[70vh] object-contain rounded-2xl" />
             </div>
 
-            <div id="metadata-content" class="space-y-6"></div>
+            <!-- Navigation: Next -->
+            <button onclick="navigateLightbox(1)" class="absolute right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center">
+              <i data-lucide="chevron-right" class="w-6 h-6 text-white"></i>
+            </button>
+          </div>
+
+          <!-- Thumbnails strip at bottom -->
+          <div id="lightbox-thumbnails" class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 max-w-4xl overflow-x-auto px-6 py-2 bg-black/50 backdrop-blur-xl rounded-2xl"></div>
+
+          <!-- Metadata panel (hidden by default) -->
+          <div id="metadata-panel" class="hidden absolute top-[1.875rem] right-[1.375rem] md:top-[1.875rem] md:right-[1.375rem] left-6 md:left-auto bottom-6 md:bottom-auto md:w-96 w-auto max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-3rem)] max-w-md mx-auto md:mx-0 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl overflow-y-auto shadow-2xl rounded-2xl border border-white/50 dark:border-white/10">
+            <div class="p-6">
+              <div class="mb-6">
+                <h3 class="text-xl font-bold">Photo Info</h3>
+              </div>
+
+              <div id="metadata-content" class="space-y-6"></div>
+            </div>
           </div>
         </div>
-      </div>
-      """)
+        """
+    )
   }
 
   // Helper method to create custom styles
   private func createStyles() -> some Markup {
-    MarkupString(content: """
-      <style>
-        /* Jelly animation for dropdowns */
-        @keyframes jellyIn {
-          0% {
-            opacity: 0;
-            transform: scale(0.8) translateY(-10px);
+    MarkupString(
+      content: """
+        <style>
+          /* Jelly animation for dropdowns */
+          @keyframes jellyIn {
+            0% {
+              opacity: 0;
+              transform: scale(0.8) translateY(-10px);
+            }
+            50% {
+              transform: scale(1.05) translateY(0);
+            }
+            70% {
+              transform: scale(0.95);
+            }
+            100% {
+              opacity: 1;
+              transform: scale(1) translateY(0);
+            }
           }
-          50% {
-            transform: scale(1.05) translateY(0);
+
+          .filter-dropdown.active {
+            display: block;
+            animation: jellyIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
           }
-          70% {
-            transform: scale(0.95);
+
+          /* Smooth scrolling for thumbnails */
+          #lightbox-thumbnails::-webkit-scrollbar {
+            height: 6px;
           }
-          100% {
-            opacity: 1;
-            transform: scale(1) translateY(0);
+
+          #lightbox-thumbnails::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
           }
-        }
 
-        .filter-dropdown.active {
-          display: block;
-          animation: jellyIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
+          #lightbox-thumbnails::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+          }
 
-        /* Smooth scrolling for thumbnails */
-        #lightbox-thumbnails::-webkit-scrollbar {
-          height: 6px;
-        }
+          #lightbox-thumbnails::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+          }
 
-        #lightbox-thumbnails::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 3px;
-        }
+          /* Selected filter option styling */
+          .filter-option.selected {
+            background: rgba(20, 184, 166, 0.15) !important;
+            color: rgb(20, 184, 166);
+            font-weight: 600;
+          }
 
-        #lightbox-thumbnails::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.3);
-          border-radius: 3px;
-        }
+          .dark .filter-option.selected {
+            background: rgba(20, 184, 166, 0.2) !important;
+            color: rgb(94, 234, 212);
+          }
 
-        #lightbox-thumbnails::-webkit-scrollbar-thumb:hover {
-          background: rgba(255, 255, 255, 0.5);
-        }
+          /* Metadata panel jelly animation */
+          #metadata-panel.active {
+            display: block;
+            animation: jellyIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+          }
 
-        /* Selected filter option styling */
-        .filter-option.selected {
-          background: rgba(20, 184, 166, 0.15) !important;
-          color: rgb(20, 184, 166);
-          font-weight: 600;
-        }
-
-        .dark .filter-option.selected {
-          background: rgba(20, 184, 166, 0.2) !important;
-          color: rgb(94, 234, 212);
-        }
-
-        /* Metadata panel jelly animation */
-        #metadata-panel.active {
-          display: block;
-          animation: jellyIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        /* Map styling - minimal grayscale */
-        .map-container iframe {
-          opacity: 0.8;
-        }
-      </style>
-      """)
+          /* Map styling - minimal grayscale */
+          .map-container iframe {
+            opacity: 0.8;
+          }
+        </style>
+        """
+    )
   }
 
   // Helper method to create JavaScript functionality
@@ -315,28 +332,28 @@ struct DynamicAlbum: Document {
       let keywordsJSON = photo.metadata.keywords.map { "\"\($0)\"" }.joined(separator: ", ")
 
       return """
-      {
-        "src": "\(photo.webPath)",
-        "alt": "\(photo.altText)",
-        "caption": \(photo.caption != nil ? "\"\(photo.caption!)\"" : "null"),
-        "metadata": {
-          "camera": \(photo.metadata.camera != nil ? "\"\(photo.metadata.camera!)\"" : "null"),
-          "lens": \(photo.metadata.lens != nil ? "\"\(photo.metadata.lens!)\"" : "null"),
-          "focalLength": \(photo.metadata.focalLength != nil ? "\(photo.metadata.focalLength!)" : "null"),
-          "aperture": \(photo.metadata.aperture != nil ? "\(photo.metadata.aperture!)" : "null"),
-          "shutterSpeed": \(photo.metadata.shutterSpeed != nil ? "\(photo.metadata.shutterSpeed!)" : "null"),
-          "iso": \(photo.metadata.iso != nil ? "\(photo.metadata.iso!)" : "null"),
-          "dateTaken": \(photo.metadata.dateTaken != nil ? "\"\(photo.metadata.dateTaken!.ISO8601Format())\"" : "null"),
-          "location": \(locationJSON),
-          "locationName": \(photo.metadata.locationName != nil ? "\"\(photo.metadata.locationName!)\"" : "null"),
-          "keywords": [\(keywordsJSON)],
-          "isRaw": \(photo.metadata.isRaw),
-          "width": \(photo.metadata.width != nil ? "\(photo.metadata.width!)" : "null"),
-          "height": \(photo.metadata.height != nil ? "\(photo.metadata.height!)" : "null"),
-          "fileSize": \(photo.metadata.fileSize != nil ? "\"\(photo.metadata.formattedFileSize!)\"" : "null")
+        {
+          "src": "\(photo.webPath)",
+          "alt": "\(photo.altText)",
+          "caption": \(photo.caption != nil ? "\"\(photo.caption!)\"" : "null"),
+          "metadata": {
+            "camera": \(photo.metadata.camera != nil ? "\"\(photo.metadata.camera!)\"" : "null"),
+            "lens": \(photo.metadata.lens != nil ? "\"\(photo.metadata.lens!)\"" : "null"),
+            "focalLength": \(photo.metadata.focalLength != nil ? "\(photo.metadata.focalLength!)" : "null"),
+            "aperture": \(photo.metadata.aperture != nil ? "\(photo.metadata.aperture!)" : "null"),
+            "shutterSpeed": \(photo.metadata.shutterSpeed != nil ? "\(photo.metadata.shutterSpeed!)" : "null"),
+            "iso": \(photo.metadata.iso != nil ? "\(photo.metadata.iso!)" : "null"),
+            "dateTaken": \(photo.metadata.dateTaken != nil ? "\"\(photo.metadata.dateTaken!.ISO8601Format())\"" : "null"),
+            "location": \(locationJSON),
+            "locationName": \(photo.metadata.locationName != nil ? "\"\(photo.metadata.locationName!)\"" : "null"),
+            "keywords": [\(keywordsJSON)],
+            "isRaw": \(photo.metadata.isRaw),
+            "width": \(photo.metadata.width != nil ? "\(photo.metadata.width!)" : "null"),
+            "height": \(photo.metadata.height != nil ? "\(photo.metadata.height!)" : "null"),
+            "fileSize": \(photo.metadata.fileSize != nil ? "\"\(photo.metadata.formattedFileSize!)\"" : "null")
+          }
         }
-      }
-      """
+        """
     }.joined(separator: ",\n")
 
     return Script(placement: .body) {

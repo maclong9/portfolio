@@ -116,7 +116,8 @@ struct SchengenTracker: Document {
                 id: "days-remaining",
                 classes: ["text-4xl", "font-bold", "text-green-600", "dark:text-green-400"]
               )
-              Stack(id: "days-after-planned-container", classes: ["flex", "items-baseline", "gap-1", "ml-1", "hidden"]) {
+              Stack(id: "days-after-planned-container", classes: ["flex", "items-baseline", "gap-1", "ml-1", "hidden"])
+              {
                 Text(
                   "",
                   id: "days-after-planned",
@@ -131,7 +132,7 @@ struct SchengenTracker: Document {
                     "absolute", "bottom-full", "left-1/2", "transform", "-translate-x-1/2", "mb-2",
                     "bg-zinc-900", "dark:bg-zinc-700", "text-white", "text-xs", "rounded", "py-1", "px-2",
                     "whitespace-nowrap", "opacity-0", "group-hover:opacity-100", "transition-opacity",
-                    "pointer-events-none", "z-10"
+                    "pointer-events-none", "z-10",
                   ]) {
                     Text("After planned trips")
                   }
@@ -144,7 +145,7 @@ struct SchengenTracker: Document {
         // Next Reset
         Stack(classes: [
           "bg-white", "dark:bg-zinc-800", "p-6", "rounded-lg", "border", "border-zinc-200", "dark:border-zinc-700",
-          "mb-6", "flex", "flex-col"
+          "mb-6", "flex", "flex-col",
         ]) {
           Heading(.title, "Next Reset Date", classes: ["text-lg", "font-semibold", "mb-2"])
           Text("No visits yet", id: "next-reset", classes: ["text-2xl", "mb-4"])
@@ -201,7 +202,7 @@ struct SchengenTracker: Document {
             classes: [
               "w-full", "bg-gray-400", "dark:bg-zinc-600", "text-white", "p-3",
               "rounded-lg", "disabled:cursor-not-allowed", "flex", "items-center",
-              "justify-center", "gap-2", "font-medium", "transition-colors"
+              "justify-center", "gap-2", "font-medium", "transition-colors",
             ]
           ) {
             Icon(name: "plus", classes: ["w-5", "h-5"])
@@ -234,11 +235,11 @@ struct SchengenTracker: Document {
         title: "How the Schengen 90/180 Rule Works",
         onClose: "hideInfo()",
         content: """
-          <p><strong>The Rule:</strong> You can stay up to 90 days within any 180-day period in the Schengen area. This is a rolling window that moves with each day.</p>
-          <p>The tracker calculates your usage based on visits within the last 180 days from today. Your allowance resets gradually as old visits fall outside the 180-day window.</p>
-          <p><strong>Next Reset:</strong> Shows when your earliest visit will fall outside the 180-day window, beginning to restore your allowance.</p>
-          <p><strong>Sharing:</strong> Generate a secure link to share your visit history with family, friends, or advisors. The link contains only your travel dates and locations.</p>
-        """
+            <p><strong>The Rule:</strong> You can stay up to 90 days within any 180-day period in the Schengen area. This is a rolling window that moves with each day.</p>
+            <p>The tracker calculates your usage based on visits within the last 180 days from today. Your allowance resets gradually as old visits fall outside the 180-day window.</p>
+            <p><strong>Next Reset:</strong> Shows when your earliest visit will fall outside the 180-day window, beginning to restore your allowance.</p>
+            <p><strong>Sharing:</strong> Generate a secure link to share your visit history with family, friends, or advisors. The link contains only your travel dates and locations.</p>
+          """
       )
 
       ShareModal(

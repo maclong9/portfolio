@@ -18,7 +18,8 @@ struct Photos: Document {
 
         // Sort rest by date descending (newest first)
         guard let lhsDate = lhs.date,
-              let rhsDate = rhs.date else {
+          let rhsDate = rhs.date
+        else {
           return false
         }
         return lhsDate > rhsDate
@@ -45,10 +46,12 @@ struct Photos: Document {
         Breadcrumb(title: "Mac Long", url: "/"),
         Breadcrumb(title: "Photos", url: "/photos"),
       ],
-      pageHeader: albums.isEmpty ? nil : .collection(
-        name: "Photos",
-        description: "Photo albums from travels and life"
-      )
+      pageHeader: albums.isEmpty
+        ? nil
+        : .collection(
+          name: "Photos",
+          description: "Photo albums from travels and life"
+        )
     ) {
       if albums.isEmpty {
         EmptyState(

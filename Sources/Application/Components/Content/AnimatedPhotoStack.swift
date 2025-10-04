@@ -20,11 +20,11 @@ public struct AnimatedPhotoStack: Element {
         "flex",
         "items-center",
         "justify-center",
-        "overflow-visible"
+        "overflow-visible",
       ],
       data: [
         "photo-stack": "true",
-        "photos": photos.joined(separator: ",")
+        "photos": photos.joined(separator: ","),
       ]
     ) {
       // Render up to 5 photos in the stack
@@ -43,7 +43,7 @@ public struct AnimatedPhotoStack: Element {
             "photo-stack-item",
             "transition-all",
             "duration-700",
-            "ease-out"
+            "ease-out",
           ],
           data: [
             "stack-index": String(index)

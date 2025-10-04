@@ -13,7 +13,7 @@ let package = Package(
       name: "Application",
       dependencies: [
         .product(name: "WebUI", package: "web-ui"),
-        .product(name: "WebUIMarkdown", package: "web-ui")
+        .product(name: "WebUIMarkdown", package: "web-ui"),
       ]
     ),
     .testTarget(
@@ -21,8 +21,8 @@ let package = Package(
       dependencies: [
         "Application",
         .product(name: "WebUI", package: "web-ui"),
-        .product(name: "WebUIMarkdown", package: "web-ui")
+        .product(name: "WebUIMarkdown", package: "web-ui"),
       ]
-    )
+    ),
   ]
 )

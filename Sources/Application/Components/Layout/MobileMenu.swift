@@ -11,31 +11,33 @@ public struct MobileMenu: Element {
   public var body: some Markup {
     Stack {
       // Jelly animation styles
-      MarkupString(content: """
-      <style>
-        @keyframes jellyIn {
-          0% {
-            opacity: 0;
-            transform: scale(0.8) translateY(-10px);
-          }
-          50% {
-            transform: scale(1.05) translateY(0);
-          }
-          70% {
-            transform: scale(0.95);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-          }
-        }
+      MarkupString(
+        content: """
+          <style>
+            @keyframes jellyIn {
+              0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(-10px);
+              }
+              50% {
+                transform: scale(1.05) translateY(0);
+              }
+              70% {
+                transform: scale(0.95);
+              }
+              100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+              }
+            }
 
-        #mobile-menu-overlay.active {
-          display: block;
-          animation: jellyIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-      </style>
-      """)
+            #mobile-menu-overlay.active {
+              display: block;
+              animation: jellyIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+          </style>
+          """
+      )
 
       Stack(
         id: "mobile-menu-container",
@@ -171,7 +173,8 @@ public struct MobileMenu: Element {
               Text("Theme", classes: ["text-sm", "font-medium", "text-zinc-700", "dark:text-zinc-300", "mb-3"])
               Stack(classes: ["space-y-1"]) {
                 Button(
-                  onClick: "if (window.setTheme) window.setTheme('system'); window.closeSlideMenu('mobile-menu-container')",
+                  onClick:
+                    "if (window.setTheme) window.setTheme('system'); window.closeSlideMenu('mobile-menu-container')",
                   id: "theme-system-mobile",
                   classes: [
                     "w-full", "flex", "items-center", "space-x-3", "px-3", "py-2", "rounded-xl",
@@ -189,7 +192,8 @@ public struct MobileMenu: Element {
                 }
 
                 Button(
-                  onClick: "if (window.setTheme) window.setTheme('light'); window.closeSlideMenu('mobile-menu-container')",
+                  onClick:
+                    "if (window.setTheme) window.setTheme('light'); window.closeSlideMenu('mobile-menu-container')",
                   id: "theme-light-mobile",
                   classes: [
                     "w-full", "flex", "items-center", "space-x-3", "px-3", "py-2", "rounded-xl",
@@ -207,7 +211,8 @@ public struct MobileMenu: Element {
                 }
 
                 Button(
-                  onClick: "if (window.setTheme) window.setTheme('dark'); window.closeSlideMenu('mobile-menu-container')",
+                  onClick:
+                    "if (window.setTheme) window.setTheme('dark'); window.closeSlideMenu('mobile-menu-container')",
                   id: "theme-dark-mobile",
                   classes: [
                     "w-full", "flex", "items-center", "space-x-3", "px-3", "py-2", "rounded-xl",
@@ -229,7 +234,7 @@ public struct MobileMenu: Element {
         }
       }
       // .slideMenu(
-      //   overlayId: "mobile-menu-overlay", 
+      //   overlayId: "mobile-menu-overlay",
       //   from: .fromRight,
       //   duration: 300,
       //   toggleButtonSelector: "#mobile-menu-button"
@@ -237,4 +242,3 @@ public struct MobileMenu: Element {
     }
   }
 }
-

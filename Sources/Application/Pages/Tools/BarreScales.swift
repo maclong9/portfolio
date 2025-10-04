@@ -67,7 +67,7 @@ struct BarreScales: Document {
           Stack(classes: ["flex", "flex-col", "h-full"]) {
             Stack(classes: [
               "bg-white", "dark:bg-zinc-800", "rounded-lg", "shadow-sm", "border",
-              "border-zinc-200", "dark:border-zinc-700", "p-4", "flex-shrink-0"
+              "border-zinc-200", "dark:border-zinc-700", "p-4", "flex-shrink-0",
             ]) {
               Stack(classes: ["flex", "items-center", "justify-between", "mb-4"]) {
                 Heading(.headline, "Chord Progressions", classes: ["text-lg", "font-semibold"])
@@ -75,7 +75,7 @@ struct BarreScales: Document {
                   onClick: "hideProgressions()",
                   classes: [
                     "lg:hidden", "p-1", "text-zinc-500", "hover:text-zinc-700",
-                    "dark:text-zinc-400", "dark:hover:text-zinc-200"
+                    "dark:text-zinc-400", "dark:hover:text-zinc-200",
                   ]
                 ) {
                   Icon(name: "x", classes: ["w-5", "h-5"])
@@ -89,11 +89,14 @@ struct BarreScales: Document {
               }
             }
 
-            Stack(id: "progressions-list", classes: [
-              "flex-1", "overflow-y-auto", "p-4", "space-y-4", "min-h-0",
-              "bg-white", "dark:bg-zinc-800", "rounded-lg", "shadow-sm", "border",
-              "border-zinc-200", "dark:border-zinc-700"
-            ])
+            Stack(
+              id: "progressions-list",
+              classes: [
+                "flex-1", "overflow-y-auto", "p-4", "space-y-4", "min-h-0",
+                "bg-white", "dark:bg-zinc-800", "rounded-lg", "shadow-sm", "border",
+                "border-zinc-200", "dark:border-zinc-700",
+              ]
+            )
           }
         }
 
@@ -181,12 +184,12 @@ struct BarreScales: Document {
         title: "How to Use the Barre Scales Tool",
         onClose: "hideInfo()",
         content: """
-          <p><strong>Getting Started:</strong> Choose your scale type (Major or Minor) and root note using the controls at the bottom. The table will update to show all seven degrees of the scale with their corresponding barre chord positions.</p>
-          <p><strong>Selecting Degrees:</strong> Click on any row in the table to select that degree. Selected degrees are highlighted and numbered in order of selection. This helps you build chord progressions step by step.</p>
-          <p><strong>Chord Progressions:</strong> Use the sidebar (toggle with the grid icon) to explore common chord progressions. Click any progression to automatically select the corresponding degrees in the correct order.</p>
-          <p><strong>Barre Positions:</strong> Each degree shows multiple barre chord shapes with fret positions. The letters in parentheses indicate the root string: (E) = E-string shapes, (A) = A-string shapes, (D) = D-string shapes.</p>
-          <p><strong>Color Coding:</strong> Chord qualities are color-coded (Major = green, Minor = blue, Diminished = red).</p>
-        """
+            <p><strong>Getting Started:</strong> Choose your scale type (Major or Minor) and root note using the controls at the bottom. The table will update to show all seven degrees of the scale with their corresponding barre chord positions.</p>
+            <p><strong>Selecting Degrees:</strong> Click on any row in the table to select that degree. Selected degrees are highlighted and numbered in order of selection. This helps you build chord progressions step by step.</p>
+            <p><strong>Chord Progressions:</strong> Use the sidebar (toggle with the grid icon) to explore common chord progressions. Click any progression to automatically select the corresponding degrees in the correct order.</p>
+            <p><strong>Barre Positions:</strong> Each degree shows multiple barre chord shapes with fret positions. The letters in parentheses indicate the root string: (E) = E-string shapes, (A) = A-string shapes, (D) = D-string shapes.</p>
+            <p><strong>Color Coding:</strong> Chord qualities are color-coded (Major = green, Minor = blue, Diminished = red).</p>
+          """
       )
 
       Script(content: {
