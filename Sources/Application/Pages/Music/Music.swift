@@ -124,7 +124,7 @@ struct Music: Document {
                         "from-purple-400 to-pink-500",
                         "from-orange-400 to-red-500",
                         "from-green-400 to-cyan-500",
-                        "from-indigo-400 to-purple-500"
+                        "from-indigo-400 to-purple-500",
                       ]
                       let gradient = gradients[abs(album.id.hashValue) % gradients.count]
 
@@ -152,7 +152,7 @@ struct Music: Document {
                   "from-purple-400 to-pink-500",
                   "from-orange-400 to-red-500",
                   "from-green-400 to-cyan-500",
-                  "from-indigo-400 to-purple-500"
+                  "from-indigo-400 to-purple-500",
                 ]
                 let gradient = gradients[abs(album.id.hashValue) % gradients.count]
 
@@ -298,7 +298,7 @@ struct Music: Document {
                         "from-purple-400 to-pink-500",
                         "from-orange-400 to-red-500",
                         "from-green-400 to-cyan-500",
-                        "from-indigo-400 to-purple-500"
+                        "from-indigo-400 to-purple-500",
                       ]
                       let gradient = gradients[abs(artist.id.hashValue) % gradients.count]
 
@@ -328,7 +328,7 @@ struct Music: Document {
                   "from-purple-400 to-pink-500",
                   "from-orange-400 to-red-500",
                   "from-green-400 to-cyan-500",
-                  "from-indigo-400 to-purple-500"
+                  "from-indigo-400 to-purple-500",
                 ]
                 let gradient = gradients[abs(artist.id.hashValue) % gradients.count]
 

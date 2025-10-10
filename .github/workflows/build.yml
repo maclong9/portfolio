@@ -13,9 +13,3 @@ permissions:
 jobs:
   build:
     uses: maclong9/web-ui/.github/workflows/build.yml@main
-    with:
-      swift-version: '6.1'
-      build-command: 'swift build -v'
-      generate-command: 'swift run Application'
-      output-directory: '.output'
-      static-branch: 'static'

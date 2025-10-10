@@ -13,28 +13,29 @@ struct Home: Document {
     Card(
       title: "Apple Ecosystem",
       description:
-        "Native iOS and macOS development using Swift and SwiftUI for beautiful, performant applications.",
-      tags: ["Swift", "SwiftUI", "Xcode", "iOS", "macOS", "UIKit", "Core Data", "TestFlight"],
+        "Building native iOS and macOS experiences using Swift and SwiftUI — elegant, fast, and deeply integrated with the platform.",
+      tags: ["Swift", "SwiftUI", "Xcode", "iOS", "macOS", "UIKit", "Combine", "CoreData"],
       emoji: "📱"
     ),
     Card(
       title: "Systems Programming",
       description:
-        "Low-level programming and command-line tools with UNIX systems expertise and efficient C implementations.",
-      tags: ["C", "UNIX Shell", "CLI Tools", "POSIX", "System APIs", "Make", "GCC", "LLVM"],
+        "Crafting efficient tools and low-level systems with C and Swift — understanding UNIX internals, memory, and process control.",
+      tags: ["C", "Swift", "UNIX", "POSIX", "Shell", "CLI", "Make", "Clang"],
       emoji: "🔧"
     ),
     Card(
       title: "Web Development",
       description:
-        "Full-stack web applications with modern frameworks, responsive design, and scalable backend systems.",
-      tags: ["React", "TypeScript", "Node.js", "HTML", "CSS", "Hummingbird", "REST", "WebSockets"],
+        "Creating full-stack web applications with clean HTML, modern CSS, and Swift-powered backends for speed and scalability.",
+      tags: ["HTML", "CSS", "JavaScript", "Hummingbird", "REST", "SSE", "WebSockets", "Caching"],
       emoji: "🌐"
     ),
     Card(
       title: "Cloud & DevOps",
-      description: "Modern deployment and infrastructure management with automated CI/CD and cloud hosting.",
-      tags: ["Cloudflare", "Vercel", "AWS", "GitHub", "Docker", "CI/CD", "Git", "Kubernetes"],
+      description:
+        "Automating deployment, managing infrastructure, and optimizing edge delivery with reliable, self-managed systems.",
+      tags: ["Cloudflare", "Docker", "GitHub", "CI/CD", "Git", "VPS", "Apache", "Monitoring"],
       emoji: "☁️"
     ),
   ]
