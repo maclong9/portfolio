@@ -1,0 +1,614 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Posts | Mac Long</title><meta property="og:title" content="Posts | Mac Long"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Swift, TypeScript, React and TailwindCSS developer crafting clean code and efficient forward-thinking solutions"><meta property="og:description" content="Swift, TypeScript, React and TailwindCSS developer crafting clean code and efficient forward-thinking solutions"><meta property="og:image" content="/public/og.jpg"><meta name="author" content="Mac Long"><meta name="keywords" content="software engineer, swift developer, react developer, typescript, tailwindcss, frontend development, skateboarding, punk rock, web development, iOS development"><link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>👨‍💻</text></svg>"><script type="application/ld+json">
+{"familyName":"Long","jobTitle":"Software Engineer","@context":"https://schema.org","@type":"Person","givenName":"Mac","sameAs":["https://github.com/maclong9","https://orcid.org/0009-0002-4180-3822"],"image":"https://avatars.githubusercontent.com/u/115668288?v=4","email":"hello@maclong.uk","name":"Mac Long","url":"https://maclong.uk"}
+</script><script src="/public/js/theme.js"></script><script src="https://unpkg.com/@tailwindcss/browser@4"></script><script src="https://unpkg.com/lucide@latest"></script><meta name="generator" content="WebUI" /><link rel="preload" href="https://unpkg.com/@tailwindcss/browser@4" as="script"><link rel="preload" href="https://unpkg.com/lucide@latest" as="script"><link rel="dns-prefetch" href="//unpkg.com"><link rel="preload" href="/public/js/theme.js" as="script"><link rel="preload" href="/public/js/icons.js" as="script"><style type="text/tailwindcss">
+    @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+    /* Apple-style glassmorphism support */
+    @supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
+        .backdrop-blur-sm {
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .backdrop-blur-xl {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .backdrop-saturate-150 {
+            backdrop-filter: saturate(1.5);
+            -webkit-backdrop-filter: saturate(1.5);
+        }
+    }
+
+    /* Smooth transitions for interactive elements */
+    select, button, a {
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Respect user's motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+
+        .reveal-card {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+        }
+
+        .game-of-life-bg {
+            display: none !important;
+        }
+    }
+
+    /* Hero animations */
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes avatarFadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    /* Progressive Reveal for Cards */
+    .reveal-card {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .reveal-card.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .reveal-card:nth-child(1) { transition-delay: 0.1s; }
+    .reveal-card:nth-child(2) { transition-delay: 0.2s; }
+    .reveal-card:nth-child(3) { transition-delay: 0.3s; }
+    .reveal-card:nth-child(4) { transition-delay: 0.4s; }
+    .reveal-card:nth-child(5) { transition-delay: 0.5s; }
+    .reveal-card:nth-child(6) { transition-delay: 0.6s; }
+    
+    /* Hero element animations */
+    .hero-avatar {
+        animation: avatarFadeIn 0.8s ease-out;
+    }
+    
+    .hero-name {
+        animation: slideUp 0.6s ease-out 0.1s both;
+    }
+    
+    .hero-description {
+        animation: slideUp 0.6s ease-out 0.3s both;
+    }
+    
+    /* Typography enhancements for prose content */
+    .prose {
+        @apply text-zinc-700 dark:text-zinc-300 leading-relaxed;
+    }
+
+    /* Paragraph spacing */
+    .prose p {
+        @apply mb-6 leading-relaxed;
+    }
+
+    /* Headings */
+    .prose h1 {
+        @apply text-3xl font-bold text-zinc-900 dark:text-zinc-100 mt-12 mb-6 leading-tight;
+    }
+    
+    .prose h2 {
+        @apply text-2xl font-bold text-zinc-900 dark:text-zinc-100 mt-10 mb-4 leading-tight;
+    }
+    
+    .prose h3 {
+        @apply text-xl font-semibold text-zinc-900 dark:text-zinc-100 mt-8 mb-3 leading-snug;
+    }
+    
+    .prose h4 {
+        @apply text-lg font-semibold text-zinc-900 dark:text-zinc-100 mt-6 mb-2;
+    }
+
+    /* Lists */
+    .prose ul {
+        @apply mb-6 pl-6;
+    }
+    
+    .prose ol {
+        @apply mb-6 pl-6;
+    }
+    
+    .prose li {
+        @apply mb-2 leading-relaxed;
+    }
+    
+    .prose ul > li {
+        @apply relative;
+    }
+    
+    .prose ul > li::before {
+        content: "•";
+        @apply absolute -left-4 text-teal-600 dark:text-teal-400 font-medium;
+    }
+
+    /* Links */
+    .prose a {
+        @apply text-teal-600 dark:text-teal-400 underline decoration-teal-600/30 underline-offset-2 transition-colors;
+    }
+    
+    .prose a:hover {
+        @apply text-teal-700 dark:text-teal-300 decoration-teal-600/60;
+    }
+
+    /* Blockquotes */
+    .prose blockquote {
+        @apply border-l-4 border-teal-500 pl-6 py-4 my-6 italic text-zinc-600 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-800/50 rounded-r;
+    }
+    
+    .prose blockquote p {
+        @apply mb-3 last:mb-0;
+    }
+    
+    /* Blockquote attribution styling */
+    .prose blockquote cite,
+    .prose blockquote footer {
+        @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3 block;
+    }
+    
+    .prose blockquote cite::before,
+    .prose blockquote footer::before {
+        content: "— ";
+    }
+    
+    /* Attribution styling for marked elements */
+    .prose blockquote p.attribution {
+        @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3;
+    }
+
+    /* Code block styling */
+    .prose pre {
+        @apply bg-zinc-900 dark:bg-zinc-800 text-zinc-100 text-xs p-4 rounded-lg my-6 overflow-x-auto;
+        border: 1px solid theme(colors.zinc.700);
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+    
+    .prose code:not(pre code) {
+        @apply bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-1.5 py-0.5 rounded text-sm font-mono;
+    }
+
+    /* Tables */
+    .prose table {
+        @apply w-full my-6 border-collapse;
+    }
+    
+    .prose th {
+        @apply bg-zinc-50 dark:bg-zinc-800 font-semibold text-left px-4 py-3 border-b border-zinc-200 dark:border-zinc-700;
+    }
+    
+    .prose td {
+        @apply px-4 py-3 border-b border-zinc-100 dark:border-zinc-800;
+    }
+
+    /* Horizontal rules */
+    .prose hr {
+        @apply my-8 border-t-2 border-zinc-200 dark:border-zinc-700;
+    }
+
+    /* Strong and emphasis */
+    .prose strong {
+        @apply font-semibold text-zinc-900 dark:text-zinc-100;
+    }
+    
+    .prose em {
+        @apply italic text-zinc-600 dark:text-zinc-400;
+    }
+
+    /* Accessibility: Hide animations on reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        .reveal-card,
+        .hero-avatar,
+        .hero-name, 
+        .hero-description {
+            animation: none !important;
+            transition: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    }
+</style></head><body class="bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 transition-colors duration-300"><div><style>
+  @keyframes jellyIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.8) translateY(-10px);
+    }
+    50% {
+      transform: scale(1.05) translateY(0);
+    }
+    70% {
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  #mobile-menu-overlay.active {
+    display: block;
+    animation: jellyIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+</style><div id="mobile-menu-container" data-mobile-menu-open="false"><div id="mobile-menu-overlay" class="fixed top-[90px] right-4 w-80 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-6rem)] overflow-y-auto bg-white/95 dark:bg-zinc-900/95 backdrop-blur-2xl backdrop-saturate-150 border border-white/50 dark:border-white/10 px-6 py-6 shadow-2xl rounded-2xl z-50 hidden" data-mobile-menu="closed"><div class="flex flex-col space-y-3"><div class="flex items-center justify-between mb-4"><span class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Navigation</span><button id="mobile-menu-close" class="p-1 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 cursor-pointer" aria-label="Close menu" onclick="closeSlideMenu('mobile-menu-container')"><i data-lucide="x" class="w-5 h-5"></i></button></div><a href="/posts" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="posts"><i data-lucide="file-text" class="w-5 h-5"></i><span>Posts</span></a><a href="/photos" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="photos"><i data-lucide="camera" class="w-5 h-5"></i><span>Photos</span></a><a href="/music" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="music"><i data-lucide="music" class="w-5 h-5"></i><span>Music</span></a><a href="/tools" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="tools"><i data-lucide="wrench" class="w-5 h-5"></i><span>Tools</span></a><a href="mailto:hello@maclong.uk" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="email"><i data-lucide="mail" class="w-5 h-5"></i><span>Email</span></a><a href="https://github.com/maclong9" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="github" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i><span>GitHub</span></a><div class="border-t border-white/20 dark:border-zinc-700/50 pt-4 mt-2"><span class="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-3">Theme</span><div class="space-y-1"><button id="theme-system-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-sm transition-all cursor-pointer text-zinc-700 dark:text-zinc-200" data-theme-option="system" onclick="if (window.setTheme) window.setTheme('system'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="monitor" class="w-4 h-4"></i><span>System</span></div></button><button id="theme-light-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-sm transition-all cursor-pointer text-zinc-700 dark:text-zinc-200" data-theme-option="light" onclick="if (window.setTheme) window.setTheme('light'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="sun" class="w-4 h-4"></i><span>Light</span></div></button><button id="theme-dark-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-sm transition-all cursor-pointer text-zinc-700 dark:text-zinc-200" data-theme-option="dark" onclick="if (window.setTheme) window.setTheme('dark'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="moon" class="w-4 h-4"></i><span>Dark</span></div></button></div></div></div></div></div></div><div class="min-h-screen flex flex-col"><div><header id="main-header" class="fixed top-4 left-1/2 -translate-x-1/2 max-w-5xl w-[calc(100%-2rem)] bg-white/60 dark:bg-zinc-900/60 backdrop-blur-2xl backdrop-saturate-200 border border-white/40 dark:border-zinc-700/40 rounded-2xl px-6 py-4 z-30 transition-all duration-300 ease-in-out shadow-lg shadow-zinc-900/5 dark:shadow-zinc-950/30"><div class="flex items-center justify-between"><div class="flex items-center justify-between w-full"><nav class="md:hidden flex items-center space-x-1 text-sm"><a href="/" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Mac Long</a><span class="text-zinc-400 dark:text-zinc-600">/</span><span class="text-zinc-900 dark:text-zinc-100 font-medium">Posts</span></nav><nav class="hidden md:flex items-center space-x-1 text-sm"><a href="/" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Mac Long</a><span class="text-zinc-400 dark:text-zinc-600">/</span><span class="text-zinc-900 dark:text-zinc-100 font-medium">Posts</span></nav><div class="flex items-center space-x-4"><div class="flex items-center space-x-1"><div class="md:hidden"><button id="mobile-menu-button" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Menu" onclick="toggleSlideMenu('mobile-menu-container')"><i data-lucide="chevron-left" class="w-5 h-5"></i></button></div><div class="hidden md:flex items-center space-x-2"><a href="/posts" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Posts"><i data-lucide="file-text" class="w-5 h-5"></i></a><a href="/photos" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Photos"><i data-lucide="camera" class="w-5 h-5"></i></a><a href="/music" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Music"><i data-lucide="music" class="w-5 h-5"></i></a><a href="/tools" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Tools"><i data-lucide="wrench" class="w-5 h-5"></i></a><div class="w-px h-6 bg-zinc-300/50 dark:bg-zinc-600/50"></div><a href="mailto:hello@maclong.uk" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Email"><i data-lucide="mail" class="w-5 h-5"></i></a><a href="https://github.com/maclong9" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="View GitHub Profile" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i></a><div class="relative theme-dropdown"><button class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Change theme" data-theme-toggle="true"><i data-lucide="sun" data-theme-icon="light" class="hidden"></i><i data-lucide="moon" data-theme-icon="dark" class="hidden"></i><i data-lucide="palette" data-theme-icon="system" class="w-5 h-5"></i></button><div class="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-zinc-800 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700 py-1 z-50 theme-dropdown-menu hidden"><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="system"><i data-lucide="palette" class="w-5 h-5"></i><span>System</span></button><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="light"><i data-lucide="sun" class="w-5 h-5"></i><span>Light</span></button><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="dark"><i data-lucide="moon" class="w-5 h-5"></i><span>Dark</span></button></div><style>.theme-dropdown-menu {
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transition: opacity 0.15s ease-in, transform 0.15s ease-in;
+}
+
+.theme-dropdown-menu--open {
+    display: block;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.theme-option--active {
+    background-color: rgb(240 253 250);
+    color: rgb(15 118 110);
+}
+
+.dark .theme-option--active {
+    background-color: rgb(19 78 74 / 0.5);
+    color: rgb(94 234 212);
+}
+
+[data-theme-icon] {
+    display: none;
+}
+
+[data-theme-icon="system"] {
+    display: block;
+}</style><script>// Theme dropdown functionality - colocated with ThemeDropdown component
+(function() {
+    let isDropdownOpen = false;
+
+    function initThemeDropdown() {
+        // Listen for dropdown toggle
+        document.addEventListener('click', (e) => {
+            const themeToggle = e.target.closest('[data-theme-toggle]');
+            if (themeToggle) {
+                e.preventDefault();
+                toggleDropdown();
+                return;
+            }
+
+            const themeOption = e.target.closest('[data-theme-option]');
+            if (themeOption) {
+                e.preventDefault();
+                const theme = themeOption.dataset.themeOption;
+                setTheme(theme);
+                updateDropdownUI();
+                closeDropdown();
+                return;
+            }
+
+            // Close dropdown when clicking outside
+            if (isDropdownOpen && !e.target.closest('.theme-dropdown')) {
+                closeDropdown();
+            }
+        });
+
+        // Update UI initially and when theme changes
+        updateDropdownUI();
+        
+        // Listen for theme changes
+        const observer = new MutationObserver(() => {
+            updateDropdownUI();
+        });
+        
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
+    }
+
+    function toggleDropdown() {
+        if (isDropdownOpen) {
+            closeDropdown();
+        } else {
+            openDropdown();
+        }
+    }
+
+    function openDropdown() {
+        isDropdownOpen = true;
+        const dropdown = document.querySelector('.theme-dropdown-menu');
+        if (dropdown) {
+            dropdown.classList.remove('hidden');
+            // Trigger reflow for animation
+            dropdown.offsetHeight;
+            dropdown.classList.add('theme-dropdown-menu--open');
+        }
+    }
+
+    function closeDropdown() {
+        isDropdownOpen = false;
+        const dropdown = document.querySelector('.theme-dropdown-menu');
+        if (dropdown) {
+            dropdown.classList.remove('theme-dropdown-menu--open');
+            setTimeout(() => {
+                if (!isDropdownOpen) {
+                    dropdown.classList.add('hidden');
+                }
+            }, 200); // Match transition duration
+        }
+    }
+
+    function setTheme(theme) {
+        localStorage.setItem('theme', theme);
+        updateTheme();
+    }
+
+    function updateTheme() {
+        const themePreference = localStorage.getItem('theme') || 'system';
+        let actualTheme = 'light';
+
+        if (themePreference === 'dark') {
+            actualTheme = 'dark';
+        } else if (themePreference === 'system') {
+            actualTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        document.documentElement.setAttribute('data-theme', actualTheme);
+    }
+
+    function updateDropdownUI() {
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        
+        // Update theme toggle button icon
+        const toggleIcons = document.querySelectorAll('[data-theme-icon]');
+        toggleIcons.forEach(icon => {
+            icon.style.display = 'none';
+        });
+        
+        const activeIcon = document.querySelector(`[data-theme-icon="${savedTheme}"]`);
+        if (activeIcon) {
+            activeIcon.style.display = 'block';
+        }
+
+        // Update dropdown options
+        const options = document.querySelectorAll('[data-theme-option]');
+        options.forEach(option => {
+            const isActive = option.dataset.themeOption === savedTheme;
+            option.classList.toggle('theme-option--active', isActive);
+        });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initThemeDropdown);
+    } else {
+        initThemeDropdown();
+    }
+})();</script></div></div></div></div></div></div></header></div><main class="flex-1 px-4 py-8 pt-32"><div class="max-w-4xl mx-auto"><div class="flex items-center justify-between mb-6 pb-4 border-b border-zinc-200 dark:border-zinc-700"><h1 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Posts</h1><span class="text-sm text-zinc-600 dark:text-zinc-400 max-w-xs md:max-w-none text-right md:text-left">Thoughts on technology, and other science</span></div><div class="space-y-8 group/masonry"><div class="mb-4"><a href="/posts/2025-10-03-welcome-to-my-blog"><div class="flex flex-col bg-white/70 dark:bg-zinc-800/70 backdrop-blur-xl backdrop-saturate-150 rounded-2xl shadow-lg shadow-zinc-200/50 dark:shadow-zinc-950/50 border border-white/20 dark:border-zinc-700/50 overflow-hidden hover:shadow-md hover:shadow-teal-500/15 dark:hover:shadow-teal-400/15 hover:scale-[1.02] transition-shadow duration-[800ms] ease-in-out transition-transform duration-300 ease-out cursor-pointer card reveal-card group-[.masonry-small]/masonry:min-h-[180px] group-[.masonry-medium]/masonry:min-h-[200px] min-h-[220px]"><div class="flex flex-col flex-1 p-6"><div class="flex items-start justify-between mb-4"><span class="px-2.5 py-1 text-xs font-medium bg-zinc-100/80 dark:bg-zinc-700/80 backdrop-blur-sm rounded-full border border-zinc-200/50 dark:border-zinc-600/50">1 min read</span></div><div class="flex flex-col"><h3 class="text-lg font-semibold mb-2 transition-colors">Welcome to my Blog</h3><div class="flex flex-wrap gap-2 mb-3"><span class="px-2.5 py-1 text-xs font-medium bg-zinc-100/80 dark:bg-zinc-700/80 backdrop-blur-sm rounded-full border border-zinc-200/50 dark:border-zinc-600/50">#Personal</span><span class="px-2.5 py-1 text-xs font-medium bg-zinc-100/80 dark:bg-zinc-700/80 backdrop-blur-sm rounded-full border border-zinc-200/50 dark:border-zinc-600/50">#Writing</span></div><p class="text-sm flex-1 mb-4">A new place for me to write about whatever crosses my mind, from technology to physics. Beginning a new blog is a wonderful step for me articulating ideas in a written format.</p><div class="mt-auto pt-6"><span class="text-sm font-semibold text-teal-600 dark:text-teal-400 self-end px-4 py-2 bg-teal-50/80 dark:bg-teal-950/30 backdrop-blur-sm rounded-full border border-teal-200/50 dark:border-teal-800/50">Read more →</span></div></div></div></div></a></div><script>// Card scroll animations
+(function() {
+    if (window.cardAnimationsInitialized) return;
+    window.cardAnimationsInitialized = true;
+
+    // Check for prefers-reduced-motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+        // Skip animations if user prefers reduced motion
+        const cards = document.querySelectorAll('.reveal-card');
+        cards.forEach(card => {
+            card.classList.add('in-view');
+            card.style.opacity = '1';
+            card.style.transform = 'none';
+        });
+        return;
+    }
+
+    let lastScrollTop = 0;
+    let scrollVelocity = 0;
+    let isScrollingFast = false;
+    let scrollTimeout;
+
+    window.addEventListener('scroll', () => {
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        scrollVelocity = Math.abs(currentScrollTop - lastScrollTop);
+        lastScrollTop = currentScrollTop;
+        isScrollingFast = scrollVelocity > 20;
+
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            isScrollingFast = false;
+            scrollVelocity = 0;
+        }, 150);
+    }, { passive: true });
+
+    const observerOptions = {
+        threshold: 0.25,
+        rootMargin: '0px 0px 100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const card = entry.target;
+                if (isScrollingFast || scrollVelocity > 50) {
+                    card.style.transition = 'opacity 0.15s ease-out, transform 0.15s ease-out';
+                    card.style.transitionDelay = '0s';
+                } else if (scrollVelocity > 15) {
+                    card.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                    const baseDelay = parseFloat(card.dataset.originalDelay || '0');
+                    card.style.transitionDelay = `${baseDelay * 0.5}s`;
+                }
+                card.classList.add('in-view');
+            }
+        });
+    }, observerOptions);
+
+    const cards = document.querySelectorAll('.reveal-card');
+    cards.forEach((card, index) => {
+        const originalDelay = index * 0.1;
+        card.style.transitionDelay = `${originalDelay}s`;
+        card.dataset.originalDelay = originalDelay.toString();
+        observer.observe(card);
+    });
+})();
+
+// Animated photo stack
+(function() {
+    if (window.photoStackInitialized) return;
+    window.photoStackInitialized = true;
+
+    // Random number between min and max
+    function random(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    // Initialize all photo stacks
+    function initPhotoStacks() {
+        const stacks = document.querySelectorAll('[data-photo-stack]');
+
+        stacks.forEach(stack => {
+            const photos = stack.querySelectorAll('.photo-stack-item');
+            if (photos.length === 0) return;
+
+            // Initialize positions with random rotations
+            // Use smaller angles for wider photos (w-64)
+            const isWidePhoto = photos[0].offsetWidth > 150;
+            const maxRotation = isWidePhoto ? 8 : 15;
+
+            photos.forEach((photo, index) => {
+                const rotation = random(-maxRotation, maxRotation);
+                const zIndex = photos.length - index;
+
+                photo.style.zIndex = zIndex;
+                photo.style.transform = `rotate(${rotation}deg) translateY(${index * 2}px)`;
+            });
+
+            // Start animation cycle
+            let currentIndex = 0;
+
+            setInterval(() => {
+                const topPhoto = photos[currentIndex % photos.length];
+                const nextIndex = (currentIndex + 1) % photos.length;
+
+                // Random direction: left or right
+                const direction = Math.random() > 0.5 ? 1 : -1;
+                const xOffset = direction * 200;
+
+                // Get current rotation from the top photo
+                const currentRotation = parseFloat(topPhoto.style.transform.match(/rotate\(([^)]+)\)/)?.[1] || 0);
+
+                // Animate top photo swiping away
+                topPhoto.style.transition = 'transform 0.7175s ease-out, opacity 0.7175s ease-out';
+                topPhoto.style.transform = `translateX(${xOffset}px) rotate(${currentRotation * 1.5}deg)`;
+                topPhoto.style.opacity = '0';
+
+                // After swipe animation completes, reset and fade in at back
+                setTimeout(() => {
+                    // Prepare the new rotation for the back
+                    const rotation = random(-maxRotation, maxRotation);
+
+                    // Update z-indices so the swiped photo will appear at the back
+                    photos.forEach((photo, index) => {
+                        const adjustedIndex = (index - nextIndex + photos.length) % photos.length;
+                        photo.style.zIndex = photos.length - adjustedIndex;
+                    });
+
+                    // Move swiped photo to back position instantly (no transition)
+                    topPhoto.style.transition = 'none';
+                    topPhoto.style.zIndex = '1';
+                    topPhoto.style.transform = `rotate(${rotation}deg) translateY(${(photos.length - 1) * 2}px)`;
+                    topPhoto.style.opacity = '0';
+
+                    // Force reflow
+                    topPhoto.offsetHeight;
+
+                    // Fade in at the back
+                    topPhoto.style.transition = 'opacity 0.7175s ease-in';
+                    topPhoto.style.opacity = '1';
+                }, 718); // Start halfway through the swipe
+
+                currentIndex = nextIndex;
+            }, 1538);
+        });
+    }
+
+    // Wait for images to load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPhotoStacks);
+    } else {
+        initPhotoStacks();
+    }
+})();</script></div></div></main><footer class="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl backdrop-saturate-150 border-t border-zinc-200/50 dark:border-zinc-700/50 px-4 py-8 space-y-4 flex flex-col items-center justify-center shadow-[0_-4px_16px_rgba(0,0,0,0.04)] dark:shadow-[0_-4px_16px_rgba(0,0,0,0.2)]"><div class="flex flex-row items-center gap-3 flex-wrap justify-center"><a href="/posts" class="p-3 text-zinc-600 hover:text-teal-600 dark:text-zinc-400 dark:hover:text-teal-400 rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/50 dark:border-zinc-700/50 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-lg"><i data-lucide="file-text" class="w-5 h-5"></i></a><a href="mailto:hello@maclong.uk" class="p-3 text-zinc-600 hover:text-teal-600 dark:text-zinc-400 dark:hover:text-teal-400 rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/50 dark:border-zinc-700/50 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-lg"><i data-lucide="mail" class="w-5 h-5"></i></a><a href="https://github.com/maclong9" class="p-3 text-zinc-600 hover:text-teal-600 dark:text-zinc-400 dark:hover:text-teal-400 rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/50 dark:border-zinc-700/50 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-lg" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i></a></div><div class="text-zinc-500 dark:text-zinc-400 text-sm font-medium"><span>© 2025 </span><a href="https://maclong.uk" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors duration-300 font-semibold">Mac Long</a><span>.</span></div></footer><div id="mini-player" class="fixed bottom-4 left-4 z-50 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl backdrop-saturate-150 border border-zinc-200 dark:border-zinc-800 rounded-lg shadow-lg hidden transition-all duration-300"><div id="mini-player-collapsed" class="w-14 h-14 cursor-pointer relative" onclick="toggleMiniPlayer()"><div class="w-full h-full rounded-lg bg-gradient-to-br from-teal-400 to-blue-500 flex items-center justify-center"><i data-lucide="disc" class="w-6 h-6 text-white/70"></i></div><div class="absolute top-1 right-1 w-2 h-2 bg-teal-500 rounded-full animate-pulse"></div></div><div id="mini-player-expanded" class="hidden p-3 space-y-2 w-72"><div class="flex items-center justify-between mb-2"><span class="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Now Playing</span><button onclick="toggleMiniPlayer()" class="p-1 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Collapse"><i data-lucide="chevron-down" class="w-4 h-4"></i></button></div><div class="flex items-center gap-3"><div class="w-12 h-12 rounded-lg bg-gradient-to-br from-teal-400 to-blue-500 flex items-center justify-center flex-shrink-0"><i data-lucide="disc" class="w-5 h-5 text-white/70"></i></div><div class="flex-1 min-w-0"><div id="mini-player-title" class="font-medium text-zinc-900 dark:text-zinc-100 truncate text-sm"></div><div id="mini-player-artist" class="text-xs text-zinc-600 dark:text-zinc-400 truncate"></div></div></div><div class="flex items-center justify-center gap-2 pt-2"><button onclick="previousTrack()" class="p-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Previous"><i data-lucide="skip-back" class="w-4 h-4"></i></button><button onclick="togglePlayPause()" id="mini-play-pause-btn" class="p-2 bg-teal-500 hover:bg-teal-600 text-white rounded-full transition-colors" aria-label="Play/Pause"><i data-lucide="play" id="mini-play-pause-icon" class="w-5 h-5"></i></button><button onclick="nextTrack()" class="p-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Next"><i data-lucide="skip-forward" class="w-4 h-4"></i></button><button onclick="closeMiniPlayer()" class="p-2 text-zinc-600 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-400 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Stop"><i data-lucide="x" class="w-4 h-4"></i></button></div><a href="/music" class="block text-center text-xs text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors pt-2 border-t border-zinc-200 dark:border-zinc-700">Open Music</a></div></div><script>
+  function toggleMiniPlayer() {
+    const collapsed = document.getElementById('mini-player-collapsed');
+    const expanded = document.getElementById('mini-player-expanded');
+
+    if (collapsed && expanded) {
+      collapsed.classList.toggle('hidden');
+      expanded.classList.toggle('hidden');
+    }
+  }
+
+  function closeMiniPlayer() {
+    const miniPlayer = document.getElementById('mini-player');
+    if (audioPlayer) {
+      audioPlayer.pause();
+      audioPlayer.src = '';
+    }
+    if (miniPlayer) {
+      miniPlayer.classList.add('hidden');
+    }
+    // Also hide the now playing bar if on music page
+    const nowPlayingBar = document.getElementById('now-playing-bar');
+    if (nowPlayingBar) {
+      nowPlayingBar.classList.add('hidden');
+    }
+  }
+
+  // Sync mini player with main player
+  function updateMiniPlayer(title, artist, isPlaying) {
+    const miniPlayerTitle = document.getElementById('mini-player-title');
+    const miniPlayerArtist = document.getElementById('mini-player-artist');
+    const miniPlayer = document.getElementById('mini-player');
+    const miniPlayPauseIcon = document.getElementById('mini-play-pause-icon');
+
+    if (miniPlayerTitle) miniPlayerTitle.textContent = title;
+    if (miniPlayerArtist) miniPlayerArtist.textContent = artist;
+
+    // Show mini player on non-music pages
+    if (miniPlayer && !window.location.pathname.includes('/music')) {
+      miniPlayer.classList.remove('hidden');
+    }
+
+    // Update play/pause icon
+    if (miniPlayPauseIcon) {
+      miniPlayPauseIcon.setAttribute('data-lucide', isPlaying ? 'pause' : 'play');
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    }
+  }
+</script></div></body><script src="/public/js/icons.js"></script></html>

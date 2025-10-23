@@ -1,0 +1,840 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Barre Scales - Mac Long Tools | Mac Long</title><meta property="og:title" content="Barre Scales - Mac Long Tools | Mac Long"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Swift, TypeScript, React and TailwindCSS developer crafting clean code and efficient forward-thinking solutions"><meta property="og:description" content="Swift, TypeScript, React and TailwindCSS developer crafting clean code and efficient forward-thinking solutions"><meta property="og:image" content="/public/og.jpg"><meta name="author" content="Mac Long"><meta name="keywords" content="software engineer, swift developer, react developer, typescript, tailwindcss, frontend development, skateboarding, punk rock, web development, iOS development"><link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>👨‍💻</text></svg>"><script type="application/ld+json">
+{"sameAs":["https://github.com/maclong9","https://orcid.org/0009-0002-4180-3822"],"givenName":"Mac","@context":"https://schema.org","jobTitle":"Software Engineer","email":"hello@maclong.uk","name":"Mac Long","familyName":"Long","url":"https://maclong.uk","@type":"Person","image":"https://avatars.githubusercontent.com/u/115668288?v=4"}
+</script><script src="/public/js/theme.js"></script><script src="https://unpkg.com/@tailwindcss/browser@4"></script><script src="https://unpkg.com/lucide@latest"></script><meta name="generator" content="WebUI" /><link rel="preload" href="https://unpkg.com/@tailwindcss/browser@4" as="script"><link rel="preload" href="https://unpkg.com/lucide@latest" as="script"><link rel="dns-prefetch" href="//unpkg.com"><link rel="preload" href="/public/js/theme.js" as="script"><link rel="preload" href="/public/js/icons.js" as="script"><style type="text/tailwindcss">
+    @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+    /* Apple-style glassmorphism support */
+    @supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
+        .backdrop-blur-sm {
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .backdrop-blur-xl {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .backdrop-saturate-150 {
+            backdrop-filter: saturate(1.5);
+            -webkit-backdrop-filter: saturate(1.5);
+        }
+    }
+
+    /* Smooth transitions for interactive elements */
+    select, button, a {
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Respect user's motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+
+        .reveal-card {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+        }
+
+        .game-of-life-bg {
+            display: none !important;
+        }
+    }
+
+    /* Hero animations */
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes avatarFadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    /* Progressive Reveal for Cards */
+    .reveal-card {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .reveal-card.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .reveal-card:nth-child(1) { transition-delay: 0.1s; }
+    .reveal-card:nth-child(2) { transition-delay: 0.2s; }
+    .reveal-card:nth-child(3) { transition-delay: 0.3s; }
+    .reveal-card:nth-child(4) { transition-delay: 0.4s; }
+    .reveal-card:nth-child(5) { transition-delay: 0.5s; }
+    .reveal-card:nth-child(6) { transition-delay: 0.6s; }
+    
+    /* Hero element animations */
+    .hero-avatar {
+        animation: avatarFadeIn 0.8s ease-out;
+    }
+    
+    .hero-name {
+        animation: slideUp 0.6s ease-out 0.1s both;
+    }
+    
+    .hero-description {
+        animation: slideUp 0.6s ease-out 0.3s both;
+    }
+    
+    /* Typography enhancements for prose content */
+    .prose {
+        @apply text-zinc-700 dark:text-zinc-300 leading-relaxed;
+    }
+
+    /* Paragraph spacing */
+    .prose p {
+        @apply mb-6 leading-relaxed;
+    }
+
+    /* Headings */
+    .prose h1 {
+        @apply text-3xl font-bold text-zinc-900 dark:text-zinc-100 mt-12 mb-6 leading-tight;
+    }
+    
+    .prose h2 {
+        @apply text-2xl font-bold text-zinc-900 dark:text-zinc-100 mt-10 mb-4 leading-tight;
+    }
+    
+    .prose h3 {
+        @apply text-xl font-semibold text-zinc-900 dark:text-zinc-100 mt-8 mb-3 leading-snug;
+    }
+    
+    .prose h4 {
+        @apply text-lg font-semibold text-zinc-900 dark:text-zinc-100 mt-6 mb-2;
+    }
+
+    /* Lists */
+    .prose ul {
+        @apply mb-6 pl-6;
+    }
+    
+    .prose ol {
+        @apply mb-6 pl-6;
+    }
+    
+    .prose li {
+        @apply mb-2 leading-relaxed;
+    }
+    
+    .prose ul > li {
+        @apply relative;
+    }
+    
+    .prose ul > li::before {
+        content: "•";
+        @apply absolute -left-4 text-teal-600 dark:text-teal-400 font-medium;
+    }
+
+    /* Links */
+    .prose a {
+        @apply text-teal-600 dark:text-teal-400 underline decoration-teal-600/30 underline-offset-2 transition-colors;
+    }
+    
+    .prose a:hover {
+        @apply text-teal-700 dark:text-teal-300 decoration-teal-600/60;
+    }
+
+    /* Blockquotes */
+    .prose blockquote {
+        @apply border-l-4 border-teal-500 pl-6 py-4 my-6 italic text-zinc-600 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-800/50 rounded-r;
+    }
+    
+    .prose blockquote p {
+        @apply mb-3 last:mb-0;
+    }
+    
+    /* Blockquote attribution styling */
+    .prose blockquote cite,
+    .prose blockquote footer {
+        @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3 block;
+    }
+    
+    .prose blockquote cite::before,
+    .prose blockquote footer::before {
+        content: "— ";
+    }
+    
+    /* Attribution styling for marked elements */
+    .prose blockquote p.attribution {
+        @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3;
+    }
+
+    /* Code block styling */
+    .prose pre {
+        @apply bg-zinc-900 dark:bg-zinc-800 text-zinc-100 text-xs p-4 rounded-lg my-6 overflow-x-auto;
+        border: 1px solid theme(colors.zinc.700);
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+    
+    .prose code:not(pre code) {
+        @apply bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-1.5 py-0.5 rounded text-sm font-mono;
+    }
+
+    /* Tables */
+    .prose table {
+        @apply w-full my-6 border-collapse;
+    }
+    
+    .prose th {
+        @apply bg-zinc-50 dark:bg-zinc-800 font-semibold text-left px-4 py-3 border-b border-zinc-200 dark:border-zinc-700;
+    }
+    
+    .prose td {
+        @apply px-4 py-3 border-b border-zinc-100 dark:border-zinc-800;
+    }
+
+    /* Horizontal rules */
+    .prose hr {
+        @apply my-8 border-t-2 border-zinc-200 dark:border-zinc-700;
+    }
+
+    /* Strong and emphasis */
+    .prose strong {
+        @apply font-semibold text-zinc-900 dark:text-zinc-100;
+    }
+    
+    .prose em {
+        @apply italic text-zinc-600 dark:text-zinc-400;
+    }
+
+    /* Accessibility: Hide animations on reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        .reveal-card,
+        .hero-avatar,
+        .hero-name, 
+        .hero-description {
+            animation: none !important;
+            transition: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    }
+</style></head><body class="bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 transition-colors duration-300"><div><style>
+  @keyframes jellyIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.8) translateY(-10px);
+    }
+    50% {
+      transform: scale(1.05) translateY(0);
+    }
+    70% {
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  #mobile-menu-overlay.active {
+    display: block;
+    animation: jellyIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+</style><div id="mobile-menu-container" data-mobile-menu-open="false"><div id="mobile-menu-overlay" class="fixed top-[90px] right-4 w-80 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-6rem)] overflow-y-auto bg-white/95 dark:bg-zinc-900/95 backdrop-blur-2xl backdrop-saturate-150 border border-white/50 dark:border-white/10 px-6 py-6 shadow-2xl rounded-2xl z-50 hidden" data-mobile-menu="closed"><div class="flex flex-col space-y-3"><div class="flex items-center justify-between mb-4"><span class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Navigation</span><button id="mobile-menu-close" class="p-1 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 cursor-pointer" aria-label="Close menu" onclick="closeSlideMenu('mobile-menu-container')"><i data-lucide="x" class="w-5 h-5"></i></button></div><a href="/posts" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="posts"><i data-lucide="file-text" class="w-5 h-5"></i><span>Posts</span></a><a href="/photos" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="photos"><i data-lucide="camera" class="w-5 h-5"></i><span>Photos</span></a><a href="/music" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="music"><i data-lucide="music" class="w-5 h-5"></i><span>Music</span></a><a href="/tools" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="tools"><i data-lucide="wrench" class="w-5 h-5"></i><span>Tools</span></a><a href="mailto:hello@maclong.uk" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="email"><i data-lucide="mail" class="w-5 h-5"></i><span>Email</span></a><a href="https://github.com/maclong9" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="github" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i><span>GitHub</span></a><div class="border-t border-white/20 dark:border-zinc-700/50 pt-4 mt-2"><span class="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-3">Theme</span><div class="space-y-1"><button id="theme-system-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-sm transition-all cursor-pointer text-zinc-700 dark:text-zinc-200" data-theme-option="system" onclick="if (window.setTheme) window.setTheme('system'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="monitor" class="w-4 h-4"></i><span>System</span></div></button><button id="theme-light-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-sm transition-all cursor-pointer text-zinc-700 dark:text-zinc-200" data-theme-option="light" onclick="if (window.setTheme) window.setTheme('light'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="sun" class="w-4 h-4"></i><span>Light</span></div></button><button id="theme-dark-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-sm transition-all cursor-pointer text-zinc-700 dark:text-zinc-200" data-theme-option="dark" onclick="if (window.setTheme) window.setTheme('dark'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="moon" class="w-4 h-4"></i><span>Dark</span></div></button></div></div></div></div></div></div><div class="min-h-screen flex flex-col"><div><header id="main-header" class="fixed top-4 left-1/2 -translate-x-1/2 max-w-5xl w-[calc(100%-2rem)] bg-white/60 dark:bg-zinc-900/60 backdrop-blur-2xl backdrop-saturate-200 border border-white/40 dark:border-zinc-700/40 rounded-2xl px-6 py-4 z-30 transition-all duration-300 ease-in-out shadow-lg shadow-zinc-900/5 dark:shadow-zinc-950/30"><div class="flex items-center justify-between"><div class="flex items-center justify-between w-full"><nav class="md:hidden flex items-center space-x-1 text-sm"><a href="/" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Mac Long</a><span class="text-zinc-400 dark:text-zinc-600">/</span><a href="/tools" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Tools</a></nav><nav class="hidden md:flex items-center space-x-1 text-sm"><a href="/" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Mac Long</a><span class="text-zinc-400 dark:text-zinc-600">/</span><a href="/tools" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Tools</a><span class="text-zinc-400 dark:text-zinc-600">/</span><span class="text-zinc-900 dark:text-zinc-100 font-medium">Barre Scales</span></nav><div class="flex items-center space-x-4"><div class="flex items-center space-x-1"><div class="md:hidden"><button id="mobile-menu-button" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Menu" onclick="toggleSlideMenu('mobile-menu-container')"><i data-lucide="chevron-left" class="w-5 h-5"></i></button></div><div class="hidden md:flex items-center space-x-2"><a href="/posts" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Posts"><i data-lucide="file-text" class="w-5 h-5"></i></a><a href="/photos" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Photos"><i data-lucide="camera" class="w-5 h-5"></i></a><a href="/music" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Music"><i data-lucide="music" class="w-5 h-5"></i></a><a href="/tools" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Tools"><i data-lucide="wrench" class="w-5 h-5"></i></a><div class="w-px h-6 bg-zinc-300/50 dark:bg-zinc-600/50"></div><a href="mailto:hello@maclong.uk" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Email"><i data-lucide="mail" class="w-5 h-5"></i></a><a href="https://github.com/maclong9" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="View GitHub Profile" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i></a><div class="relative theme-dropdown"><button class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Change theme" data-theme-toggle="true"><i data-lucide="sun" data-theme-icon="light" class="hidden"></i><i data-lucide="moon" data-theme-icon="dark" class="hidden"></i><i data-lucide="palette" data-theme-icon="system" class="w-5 h-5"></i></button><div class="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-zinc-800 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700 py-1 z-50 theme-dropdown-menu hidden"><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="system"><i data-lucide="palette" class="w-5 h-5"></i><span>System</span></button><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="light"><i data-lucide="sun" class="w-5 h-5"></i><span>Light</span></button><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="dark"><i data-lucide="moon" class="w-5 h-5"></i><span>Dark</span></button></div><style>.theme-dropdown-menu {
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transition: opacity 0.15s ease-in, transform 0.15s ease-in;
+}
+
+.theme-dropdown-menu--open {
+    display: block;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.theme-option--active {
+    background-color: rgb(240 253 250);
+    color: rgb(15 118 110);
+}
+
+.dark .theme-option--active {
+    background-color: rgb(19 78 74 / 0.5);
+    color: rgb(94 234 212);
+}
+
+[data-theme-icon] {
+    display: none;
+}
+
+[data-theme-icon="system"] {
+    display: block;
+}</style><script>// Theme dropdown functionality - colocated with ThemeDropdown component
+(function() {
+    let isDropdownOpen = false;
+
+    function initThemeDropdown() {
+        // Listen for dropdown toggle
+        document.addEventListener('click', (e) => {
+            const themeToggle = e.target.closest('[data-theme-toggle]');
+            if (themeToggle) {
+                e.preventDefault();
+                toggleDropdown();
+                return;
+            }
+
+            const themeOption = e.target.closest('[data-theme-option]');
+            if (themeOption) {
+                e.preventDefault();
+                const theme = themeOption.dataset.themeOption;
+                setTheme(theme);
+                updateDropdownUI();
+                closeDropdown();
+                return;
+            }
+
+            // Close dropdown when clicking outside
+            if (isDropdownOpen && !e.target.closest('.theme-dropdown')) {
+                closeDropdown();
+            }
+        });
+
+        // Update UI initially and when theme changes
+        updateDropdownUI();
+        
+        // Listen for theme changes
+        const observer = new MutationObserver(() => {
+            updateDropdownUI();
+        });
+        
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
+    }
+
+    function toggleDropdown() {
+        if (isDropdownOpen) {
+            closeDropdown();
+        } else {
+            openDropdown();
+        }
+    }
+
+    function openDropdown() {
+        isDropdownOpen = true;
+        const dropdown = document.querySelector('.theme-dropdown-menu');
+        if (dropdown) {
+            dropdown.classList.remove('hidden');
+            // Trigger reflow for animation
+            dropdown.offsetHeight;
+            dropdown.classList.add('theme-dropdown-menu--open');
+        }
+    }
+
+    function closeDropdown() {
+        isDropdownOpen = false;
+        const dropdown = document.querySelector('.theme-dropdown-menu');
+        if (dropdown) {
+            dropdown.classList.remove('theme-dropdown-menu--open');
+            setTimeout(() => {
+                if (!isDropdownOpen) {
+                    dropdown.classList.add('hidden');
+                }
+            }, 200); // Match transition duration
+        }
+    }
+
+    function setTheme(theme) {
+        localStorage.setItem('theme', theme);
+        updateTheme();
+    }
+
+    function updateTheme() {
+        const themePreference = localStorage.getItem('theme') || 'system';
+        let actualTheme = 'light';
+
+        if (themePreference === 'dark') {
+            actualTheme = 'dark';
+        } else if (themePreference === 'system') {
+            actualTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        document.documentElement.setAttribute('data-theme', actualTheme);
+    }
+
+    function updateDropdownUI() {
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        
+        // Update theme toggle button icon
+        const toggleIcons = document.querySelectorAll('[data-theme-icon]');
+        toggleIcons.forEach(icon => {
+            icon.style.display = 'none';
+        });
+        
+        const activeIcon = document.querySelector(`[data-theme-icon="${savedTheme}"]`);
+        if (activeIcon) {
+            activeIcon.style.display = 'block';
+        }
+
+        // Update dropdown options
+        const options = document.querySelectorAll('[data-theme-option]');
+        options.forEach(option => {
+            const isActive = option.dataset.themeOption === savedTheme;
+            option.classList.toggle('theme-option--active', isActive);
+        });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initThemeDropdown);
+    } else {
+        initThemeDropdown();
+    }
+})();</script></div></div></div></div></div></div></header></div><main class="flex-1 px-4 py-8 pt-32"><div class="max-w-4xl mx-auto"><div class="flex items-center justify-between mb-6 pb-4 border-b border-zinc-200 dark:border-zinc-700"><div class="flex items-center gap-3"><span class="text-2xl">🎸</span><h1 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Barre Scales</h1></div><div class="flex items-center gap-2"><button class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Toggle progressions" onclick="toggleProgressions()"><i data-lucide="layout-grid" class="w-5 h-5"></i></button><button class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Information" onclick="showInfo()"><i data-lucide="info" class="w-5 h-5"></i></button></div></div><div class="flex"><aside id="progressions-sidebar" class="fixed inset-y-0 left-0 top-0 z-60 w-full max-w-sm bg-white dark:bg-zinc-800 border-r border-zinc-200 rounded-md dark:border-zinc-700 lg:static lg:z-auto lg:max-w-80 lg:h-[616px] transform -translate-x-full transition-transform duration-300 ease-out lg:translate-x-0"><div class="flex flex-col h-full"><div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-700 p-4 flex-shrink-0"><div class="flex items-center justify-between mb-4"><h3 class="text-lg font-semibold">Chord Progressions</h3><button class="lg:hidden p-1 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200" onclick="hideProgressions()"><i data-lucide="x" class="w-5 h-5"></i></button></div><div class="mb-4"><h5 class="text-sm font-medium mb-2">Selection Order</h5><div id="degree-colors" class="grid grid-cols-2 sm:grid-cols-4 gap-2"></div></div></div><div id="progressions-list" class="flex-1 overflow-y-auto p-4 space-y-4 min-h-0 bg-white dark:bg-zinc-800 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-700"></div></div></aside><div class="flex-1 flex flex-col transition-all duration-300 ease-out"><div class="flex-1 px-4"><div class="max-w-5xl mx-auto"><div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-700 mb-4 overflow-hidden"><div id="mobile-scale-view" class="block md:hidden"></div><div class="hidden md:block overflow-x-auto min-w-0"><table class="w-full"><thead class="bg-zinc-50 dark:bg-zinc-700"><tr><th class="px-4 py-3 text-center text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Degree</th><th class="px-4 py-3 text-center text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Note</th><th class="px-4 py-3 text-center text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Quality</th><th class="px-4 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">All Positions</th></tr></thead><tbody id="scale-table-body" class="divide-y divide-gray-200 dark:divide-gray-700"></tbody></table></div></div><div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-700 p-4"><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div><span class="block text-sm font-medium mb-3">Scale Type</span><div class="flex space-x-2"><button id="major-btn" class="px-4 py-2 rounded-lg transition-colors font-medium bg-teal-600 text-white" onclick="setScaleType('major')">Major</button><button id="minor-btn" class="px-4 py-2 rounded-lg transition-colors font-medium bg-gray-100 dark:bg-zinc-600 text-zinc-700 dark:text-zinc-300" onclick="setScaleType('minor')">Minor</button></div></div><div><span class="block text-sm font-medium mb-3">Root Note</span><div id="note-buttons" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2"></div></div></div></div></div></div></div></div><div id="info-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden" data-onclick="hideInfo()"><div class="bg-white dark:bg-zinc-800 rounded-lg max-w-2xl w-full p-6" data-onclick="event.stopPropagation()"><div class="flex items-center justify-between mb-4"><h2 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">How to Use the Barre Scales Tool</h2><button class="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200" onclick="hideInfo()"><i data-lucide="x" class="w-6 h-6"></i></button></div><div class="text-zinc-700 dark:text-zinc-300 space-y-4"><p><strong>Getting Started:</strong> Choose your scale type (Major or Minor) and root note using the controls at the bottom. The table will update to show all seven degrees of the scale with their corresponding barre chord positions.</p><p><strong>Selecting Degrees:</strong> Click on any row in the table to select that degree. Selected degrees are highlighted and numbered in order of selection. This helps you build chord progressions step by step.</p><p><strong>Chord Progressions:</strong> Use the sidebar (toggle with the grid icon) to explore common chord progressions. Click any progression to automatically select the corresponding degrees in the correct order.</p><p><strong>Barre Positions:</strong> Each degree shows multiple barre chord shapes with fret positions. The letters in parentheses indicate the root string: (E) = E-string shapes, (A) = A-string shapes, (D) = D-string shapes.</p><p><strong>Color Coding:</strong> Chord qualities are color-coded (Major = green, Minor = blue, Diminished = red).</p></div></div></div><script>// Barre Scales App
+(function() {
+    let state = {
+        sidebarOpen: false,
+        showInfoModal: false,
+        scaleType: 'major',
+        rootNote: 'C',
+        selectedDegrees: [],
+        degrees: [1, 2, 3, 4, 5, 6, 7],
+        notes: ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'],
+        currentScale: null
+    };
+
+    const progressions = [
+        {
+            name: 'The Eternal Circle',
+            formula: 'I - V - vi - IV',
+            degrees: '1 - 5 - 6 - 4',
+            description: 'The heartbeat of popular music. Creates natural resolution while keeping listeners suspended in familiar comfort.',
+            examples: '"Let It Be", "Don\'t Stop Believin\'"'
+        },
+        {
+            name: 'The Descent',
+            formula: 'vi - IV - I - V',
+            degrees: '6 - 4 - 1 - 5',
+            description: 'Starting in minor territory, falling toward home. Creates emotional weight through gravitational pull downward.',
+            examples: '"Creep", "With or Without You"'
+        },
+        {
+            name: 'The Jazz Standard',
+            formula: 'ii - V - I',
+            degrees: '2 - 5 - 1',
+            description: 'The lingua franca of jazz. Simple, sophisticated, endlessly renewable. Tension builds and releases naturally.',
+            examples: '"Autumn Leaves", "All The Things You Are"'
+        },
+        {
+            name: 'The Folk Circle',
+            formula: 'I - vi - ii - V',
+            degrees: '1 - 6 - 2 - 5',
+            description: 'Cyclical and storytelling. Each chord leans into the next like verses in an ancient ballad.',
+            examples: '"Stand By Me", "Blue Moon"'
+        },
+        {
+            name: 'The 50s Progression',
+            formula: 'I - vi - IV - V',
+            degrees: '1 - 6 - 4 - 5',
+            description: 'The sound of classic rock and roll. Cheerful and nostalgic, this progression dominated the doo-wop era and remains timeless.',
+            examples: '"Earth Angel", "Blue Moon"'
+        },
+        {
+            name: 'The Classic Turnaround',
+            formula: 'I - IV - V - I',
+            degrees: '1 - 4 - 5 - 1',
+            description: 'The most fundamental progression in Western music. Strong departure from home, building tension, then perfect resolution back to the tonic.',
+            examples: '"Louie Louie", "Wild Thing"'
+        }
+    ];
+
+    // Scale formulas and chord qualities
+    const majorScaleIntervals = [0, 2, 4, 5, 7, 9, 11];
+    const minorScaleIntervals = [0, 2, 3, 5, 7, 8, 10];
+    const majorChordQualities = ['Major', 'Minor', 'Minor', 'Major', 'Major', 'Minor', 'Diminished'];
+    const minorChordQualities = ['Minor', 'Diminished', 'Major', 'Minor', 'Minor', 'Major', 'Major'];
+
+    // Global functions
+    window.toggleProgressions = function() {
+        state.sidebarOpen = !state.sidebarOpen;
+        const sidebar = document.getElementById('progressions-sidebar');
+        if (sidebar) {
+            if (state.sidebarOpen) {
+                sidebar.classList.remove('-translate-x-full');
+                sidebar.classList.add('translate-x-0');
+            } else {
+                sidebar.classList.remove('translate-x-0');
+                sidebar.classList.add('-translate-x-full');
+            }
+        }
+    };
+
+    window.hideProgressions = function() {
+        state.sidebarOpen = false;
+        const sidebar = document.getElementById('progressions-sidebar');
+        if (sidebar) {
+            sidebar.classList.remove('translate-x-0');
+            sidebar.classList.add('-translate-x-full');
+        }
+    };
+
+    window.showInfo = function() {
+        state.showInfoModal = true;
+        const modal = document.getElementById('info-modal');
+        if (modal) modal.classList.remove('hidden');
+    };
+
+    window.hideInfo = function() {
+        state.showInfoModal = false;
+        const modal = document.getElementById('info-modal');
+        if (modal) modal.classList.add('hidden');
+    };
+
+    window.setScaleType = function(type) {
+        state.scaleType = type;
+        updateScaleButtons();
+        updateScale();
+    };
+
+    window.setRootNote = function(note) {
+        state.rootNote = note;
+        updateNoteButtons();
+        updateScale();
+    };
+
+    window.toggleDegree = function(index) {
+        if (state.selectedDegrees.includes(index)) {
+            state.selectedDegrees = state.selectedDegrees.filter(d => d !== index);
+        } else {
+            state.selectedDegrees.push(index);
+        }
+        renderScale();
+    };
+
+    window.selectProgression = function(progression) {
+        const degreeNumbers = progression.degrees.split(' - ').map(d => parseInt(d.trim()) - 1);
+        state.selectedDegrees = [...degreeNumbers];
+        renderScale();
+        hideProgressions();
+    };
+
+    // Helper functions
+    function getNoteFromOffset(rootNote, semitones, scaleType) {
+        const noteIndex = state.notes.indexOf(rootNote);
+        const targetIndex = (noteIndex + semitones) % 12;
+        let resultNote = state.notes[targetIndex];
+        
+        if (scaleType === 'minor') {
+            const enharmonicMap = {
+                'C#': 'D♭', 'D#': 'E♭', 'F#': 'G♭', 'G#': 'A♭', 'A#': 'B♭'
+            };
+            if (enharmonicMap[resultNote]) {
+                resultNote = enharmonicMap[resultNote];
+            }
+        }
+        return resultNote;
+    }
+
+    function getBarrePositions(note) {
+        const normalizedNote = note.replace('♯', '#').replace('♭', 'b');
+        const flatToSharpMap = { Db: 'C#', Eb: 'D#', Gb: 'F#', Ab: 'G#', Bb: 'A#' };
+        const lookupNote = flatToSharpMap[normalizedNote] || normalizedNote;
+        const chromaticIndex = state.notes.indexOf(lookupNote);
+
+        const basePositions = [
+            { C: '3rd (A)', A: '3rd (A)', G: '10th (E)', E: '8th (E)', D: '10th (D)' },
+            { C: '4th (A)', A: '4th (A)', G: '11th (E)', E: '9th (E)', D: '11th (D)' },
+            { C: '5th (A)', A: '5th (A)', G: '12th (E)', E: '10th (E)', D: '12th (D)' },
+            { C: '6th (A)', A: '6th (A)', G: '1st (E)', E: '11th (E)', D: '1st (D)' },
+            { C: '7th (A)', A: '7th (A)', G: '2nd (E)', E: '12th (E)', D: '2nd (D)' },
+            { C: '8th (A)', A: '8th (A)', G: '3rd (E)', E: '1st (E)', D: '3rd (D)' },
+            { C: '9th (A)', A: '9th (A)', G: '4th (E)', E: '2nd (E)', D: '4th (D)' },
+            { C: '10th (A)', A: '10th (A)', G: '5th (E)', E: '3rd (E)', D: '5th (D)' },
+            { C: '11th (A)', A: '11th (A)', G: '6th (E)', E: '4th (E)', D: '6th (D)' },
+            { C: '12th (A)', A: '12th (A)', G: '7th (E)', E: '5th (E)', D: '7th (D)' },
+            { C: '1st (A)', A: '1st (A)', G: '8th (E)', E: '6th (E)', D: '8th (D)' },
+            { C: '2nd (A)', A: '2nd (A)', G: '9th (E)', E: '7th (E)', D: '9th (D)' }
+        ];
+        return basePositions[chromaticIndex] || basePositions[0];
+    }
+
+    function generateScale(scaleType, rootNote) {
+        const intervals = scaleType === 'major' ? majorScaleIntervals : minorScaleIntervals;
+        const qualities = scaleType === 'major' ? majorChordQualities : minorChordQualities;
+
+        const degrees = intervals.map((interval, index) => {
+            const note = getNoteFromOffset(rootNote, interval, scaleType);
+            return {
+                degree: ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th'][index],
+                note: note,
+                positions: getBarrePositions(note),
+                quality: qualities[index]
+            };
+        });
+
+        return {
+            name: `${rootNote} ${scaleType.charAt(0).toUpperCase() + scaleType.slice(1)}`,
+            degrees: degrees
+        };
+    }
+
+    function updateScale() {
+        state.currentScale = generateScale(state.scaleType, state.rootNote);
+        renderScale();
+    }
+
+    function updateScaleButtons() {
+        const majorBtn = document.getElementById('major-btn');
+        const minorBtn = document.getElementById('minor-btn');
+        
+        if (majorBtn && minorBtn) {
+            if (state.scaleType === 'major') {
+                majorBtn.className = majorBtn.className.replace(/bg-gray-\d+|bg-zinc-\d+|text-zinc-\d+/g, '') + ' bg-teal-600 text-white';
+                minorBtn.className = minorBtn.className.replace(/bg-teal-\d+|text-white/g, '') + ' bg-gray-100 dark:bg-zinc-600 text-zinc-700 dark:text-zinc-300';
+            } else {
+                minorBtn.className = minorBtn.className.replace(/bg-gray-\d+|bg-zinc-\d+|text-zinc-\d+/g, '') + ' bg-teal-600 text-white';
+                majorBtn.className = majorBtn.className.replace(/bg-teal-\d+|text-white/g, '') + ' bg-gray-100 dark:bg-zinc-600 text-zinc-700 dark:text-zinc-300';
+            }
+        }
+    }
+
+    function updateNoteButtons() {
+        const container = document.getElementById('note-buttons');
+        if (!container) return;
+
+        container.innerHTML = state.notes.map(note => `
+            <button onclick="setRootNote('${note}')" 
+                class="px-2 py-2 rounded-lg transition-colors font-medium text-sm ${
+                    state.rootNote === note 
+                        ? 'bg-teal-600 text-white' 
+                        : 'bg-gray-100 dark:bg-zinc-600 text-zinc-700 dark:text-zinc-300 hover:bg-gray-200 dark:hover:bg-gray-500'
+                }">
+                ${note.replace('#', '♯')}
+            </button>
+        `).join('');
+    }
+
+    function renderScale() {
+        if (!state.currentScale) return;
+
+        const tableBody = document.getElementById('scale-table-body');
+        if (tableBody) {
+            tableBody.innerHTML = state.currentScale.degrees.map((degree, index) => {
+                const isSelected = state.selectedDegrees.includes(index);
+                const selectionOrder = state.selectedDegrees.indexOf(index) + 1;
+                
+                const qualityClass = degree.quality === 'Major' ? 'chord-major' :
+                                   degree.quality === 'Minor' ? 'chord-minor' : 'chord-diminished';
+
+                const positionsHtml = Object.entries(degree.positions).map(([shape, position]) => 
+                    `<span class="inline-flex items-center justify-center px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-600 text-gray-800 dark:text-zinc-200 rounded text-center whitespace-nowrap">
+                        ${shape}: ${position}
+                    </span>`
+                ).join('');
+
+                return `
+                    <tr onclick="toggleDegree(${index})" class="cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors ${isSelected ? 'bg-blue-50 dark:bg-blue-900/20' : ''}">
+                        <td class="px-4 py-4 text-center">
+                            <div class="flex items-center justify-center space-x-2">
+                                <div class="degree-${index + 1} w-6 h-6 border border-zinc-300 dark:border-zinc-600 flex items-center justify-center text-sm font-semibold text-gray-900">
+                                    ${isSelected ? selectionOrder : ''}
+                                </div>
+                                <span class="text-sm font-medium text-zinc-900 dark:text-zinc-100">${degree.degree}</span>
+                            </div>
+                        </td>
+                        <td class="px-4 py-4 text-center">
+                            <span class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">${degree.note}</span>
+                        </td>
+                        <td class="px-4 py-4 text-center">
+                            <span class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full text-gray-900 ${qualityClass}">${degree.quality}</span>
+                        </td>
+                        <td class="px-4 py-4">
+                            <div class="flex flex-wrap gap-1">${positionsHtml}</div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Mobile card view rendering
+        const mobileView = document.getElementById('mobile-scale-view');
+        if (mobileView) {
+            mobileView.innerHTML = state.currentScale.degrees.map((degree, index) => {
+                const isSelected = state.selectedDegrees.includes(index);
+                const selectionOrder = state.selectedDegrees.indexOf(index) + 1;
+                
+                const qualityClass = degree.quality === 'Major' ? 'chord-major' :
+                                   degree.quality === 'Minor' ? 'chord-minor' : 'chord-diminished';
+
+                const positionsHtml = Object.entries(degree.positions).map(([shape, position]) => 
+                    `<span class="inline-block px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-zinc-600 text-gray-800 dark:text-zinc-200 mr-1 mb-1">
+                        ${shape}: ${position}
+                    </span>`
+                ).join('');
+
+                return `
+                    <div onclick="toggleDegree(${index})" class="bg-white dark:bg-zinc-700 rounded-lg border border-zinc-200 dark:border-zinc-600 p-4 mb-3 cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-600 transition-colors ${isSelected ? 'ring-2 ring-blue-500 dark:ring-blue-400' : ''}">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="degree-${index + 1} w-8 h-8 rounded border border-zinc-300 dark:border-zinc-600 flex items-center justify-center text-sm font-semibold text-gray-900">
+                                    ${isSelected ? selectionOrder : ''}
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-zinc-500 dark:text-zinc-400">${degree.degree}</div>
+                                    <div class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">${degree.note}</div>
+                                </div>
+                            </div>
+                            <span class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full text-gray-900 ${qualityClass}">${degree.quality}</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Barre Positions</div>
+                            <div class="flex flex-wrap">${positionsHtml}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+    }
+
+    function renderProgressions() {
+        const container = document.getElementById('progressions-list');
+        if (!container) return;
+
+        container.innerHTML = progressions.map((progression, index) => `
+            <div onclick='selectProgression(${JSON.stringify(progression)})'
+                 class="bg-zinc-50 dark:bg-zinc-700 rounded-lg p-4 border border-zinc-200 dark:border-zinc-600 cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-600 transition-colors">
+                <h4 class="font-semibold text-zinc-900 dark:text-zinc-100 mb-2">${progression.name}</h4>
+                <div class="text-sm text-zinc-600 dark:text-zinc-300 mb-1">${progression.formula}</div>
+                <div class="text-sm text-zinc-500 dark:text-zinc-400 mb-2">${progression.degrees}</div>
+                <p class="text-xs text-zinc-600 dark:text-zinc-400 mb-2">${progression.description}</p>
+                <div class="text-xs text-zinc-500 dark:text-zinc-500">${progression.examples}</div>
+                <div class="mt-2 text-xs text-teal-600 dark:text-teal-400 font-medium">
+                    Click to select this progression →
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderDegreeColors() {
+        const container = document.getElementById('degree-colors');
+        if (!container) return;
+
+        container.innerHTML = state.degrees.map((degree, index) => `
+            <div class="flex items-center space-x-1 text-xs">
+                <div class="degree-${index + 1} w-4 h-4 rounded border border-zinc-300 dark:border-zinc-600 flex items-center justify-center">
+                    <span class="text-gray-900 font-bold ${state.selectedDegrees.includes(index) ? '' : 'hidden'}">
+                        ${state.selectedDegrees.indexOf(index) + 1}
+                    </span>
+                </div>
+                <span class="text-zinc-600 dark:text-zinc-400">
+                    ${degree}${index === 0 ? 'st' : index === 1 ? 'nd' : index === 2 ? 'rd' : 'th'}
+                </span>
+            </div>
+        `).join('');
+    }
+
+    // Initialize app
+    function init() {
+        updateScale();
+        updateNoteButtons();
+        renderProgressions();
+        renderDegreeColors();
+        
+        setTimeout(() => {
+            if (window.lucide) lucide.createIcons();
+        }, 100);
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+    
+    // Add custom CSS for degree colors
+    const customCSS = `
+        .chord-major { background-color: #86efac; }
+        .chord-minor { background-color: #93c5fd; }  
+        .chord-diminished { background-color: #fca5a5; }
+        
+        .degree-1 { background-color: #fca5a5; }
+        .degree-2 { background-color: #fed7aa; }
+        .degree-3 { background-color: #fef3c7; }
+        .degree-4 { background-color: #86efac; }
+        .degree-5 { background-color: #a7f3d0; }
+        .degree-6 { background-color: #93c5fd; }
+        .degree-7 { background-color: #d8b4fe; }
+    `;
+    
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = customCSS;
+    document.head.appendChild(styleSheet);
+})();</script></div></main><footer class="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl backdrop-saturate-150 border-t border-zinc-200/50 dark:border-zinc-700/50 px-4 py-8 space-y-4 flex flex-col items-center justify-center shadow-[0_-4px_16px_rgba(0,0,0,0.04)] dark:shadow-[0_-4px_16px_rgba(0,0,0,0.2)]"><div class="flex flex-row items-center gap-3 flex-wrap justify-center"><a href="/posts" class="p-3 text-zinc-600 hover:text-teal-600 dark:text-zinc-400 dark:hover:text-teal-400 rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/50 dark:border-zinc-700/50 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-lg"><i data-lucide="file-text" class="w-5 h-5"></i></a><a href="mailto:hello@maclong.uk" class="p-3 text-zinc-600 hover:text-teal-600 dark:text-zinc-400 dark:hover:text-teal-400 rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/50 dark:border-zinc-700/50 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-lg"><i data-lucide="mail" class="w-5 h-5"></i></a><a href="https://github.com/maclong9" class="p-3 text-zinc-600 hover:text-teal-600 dark:text-zinc-400 dark:hover:text-teal-400 rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/50 dark:border-zinc-700/50 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-lg" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i></a></div><div class="text-zinc-500 dark:text-zinc-400 text-sm font-medium"><span>© 2025 </span><a href="https://maclong.uk" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors duration-300 font-semibold">Mac Long</a><span>.</span></div></footer><div id="mini-player" class="fixed bottom-4 left-4 z-50 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl backdrop-saturate-150 border border-zinc-200 dark:border-zinc-800 rounded-lg shadow-lg hidden transition-all duration-300"><div id="mini-player-collapsed" class="w-14 h-14 cursor-pointer relative" onclick="toggleMiniPlayer()"><div class="w-full h-full rounded-lg bg-gradient-to-br from-teal-400 to-blue-500 flex items-center justify-center"><i data-lucide="disc" class="w-6 h-6 text-white/70"></i></div><div class="absolute top-1 right-1 w-2 h-2 bg-teal-500 rounded-full animate-pulse"></div></div><div id="mini-player-expanded" class="hidden p-3 space-y-2 w-72"><div class="flex items-center justify-between mb-2"><span class="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Now Playing</span><button onclick="toggleMiniPlayer()" class="p-1 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Collapse"><i data-lucide="chevron-down" class="w-4 h-4"></i></button></div><div class="flex items-center gap-3"><div class="w-12 h-12 rounded-lg bg-gradient-to-br from-teal-400 to-blue-500 flex items-center justify-center flex-shrink-0"><i data-lucide="disc" class="w-5 h-5 text-white/70"></i></div><div class="flex-1 min-w-0"><div id="mini-player-title" class="font-medium text-zinc-900 dark:text-zinc-100 truncate text-sm"></div><div id="mini-player-artist" class="text-xs text-zinc-600 dark:text-zinc-400 truncate"></div></div></div><div class="flex items-center justify-center gap-2 pt-2"><button onclick="previousTrack()" class="p-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Previous"><i data-lucide="skip-back" class="w-4 h-4"></i></button><button onclick="togglePlayPause()" id="mini-play-pause-btn" class="p-2 bg-teal-500 hover:bg-teal-600 text-white rounded-full transition-colors" aria-label="Play/Pause"><i data-lucide="play" id="mini-play-pause-icon" class="w-5 h-5"></i></button><button onclick="nextTrack()" class="p-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Next"><i data-lucide="skip-forward" class="w-4 h-4"></i></button><button onclick="closeMiniPlayer()" class="p-2 text-zinc-600 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-400 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Stop"><i data-lucide="x" class="w-4 h-4"></i></button></div><a href="/music" class="block text-center text-xs text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors pt-2 border-t border-zinc-200 dark:border-zinc-700">Open Music</a></div></div><script>
+  function toggleMiniPlayer() {
+    const collapsed = document.getElementById('mini-player-collapsed');
+    const expanded = document.getElementById('mini-player-expanded');
+
+    if (collapsed && expanded) {
+      collapsed.classList.toggle('hidden');
+      expanded.classList.toggle('hidden');
+    }
+  }
+
+  function closeMiniPlayer() {
+    const miniPlayer = document.getElementById('mini-player');
+    if (audioPlayer) {
+      audioPlayer.pause();
+      audioPlayer.src = '';
+    }
+    if (miniPlayer) {
+      miniPlayer.classList.add('hidden');
+    }
+    // Also hide the now playing bar if on music page
+    const nowPlayingBar = document.getElementById('now-playing-bar');
+    if (nowPlayingBar) {
+      nowPlayingBar.classList.add('hidden');
+    }
+  }
+
+  // Sync mini player with main player
+  function updateMiniPlayer(title, artist, isPlaying) {
+    const miniPlayerTitle = document.getElementById('mini-player-title');
+    const miniPlayerArtist = document.getElementById('mini-player-artist');
+    const miniPlayer = document.getElementById('mini-player');
+    const miniPlayPauseIcon = document.getElementById('mini-play-pause-icon');
+
+    if (miniPlayerTitle) miniPlayerTitle.textContent = title;
+    if (miniPlayerArtist) miniPlayerArtist.textContent = artist;
+
+    // Show mini player on non-music pages
+    if (miniPlayer && !window.location.pathname.includes('/music')) {
+      miniPlayer.classList.remove('hidden');
+    }
+
+    // Update play/pause icon
+    if (miniPlayPauseIcon) {
+      miniPlayPauseIcon.setAttribute('data-lucide', isPlaying ? 'pause' : 'play');
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    }
+  }
+</script></div></body><script src="/public/js/icons.js"></script></html>

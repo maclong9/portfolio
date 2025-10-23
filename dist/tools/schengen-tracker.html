@@ -1,0 +1,1063 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Schengen 90/180 Tracker - Mac Long Tools | Mac Long</title><meta property="og:title" content="Schengen 90/180 Tracker - Mac Long Tools | Mac Long"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Swift, TypeScript, React and TailwindCSS developer crafting clean code and efficient forward-thinking solutions"><meta property="og:description" content="Swift, TypeScript, React and TailwindCSS developer crafting clean code and efficient forward-thinking solutions"><meta property="og:image" content="/public/og.jpg"><meta name="author" content="Mac Long"><meta name="keywords" content="software engineer, swift developer, react developer, typescript, tailwindcss, frontend development, skateboarding, punk rock, web development, iOS development"><link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>👨‍💻</text></svg>"><script type="application/ld+json">
+{"email":"hello@maclong.uk","image":"https://avatars.githubusercontent.com/u/115668288?v=4","@type":"Person","familyName":"Long","jobTitle":"Software Engineer","sameAs":["https://github.com/maclong9","https://orcid.org/0009-0002-4180-3822"],"@context":"https://schema.org","givenName":"Mac","url":"https://maclong.uk","name":"Mac Long"}
+</script><script src="/public/js/theme.js"></script><script src="https://unpkg.com/@tailwindcss/browser@4"></script><script src="https://unpkg.com/lucide@latest"></script><meta name="generator" content="WebUI" /><link rel="preload" href="https://unpkg.com/@tailwindcss/browser@4" as="script"><link rel="preload" href="https://unpkg.com/lucide@latest" as="script"><link rel="dns-prefetch" href="//unpkg.com"><link rel="preload" href="/public/js/theme.js" as="script"><link rel="preload" href="/public/js/icons.js" as="script"><style type="text/tailwindcss">
+    @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+    /* Apple-style glassmorphism support */
+    @supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
+        .backdrop-blur-sm {
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .backdrop-blur-xl {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .backdrop-saturate-150 {
+            backdrop-filter: saturate(1.5);
+            -webkit-backdrop-filter: saturate(1.5);
+        }
+    }
+
+    /* Smooth transitions for interactive elements */
+    select, button, a {
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Respect user's motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+
+        .reveal-card {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+        }
+
+        .game-of-life-bg {
+            display: none !important;
+        }
+    }
+
+    /* Hero animations */
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes avatarFadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    /* Progressive Reveal for Cards */
+    .reveal-card {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .reveal-card.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .reveal-card:nth-child(1) { transition-delay: 0.1s; }
+    .reveal-card:nth-child(2) { transition-delay: 0.2s; }
+    .reveal-card:nth-child(3) { transition-delay: 0.3s; }
+    .reveal-card:nth-child(4) { transition-delay: 0.4s; }
+    .reveal-card:nth-child(5) { transition-delay: 0.5s; }
+    .reveal-card:nth-child(6) { transition-delay: 0.6s; }
+    
+    /* Hero element animations */
+    .hero-avatar {
+        animation: avatarFadeIn 0.8s ease-out;
+    }
+    
+    .hero-name {
+        animation: slideUp 0.6s ease-out 0.1s both;
+    }
+    
+    .hero-description {
+        animation: slideUp 0.6s ease-out 0.3s both;
+    }
+    
+    /* Typography enhancements for prose content */
+    .prose {
+        @apply text-zinc-700 dark:text-zinc-300 leading-relaxed;
+    }
+
+    /* Paragraph spacing */
+    .prose p {
+        @apply mb-6 leading-relaxed;
+    }
+
+    /* Headings */
+    .prose h1 {
+        @apply text-3xl font-bold text-zinc-900 dark:text-zinc-100 mt-12 mb-6 leading-tight;
+    }
+    
+    .prose h2 {
+        @apply text-2xl font-bold text-zinc-900 dark:text-zinc-100 mt-10 mb-4 leading-tight;
+    }
+    
+    .prose h3 {
+        @apply text-xl font-semibold text-zinc-900 dark:text-zinc-100 mt-8 mb-3 leading-snug;
+    }
+    
+    .prose h4 {
+        @apply text-lg font-semibold text-zinc-900 dark:text-zinc-100 mt-6 mb-2;
+    }
+
+    /* Lists */
+    .prose ul {
+        @apply mb-6 pl-6;
+    }
+    
+    .prose ol {
+        @apply mb-6 pl-6;
+    }
+    
+    .prose li {
+        @apply mb-2 leading-relaxed;
+    }
+    
+    .prose ul > li {
+        @apply relative;
+    }
+    
+    .prose ul > li::before {
+        content: "•";
+        @apply absolute -left-4 text-teal-600 dark:text-teal-400 font-medium;
+    }
+
+    /* Links */
+    .prose a {
+        @apply text-teal-600 dark:text-teal-400 underline decoration-teal-600/30 underline-offset-2 transition-colors;
+    }
+    
+    .prose a:hover {
+        @apply text-teal-700 dark:text-teal-300 decoration-teal-600/60;
+    }
+
+    /* Blockquotes */
+    .prose blockquote {
+        @apply border-l-4 border-teal-500 pl-6 py-4 my-6 italic text-zinc-600 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-800/50 rounded-r;
+    }
+    
+    .prose blockquote p {
+        @apply mb-3 last:mb-0;
+    }
+    
+    /* Blockquote attribution styling */
+    .prose blockquote cite,
+    .prose blockquote footer {
+        @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3 block;
+    }
+    
+    .prose blockquote cite::before,
+    .prose blockquote footer::before {
+        content: "— ";
+    }
+    
+    /* Attribution styling for marked elements */
+    .prose blockquote p.attribution {
+        @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3;
+    }
+
+    /* Code block styling */
+    .prose pre {
+        @apply bg-zinc-900 dark:bg-zinc-800 text-zinc-100 text-xs p-4 rounded-lg my-6 overflow-x-auto;
+        border: 1px solid theme(colors.zinc.700);
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+    
+    .prose code:not(pre code) {
+        @apply bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-1.5 py-0.5 rounded text-sm font-mono;
+    }
+
+    /* Tables */
+    .prose table {
+        @apply w-full my-6 border-collapse;
+    }
+    
+    .prose th {
+        @apply bg-zinc-50 dark:bg-zinc-800 font-semibold text-left px-4 py-3 border-b border-zinc-200 dark:border-zinc-700;
+    }
+    
+    .prose td {
+        @apply px-4 py-3 border-b border-zinc-100 dark:border-zinc-800;
+    }
+
+    /* Horizontal rules */
+    .prose hr {
+        @apply my-8 border-t-2 border-zinc-200 dark:border-zinc-700;
+    }
+
+    /* Strong and emphasis */
+    .prose strong {
+        @apply font-semibold text-zinc-900 dark:text-zinc-100;
+    }
+    
+    .prose em {
+        @apply italic text-zinc-600 dark:text-zinc-400;
+    }
+
+    /* Accessibility: Hide animations on reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        .reveal-card,
+        .hero-avatar,
+        .hero-name, 
+        .hero-description {
+            animation: none !important;
+            transition: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    }
+</style></head><body class="bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 transition-colors duration-300"><div><style>
+  @keyframes jellyIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.8) translateY(-10px);
+    }
+    50% {
+      transform: scale(1.05) translateY(0);
+    }
+    70% {
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  #mobile-menu-overlay.active {
+    display: block;
+    animation: jellyIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+</style><div id="mobile-menu-container" data-mobile-menu-open="false"><div id="mobile-menu-overlay" class="fixed top-[90px] right-4 w-80 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-6rem)] overflow-y-auto bg-white/95 dark:bg-zinc-900/95 backdrop-blur-2xl backdrop-saturate-150 border border-white/50 dark:border-white/10 px-6 py-6 shadow-2xl rounded-2xl z-50 hidden" data-mobile-menu="closed"><div class="flex flex-col space-y-3"><div class="flex items-center justify-between mb-4"><span class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Navigation</span><button id="mobile-menu-close" class="p-1 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 cursor-pointer" aria-label="Close menu" onclick="closeSlideMenu('mobile-menu-container')"><i data-lucide="x" class="w-5 h-5"></i></button></div><a href="/posts" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="posts"><i data-lucide="file-text" class="w-5 h-5"></i><span>Posts</span></a><a href="/photos" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="photos"><i data-lucide="camera" class="w-5 h-5"></i><span>Photos</span></a><a href="/music" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="music"><i data-lucide="music" class="w-5 h-5"></i><span>Music</span></a><a href="/tools" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="tools"><i data-lucide="wrench" class="w-5 h-5"></i><span>Tools</span></a><a href="mailto:hello@maclong.uk" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="email"><i data-lucide="mail" class="w-5 h-5"></i><span>Email</span></a><a href="https://github.com/maclong9" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="github" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i><span>GitHub</span></a><div class="border-t border-white/20 dark:border-zinc-700/50 pt-4 mt-2"><span class="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-3">Theme</span><div class="space-y-1"><button id="theme-system-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-sm transition-all cursor-pointer text-zinc-700 dark:text-zinc-200" data-theme-option="system" onclick="if (window.setTheme) window.setTheme('system'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="monitor" class="w-4 h-4"></i><span>System</span></div></button><button id="theme-light-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-sm transition-all cursor-pointer text-zinc-700 dark:text-zinc-200" data-theme-option="light" onclick="if (window.setTheme) window.setTheme('light'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="sun" class="w-4 h-4"></i><span>Light</span></div></button><button id="theme-dark-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-sm transition-all cursor-pointer text-zinc-700 dark:text-zinc-200" data-theme-option="dark" onclick="if (window.setTheme) window.setTheme('dark'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="moon" class="w-4 h-4"></i><span>Dark</span></div></button></div></div></div></div></div></div><div class="min-h-screen flex flex-col"><div><header id="main-header" class="fixed top-4 left-1/2 -translate-x-1/2 max-w-5xl w-[calc(100%-2rem)] bg-white/60 dark:bg-zinc-900/60 backdrop-blur-2xl backdrop-saturate-200 border border-white/40 dark:border-zinc-700/40 rounded-2xl px-6 py-4 z-30 transition-all duration-300 ease-in-out shadow-lg shadow-zinc-900/5 dark:shadow-zinc-950/30"><div class="flex items-center justify-between"><div class="flex items-center justify-between w-full"><nav class="md:hidden flex items-center space-x-1 text-sm"><a href="/" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Mac Long</a><span class="text-zinc-400 dark:text-zinc-600">/</span><a href="/tools" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Tools</a></nav><nav class="hidden md:flex items-center space-x-1 text-sm"><a href="/" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Mac Long</a><span class="text-zinc-400 dark:text-zinc-600">/</span><a href="/tools" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Tools</a><span class="text-zinc-400 dark:text-zinc-600">/</span><span class="text-zinc-900 dark:text-zinc-100 font-medium">Schengen Tracker</span></nav><div class="flex items-center space-x-4"><div class="flex items-center space-x-1"><div class="md:hidden"><button id="mobile-menu-button" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Menu" onclick="toggleSlideMenu('mobile-menu-container')"><i data-lucide="chevron-left" class="w-5 h-5"></i></button></div><div class="hidden md:flex items-center space-x-2"><a href="/posts" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Posts"><i data-lucide="file-text" class="w-5 h-5"></i></a><a href="/photos" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Photos"><i data-lucide="camera" class="w-5 h-5"></i></a><a href="/music" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Music"><i data-lucide="music" class="w-5 h-5"></i></a><a href="/tools" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Tools"><i data-lucide="wrench" class="w-5 h-5"></i></a><div class="w-px h-6 bg-zinc-300/50 dark:bg-zinc-600/50"></div><a href="mailto:hello@maclong.uk" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Email"><i data-lucide="mail" class="w-5 h-5"></i></a><a href="https://github.com/maclong9" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="View GitHub Profile" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i></a><div class="relative theme-dropdown"><button class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Change theme" data-theme-toggle="true"><i data-lucide="sun" data-theme-icon="light" class="hidden"></i><i data-lucide="moon" data-theme-icon="dark" class="hidden"></i><i data-lucide="palette" data-theme-icon="system" class="w-5 h-5"></i></button><div class="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-zinc-800 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700 py-1 z-50 theme-dropdown-menu hidden"><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="system"><i data-lucide="palette" class="w-5 h-5"></i><span>System</span></button><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="light"><i data-lucide="sun" class="w-5 h-5"></i><span>Light</span></button><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="dark"><i data-lucide="moon" class="w-5 h-5"></i><span>Dark</span></button></div><style>.theme-dropdown-menu {
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transition: opacity 0.15s ease-in, transform 0.15s ease-in;
+}
+
+.theme-dropdown-menu--open {
+    display: block;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.theme-option--active {
+    background-color: rgb(240 253 250);
+    color: rgb(15 118 110);
+}
+
+.dark .theme-option--active {
+    background-color: rgb(19 78 74 / 0.5);
+    color: rgb(94 234 212);
+}
+
+[data-theme-icon] {
+    display: none;
+}
+
+[data-theme-icon="system"] {
+    display: block;
+}</style><script>// Theme dropdown functionality - colocated with ThemeDropdown component
+(function() {
+    let isDropdownOpen = false;
+
+    function initThemeDropdown() {
+        // Listen for dropdown toggle
+        document.addEventListener('click', (e) => {
+            const themeToggle = e.target.closest('[data-theme-toggle]');
+            if (themeToggle) {
+                e.preventDefault();
+                toggleDropdown();
+                return;
+            }
+
+            const themeOption = e.target.closest('[data-theme-option]');
+            if (themeOption) {
+                e.preventDefault();
+                const theme = themeOption.dataset.themeOption;
+                setTheme(theme);
+                updateDropdownUI();
+                closeDropdown();
+                return;
+            }
+
+            // Close dropdown when clicking outside
+            if (isDropdownOpen && !e.target.closest('.theme-dropdown')) {
+                closeDropdown();
+            }
+        });
+
+        // Update UI initially and when theme changes
+        updateDropdownUI();
+        
+        // Listen for theme changes
+        const observer = new MutationObserver(() => {
+            updateDropdownUI();
+        });
+        
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
+    }
+
+    function toggleDropdown() {
+        if (isDropdownOpen) {
+            closeDropdown();
+        } else {
+            openDropdown();
+        }
+    }
+
+    function openDropdown() {
+        isDropdownOpen = true;
+        const dropdown = document.querySelector('.theme-dropdown-menu');
+        if (dropdown) {
+            dropdown.classList.remove('hidden');
+            // Trigger reflow for animation
+            dropdown.offsetHeight;
+            dropdown.classList.add('theme-dropdown-menu--open');
+        }
+    }
+
+    function closeDropdown() {
+        isDropdownOpen = false;
+        const dropdown = document.querySelector('.theme-dropdown-menu');
+        if (dropdown) {
+            dropdown.classList.remove('theme-dropdown-menu--open');
+            setTimeout(() => {
+                if (!isDropdownOpen) {
+                    dropdown.classList.add('hidden');
+                }
+            }, 200); // Match transition duration
+        }
+    }
+
+    function setTheme(theme) {
+        localStorage.setItem('theme', theme);
+        updateTheme();
+    }
+
+    function updateTheme() {
+        const themePreference = localStorage.getItem('theme') || 'system';
+        let actualTheme = 'light';
+
+        if (themePreference === 'dark') {
+            actualTheme = 'dark';
+        } else if (themePreference === 'system') {
+            actualTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        document.documentElement.setAttribute('data-theme', actualTheme);
+    }
+
+    function updateDropdownUI() {
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        
+        // Update theme toggle button icon
+        const toggleIcons = document.querySelectorAll('[data-theme-icon]');
+        toggleIcons.forEach(icon => {
+            icon.style.display = 'none';
+        });
+        
+        const activeIcon = document.querySelector(`[data-theme-icon="${savedTheme}"]`);
+        if (activeIcon) {
+            activeIcon.style.display = 'block';
+        }
+
+        // Update dropdown options
+        const options = document.querySelectorAll('[data-theme-option]');
+        options.forEach(option => {
+            const isActive = option.dataset.themeOption === savedTheme;
+            option.classList.toggle('theme-option--active', isActive);
+        });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initThemeDropdown);
+    } else {
+        initThemeDropdown();
+    }
+})();</script></div></div></div></div></div></div></header></div><main class="flex-1 px-4 py-8 pt-32"><div class="max-w-4xl mx-auto"><div class="flex items-center justify-between mb-6 pb-4 border-b border-zinc-200 dark:border-zinc-700"><div class="flex items-center gap-3"><span class="text-2xl">✈️</span><h1 class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Schengen Tracker</h1></div><div class="flex items-center gap-2"><button class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Share data" onclick="showShare()"><i data-lucide="share-2" class="w-5 h-5"></i></button><button class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Information" onclick="showInfo()"><i data-lucide="info" class="w-5 h-5"></i></button></div></div><div class="max-w-4xl mx-auto"><div id="shared-banner" class="mb-6 p-4 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg hidden"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><i data-lucide="share-2" class="text-orange-600 dark:text-orange-400 w-5 h-5"></i><span class="text-orange-800 dark:text-orange-200 font-medium">Viewing shared data - changes won&#39;t be saved automatically</span></div><button class="bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium" onclick="saveToMyData()"><span>Save to My Data</span></button></div></div><div id="error-banner" class="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg hidden"><span id="error-text" class="text-red-800 dark:text-red-200 text-sm"></span></div><div class="grid md:grid-cols-2 gap-6 mb-6"><div class="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 p-6 rounded-lg"><h2 class="text-lg font-semibold mb-2">Days Used</h2><span id="days-used" class="text-4xl font-bold text-teal-600 dark:text-teal-400">0/90</span></div><div id="days-remaining-card" class="bg-white dark:bg-zinc-800 border p-6 rounded-lg border-green-200 dark:border-green-800"><h2 class="text-lg font-semibold mb-2">Days Remaining</h2><div class="flex items-baseline gap-2"><span id="days-remaining" class="text-4xl font-bold text-green-600 dark:text-green-400">90</span><div id="days-after-planned-container" class="flex items-baseline gap-1 ml-1 hidden"><span id="days-after-planned" class="text-4xl font-bold text-green-600 dark:text-green-400 opacity-60"></span><div class="relative group"><i data-lucide="info" class="w-4 h-4 text-green-600 dark:text-green-400 opacity-60 cursor-help"></i><div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-zinc-900 dark:bg-zinc-700 text-white text-xs rounded py-1 px-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10"><span>After planned trips</span></div></div></div></div></div></div><div class="bg-white dark:bg-zinc-800 p-6 rounded-lg border border-zinc-200 dark:border-zinc-700 mb-6 flex flex-col"><h2 class="text-lg font-semibold mb-2">Next Reset Date</h2><span id="next-reset" class="text-2xl mb-4">No visits yet</span><span id="reset-description" class="text-sm text-zinc-600 dark:text-zinc-400 hidden">Your allowance will begin restoring on this date as your earliest visit falls outside the 180-day rolling window.</span><span id="reset-days" class="text-sm text-zinc-500 dark:text-zinc-500 mt-2 hidden"></span></div><div class="bg-white dark:bg-zinc-800 p-6 rounded-lg border border-zinc-200 dark:border-zinc-700 mb-6"><h2 class="text-xl font-semibold mb-4">Add New Visit</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"><div class="min-w-0"><span class="block text-sm font-medium mb-2">Entry Date</span><input type="date" id="entry-date" class="w-full max-w-full px-3 py-3 border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:focus:ring-teal-400 dark:focus:border-teal-400"></div><div class="min-w-0"><span class="block text-sm font-medium mb-2">Exit Date</span><input type="date" id="exit-date" class="w-full max-w-full px-3 py-3 border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:focus:ring-teal-400 dark:focus:border-teal-400"></div></div><div class="mb-4"><span class="block text-sm font-medium mb-2">Location</span><input type="text" id="location" name="location" list="schengen-countries" placeholder="e.g., Paris, France" class="w-full px-3 py-3 border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:focus:ring-teal-400 dark:focus:border-teal-400"><datalist id="schengen-countries"><option value="Austria"><option value="Belgium"><option value="Bulgaria"><option value="Croatia"><option value="Czech Republic"><option value="Denmark"><option value="Estonia"><option value="Finland"><option value="France"><option value="Germany"><option value="Greece"><option value="Hungary"><option value="Iceland"><option value="Italy"><option value="Latvia"><option value="Liechtenstein"><option value="Lithuania"><option value="Luxembourg"><option value="Malta"><option value="Netherlands"><option value="Norway"><option value="Poland"><option value="Portugal"><option value="Romania"><option value="Slovakia"><option value="Slovenia"><option value="Spain"><option value="Sweden"><option value="Switzerland"></datalist></div><button id="add-visit-btn" class="w-full bg-gray-400 dark:bg-zinc-600 text-white p-3 rounded-lg disabled:cursor-not-allowed flex items-center justify-center gap-2 font-medium transition-colors" onclick="addVisit()"><i data-lucide="plus" class="w-5 h-5"></i><span>Add Visit</span></button></div><div><h2 id="visits-header" class="text-xl font-semibold mb-4">Previous Visits (0)</h2><div id="empty-state" class="text-center py-12 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg"><i data-lucide="calendar" class="w-12 h-12 mx-auto mb-4 opacity-50"></i><p class="text-balance max-w-xs mx-auto">No visits recorded yet. Add your first visit above.</p></div><div id="visits-list" class="space-y-3 hidden"></div></div></div><div id="info-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden" data-onclick="hideInfo()"><div class="bg-white dark:bg-zinc-800 rounded-lg max-w-2xl w-full p-6" data-onclick="event.stopPropagation()"><div class="flex items-center justify-between mb-4"><h2 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">How the Schengen 90/180 Rule Works</h2><button class="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200" onclick="hideInfo()"><i data-lucide="x" class="w-6 h-6"></i></button></div><div class="text-zinc-700 dark:text-zinc-300 space-y-4"><p><strong>The Rule:</strong> You can stay up to 90 days within any 180-day period in the Schengen area. This is a rolling window that moves with each day.</p><p>The tracker calculates your usage based on visits within the last 180 days from today. Your allowance resets gradually as old visits fall outside the 180-day window.</p><p><strong>Next Reset:</strong> Shows when your earliest visit will fall outside the 180-day window, beginning to restore your allowance.</p><p><strong>Sharing:</strong> Generate a secure link to share your visit history with family, friends, or advisors. The link contains only your travel dates and locations.</p></div></div></div><div id="share-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden" data-onclick="hideShare()"><div class="bg-white dark:bg-zinc-800 rounded-lg max-w-md w-full p-6" data-onclick="event.stopPropagation()"><div class="flex items-center justify-between mb-4"><h2 class="text-xl font-semibold text-zinc-900 dark:text-zinc-100">Share Your Data</h2><button class="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200" onclick="hideShare()"><i data-lucide="x" class="w-6 h-6"></i></button></div><span class="text-zinc-600 dark:text-zinc-400 text-sm mb-4">Share your visit history with family, friends, or advisors</span><div class="space-y-3"><button class="w-full bg-teal-600 hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 text-white px-4 py-3 rounded-lg transition-colors flex items-center justify-center gap-2 font-medium" onclick="shareNatively()"><i data-lucide="share-2" class="w-4 h-4"></i><span>Share</span></button><button class="w-full bg-zinc-600 hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-zinc-600 text-white px-4 py-3 rounded-lg transition-colors font-medium" onclick="generateShareUrl()"><span>Generate Link</span></button><div id="share-url-container" class="space-y-2 hidden"><div class="flex items-center gap-2"><input type="text" id="share-url-input" readonly class="flex-1 p-2 border border-zinc-300 dark:border-zinc-600 bg-gray-50 dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded text-sm font-mono"><button id="copy-btn" class="bg-zinc-600 hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-zinc-600 text-white px-3 py-2 rounded transition-colors flex items-center gap-1" onclick="copyToClipboard()"><i data-lucide="copy" class="w-3.5 h-3.5"></i><span>Copy</span></button></div></div></div></div></div><script>// Schengen Tracker App
+(function() {
+    let state = {
+        visits: [],
+        shareUrl: '',
+        copied: false,
+        isSharedData: false,
+        error: '',
+        showInfoModal: false,
+        showShareModal: false,
+        daysUsed: 0,
+        daysRemaining: 90,
+        nextResetDate: null
+    };
+
+    // Global functions
+    window.showInfo = function() {
+        state.showInfoModal = true;
+        const modal = document.getElementById('info-modal');
+        if (modal) modal.classList.remove('hidden');
+    };
+
+    window.hideInfo = function() {
+        state.showInfoModal = false;
+        const modal = document.getElementById('info-modal');
+        if (modal) modal.classList.add('hidden');
+    };
+
+    window.showShare = function() {
+        state.showShareModal = true;
+        const modal = document.getElementById('share-modal');
+        if (modal) modal.classList.remove('hidden');
+    };
+
+    window.hideShare = function() {
+        state.showShareModal = false;
+        const modal = document.getElementById('share-modal');
+        if (modal) modal.classList.add('hidden');
+    };
+
+    window.addVisit = function() {
+        const entryDate = document.getElementById('entry-date').value;
+        const exitDate = document.getElementById('exit-date').value;
+        const location = document.getElementById('location').value;
+
+        if (!entryDate || !exitDate) return;
+
+        const entry = new Date(entryDate);
+        const exit = new Date(exitDate);
+
+        if (entry > exit) {
+            showError('Entry date must be before exit date');
+            return;
+        }
+
+        const newVisit = {
+            id: Date.now(),
+            entry: entryDate,
+            exit: exitDate,
+            location: location.trim() || 'Schengen Area',
+            days: Math.ceil((exit - entry) / (1000 * 60 * 60 * 24)) + 1,
+            isEditing: false
+        };
+
+        state.visits.push(newVisit);
+        state.visits.sort((a, b) => new Date(a.entry) - new Date(b.entry));
+        saveVisits();
+        updateCalculations();
+        updateFutureTripDisplay();
+
+        // Clear form
+        document.getElementById('entry-date').value = '';
+        document.getElementById('exit-date').value = '';
+        document.getElementById('location').value = '';
+
+        if (state.isSharedData) {
+            state.isSharedData = false;
+            updateSharedBanner();
+        }
+
+        renderVisits();
+        updateAddButton();
+    };
+
+    window.removeVisit = function(id) {
+        state.visits = state.visits.filter(visit => visit.id !== id);
+        saveVisits();
+        updateCalculations();
+        updateFutureTripDisplay();
+        
+        if (state.isSharedData) {
+            state.isSharedData = false;
+            updateSharedBanner();
+        }
+        
+        renderVisits();
+        updateFutureTripDisplay();
+    };
+
+    window.startEdit = function(id) {
+        const visit = state.visits.find(v => v.id === id);
+        if (visit) {
+            visit._backup = { entry: visit.entry, exit: visit.exit, location: visit.location };
+            visit.isEditing = true;
+            renderVisits();
+        }
+    };
+
+    window.cancelEdit = function(id) {
+        const visit = state.visits.find(v => v.id === id);
+        if (visit && visit._backup) {
+            visit.entry = visit._backup.entry;
+            visit.exit = visit._backup.exit;
+            visit.location = visit._backup.location;
+            delete visit._backup;
+            visit.isEditing = false;
+            renderVisits();
+        }
+    };
+
+    window.saveEdit = function(id) {
+        const visit = state.visits.find(v => v.id === id);
+        if (visit) {
+            const entryInput = document.querySelector(`#edit-entry-${id}`);
+            const exitInput = document.querySelector(`#edit-exit-${id}`);
+            const locationInput = document.querySelector(`#edit-location-${id}`);
+            
+            const entry = new Date(entryInput.value);
+            const exit = new Date(exitInput.value);
+            
+            if (entry > exit) {
+                showError('Entry date must be before exit date');
+                return;
+            }
+            
+            visit.entry = entryInput.value;
+            visit.exit = exitInput.value;
+            visit.location = locationInput.value;
+            visit.days = Math.ceil((exit - entry) / (1000 * 60 * 60 * 24)) + 1;
+            visit.isEditing = false;
+            delete visit._backup;
+            
+            saveVisits();
+            updateCalculations();
+            updateFutureTripDisplay();
+            renderVisits();
+        }
+    };
+
+    window.generateShareUrl = function() {
+        if (state.visits.length === 0) return;
+
+        try {
+            const encodedData = safeBase64Encode(state.visits);
+            const baseUrl = window.location.origin + window.location.pathname;
+            const url = `${baseUrl}?data=${encodedData}`;
+            state.shareUrl = url;
+            
+            const container = document.getElementById('share-url-container');
+            const input = document.getElementById('share-url-input');
+            if (container && input) {
+                input.value = url;
+                container.classList.remove('hidden');
+            }
+        } catch (error) {
+            console.error('Error generating share URL:', error);
+            showError('Failed to generate share link');
+        }
+    };
+
+    window.copyToClipboard = async function() {
+        if (!state.shareUrl) return;
+
+        try {
+            await navigator.clipboard.writeText(state.shareUrl);
+            state.copied = true;
+            const copyBtn = document.getElementById('copy-btn');
+            if (copyBtn) {
+                copyBtn.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5"></i><span>Copied!</span>';
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i data-lucide="copy" class="w-3.5 h-3.5"></i><span>Copy</span>';
+                    state.copied = false;
+                    if (window.lucide) lucide.createIcons();
+                }, 2000);
+            }
+            if (window.lucide) lucide.createIcons();
+        } catch (error) {
+            console.error('Failed to copy to clipboard:', error);
+            showError('Failed to copy link');
+        }
+    };
+
+    window.shareNatively = async function() {
+        if (state.visits.length === 0) return;
+
+        generateShareUrl();
+        if (!state.shareUrl) return;
+
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: 'My Schengen Travel History',
+                    text: 'Check out my Schengen 90/180 travel tracker data',
+                    url: state.shareUrl
+                });
+            } catch (error) {
+                console.log('Native share cancelled or failed:', error);
+                await copyToClipboard();
+            }
+        } else {
+            await copyToClipboard();
+        }
+    };
+
+    window.saveToMyData = function() {
+        state.isSharedData = false;
+        saveVisits();
+        updateSharedBanner();
+    };
+
+    // Helper functions
+    function showError(message) {
+        state.error = message;
+        const banner = document.getElementById('error-banner');
+        const text = document.getElementById('error-text');
+        if (banner && text) {
+            text.textContent = message;
+            banner.classList.remove('hidden');
+            setTimeout(() => {
+                banner.classList.add('hidden');
+                state.error = '';
+            }, 5000);
+        }
+    }
+
+    function safeBase64Encode(data) {
+        try {
+            const jsonString = JSON.stringify(data);
+            const utf8Bytes = new TextEncoder().encode(jsonString);
+            const binaryString = Array.from(utf8Bytes, byte => String.fromCharCode(byte)).join('');
+            return btoa(binaryString);
+        } catch (error) {
+            console.error('Base64 encoding error:', error);
+            throw new Error('Failed to encode data');
+        }
+    }
+
+    function safeBase64Decode(encodedData) {
+        try {
+            const binaryString = atob(encodedData);
+            const bytes = new Uint8Array(binaryString.length);
+            for (let i = 0; i < binaryString.length; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            const jsonString = new TextDecoder().decode(bytes);
+            return JSON.parse(jsonString);
+        } catch (error) {
+            console.error('Base64 decoding error:', error);
+            throw new Error('Failed to decode data');
+        }
+    }
+
+    function loadVisits() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const sharedData = urlParams.get('data');
+
+        if (sharedData) {
+            try {
+                const decodedData = safeBase64Decode(sharedData);
+                state.visits = decodedData;
+                state.isSharedData = true;
+            } catch (error) {
+                console.error('Invalid shared data:', error);
+                showError('Invalid shared data in URL');
+                const savedVisits = localStorage.getItem('schengen-visits');
+                if (savedVisits) {
+                    state.visits = JSON.parse(savedVisits);
+                }
+            }
+        } else {
+            const savedVisits = localStorage.getItem('schengen-visits');
+            if (savedVisits) {
+                state.visits = JSON.parse(savedVisits);
+            }
+        }
+    }
+
+    function saveVisits() {
+        if (!state.isSharedData) {
+            localStorage.setItem('schengen-visits', JSON.stringify(state.visits));
+        }
+    }
+
+    function formatDate(dateStr) {
+        return new Date(dateStr).toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+        });
+    }
+
+    function updateCalculations() {
+        const today = new Date();
+        const cutoffDate = new Date(today);
+        cutoffDate.setDate(cutoffDate.getDate() - 180);
+
+        // Filter visits within the last 180 days
+        const relevantVisits = state.visits.filter(visit => {
+            const exitDate = new Date(visit.exit);
+            return exitDate >= cutoffDate;
+        });
+
+        // Calculate total days used in rolling 180-day period
+        let totalDays = 0;
+        relevantVisits.forEach(visit => {
+            const entryDate = new Date(visit.entry);
+            const exitDate = new Date(visit.exit);
+
+            const startDate = entryDate < cutoffDate ? cutoffDate : entryDate;
+            const endDate = exitDate > today ? today : exitDate;
+
+            if (startDate <= endDate) {
+                const days = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+                totalDays += Math.max(0, days);
+            }
+        });
+
+        state.daysUsed = Math.min(totalDays, 90);
+        state.daysRemaining = Math.max(0, 90 - state.daysUsed);
+
+        // Update UI
+        const daysUsedEl = document.getElementById('days-used');
+        const daysRemainingEl = document.getElementById('days-remaining');
+        const daysRemainingCard = document.getElementById('days-remaining-card');
+        
+        if (daysUsedEl) daysUsedEl.textContent = `${state.daysUsed}/90`;
+        if (daysRemainingEl) daysRemainingEl.textContent = state.daysRemaining;
+        
+        if (daysRemainingCard) {
+            daysRemainingCard.className = daysRemainingCard.className.replace(
+                /border-(red|yellow|green)-\d+/g, ''
+            ).replace(/dark:border-(red|yellow|green)-\d+/g, '');
+            
+            if (state.daysRemaining <= 10) {
+                daysRemainingCard.classList.add('border-red-200', 'dark:border-red-800');
+                daysRemainingEl.className = daysRemainingEl.className.replace(
+                    /(text-(red|yellow|green)-\d+|dark:text-(red|yellow|green)-\d+)/g, ''
+                ) + ' text-red-600 dark:text-red-400';
+            } else if (state.daysRemaining <= 30) {
+                daysRemainingCard.classList.add('border-yellow-200', 'dark:border-yellow-800');
+                daysRemainingEl.className = daysRemainingEl.className.replace(
+                    /(text-(red|yellow|green)-\d+|dark:text-(red|yellow|green)-\d+)/g, ''
+                ) + ' text-yellow-600 dark:text-yellow-400';
+            } else {
+                daysRemainingCard.classList.add('border-green-200', 'dark:border-green-800');
+                daysRemainingEl.className = daysRemainingEl.className.replace(
+                    /(text-(red|yellow|green)-\d+|dark:text-(red|yellow|green)-\d+)/g, ''
+                ) + ' text-green-600 dark:text-green-400';
+            }
+        }
+
+        // Calculate next reset date
+        if (relevantVisits.length > 0) {
+            const earliestRelevantVisit = relevantVisits.sort((a, b) => new Date(a.entry) - new Date(b.entry))[0];
+            const earliestExit = new Date(earliestRelevantVisit.exit);
+            const resetDate = new Date(earliestExit);
+            resetDate.setDate(resetDate.getDate() + 181);
+
+            if (resetDate > today) {
+                state.nextResetDate = resetDate.toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            } else {
+                state.nextResetDate = null;
+            }
+        } else {
+            state.nextResetDate = null;
+        }
+
+        // Update next reset UI
+        const nextResetEl = document.getElementById('next-reset');
+        const resetDescriptionEl = document.getElementById('reset-description');
+        const resetDaysEl = document.getElementById('reset-days');
+        
+        if (nextResetEl) {
+            nextResetEl.textContent = state.nextResetDate || 'No visits yet';
+        }
+        
+        if (resetDescriptionEl && resetDaysEl) {
+            if (state.nextResetDate && state.visits.length > 0) {
+                resetDescriptionEl.classList.remove('hidden');
+                resetDaysEl.classList.remove('hidden');
+                resetDaysEl.textContent = `${state.visits[0]?.days || 0} ${state.visits[0]?.days === 1 ? 'day' : 'days'} will be restored on this date`;
+            } else {
+                resetDescriptionEl.classList.add('hidden');
+                resetDaysEl.classList.add('hidden');
+            }
+        }
+    }
+
+    function calculateFutureTripImpact() {
+        const today = new Date();
+        
+        // Get all visits (past and future)
+        const allVisits = [...state.visits];
+        
+        // Separate current/past visits from future visits
+        const futureVisits = allVisits.filter(visit => {
+            const entryDate = new Date(visit.entry);
+            return entryDate > today;
+        });
+        
+        if (futureVisits.length === 0) {
+            return { futureDaysRemaining: null, latestFutureVisitId: null };
+        }
+        
+        // Find the latest future trip exit date and its visit
+        let latestFutureExit = new Date(0);
+        let latestFutureVisit = null;
+        
+        futureVisits.forEach(visit => {
+            const exitDate = new Date(visit.exit);
+            if (exitDate > latestFutureExit) {
+                latestFutureExit = exitDate;
+                latestFutureVisit = visit;
+            }
+        });
+        
+        // Calculate the 180-day window from the latest future trip
+        const futureCutoffDate = new Date(latestFutureExit);
+        futureCutoffDate.setDate(futureCutoffDate.getDate() - 180);
+        
+        // Calculate total days that will be used in this future window
+        let totalFutureDays = 0;
+        allVisits.forEach(visit => {
+            const entryDate = new Date(visit.entry);
+            const exitDate = new Date(visit.exit);
+            
+            // Check if this visit overlaps with the future 180-day window
+            if (exitDate >= futureCutoffDate && entryDate <= latestFutureExit) {
+                const startDate = entryDate < futureCutoffDate ? futureCutoffDate : entryDate;
+                const endDate = exitDate > latestFutureExit ? latestFutureExit : exitDate;
+                
+                if (startDate <= endDate) {
+                    const days = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+                    totalFutureDays += Math.max(0, days);
+                }
+            }
+        });
+        
+        const futureDaysRemaining = Math.max(0, 90 - Math.min(totalFutureDays, 90));
+        return {
+            futureDaysRemaining: futureDaysRemaining,
+            latestFutureVisitId: latestFutureVisit ? latestFutureVisit.id : null
+        };
+    }
+
+    function updateFutureTripDisplay() {
+        const futureImpact = calculateFutureTripImpact();
+        const daysAfterPlannedEl = document.getElementById('days-after-planned');
+        const daysAfterPlannedContainer = document.getElementById('days-after-planned-container');
+        const daysRemainingEl = document.getElementById('days-remaining');
+        
+        // Update state with latest future visit ID
+        state.latestFutureVisitId = futureImpact.latestFutureVisitId;
+        
+        if (daysAfterPlannedEl && daysAfterPlannedContainer && daysRemainingEl) {
+            if (futureImpact.futureDaysRemaining !== null && futureImpact.futureDaysRemaining !== state.daysRemaining) {
+                // Show current remaining without change, and future remaining in faded container
+                daysRemainingEl.textContent = state.daysRemaining;
+                daysAfterPlannedEl.textContent = futureImpact.futureDaysRemaining;
+                daysAfterPlannedContainer.classList.remove('hidden');
+            } else {
+                // Show current remaining and hide future container
+                daysRemainingEl.textContent = state.daysRemaining;
+                daysAfterPlannedContainer.classList.add('hidden');
+            }
+        }
+    }
+
+    function updateAddButton() {
+        const entryDate = document.getElementById('entry-date').value;
+        const exitDate = document.getElementById('exit-date').value;
+        const btn = document.getElementById('add-visit-btn');
+        
+        if (btn) {
+            if (entryDate && exitDate) {
+                btn.disabled = false;
+                btn.className = btn.className.replace(/bg-gray-\d+|dark:bg-zinc-\d+/g, '') + ' bg-teal-600 hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600';
+            } else {
+                btn.disabled = true;
+                btn.className = btn.className.replace(/bg-teal-\d+|hover:bg-teal-\d+|dark:bg-teal-\d+|dark:hover:bg-teal-\d+/g, '') + ' bg-gray-400 dark:bg-zinc-600';
+            }
+        }
+    }
+
+    function updateSharedBanner() {
+        const banner = document.getElementById('shared-banner');
+        if (banner) {
+            if (state.isSharedData) {
+                banner.classList.remove('hidden');
+            } else {
+                banner.classList.add('hidden');
+            }
+        }
+    }
+
+    function renderVisits() {
+        const header = document.getElementById('visits-header');
+        const emptyState = document.getElementById('empty-state');
+        const visitsList = document.getElementById('visits-list');
+        
+        if (header) header.textContent = `Previous Visits (${state.visits.length})`;
+        
+        if (state.visits.length === 0) {
+            if (emptyState) emptyState.classList.remove('hidden');
+            if (visitsList) visitsList.classList.add('hidden');
+        } else {
+            if (emptyState) emptyState.classList.add('hidden');
+            if (visitsList) {
+                visitsList.classList.remove('hidden');
+                visitsList.innerHTML = state.visits.map(visit => `
+                    <div class="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg p-4 hover:shadow-sm transition-shadow">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+                            ${visit.isEditing ? `
+                                <div class="flex-1 min-w-0">
+                                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 text-sm mb-3 sm:mb-0">
+                                        <input type="date" id="edit-entry-${visit.id}" value="${visit.entry}" class="px-2 py-1.5 sm:p-2 border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded text-sm">
+                                        <input type="date" id="edit-exit-${visit.id}" value="${visit.exit}" class="px-2 py-1.5 sm:p-2 border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded text-sm">
+                                        <input type="text" id="edit-location-${visit.id}" value="${visit.location}" placeholder="Location" list="schengen-countries" class="px-2 py-1.5 sm:p-2 border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-gray-700 text-zinc-900 dark:text-zinc-100 rounded text-sm sm:col-span-1">
+                                        <div class="flex items-center">
+                                            <span class="text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/50 px-2 py-1 rounded text-xs">${visit.days} ${visit.days === 1 ? 'day' : 'days'}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2 justify-end sm:justify-start flex-shrink-0">
+                                    <button onclick="saveEdit(${visit.id})" class="text-green-600 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300 p-2 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/50 transition-colors" title="Save">
+                                        <i data-lucide="check" class="w-4 h-4"></i>
+                                    </button>
+                                    <button onclick="cancelEdit(${visit.id})" class="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors" title="Cancel">
+                                        <i data-lucide="x" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            ` : `
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm">
+                                        <span class="font-medium text-zinc-900 dark:text-zinc-100">${formatDate(visit.entry)} - ${formatDate(visit.exit)}</span>
+                                        <span class="text-zinc-600 dark:text-zinc-400">${visit.location || 'Schengen Area'}</span>
+                                        <span class="text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/50 px-2 py-1 rounded text-xs self-start">${visit.days} ${visit.days === 1 ? 'day' : 'days'}</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2 justify-end sm:justify-start flex-shrink-0">
+                                    <button onclick="startEdit(${visit.id})" class="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors" title="Edit visit">
+                                        <i data-lucide="edit-2" class="w-4 h-4"></i>
+                                    </button>
+                                    <button onclick="removeVisit(${visit.id})" class="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/50 transition-colors" title="Delete visit">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            `}
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Reinitialize icons after DOM update
+        setTimeout(() => {
+            if (window.lucide) lucide.createIcons();
+        }, 50);
+    }
+
+    // Initialize app
+    function init() {
+        loadVisits();
+        updateCalculations();
+        updateFutureTripDisplay();
+        renderVisits();
+        updateSharedBanner();
+
+        // Add event listeners for form inputs
+        const entryInput = document.getElementById('entry-date');
+        const exitInput = document.getElementById('exit-date');
+        
+        if (entryInput) entryInput.addEventListener('input', updateAddButton);
+        if (exitInput) exitInput.addEventListener('input', updateAddButton);
+        
+        updateAddButton();
+
+        setTimeout(() => {
+            if (window.lucide) lucide.createIcons();
+        }, 100);
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();</script></div></main><footer class="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl backdrop-saturate-150 border-t border-zinc-200/50 dark:border-zinc-700/50 px-4 py-8 space-y-4 flex flex-col items-center justify-center shadow-[0_-4px_16px_rgba(0,0,0,0.04)] dark:shadow-[0_-4px_16px_rgba(0,0,0,0.2)]"><div class="flex flex-row items-center gap-3 flex-wrap justify-center"><a href="/posts" class="p-3 text-zinc-600 hover:text-teal-600 dark:text-zinc-400 dark:hover:text-teal-400 rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/50 dark:border-zinc-700/50 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-lg"><i data-lucide="file-text" class="w-5 h-5"></i></a><a href="mailto:hello@maclong.uk" class="p-3 text-zinc-600 hover:text-teal-600 dark:text-zinc-400 dark:hover:text-teal-400 rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/50 dark:border-zinc-700/50 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-lg"><i data-lucide="mail" class="w-5 h-5"></i></a><a href="https://github.com/maclong9" class="p-3 text-zinc-600 hover:text-teal-600 dark:text-zinc-400 dark:hover:text-teal-400 rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/50 dark:border-zinc-700/50 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-lg" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i></a></div><div class="text-zinc-500 dark:text-zinc-400 text-sm font-medium"><span>© 2025 </span><a href="https://maclong.uk" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors duration-300 font-semibold">Mac Long</a><span>.</span></div></footer><div id="mini-player" class="fixed bottom-4 left-4 z-50 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl backdrop-saturate-150 border border-zinc-200 dark:border-zinc-800 rounded-lg shadow-lg hidden transition-all duration-300"><div id="mini-player-collapsed" class="w-14 h-14 cursor-pointer relative" onclick="toggleMiniPlayer()"><div class="w-full h-full rounded-lg bg-gradient-to-br from-teal-400 to-blue-500 flex items-center justify-center"><i data-lucide="disc" class="w-6 h-6 text-white/70"></i></div><div class="absolute top-1 right-1 w-2 h-2 bg-teal-500 rounded-full animate-pulse"></div></div><div id="mini-player-expanded" class="hidden p-3 space-y-2 w-72"><div class="flex items-center justify-between mb-2"><span class="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Now Playing</span><button onclick="toggleMiniPlayer()" class="p-1 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Collapse"><i data-lucide="chevron-down" class="w-4 h-4"></i></button></div><div class="flex items-center gap-3"><div class="w-12 h-12 rounded-lg bg-gradient-to-br from-teal-400 to-blue-500 flex items-center justify-center flex-shrink-0"><i data-lucide="disc" class="w-5 h-5 text-white/70"></i></div><div class="flex-1 min-w-0"><div id="mini-player-title" class="font-medium text-zinc-900 dark:text-zinc-100 truncate text-sm"></div><div id="mini-player-artist" class="text-xs text-zinc-600 dark:text-zinc-400 truncate"></div></div></div><div class="flex items-center justify-center gap-2 pt-2"><button onclick="previousTrack()" class="p-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Previous"><i data-lucide="skip-back" class="w-4 h-4"></i></button><button onclick="togglePlayPause()" id="mini-play-pause-btn" class="p-2 bg-teal-500 hover:bg-teal-600 text-white rounded-full transition-colors" aria-label="Play/Pause"><i data-lucide="play" id="mini-play-pause-icon" class="w-5 h-5"></i></button><button onclick="nextTrack()" class="p-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Next"><i data-lucide="skip-forward" class="w-4 h-4"></i></button><button onclick="closeMiniPlayer()" class="p-2 text-zinc-600 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-400 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Stop"><i data-lucide="x" class="w-4 h-4"></i></button></div><a href="/music" class="block text-center text-xs text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors pt-2 border-t border-zinc-200 dark:border-zinc-700">Open Music</a></div></div><script>
+  function toggleMiniPlayer() {
+    const collapsed = document.getElementById('mini-player-collapsed');
+    const expanded = document.getElementById('mini-player-expanded');
+
+    if (collapsed && expanded) {
+      collapsed.classList.toggle('hidden');
+      expanded.classList.toggle('hidden');
+    }
+  }
+
+  function closeMiniPlayer() {
+    const miniPlayer = document.getElementById('mini-player');
+    if (audioPlayer) {
+      audioPlayer.pause();
+      audioPlayer.src = '';
+    }
+    if (miniPlayer) {
+      miniPlayer.classList.add('hidden');
+    }
+    // Also hide the now playing bar if on music page
+    const nowPlayingBar = document.getElementById('now-playing-bar');
+    if (nowPlayingBar) {
+      nowPlayingBar.classList.add('hidden');
+    }
+  }
+
+  // Sync mini player with main player
+  function updateMiniPlayer(title, artist, isPlaying) {
+    const miniPlayerTitle = document.getElementById('mini-player-title');
+    const miniPlayerArtist = document.getElementById('mini-player-artist');
+    const miniPlayer = document.getElementById('mini-player');
+    const miniPlayPauseIcon = document.getElementById('mini-play-pause-icon');
+
+    if (miniPlayerTitle) miniPlayerTitle.textContent = title;
+    if (miniPlayerArtist) miniPlayerArtist.textContent = artist;
+
+    // Show mini player on non-music pages
+    if (miniPlayer && !window.location.pathname.includes('/music')) {
+      miniPlayer.classList.remove('hidden');
+    }
+
+    // Update play/pause icon
+    if (miniPlayPauseIcon) {
+      miniPlayPauseIcon.setAttribute('data-lucide', isPlaying ? 'pause' : 'play');
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    }
+  }
+</script></div></body><script src="/public/js/icons.js"></script></html>

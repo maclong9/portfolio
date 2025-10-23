@@ -1,0 +1,1216 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Corfu 2025 | Mac Long</title><meta property="og:title" content="Corfu 2025 | Mac Long"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Photo album: Corfu 2025"><meta property="og:description" content="Photo album: Corfu 2025"><meta property="og:image" content="/public/og.jpg"><meta name="author" content="Mac Long"><meta name="keywords" content="software engineer, swift developer, react developer, typescript, tailwindcss, frontend development, skateboarding, punk rock, web development, iOS development"><link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>👨‍💻</text></svg>"><script type="application/ld+json">
+{"familyName":"Long","name":"Mac Long","url":"https://maclong.uk","@type":"Person","image":"https://avatars.githubusercontent.com/u/115668288?v=4","@context":"https://schema.org","jobTitle":"Software Engineer","email":"hello@maclong.uk","sameAs":["https://github.com/maclong9","https://orcid.org/0009-0002-4180-3822"],"givenName":"Mac"}
+</script><script src="/public/js/theme.js"></script><script src="https://unpkg.com/@tailwindcss/browser@4"></script><script src="https://unpkg.com/lucide@latest"></script><meta name="generator" content="WebUI" /><link rel="preload" href="https://unpkg.com/@tailwindcss/browser@4" as="script"><link rel="preload" href="https://unpkg.com/lucide@latest" as="script"><link rel="dns-prefetch" href="//unpkg.com"><link rel="preload" href="/public/js/theme.js" as="script"><link rel="preload" href="/public/js/icons.js" as="script"><style type="text/tailwindcss">
+    @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+    /* Apple-style glassmorphism support */
+    @supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
+        .backdrop-blur-sm {
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .backdrop-blur-xl {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .backdrop-saturate-150 {
+            backdrop-filter: saturate(1.5);
+            -webkit-backdrop-filter: saturate(1.5);
+        }
+    }
+
+    /* Smooth transitions for interactive elements */
+    select, button, a {
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Respect user's motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+
+        .reveal-card {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+        }
+
+        .game-of-life-bg {
+            display: none !important;
+        }
+    }
+
+    /* Hero animations */
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes avatarFadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    /* Progressive Reveal for Cards */
+    .reveal-card {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .reveal-card.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .reveal-card:nth-child(1) { transition-delay: 0.1s; }
+    .reveal-card:nth-child(2) { transition-delay: 0.2s; }
+    .reveal-card:nth-child(3) { transition-delay: 0.3s; }
+    .reveal-card:nth-child(4) { transition-delay: 0.4s; }
+    .reveal-card:nth-child(5) { transition-delay: 0.5s; }
+    .reveal-card:nth-child(6) { transition-delay: 0.6s; }
+    
+    /* Hero element animations */
+    .hero-avatar {
+        animation: avatarFadeIn 0.8s ease-out;
+    }
+    
+    .hero-name {
+        animation: slideUp 0.6s ease-out 0.1s both;
+    }
+    
+    .hero-description {
+        animation: slideUp 0.6s ease-out 0.3s both;
+    }
+    
+    /* Typography enhancements for prose content */
+    .prose {
+        @apply text-zinc-700 dark:text-zinc-300 leading-relaxed;
+    }
+
+    /* Paragraph spacing */
+    .prose p {
+        @apply mb-6 leading-relaxed;
+    }
+
+    /* Headings */
+    .prose h1 {
+        @apply text-3xl font-bold text-zinc-900 dark:text-zinc-100 mt-12 mb-6 leading-tight;
+    }
+    
+    .prose h2 {
+        @apply text-2xl font-bold text-zinc-900 dark:text-zinc-100 mt-10 mb-4 leading-tight;
+    }
+    
+    .prose h3 {
+        @apply text-xl font-semibold text-zinc-900 dark:text-zinc-100 mt-8 mb-3 leading-snug;
+    }
+    
+    .prose h4 {
+        @apply text-lg font-semibold text-zinc-900 dark:text-zinc-100 mt-6 mb-2;
+    }
+
+    /* Lists */
+    .prose ul {
+        @apply mb-6 pl-6;
+    }
+    
+    .prose ol {
+        @apply mb-6 pl-6;
+    }
+    
+    .prose li {
+        @apply mb-2 leading-relaxed;
+    }
+    
+    .prose ul > li {
+        @apply relative;
+    }
+    
+    .prose ul > li::before {
+        content: "•";
+        @apply absolute -left-4 text-teal-600 dark:text-teal-400 font-medium;
+    }
+
+    /* Links */
+    .prose a {
+        @apply text-teal-600 dark:text-teal-400 underline decoration-teal-600/30 underline-offset-2 transition-colors;
+    }
+    
+    .prose a:hover {
+        @apply text-teal-700 dark:text-teal-300 decoration-teal-600/60;
+    }
+
+    /* Blockquotes */
+    .prose blockquote {
+        @apply border-l-4 border-teal-500 pl-6 py-4 my-6 italic text-zinc-600 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-800/50 rounded-r;
+    }
+    
+    .prose blockquote p {
+        @apply mb-3 last:mb-0;
+    }
+    
+    /* Blockquote attribution styling */
+    .prose blockquote cite,
+    .prose blockquote footer {
+        @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3 block;
+    }
+    
+    .prose blockquote cite::before,
+    .prose blockquote footer::before {
+        content: "— ";
+    }
+    
+    /* Attribution styling for marked elements */
+    .prose blockquote p.attribution {
+        @apply not-italic text-sm text-zinc-500 dark:text-zinc-500 mt-3;
+    }
+
+    /* Code block styling */
+    .prose pre {
+        @apply bg-zinc-900 dark:bg-zinc-800 text-zinc-100 text-xs p-4 rounded-lg my-6 overflow-x-auto;
+        border: 1px solid theme(colors.zinc.700);
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+    
+    .prose code:not(pre code) {
+        @apply bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 px-1.5 py-0.5 rounded text-sm font-mono;
+    }
+
+    /* Tables */
+    .prose table {
+        @apply w-full my-6 border-collapse;
+    }
+    
+    .prose th {
+        @apply bg-zinc-50 dark:bg-zinc-800 font-semibold text-left px-4 py-3 border-b border-zinc-200 dark:border-zinc-700;
+    }
+    
+    .prose td {
+        @apply px-4 py-3 border-b border-zinc-100 dark:border-zinc-800;
+    }
+
+    /* Horizontal rules */
+    .prose hr {
+        @apply my-8 border-t-2 border-zinc-200 dark:border-zinc-700;
+    }
+
+    /* Strong and emphasis */
+    .prose strong {
+        @apply font-semibold text-zinc-900 dark:text-zinc-100;
+    }
+    
+    .prose em {
+        @apply italic text-zinc-600 dark:text-zinc-400;
+    }
+
+    /* Accessibility: Hide animations on reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        .reveal-card,
+        .hero-avatar,
+        .hero-name, 
+        .hero-description {
+            animation: none !important;
+            transition: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    }
+</style></head><body class="bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 transition-colors duration-300"><div><style>
+  @keyframes jellyIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.8) translateY(-10px);
+    }
+    50% {
+      transform: scale(1.05) translateY(0);
+    }
+    70% {
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  #mobile-menu-overlay.active {
+    display: block;
+    animation: jellyIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+</style><div id="mobile-menu-container" data-mobile-menu-open="false"><div id="mobile-menu-overlay" class="fixed top-[90px] right-4 w-80 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-6rem)] overflow-y-auto bg-white/95 dark:bg-zinc-900/95 backdrop-blur-2xl backdrop-saturate-150 border border-white/50 dark:border-white/10 px-6 py-6 shadow-2xl rounded-2xl z-50 hidden" data-mobile-menu="closed"><div class="flex flex-col space-y-3"><div class="flex items-center justify-between mb-4"><span class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Navigation</span><button id="mobile-menu-close" class="p-1 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 cursor-pointer" aria-label="Close menu" onclick="closeSlideMenu('mobile-menu-container')"><i data-lucide="x" class="w-5 h-5"></i></button></div><a href="/posts" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="posts"><i data-lucide="file-text" class="w-5 h-5"></i><span>Posts</span></a><a href="/photos" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="photos"><i data-lucide="camera" class="w-5 h-5"></i><span>Photos</span></a><a href="/music" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="music"><i data-lucide="music" class="w-5 h-5"></i><span>Music</span></a><a href="/tools" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="tools"><i data-lucide="wrench" class="w-5 h-5"></i><span>Tools</span></a><a href="mailto:hello@maclong.uk" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="email"><i data-lucide="mail" class="w-5 h-5"></i><span>Email</span></a><a href="https://github.com/maclong9" class="flex items-center space-x-3 p-3 text-zinc-700 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 rounded-xl transition-all cursor-pointer" data-mobile-menu-link="github" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i><span>GitHub</span></a><div class="border-t border-white/20 dark:border-zinc-700/50 pt-4 mt-2"><span class="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-3">Theme</span><div class="space-y-1"><button id="theme-system-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-sm transition-all cursor-pointer text-zinc-700 dark:text-zinc-200" data-theme-option="system" onclick="if (window.setTheme) window.setTheme('system'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="monitor" class="w-4 h-4"></i><span>System</span></div></button><button id="theme-light-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-sm transition-all cursor-pointer text-zinc-700 dark:text-zinc-200" data-theme-option="light" onclick="if (window.setTheme) window.setTheme('light'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="sun" class="w-4 h-4"></i><span>Light</span></div></button><button id="theme-dark-mobile" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-sm transition-all cursor-pointer text-zinc-700 dark:text-zinc-200" data-theme-option="dark" onclick="if (window.setTheme) window.setTheme('dark'); window.closeSlideMenu('mobile-menu-container')"><div class="flex items-center space-x-3"><i data-lucide="moon" class="w-4 h-4"></i><span>Dark</span></div></button></div></div></div></div></div></div><div class="min-h-screen flex flex-col"><div><header id="main-header" class="fixed top-4 left-1/2 -translate-x-1/2 max-w-5xl w-[calc(100%-2rem)] bg-white/60 dark:bg-zinc-900/60 backdrop-blur-2xl backdrop-saturate-200 border border-white/40 dark:border-zinc-700/40 rounded-2xl px-6 py-4 z-30 transition-all duration-300 ease-in-out shadow-lg shadow-zinc-900/5 dark:shadow-zinc-950/30"><div class="flex items-center justify-between"><div class="flex items-center justify-between w-full"><nav class="md:hidden flex items-center space-x-1 text-sm"><a href="/" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Mac Long</a><span class="text-zinc-400 dark:text-zinc-600">/</span><a href="/photos" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Photos</a></nav><nav class="hidden md:flex items-center space-x-1 text-sm"><a href="/" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Mac Long</a><span class="text-zinc-400 dark:text-zinc-600">/</span><a href="/photos" class="text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer">Photos</a><span class="text-zinc-400 dark:text-zinc-600">/</span><span class="text-zinc-900 dark:text-zinc-100 font-medium">Corfu 2025</span></nav><div class="flex items-center space-x-4"><div class="flex items-center space-x-1"><div class="md:hidden"><button id="mobile-menu-button" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Menu" onclick="toggleSlideMenu('mobile-menu-container')"><i data-lucide="chevron-left" class="w-5 h-5"></i></button></div><div class="hidden md:flex items-center space-x-2"><a href="/posts" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Posts"><i data-lucide="file-text" class="w-5 h-5"></i></a><a href="/photos" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Photos"><i data-lucide="camera" class="w-5 h-5"></i></a><a href="/music" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Music"><i data-lucide="music" class="w-5 h-5"></i></a><a href="/tools" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Tools"><i data-lucide="wrench" class="w-5 h-5"></i></a><div class="w-px h-6 bg-zinc-300/50 dark:bg-zinc-600/50"></div><a href="mailto:hello@maclong.uk" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Email"><i data-lucide="mail" class="w-5 h-5"></i></a><a href="https://github.com/maclong9" class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="View GitHub Profile" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i></a><div class="relative theme-dropdown"><button class="p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer" aria-label="Change theme" data-theme-toggle="true"><i data-lucide="sun" data-theme-icon="light" class="hidden"></i><i data-lucide="moon" data-theme-icon="dark" class="hidden"></i><i data-lucide="palette" data-theme-icon="system" class="w-5 h-5"></i></button><div class="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-zinc-800 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700 py-1 z-50 theme-dropdown-menu hidden"><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="system"><i data-lucide="palette" class="w-5 h-5"></i><span>System</span></button><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="light"><i data-lucide="sun" class="w-5 h-5"></i><span>Light</span></button><button class="w-full px-4 py-2 text-left text-sm flex items-center space-x-3 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer theme-option" data-theme-option="dark"><i data-lucide="moon" class="w-5 h-5"></i><span>Dark</span></button></div><style>.theme-dropdown-menu {
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transition: opacity 0.15s ease-in, transform 0.15s ease-in;
+}
+
+.theme-dropdown-menu--open {
+    display: block;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.theme-option--active {
+    background-color: rgb(240 253 250);
+    color: rgb(15 118 110);
+}
+
+.dark .theme-option--active {
+    background-color: rgb(19 78 74 / 0.5);
+    color: rgb(94 234 212);
+}
+
+[data-theme-icon] {
+    display: none;
+}
+
+[data-theme-icon="system"] {
+    display: block;
+}</style><script>// Theme dropdown functionality - colocated with ThemeDropdown component
+(function() {
+    let isDropdownOpen = false;
+
+    function initThemeDropdown() {
+        // Listen for dropdown toggle
+        document.addEventListener('click', (e) => {
+            const themeToggle = e.target.closest('[data-theme-toggle]');
+            if (themeToggle) {
+                e.preventDefault();
+                toggleDropdown();
+                return;
+            }
+
+            const themeOption = e.target.closest('[data-theme-option]');
+            if (themeOption) {
+                e.preventDefault();
+                const theme = themeOption.dataset.themeOption;
+                setTheme(theme);
+                updateDropdownUI();
+                closeDropdown();
+                return;
+            }
+
+            // Close dropdown when clicking outside
+            if (isDropdownOpen && !e.target.closest('.theme-dropdown')) {
+                closeDropdown();
+            }
+        });
+
+        // Update UI initially and when theme changes
+        updateDropdownUI();
+        
+        // Listen for theme changes
+        const observer = new MutationObserver(() => {
+            updateDropdownUI();
+        });
+        
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
+    }
+
+    function toggleDropdown() {
+        if (isDropdownOpen) {
+            closeDropdown();
+        } else {
+            openDropdown();
+        }
+    }
+
+    function openDropdown() {
+        isDropdownOpen = true;
+        const dropdown = document.querySelector('.theme-dropdown-menu');
+        if (dropdown) {
+            dropdown.classList.remove('hidden');
+            // Trigger reflow for animation
+            dropdown.offsetHeight;
+            dropdown.classList.add('theme-dropdown-menu--open');
+        }
+    }
+
+    function closeDropdown() {
+        isDropdownOpen = false;
+        const dropdown = document.querySelector('.theme-dropdown-menu');
+        if (dropdown) {
+            dropdown.classList.remove('theme-dropdown-menu--open');
+            setTimeout(() => {
+                if (!isDropdownOpen) {
+                    dropdown.classList.add('hidden');
+                }
+            }, 200); // Match transition duration
+        }
+    }
+
+    function setTheme(theme) {
+        localStorage.setItem('theme', theme);
+        updateTheme();
+    }
+
+    function updateTheme() {
+        const themePreference = localStorage.getItem('theme') || 'system';
+        let actualTheme = 'light';
+
+        if (themePreference === 'dark') {
+            actualTheme = 'dark';
+        } else if (themePreference === 'system') {
+            actualTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        document.documentElement.setAttribute('data-theme', actualTheme);
+    }
+
+    function updateDropdownUI() {
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        
+        // Update theme toggle button icon
+        const toggleIcons = document.querySelectorAll('[data-theme-icon]');
+        toggleIcons.forEach(icon => {
+            icon.style.display = 'none';
+        });
+        
+        const activeIcon = document.querySelector(`[data-theme-icon="${savedTheme}"]`);
+        if (activeIcon) {
+            activeIcon.style.display = 'block';
+        }
+
+        // Update dropdown options
+        const options = document.querySelectorAll('[data-theme-option]');
+        options.forEach(option => {
+            const isActive = option.dataset.themeOption === savedTheme;
+            option.classList.toggle('theme-option--active', isActive);
+        });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initThemeDropdown);
+    } else {
+        initThemeDropdown();
+    }
+})();</script></div></div></div></div></div></div></header></div><main class="flex-1 px-4 py-8 pt-32"><div class="max-w-4xl mx-auto"><div class="max-w-4xl mx-auto"><div class="mb-8"><h1 class="text-3xl md:text-4xl font-bold mb-4">Corfu 2025</h1><div class="flex items-center justify-between flex-wrap gap-4"><div class="flex items-center gap-4 text-sm"><div class="flex items-center gap-2"><i data-lucide="calendar" class="w-4 h-4"></i><time datetime="2025-09-13T19:44:51Z">September 13, 2025</time></div><div class="flex items-center gap-2"><i data-lucide="camera" class="w-4 h-4"></i><span id="photo-count">9 photos</span></div></div><div class="flex items-center gap-2"><div class="filter-dropdown-container relative"><button onclick="toggleFilterDropdown('camera')" class="filter-icon-btn w-10 h-10 rounded-full bg-white/50 dark:bg-zinc-800/50 backdrop-blur-xl border border-white/50 dark:border-white/10 shadow-sm hover:shadow-md hover:bg-white/70 dark:hover:bg-zinc-800/70 transition-all duration-200 flex items-center justify-center cursor-pointer hover:-translate-y-0.5 active:translate-y-0"><i data-lucide="aperture" class="w-4 h-4"></i></button><div id="camera-dropdown" class="filter-dropdown hidden absolute top-12 right-0 w-56 bg-white/90 dark:bg-zinc-800/90 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/50 dark:border-white/10 overflow-hidden z-50"><div class="p-3 border-b border-zinc-200/50 dark:border-zinc-700/50"><div class="text-xs font-semibold text-zinc-600 dark:text-zinc-400">Camera</div></div><div class="max-h-64 overflow-y-auto"><button onclick="selectFilter('camera', '')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="camera" data-filter-value="">All cameras</button><button onclick="selectFilter('camera', 'Apple iPhone 12')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="camera" data-filter-value="Apple iPhone 12">Apple iPhone 12</button><button onclick="selectFilter('camera', 'Apple iPhone 13 Pro')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="camera" data-filter-value="Apple iPhone 13 Pro">Apple iPhone 13 Pro</button></div></div></div><div class="filter-dropdown-container relative"><button onclick="toggleFilterDropdown('location')" class="filter-icon-btn w-10 h-10 rounded-full bg-white/50 dark:bg-zinc-800/50 backdrop-blur-xl border border-white/50 dark:border-white/10 shadow-sm hover:shadow-md hover:bg-white/70 dark:hover:bg-zinc-800/70 transition-all duration-200 flex items-center justify-center cursor-pointer hover:-translate-y-0.5 active:translate-y-0"><i data-lucide="map-pin" class="w-4 h-4"></i></button><div id="location-dropdown" class="filter-dropdown hidden absolute top-12 right-0 w-56 bg-white/90 dark:bg-zinc-800/90 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/50 dark:border-white/10 overflow-hidden z-50"><div class="p-3 border-b border-zinc-200/50 dark:border-zinc-700/50"><div class="text-xs font-semibold text-zinc-600 dark:text-zinc-400">Location</div></div><div class="max-h-64 overflow-y-auto"><button onclick="selectFilter('location', '')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="location" data-filter-value="">All locations</button><button onclick="selectFilter('location', '39.6214, 19.9156')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="location" data-filter-value="39.6214, 19.9156">39.6214, 19.9156</button><button onclick="selectFilter('location', '39.6713, 19.7282')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="location" data-filter-value="39.6713, 19.7282">39.6713, 19.7282</button><button onclick="selectFilter('location', '39.6743, 19.7271')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="location" data-filter-value="39.6743, 19.7271">39.6743, 19.7271</button><button onclick="selectFilter('location', '39.6745, 19.7206')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="location" data-filter-value="39.6745, 19.7206">39.6745, 19.7206</button><button onclick="selectFilter('location', '39.6751, 19.7226')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="location" data-filter-value="39.6751, 19.7226">39.6751, 19.7226</button><button onclick="selectFilter('location', '39.7931, 19.6721')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="location" data-filter-value="39.7931, 19.6721">39.7931, 19.6721</button><button onclick="selectFilter('location', '39.7949, 19.6735')" class="filter-option w-full text-left px-3 py-2 text-sm hover:bg-zinc-100/50 dark:hover:bg-zinc-700/50 transition-colors" data-filter-type="location" data-filter-value="39.7949, 19.6735">39.7949, 19.6735</button></div></div></div><button onclick="resetFilters()" class="px-4 py-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-white/60 dark:bg-zinc-800/60 hover:bg-white/80 dark:hover:bg-zinc-800/80 backdrop-blur-xl rounded-full shadow-sm shadow-black/5 border border-white/50 dark:border-white/10 transition-all duration-200 cursor-pointer hover:-translate-y-0.5 active:translate-y-0"> Reset </button></div></div></div><div class="p-8 bg-gradient-to-br from-zinc-50/70 to-white/70 dark:from-zinc-900/70 dark:to-zinc-800/70 backdrop-blur-xl border border-white/50 dark:border-white/10 rounded-2xl shadow-sm mb-12"><div id="photo-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"><div class="group relative overflow-hidden rounded-2xl aspect-square bg-gradient-to-br from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 shadow-md hover:shadow-2xl hover:shadow-teal-500/10 dark:hover:shadow-teal-400/10 transition-all duration-500 ease-out reveal-card photo-item border border-zinc-200/50 dark:border-zinc-700/50 hover:scale-[1.02] cursor-pointer" data-photo-index="0" data-location="" data-camera="Apple iPhone 12" data-has-location="false" data-keywords="" onclick="openLightbox(0)"><div class="relative w-full h-full"><img src="/media/photos/Corfu 2025/2025-09-13T17:44:51+01:00.heic" alt="2025-09-13T17:44:51+01:00.heic" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" loading="lazy" /></div></div><div class="group relative overflow-hidden rounded-2xl aspect-square bg-gradient-to-br from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 shadow-md hover:shadow-2xl hover:shadow-teal-500/10 dark:hover:shadow-teal-400/10 transition-all duration-500 ease-out reveal-card photo-item border border-zinc-200/50 dark:border-zinc-700/50 hover:scale-[1.02] cursor-pointer" data-photo-index="1" data-location="" data-camera="Apple iPhone 12" data-has-location="false" data-keywords="" onclick="openLightbox(1)"><div class="relative w-full h-full"><img src="/media/photos/Corfu 2025/2025-09-14T09:56:53+01:00.heic" alt="2025-09-14T09:56:53+01:00.heic" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" loading="lazy" /></div></div><div class="group relative overflow-hidden rounded-2xl aspect-square bg-gradient-to-br from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 shadow-md hover:shadow-2xl hover:shadow-teal-500/10 dark:hover:shadow-teal-400/10 transition-all duration-500 ease-out reveal-card photo-item border border-zinc-200/50 dark:border-zinc-700/50 hover:scale-[1.02] cursor-pointer" data-photo-index="2" data-location="39.7949, 19.6735" data-camera="Apple iPhone 13 Pro" data-has-location="true" data-keywords="" onclick="openLightbox(2)"><div class="relative w-full h-full"><img src="/media/photos/Corfu 2025/2025-09-15T13:07:19+01:00.dng" alt="2025-09-15T13:07:19+01:00.dng" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" loading="lazy" /></div></div><div class="group relative overflow-hidden rounded-2xl aspect-square bg-gradient-to-br from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 shadow-md hover:shadow-2xl hover:shadow-teal-500/10 dark:hover:shadow-teal-400/10 transition-all duration-500 ease-out reveal-card photo-item border border-zinc-200/50 dark:border-zinc-700/50 hover:scale-[1.02] cursor-pointer" data-photo-index="3" data-location="39.7931, 19.6721" data-camera="Apple iPhone 13 Pro" data-has-location="true" data-keywords="" onclick="openLightbox(3)"><div class="relative w-full h-full"><img src="/media/photos/Corfu 2025/2025-09-15T13:46:58+01:00.dng" alt="2025-09-15T13:46:58+01:00.dng" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" loading="lazy" /></div></div><div class="group relative overflow-hidden rounded-2xl aspect-square bg-gradient-to-br from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 shadow-md hover:shadow-2xl hover:shadow-teal-500/10 dark:hover:shadow-teal-400/10 transition-all duration-500 ease-out reveal-card photo-item border border-zinc-200/50 dark:border-zinc-700/50 hover:scale-[1.02] cursor-pointer" data-photo-index="4" data-location="39.6751, 19.7226" data-camera="Apple iPhone 13 Pro" data-has-location="true" data-keywords="" onclick="openLightbox(4)"><div class="relative w-full h-full"><img src="/media/photos/Corfu 2025/2025-09-16T14:53:55+01:00.dng" alt="2025-09-16T14:53:55+01:00.dng" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" loading="lazy" /></div></div><div class="group relative overflow-hidden rounded-2xl aspect-square bg-gradient-to-br from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 shadow-md hover:shadow-2xl hover:shadow-teal-500/10 dark:hover:shadow-teal-400/10 transition-all duration-500 ease-out reveal-card photo-item border border-zinc-200/50 dark:border-zinc-700/50 hover:scale-[1.02] cursor-pointer" data-photo-index="5" data-location="39.6745, 19.7206" data-camera="Apple iPhone 13 Pro" data-has-location="true" data-keywords="" onclick="openLightbox(5)"><div class="relative w-full h-full"><img src="/media/photos/Corfu 2025/2025-09-16T14:56:54+01:00.dng" alt="2025-09-16T14:56:54+01:00.dng" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" loading="lazy" /></div></div><div class="group relative overflow-hidden rounded-2xl aspect-square bg-gradient-to-br from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 shadow-md hover:shadow-2xl hover:shadow-teal-500/10 dark:hover:shadow-teal-400/10 transition-all duration-500 ease-out reveal-card photo-item border border-zinc-200/50 dark:border-zinc-700/50 hover:scale-[1.02] cursor-pointer" data-photo-index="6" data-location="39.6713, 19.7282" data-camera="Apple iPhone 13 Pro" data-has-location="true" data-keywords="" onclick="openLightbox(6)"><div class="relative w-full h-full"><img src="/media/photos/Corfu 2025/2025-09-17T11:20:12+01:00.dng" alt="2025-09-17T11:20:12+01:00.dng" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" loading="lazy" /></div></div><div class="group relative overflow-hidden rounded-2xl aspect-square bg-gradient-to-br from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 shadow-md hover:shadow-2xl hover:shadow-teal-500/10 dark:hover:shadow-teal-400/10 transition-all duration-500 ease-out reveal-card photo-item border border-zinc-200/50 dark:border-zinc-700/50 hover:scale-[1.02] cursor-pointer" data-photo-index="7" data-location="39.6743, 19.7271" data-camera="Apple iPhone 13 Pro" data-has-location="true" data-keywords="" onclick="openLightbox(7)"><div class="relative w-full h-full"><img src="/media/photos/Corfu 2025/2025-09-18T17:42:13+01:00.dng" alt="2025-09-18T17:42:13+01:00.dng" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" loading="lazy" /></div></div><div class="group relative overflow-hidden rounded-2xl aspect-square bg-gradient-to-br from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 shadow-md hover:shadow-2xl hover:shadow-teal-500/10 dark:hover:shadow-teal-400/10 transition-all duration-500 ease-out reveal-card photo-item border border-zinc-200/50 dark:border-zinc-700/50 hover:scale-[1.02] cursor-pointer" data-photo-index="8" data-location="39.6214, 19.9156" data-camera="Apple iPhone 13 Pro" data-has-location="true" data-keywords="" onclick="openLightbox(8)"><div class="relative w-full h-full"><img src="/media/photos/Corfu 2025/2025-09-22T01:59:50+01:00.dng" alt="2025-09-22T01:59:50+01:00.dng" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" loading="lazy" /></div></div></div></div><div class="text-center mt-8"><a href="/photos" class="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors">← Back to Photos</a></div><div id="lightbox-modal" class="hidden fixed inset-0 bg-black/95 z-50 flex items-center justify-center"><button onclick="closeLightbox()" class="absolute top-[1.875rem] right-[1.375rem] w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center z-50"><i data-lucide="x" class="w-6 h-6 text-white"></i></button><button id="metadata-toggle-btn" onclick="toggleMetadata()" class="absolute top-[1.875rem] right-[5.875rem] w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center z-50"><i id="metadata-toggle-icon" data-lucide="info" class="w-6 h-6 text-white"></i></button><div class="flex items-center justify-center w-full h-full p-6"><button onclick="navigateLightbox(-1)" class="absolute left-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center"><i data-lucide="chevron-left" class="w-6 h-6 text-white"></i></button><div class="max-w-5xl max-h-full flex items-center justify-center mb-24"><img id="lightbox-image" src="" alt="" class="max-w-full max-h-[70vh] object-contain rounded-2xl" /></div><button onclick="navigateLightbox(1)" class="absolute right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 transition-all duration-200 flex items-center justify-center"><i data-lucide="chevron-right" class="w-6 h-6 text-white"></i></button></div><div id="lightbox-thumbnails" class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 max-w-4xl overflow-x-auto px-6 py-2 bg-black/50 backdrop-blur-xl rounded-2xl"></div><div id="metadata-panel" class="hidden absolute top-[1.875rem] right-[1.375rem] md:top-[1.875rem] md:right-[1.375rem] left-6 md:left-auto bottom-6 md:bottom-auto md:w-96 w-auto max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-3rem)] max-w-md mx-auto md:mx-0 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl overflow-y-auto shadow-2xl rounded-2xl border border-white/50 dark:border-white/10"><div class="p-6"><div class="mb-6"><h3 class="text-xl font-bold">Photo Info</h3></div><div id="metadata-content" class="space-y-6"></div></div></div></div><style>
+  /* Jelly animation for dropdowns */
+  @keyframes jellyIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.8) translateY(-10px);
+    }
+    50% {
+      transform: scale(1.05) translateY(0);
+    }
+    70% {
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .filter-dropdown.active {
+    display: block;
+    animation: jellyIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  /* Smooth scrolling for thumbnails */
+  #lightbox-thumbnails::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  #lightbox-thumbnails::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  #lightbox-thumbnails::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+  }
+
+  #lightbox-thumbnails::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Selected filter option styling */
+  .filter-option.selected {
+    background: rgba(20, 184, 166, 0.15) !important;
+    color: rgb(20, 184, 166);
+    font-weight: 600;
+  }
+
+  .dark .filter-option.selected {
+    background: rgba(20, 184, 166, 0.2) !important;
+    color: rgb(94, 234, 212);
+  }
+
+  /* Metadata panel jelly animation */
+  #metadata-panel.active {
+    display: block;
+    animation: jellyIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  /* Map styling - minimal grayscale */
+  .map-container iframe {
+    opacity: 0.8;
+  }
+</style><script>(function() {
+  const photos = [{
+  "src": "/media/photos/Corfu 2025/2025-09-13T17:44:51+01:00.heic",
+  "alt": "2025-09-13T17:44:51+01:00.heic",
+  "caption": null,
+  "metadata": {
+    "camera": "Apple iPhone 12",
+    "lens": "iPhone 12 back dual wide camera 4.2mm f/1.6",
+    "focalLength": 4.2,
+    "aperture": 1.6,
+    "shutterSpeed": 0.003067484662576687,
+    "iso": 32,
+    "dateTaken": "2025-09-13T19:44:51Z",
+    "location": null,
+    "locationName": null,
+    "keywords": [],
+    "isRaw": false,
+    "width": 2268,
+    "height": 4032,
+    "fileSize": "1.1 MB"
+  }
+},
+{
+  "src": "/media/photos/Corfu 2025/2025-09-14T09:56:53+01:00.heic",
+  "alt": "2025-09-14T09:56:53+01:00.heic",
+  "caption": null,
+  "metadata": {
+    "camera": "Apple iPhone 12",
+    "lens": "iPhone 12 back dual wide camera 4.2mm f/1.6",
+    "focalLength": 4.2,
+    "aperture": 1.6,
+    "shutterSpeed": 0.00029403116730373417,
+    "iso": 32,
+    "dateTaken": "2025-09-14T11:56:53Z",
+    "location": null,
+    "locationName": null,
+    "keywords": [],
+    "isRaw": false,
+    "width": 2268,
+    "height": 4032,
+    "fileSize": "2.2 MB"
+  }
+},
+{
+  "src": "/media/photos/Corfu 2025/2025-09-15T13:07:19+01:00.dng",
+  "alt": "2025-09-15T13:07:19+01:00.dng",
+  "caption": null,
+  "metadata": {
+    "camera": "Apple iPhone 13 Pro",
+    "lens": "iPhone 13 Pro back triple camera 5.7mm f/1.5",
+    "focalLength": 5.699999809263318,
+    "aperture": 1.5,
+    "shutterSpeed": 0.00019700551615445234,
+    "iso": 50,
+    "dateTaken": "2025-09-15T15:07:19Z",
+    "location": {"lat": 39.79494666666667, "lng": 19.67355},
+    "locationName": "39.7949, 19.6735",
+    "keywords": [],
+    "isRaw": true,
+    "width": 4032,
+    "height": 3024,
+    "fileSize": "39.4 MB"
+  }
+},
+{
+  "src": "/media/photos/Corfu 2025/2025-09-15T13:46:58+01:00.dng",
+  "alt": "2025-09-15T13:46:58+01:00.dng",
+  "caption": null,
+  "metadata": {
+    "camera": "Apple iPhone 13 Pro",
+    "lens": "iPhone 13 Pro back triple camera 5.7mm f/1.5",
+    "focalLength": 5.699999809263318,
+    "aperture": 1.5,
+    "shutterSpeed": 0.00010599957600169599,
+    "iso": 50,
+    "dateTaken": "2025-09-15T15:46:58Z",
+    "location": {"lat": 39.79309666666666, "lng": 19.672095},
+    "locationName": "39.7931, 19.6721",
+    "keywords": [],
+    "isRaw": true,
+    "width": 4032,
+    "height": 3024,
+    "fileSize": "36.3 MB"
+  }
+},
+{
+  "src": "/media/photos/Corfu 2025/2025-09-16T14:53:55+01:00.dng",
+  "alt": "2025-09-16T14:53:55+01:00.dng",
+  "caption": null,
+  "metadata": {
+    "camera": "Apple iPhone 13 Pro",
+    "lens": "iPhone 13 Pro back triple camera 5.7mm f/1.5",
+    "focalLength": 5.699999809263318,
+    "aperture": 1.5,
+    "shutterSpeed": 0.000125,
+    "iso": 50,
+    "dateTaken": "2025-09-16T16:53:55Z",
+    "location": {"lat": 39.67513833333334, "lng": 19.722646666666666},
+    "locationName": "39.6751, 19.7226",
+    "keywords": [],
+    "isRaw": true,
+    "width": 4032,
+    "height": 3024,
+    "fileSize": "33.4 MB"
+  }
+},
+{
+  "src": "/media/photos/Corfu 2025/2025-09-16T14:56:54+01:00.dng",
+  "alt": "2025-09-16T14:56:54+01:00.dng",
+  "caption": null,
+  "metadata": {
+    "camera": "Apple iPhone 13 Pro",
+    "lens": "iPhone 13 Pro back triple camera 5.7mm f/1.5",
+    "focalLength": 5.699999809263318,
+    "aperture": 1.5,
+    "shutterSpeed": 0.00024301336088655264,
+    "iso": 50,
+    "dateTaken": "2025-09-16T16:56:54Z",
+    "location": {"lat": 39.674505, "lng": 19.720603333333333},
+    "locationName": "39.6745, 19.7206",
+    "keywords": [],
+    "isRaw": true,
+    "width": 4032,
+    "height": 3024,
+    "fileSize": "38 MB"
+  }
+},
+{
+  "src": "/media/photos/Corfu 2025/2025-09-17T11:20:12+01:00.dng",
+  "alt": "2025-09-17T11:20:12+01:00.dng",
+  "caption": null,
+  "metadata": {
+    "camera": "Apple iPhone 13 Pro",
+    "lens": "iPhone 13 Pro back triple camera 5.7mm f/1.5",
+    "focalLength": 5.699999809263318,
+    "aperture": 1.5,
+    "shutterSpeed": 0.00046189376443418013,
+    "iso": 50,
+    "dateTaken": "2025-09-17T13:20:12Z",
+    "location": {"lat": 39.671321666666664, "lng": 19.728155},
+    "locationName": "39.6713, 19.7282",
+    "keywords": [],
+    "isRaw": true,
+    "width": 4032,
+    "height": 3024,
+    "fileSize": "39.8 MB"
+  }
+},
+{
+  "src": "/media/photos/Corfu 2025/2025-09-18T17:42:13+01:00.dng",
+  "alt": "2025-09-18T17:42:13+01:00.dng",
+  "caption": null,
+  "metadata": {
+    "camera": "Apple iPhone 13 Pro",
+    "lens": "iPhone 13 Pro back triple camera 5.7mm f/1.5",
+    "focalLength": 5.699999809263318,
+    "aperture": 1.5,
+    "shutterSpeed": 0.004098360426723905,
+    "iso": 40,
+    "dateTaken": "2025-09-18T19:42:13Z",
+    "location": {"lat": 39.67432, "lng": 19.727053333333334},
+    "locationName": "39.6743, 19.7271",
+    "keywords": [],
+    "isRaw": true,
+    "width": 4032,
+    "height": 3024,
+    "fileSize": "33.7 MB"
+  }
+},
+{
+  "src": "/media/photos/Corfu 2025/2025-09-22T01:59:50+01:00.dng",
+  "alt": "2025-09-22T01:59:50+01:00.dng",
+  "caption": null,
+  "metadata": {
+    "camera": "Apple iPhone 13 Pro",
+    "lens": "iPhone 13 Pro back triple camera 5.7mm f/1.5",
+    "focalLength": 5.699999809263318,
+    "aperture": 1.5,
+    "shutterSpeed": 0.025,
+    "iso": 400,
+    "dateTaken": "2025-09-22T03:59:50Z",
+    "location": {"lat": 39.621386666666666, "lng": 19.915596666666666},
+    "locationName": "39.6214, 19.9156",
+    "keywords": [],
+    "isRaw": true,
+    "width": 4032,
+    "height": 3024,
+    "fileSize": "26.7 MB"
+  }
+}];
+  let currentPhotoIndex = 0;
+  let activeFilters = {
+    camera: '',
+    location: '',
+    keyword: ''
+  };
+
+  // Filter dropdown toggle with jelly animation
+  window.toggleFilterDropdown = function(type) {
+    const dropdown = document.getElementById(`${type}-dropdown`);
+    const allDropdowns = document.querySelectorAll('.filter-dropdown');
+
+    // Close all other dropdowns
+    allDropdowns.forEach(d => {
+      if (d !== dropdown) {
+        d.classList.remove('active');
+        d.classList.add('hidden');
+      }
+    });
+
+    // Toggle current dropdown
+    if (dropdown.classList.contains('hidden')) {
+      dropdown.classList.remove('hidden');
+      dropdown.classList.add('active');
+    } else {
+      dropdown.classList.remove('active');
+      setTimeout(() => dropdown.classList.add('hidden'), 200);
+    }
+  };
+
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.filter-dropdown-container')) {
+      document.querySelectorAll('.filter-dropdown').forEach(d => {
+        d.classList.remove('active');
+        d.classList.add('hidden');
+      });
+    }
+  });
+
+  // Select filter
+  window.selectFilter = function(type, value) {
+    activeFilters[type] = value;
+
+    // Update selected state on filter options
+    document.querySelectorAll(`[data-filter-type="${type}"]`).forEach(btn => {
+      if (btn.dataset.filterValue === value) {
+        btn.classList.add('selected');
+      } else {
+        btn.classList.remove('selected');
+      }
+    });
+
+    applyFilters();
+    toggleFilterDropdown(type);
+  };
+
+  // Apply filters
+  function applyFilters() {
+    const photoItems = document.querySelectorAll('.photo-item');
+    let visibleCount = 0;
+
+    photoItems.forEach(item => {
+      let show = true;
+
+      if (activeFilters.camera && item.dataset.camera !== activeFilters.camera) {
+        show = false;
+      }
+
+      if (activeFilters.location && item.dataset.location !== activeFilters.location) {
+        show = false;
+      }
+
+      if (activeFilters.keyword) {
+        const keywords = item.dataset.keywords ? item.dataset.keywords.split(',') : [];
+        if (!keywords.includes(activeFilters.keyword)) {
+          show = false;
+        }
+      }
+
+      if (show) {
+        item.style.display = '';
+        visibleCount++;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    const countEl = document.getElementById('photo-count');
+    if (countEl) {
+      countEl.textContent = `${visibleCount} photo${visibleCount === 1 ? '' : 's'}`;
+    }
+  }
+
+  // Reset filters
+  window.resetFilters = function() {
+    activeFilters = {
+      camera: '',
+      location: '',
+      keyword: ''
+    };
+
+    // Reset all selected states
+    document.querySelectorAll('.filter-option').forEach(btn => {
+      if (btn.dataset.filterValue === '') {
+        btn.classList.add('selected');
+      } else {
+        btn.classList.remove('selected');
+      }
+    });
+
+    applyFilters();
+  };
+
+  // Lightbox functions
+  window.openLightbox = function(index) {
+    currentPhotoIndex = index;
+    const modal = document.getElementById('lightbox-modal');
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    updateLightboxImage();
+    updateThumbnails();
+  };
+
+  window.closeLightbox = function() {
+    const modal = document.getElementById('lightbox-modal');
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+    document.getElementById('metadata-panel').classList.add('hidden');
+  };
+
+  window.navigateLightbox = function(direction) {
+    currentPhotoIndex = (currentPhotoIndex + direction + photos.length) % photos.length;
+    updateLightboxImage();
+    updateThumbnails();
+  };
+
+  function updateLightboxImage() {
+    const photo = photos[currentPhotoIndex];
+    document.getElementById('lightbox-image').src = photo.src;
+    document.getElementById('lightbox-image').alt = photo.alt;
+    updateMetadataPanel();
+  }
+
+  function updateThumbnails() {
+    const container = document.getElementById('lightbox-thumbnails');
+    container.innerHTML = '';
+
+    // Show 5 thumbnails: 2 before, current, 2 after
+    const start = Math.max(0, currentPhotoIndex - 2);
+    const end = Math.min(photos.length, currentPhotoIndex + 3);
+
+    for (let i = start; i < end; i++) {
+      const thumb = document.createElement('div');
+      thumb.className = `w-16 h-16 rounded-lg overflow-hidden cursor-pointer transition-all ${i === currentPhotoIndex ? 'ring-2 ring-white opacity-100 scale-110' : 'opacity-50 hover:opacity-100'}`;
+      thumb.onclick = () => {
+        currentPhotoIndex = i;
+        updateLightboxImage();
+        updateThumbnails();
+      };
+
+      const img = document.createElement('img');
+      img.src = photos[i].src;
+      img.alt = photos[i].alt;
+      img.className = 'w-full h-full object-cover';
+      thumb.appendChild(img);
+
+      container.appendChild(thumb);
+    }
+  }
+
+  window.toggleMetadata = function() {
+    const panel = document.getElementById('metadata-panel');
+
+    if (panel.classList.contains('hidden')) {
+      // Show panel with jelly animation
+      panel.classList.remove('hidden');
+      panel.classList.add('active');
+      updateMetadataPanel();
+    } else {
+      // Hide panel
+      panel.classList.remove('active');
+      setTimeout(() => panel.classList.add('hidden'), 200);
+    }
+  };
+
+  function updateMetadataPanel() {
+    const photo = photos[currentPhotoIndex];
+    const content = document.getElementById('metadata-content');
+
+    let html = '';
+
+    // Caption
+    if (photo.caption) {
+      html += `
+        <div>
+          <div class="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-2">Caption</div>
+          <div class="text-sm">${photo.caption}</div>
+        </div>
+      `;
+    }
+
+    // Keywords (show after caption)
+    if (photo.metadata.keywords && photo.metadata.keywords.length > 0) {
+      html += `
+        <div>
+          <div class="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-2">Keywords</div>
+          <div class="flex flex-wrap gap-2">
+            ${photo.metadata.keywords.map(k => `<a href="/photos/all?keyword=${encodeURIComponent(k)}" class="px-2 py-1 bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 text-xs rounded-full hover:bg-blue-100 dark:hover:bg-blue-950/50 transition-colors cursor-pointer">${k}</a>`).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // Camera info
+    if (photo.metadata.camera) {
+      html += `
+        <div>
+          <div class="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-2">Camera</div>
+          <div class="text-sm">${photo.metadata.camera}</div>
+          ${photo.metadata.lens ? `<div class="text-xs text-zinc-500 mt-1">${photo.metadata.lens}</div>` : ''}
+        </div>
+      `;
+    }
+
+    // Shooting parameters
+    if (photo.metadata.focalLength || photo.metadata.aperture || photo.metadata.shutterSpeed || photo.metadata.iso) {
+      html += '<div><div class="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-2">Settings</div><div class="grid grid-cols-2 gap-2 text-sm">';
+
+      if (photo.metadata.focalLength) html += `<div><span class="text-zinc-500">Focal:</span> ${Math.round(photo.metadata.focalLength)}mm</div>`;
+      if (photo.metadata.aperture) html += `<div><span class="text-zinc-500">Aperture:</span> f/${photo.metadata.aperture}</div>`;
+      if (photo.metadata.shutterSpeed) html += `<div><span class="text-zinc-500">Shutter:</span> 1/${Math.round(1/photo.metadata.shutterSpeed)}s</div>`;
+      if (photo.metadata.iso) html += `<div><span class="text-zinc-500">ISO:</span> ${photo.metadata.iso}</div>`;
+
+      html += '</div></div>';
+    }
+
+    // Image info
+    if (photo.metadata.width || photo.metadata.fileSize) {
+      html += '<div><div class="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-2">Image Info</div><div class="space-y-1 text-sm">';
+
+      if (photo.metadata.width && photo.metadata.height) {
+        html += `<div><span class="text-zinc-500">Size:</span> ${photo.metadata.width} × ${photo.metadata.height}</div>`;
+      }
+
+      if (photo.metadata.fileSize) {
+        html += `<div><span class="text-zinc-500">File:</span> ${photo.metadata.fileSize}</div>`;
+      }
+
+      html += '</div></div>';
+    }
+
+    // Location with map
+    if (photo.metadata.location) {
+      html += `
+        <div>
+          <div class="text-sm font-semibold text-zinc-600 dark:text-zinc-400 mb-2">Location</div>
+          <div class="text-sm mb-3">${photo.metadata.locationName || 'Unknown location'}</div>
+          <div class="w-full h-48 bg-zinc-100 dark:bg-zinc-800 rounded-lg overflow-hidden map-container">
+            <iframe
+              width="100%"
+              height="100%"
+              frameborder="0"
+              scrolling="no"
+              marginheight="0"
+              marginwidth="0"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=${photo.metadata.location.lng-0.01},${photo.metadata.location.lat-0.01},${photo.metadata.location.lng+0.01},${photo.metadata.location.lat+0.01}&layer=mapnik&marker=${photo.metadata.location.lat},${photo.metadata.location.lng}"
+              style="filter: grayscale(100%) contrast(1.1) brightness(1.1);"
+            ></iframe>
+          </div>
+        </div>
+      `;
+    }
+
+    content.innerHTML = html;
+  }
+
+  // Swipe gesture handling
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+  let isDragging = false;
+  const lightboxImage = document.getElementById('lightbox-image');
+
+  function getSwipeDirection(deltaX, deltaY, velocity) {
+    const absX = Math.abs(deltaX);
+    const absY = Math.abs(deltaY);
+    const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+
+    // Require minimum distance and velocity for swipe
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    if (distance < 50 || velocity < 0.3) return null;
+
+    // Determine direction based on angle
+    // Right: -22.5 to 22.5
+    if (angle >= -22.5 && angle <= 22.5) return 'right';
+    // Up-Right: 22.5 to 67.5
+    if (angle > 22.5 && angle <= 67.5) return 'up-right';
+    // Up: 67.5 to 112.5
+    if (angle > 67.5 && angle <= 112.5) return 'up';
+    // Up-Left: 112.5 to 157.5
+    if (angle > 112.5 && angle <= 157.5) return 'up-left';
+    // Left: 157.5 to 180 or -180 to -157.5
+    if (angle > 157.5 || angle <= -157.5) return 'left';
+    // Down-Left: -157.5 to -112.5
+    if (angle > -157.5 && angle <= -112.5) return 'down-left';
+    // Down: -112.5 to -67.5
+    if (angle > -112.5 && angle <= -67.5) return 'down';
+    // Down-Right: -67.5 to -22.5
+    if (angle > -67.5 && angle <= -22.5) return 'down-right';
+
+    return null;
+  }
+
+  function applySwipeTransform(deltaX, deltaY) {
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    const opacity = Math.max(0.3, 1 - distance / 500);
+    const rotation = (deltaX / 20) * (deltaY > 0 ? 1 : -1);
+
+    lightboxImage.style.transform = `translate(${deltaX}px, ${deltaY}px) rotate(${rotation}deg) scale(${Math.max(0.7, 1 - distance / 1000)})`;
+    lightboxImage.style.opacity = opacity;
+    lightboxImage.style.transition = 'none';
+  }
+
+  function animateSwipeOff(direction) {
+    const multiplier = 1500;
+    let targetX = 0;
+    let targetY = 0;
+
+    switch(direction) {
+      case 'left': targetX = -multiplier; break;
+      case 'right': targetX = multiplier; break;
+      case 'up': targetY = -multiplier; break;
+      case 'down': targetY = multiplier; break;
+      case 'up-left': targetX = -multiplier; targetY = -multiplier; break;
+      case 'up-right': targetX = multiplier; targetY = -multiplier; break;
+      case 'down-left': targetX = -multiplier; targetY = multiplier; break;
+      case 'down-right': targetX = multiplier; targetY = multiplier; break;
+    }
+
+    const rotation = (targetX / 20) * (targetY > 0 ? 1 : -1);
+
+    lightboxImage.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease-out';
+    lightboxImage.style.transform = `translate(${targetX}px, ${targetY}px) rotate(${rotation}deg) scale(0.5)`;
+    lightboxImage.style.opacity = '0';
+
+    setTimeout(() => {
+      // Navigate to next photo
+      navigateLightbox(1);
+
+      // Reset transform
+      lightboxImage.style.transition = 'none';
+      lightboxImage.style.transform = '';
+      lightboxImage.style.opacity = '1';
+
+      // Force reflow
+      void lightboxImage.offsetWidth;
+
+      // Fade in new image
+      lightboxImage.style.transition = 'opacity 0.3s ease-in';
+    }, 400);
+  }
+
+  function resetSwipeTransform() {
+    lightboxImage.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out';
+    lightboxImage.style.transform = '';
+    lightboxImage.style.opacity = '1';
+  }
+
+  // Touch events
+  lightboxImage.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    touchStartTime = Date.now();
+    isDragging = true;
+  }, { passive: true });
+
+  lightboxImage.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+
+    applySwipeTransform(deltaX, deltaY);
+  }, { passive: true });
+
+  lightboxImage.addEventListener('touchend', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+
+    const touch = e.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+    const deltaTime = Date.now() - touchStartTime;
+    const velocity = Math.sqrt(deltaX * deltaX + deltaY * deltaY) / deltaTime;
+
+    const direction = getSwipeDirection(deltaX, deltaY, velocity);
+
+    if (direction) {
+      animateSwipeOff(direction);
+    } else {
+      resetSwipeTransform();
+    }
+  }, { passive: true });
+
+  // Mouse events for desktop
+  let mouseDown = false;
+
+  lightboxImage.addEventListener('mousedown', (e) => {
+    touchStartX = e.clientX;
+    touchStartY = e.clientY;
+    touchStartTime = Date.now();
+    mouseDown = true;
+    isDragging = true;
+    lightboxImage.style.cursor = 'grabbing';
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!mouseDown || !isDragging) return;
+
+    const deltaX = e.clientX - touchStartX;
+    const deltaY = e.clientY - touchStartY;
+
+    applySwipeTransform(deltaX, deltaY);
+  });
+
+  document.addEventListener('mouseup', (e) => {
+    if (!mouseDown) return;
+    mouseDown = false;
+    isDragging = false;
+    lightboxImage.style.cursor = 'grab';
+
+    const deltaX = e.clientX - touchStartX;
+    const deltaY = e.clientY - touchStartY;
+    const deltaTime = Date.now() - touchStartTime;
+    const velocity = Math.sqrt(deltaX * deltaX + deltaY * deltaY) / deltaTime;
+
+    const direction = getSwipeDirection(deltaX, deltaY, velocity);
+
+    if (direction) {
+      animateSwipeOff(direction);
+    } else {
+      resetSwipeTransform();
+    }
+  });
+
+  // Add cursor style
+  lightboxImage.style.cursor = 'grab';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    const modal = document.getElementById('lightbox-modal');
+    if (!modal.classList.contains('hidden')) {
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowLeft') navigateLightbox(-1);
+      else if (e.key === 'ArrowRight') navigateLightbox(1);
+      else if (e.key === 'i' || e.key === 'I') toggleMetadata();
+    }
+  });
+
+  // Initialize selected states on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    // Set all "All" options as selected by default
+    document.querySelectorAll('.filter-option').forEach(btn => {
+      if (btn.dataset.filterValue === '') {
+        btn.classList.add('selected');
+      }
+    });
+  });
+
+  // Initialize card scroll animations if the global utility is available
+  if (typeof window.initCardScrollAnimations === 'function') {
+    document.addEventListener('DOMContentLoaded', function() {
+      window.initCardScrollAnimations(['#photo-grid']);
+    });
+  } else {
+    // Fallback: manually initialize photo grid animations
+    document.addEventListener('DOMContentLoaded', function() {
+      const observerOptions = {
+        threshold: 0.25,
+        rootMargin: '0px 0px 100px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          }
+        });
+      }, observerOptions);
+
+      const photoItems = document.querySelectorAll('#photo-grid .reveal-card');
+      photoItems.forEach((item, index) => {
+        const delay = index * 0.1;
+        item.style.transitionDelay = `${delay}s`;
+        observer.observe(item);
+      });
+    });
+  }
+})();</script></div></div></main><footer class="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl backdrop-saturate-150 border-t border-zinc-200/50 dark:border-zinc-700/50 px-4 py-8 space-y-4 flex flex-col items-center justify-center shadow-[0_-4px_16px_rgba(0,0,0,0.04)] dark:shadow-[0_-4px_16px_rgba(0,0,0,0.2)]"><div class="flex flex-row items-center gap-3 flex-wrap justify-center"><a href="/posts" class="p-3 text-zinc-600 hover:text-teal-600 dark:text-zinc-400 dark:hover:text-teal-400 rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/50 dark:border-zinc-700/50 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-lg"><i data-lucide="file-text" class="w-5 h-5"></i></a><a href="mailto:hello@maclong.uk" class="p-3 text-zinc-600 hover:text-teal-600 dark:text-zinc-400 dark:hover:text-teal-400 rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/50 dark:border-zinc-700/50 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-lg"><i data-lucide="mail" class="w-5 h-5"></i></a><a href="https://github.com/maclong9" class="p-3 text-zinc-600 hover:text-teal-600 dark:text-zinc-400 dark:hover:text-teal-400 rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/50 dark:border-zinc-700/50 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-lg" target="_blank" rel="noreferrer"><i data-lucide="github" class="w-5 h-5"></i></a></div><div class="text-zinc-500 dark:text-zinc-400 text-sm font-medium"><span>© 2025 </span><a href="https://maclong.uk" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors duration-300 font-semibold">Mac Long</a><span>.</span></div></footer><div id="mini-player" class="fixed bottom-4 left-4 z-50 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl backdrop-saturate-150 border border-zinc-200 dark:border-zinc-800 rounded-lg shadow-lg hidden transition-all duration-300"><div id="mini-player-collapsed" class="w-14 h-14 cursor-pointer relative" onclick="toggleMiniPlayer()"><div class="w-full h-full rounded-lg bg-gradient-to-br from-teal-400 to-blue-500 flex items-center justify-center"><i data-lucide="disc" class="w-6 h-6 text-white/70"></i></div><div class="absolute top-1 right-1 w-2 h-2 bg-teal-500 rounded-full animate-pulse"></div></div><div id="mini-player-expanded" class="hidden p-3 space-y-2 w-72"><div class="flex items-center justify-between mb-2"><span class="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Now Playing</span><button onclick="toggleMiniPlayer()" class="p-1 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Collapse"><i data-lucide="chevron-down" class="w-4 h-4"></i></button></div><div class="flex items-center gap-3"><div class="w-12 h-12 rounded-lg bg-gradient-to-br from-teal-400 to-blue-500 flex items-center justify-center flex-shrink-0"><i data-lucide="disc" class="w-5 h-5 text-white/70"></i></div><div class="flex-1 min-w-0"><div id="mini-player-title" class="font-medium text-zinc-900 dark:text-zinc-100 truncate text-sm"></div><div id="mini-player-artist" class="text-xs text-zinc-600 dark:text-zinc-400 truncate"></div></div></div><div class="flex items-center justify-center gap-2 pt-2"><button onclick="previousTrack()" class="p-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Previous"><i data-lucide="skip-back" class="w-4 h-4"></i></button><button onclick="togglePlayPause()" id="mini-play-pause-btn" class="p-2 bg-teal-500 hover:bg-teal-600 text-white rounded-full transition-colors" aria-label="Play/Pause"><i data-lucide="play" id="mini-play-pause-icon" class="w-5 h-5"></i></button><button onclick="nextTrack()" class="p-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Next"><i data-lucide="skip-forward" class="w-4 h-4"></i></button><button onclick="closeMiniPlayer()" class="p-2 text-zinc-600 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-400 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Stop"><i data-lucide="x" class="w-4 h-4"></i></button></div><a href="/music" class="block text-center text-xs text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors pt-2 border-t border-zinc-200 dark:border-zinc-700">Open Music</a></div></div><script>
+  function toggleMiniPlayer() {
+    const collapsed = document.getElementById('mini-player-collapsed');
+    const expanded = document.getElementById('mini-player-expanded');
+
+    if (collapsed && expanded) {
+      collapsed.classList.toggle('hidden');
+      expanded.classList.toggle('hidden');
+    }
+  }
+
+  function closeMiniPlayer() {
+    const miniPlayer = document.getElementById('mini-player');
+    if (audioPlayer) {
+      audioPlayer.pause();
+      audioPlayer.src = '';
+    }
+    if (miniPlayer) {
+      miniPlayer.classList.add('hidden');
+    }
+    // Also hide the now playing bar if on music page
+    const nowPlayingBar = document.getElementById('now-playing-bar');
+    if (nowPlayingBar) {
+      nowPlayingBar.classList.add('hidden');
+    }
+  }
+
+  // Sync mini player with main player
+  function updateMiniPlayer(title, artist, isPlaying) {
+    const miniPlayerTitle = document.getElementById('mini-player-title');
+    const miniPlayerArtist = document.getElementById('mini-player-artist');
+    const miniPlayer = document.getElementById('mini-player');
+    const miniPlayPauseIcon = document.getElementById('mini-play-pause-icon');
+
+    if (miniPlayerTitle) miniPlayerTitle.textContent = title;
+    if (miniPlayerArtist) miniPlayerArtist.textContent = artist;
+
+    // Show mini player on non-music pages
+    if (miniPlayer && !window.location.pathname.includes('/music')) {
+      miniPlayer.classList.remove('hidden');
+    }
+
+    // Update play/pause icon
+    if (miniPlayPauseIcon) {
+      miniPlayPauseIcon.setAttribute('data-lucide', isPlaying ? 'pause' : 'play');
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    }
+  }
+</script></div></body><script src="/public/js/icons.js"></script></html>

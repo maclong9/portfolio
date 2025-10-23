@@ -1,0 +1,423 @@
+[
+  {
+    "coverPhoto" : {
+      "fileName" : "2024-12-21T10:50:27Z.jpeg",
+      "id" : "2024-12-21T10:50:27Z",
+      "metadata" : {
+        "dateTaken" : "2025-10-23T14:52:09Z",
+        "fileSize" : 107821,
+        "height" : 1080,
+        "isRaw" : false,
+        "keywords" : [
+
+        ],
+        "width" : 1080
+      },
+      "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Pets\/2024-12-21T10:50:27Z.jpeg",
+      "relativePath" : "Pets\/2024-12-21T10:50:27Z.jpeg"
+    },
+    "date" : "2025-09-10T16:43:57Z",
+    "id" : "Pets",
+    "name" : "Pets",
+    "photos" : [
+      {
+        "fileName" : "2024-12-21T10:50:27Z.jpeg",
+        "id" : "2024-12-21T10:50:27Z",
+        "metadata" : {
+          "dateTaken" : "2025-10-23T14:52:09Z",
+          "fileSize" : 107821,
+          "height" : 1080,
+          "isRaw" : false,
+          "keywords" : [
+
+          ],
+          "width" : 1080
+        },
+        "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Pets\/2024-12-21T10:50:27Z.jpeg",
+        "relativePath" : "Pets\/2024-12-21T10:50:27Z.jpeg"
+      },
+      {
+        "fileName" : "2024-12-21T10:50:30Z.jpeg",
+        "id" : "2024-12-21T10:50:30Z",
+        "metadata" : {
+          "dateTaken" : "2025-10-23T14:52:09Z",
+          "fileSize" : 68105,
+          "height" : 753,
+          "isRaw" : false,
+          "keywords" : [
+
+          ],
+          "width" : 754
+        },
+        "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Pets\/2024-12-21T10:50:30Z.jpeg",
+        "relativePath" : "Pets\/2024-12-21T10:50:30Z.jpeg"
+      },
+      {
+        "fileName" : "2024-12-21T10:50:49Z.jpeg",
+        "id" : "2024-12-21T10:50:49Z",
+        "metadata" : {
+          "dateTaken" : "2025-10-23T14:52:09Z",
+          "fileSize" : 72565,
+          "height" : 612,
+          "isRaw" : false,
+          "keywords" : [
+
+          ],
+          "width" : 612
+        },
+        "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Pets\/2024-12-21T10:50:49Z.jpeg",
+        "relativePath" : "Pets\/2024-12-21T10:50:49Z.jpeg"
+      },
+      {
+        "fileName" : "2025-09-10T15:43:57+01:00.heic",
+        "id" : "2025-09-10T15:43:57+01:00",
+        "metadata" : {
+          "aperture" : 1.5,
+          "camera" : "Apple iPhone 13 Pro",
+          "dateTaken" : "2025-09-10T16:43:57Z",
+          "fileSize" : 3237967,
+          "focalLength" : 5.7,
+          "height" : 3024,
+          "isRaw" : false,
+          "iso" : 200,
+          "keywords" : [
+
+          ],
+          "latitude" : 52.391571666666664,
+          "lens" : "iPhone 13 Pro back triple camera 5.7mm f\/1.5",
+          "locationName" : "52.3916, 16.9046",
+          "longitude" : 16.90462,
+          "shutterSpeed" : 0.016666666666666666,
+          "width" : 4032
+        },
+        "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Pets\/2025-09-10T15:43:57+01:00.heic",
+        "relativePath" : "Pets\/2025-09-10T15:43:57+01:00.heic"
+      },
+      {
+        "fileName" : "2025-09-10T15:44:07+01:00.heic",
+        "id" : "2025-09-10T15:44:07+01:00",
+        "metadata" : {
+          "aperture" : 1.5,
+          "camera" : "Apple iPhone 13 Pro",
+          "dateTaken" : "2025-09-10T16:44:07Z",
+          "fileSize" : 3113551,
+          "focalLength" : 5.7,
+          "height" : 3024,
+          "isRaw" : false,
+          "iso" : 200,
+          "keywords" : [
+
+          ],
+          "latitude" : 52.391571666666664,
+          "lens" : "iPhone 13 Pro back triple camera 5.7mm f\/1.5",
+          "locationName" : "52.3916, 16.9046",
+          "longitude" : 16.90462,
+          "shutterSpeed" : 0.016666666666666666,
+          "width" : 4032
+        },
+        "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Pets\/2025-09-10T15:44:07+01:00.heic",
+        "relativePath" : "Pets\/2025-09-10T15:44:07+01:00.heic"
+      },
+      {
+        "fileName" : "2025-09-10T16:17:16+01:00.heic",
+        "id" : "2025-09-10T16:17:16+01:00",
+        "metadata" : {
+          "aperture" : 2.8,
+          "camera" : "Apple iPhone 13 Pro",
+          "dateTaken" : "2025-09-10T17:17:16Z",
+          "fileSize" : 552409,
+          "focalLength" : 9,
+          "height" : 3024,
+          "isRaw" : false,
+          "iso" : 800,
+          "keywords" : [
+
+          ],
+          "latitude" : 52.391675,
+          "lens" : "iPhone 13 Pro back triple camera 9mm f\/2.8",
+          "locationName" : "52.3917, 16.9047",
+          "longitude" : 16.904745,
+          "shutterSpeed" : 0.016666666666666666,
+          "width" : 4032
+        },
+        "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Pets\/2025-09-10T16:17:16+01:00.heic",
+        "relativePath" : "Pets\/2025-09-10T16:17:16+01:00.heic"
+      },
+      {
+        "fileName" : "2025-10-01T20:44:07+01:00.dng",
+        "id" : "2025-10-01T20:44:07+01:00",
+        "metadata" : {
+          "aperture" : 2.8,
+          "camera" : "Apple iPhone 13 Pro",
+          "dateTaken" : "2025-10-01T21:44:07Z",
+          "fileSize" : 14600016,
+          "focalLength" : 9,
+          "height" : 3024,
+          "isRaw" : true,
+          "iso" : 1600,
+          "keywords" : [
+
+          ],
+          "latitude" : 52.39156333333333,
+          "lens" : "iPhone 13 Pro back triple camera 9mm f\/2.8",
+          "locationName" : "52.3916, 16.9046",
+          "longitude" : 16.904571666666666,
+          "shutterSpeed" : 0.03333333333333333,
+          "width" : 4032
+        },
+        "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Pets\/2025-10-01T20:44:07+01:00.dng",
+        "relativePath" : "Pets\/2025-10-01T20:44:07+01:00.dng"
+      }
+    ],
+    "slug" : "pets"
+  },
+  {
+    "coverPhoto" : {
+      "fileName" : "2025-09-13T17:44:51+01:00.heic",
+      "id" : "2025-09-13T17:44:51+01:00",
+      "metadata" : {
+        "aperture" : 1.6,
+        "camera" : "Apple iPhone 12",
+        "dateTaken" : "2025-09-13T19:44:51Z",
+        "fileSize" : 1077040,
+        "focalLength" : 4.2,
+        "height" : 4032,
+        "isRaw" : false,
+        "iso" : 32,
+        "keywords" : [
+
+        ],
+        "lens" : "iPhone 12 back dual wide camera 4.2mm f\/1.6",
+        "shutterSpeed" : 0.003067484662576687,
+        "width" : 2268
+      },
+      "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Corfu 2025\/2025-09-13T17:44:51+01:00.heic",
+      "relativePath" : "Corfu 2025\/2025-09-13T17:44:51+01:00.heic"
+    },
+    "date" : "2025-09-13T19:44:51Z",
+    "id" : "Corfu 2025",
+    "name" : "Corfu 2025",
+    "photos" : [
+      {
+        "fileName" : "2025-09-13T17:44:51+01:00.heic",
+        "id" : "2025-09-13T17:44:51+01:00",
+        "metadata" : {
+          "aperture" : 1.6,
+          "camera" : "Apple iPhone 12",
+          "dateTaken" : "2025-09-13T19:44:51Z",
+          "fileSize" : 1077040,
+          "focalLength" : 4.2,
+          "height" : 4032,
+          "isRaw" : false,
+          "iso" : 32,
+          "keywords" : [
+
+          ],
+          "lens" : "iPhone 12 back dual wide camera 4.2mm f\/1.6",
+          "shutterSpeed" : 0.003067484662576687,
+          "width" : 2268
+        },
+        "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Corfu 2025\/2025-09-13T17:44:51+01:00.heic",
+        "relativePath" : "Corfu 2025\/2025-09-13T17:44:51+01:00.heic"
+      },
+      {
+        "fileName" : "2025-09-14T09:56:53+01:00.heic",
+        "id" : "2025-09-14T09:56:53+01:00",
+        "metadata" : {
+          "aperture" : 1.6,
+          "camera" : "Apple iPhone 12",
+          "dateTaken" : "2025-09-14T11:56:53Z",
+          "fileSize" : 2190321,
+          "focalLength" : 4.2,
+          "height" : 4032,
+          "isRaw" : false,
+          "iso" : 32,
+          "keywords" : [
+
+          ],
+          "lens" : "iPhone 12 back dual wide camera 4.2mm f\/1.6",
+          "shutterSpeed" : 0.00029403116730373417,
+          "width" : 2268
+        },
+        "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Corfu 2025\/2025-09-14T09:56:53+01:00.heic",
+        "relativePath" : "Corfu 2025\/2025-09-14T09:56:53+01:00.heic"
+      },
+      {
+        "fileName" : "2025-09-15T13:07:19+01:00.dng",
+        "id" : "2025-09-15T13:07:19+01:00",
+        "metadata" : {
+          "aperture" : 1.5,
+          "camera" : "Apple iPhone 13 Pro",
+          "dateTaken" : "2025-09-15T15:07:19Z",
+          "fileSize" : 39449340,
+          "focalLength" : 5.699999809263318,
+          "height" : 3024,
+          "isRaw" : true,
+          "iso" : 50,
+          "keywords" : [
+
+          ],
+          "latitude" : 39.79494666666667,
+          "lens" : "iPhone 13 Pro back triple camera 5.7mm f\/1.5",
+          "locationName" : "39.7949, 19.6735",
+          "longitude" : 19.67355,
+          "shutterSpeed" : 0.00019700551615445234,
+          "width" : 4032
+        },
+        "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Corfu 2025\/2025-09-15T13:07:19+01:00.dng",
+        "relativePath" : "Corfu 2025\/2025-09-15T13:07:19+01:00.dng"
+      },
+      {
+        "fileName" : "2025-09-15T13:46:58+01:00.dng",
+        "id" : "2025-09-15T13:46:58+01:00",
+        "metadata" : {
+          "aperture" : 1.5,
+          "camera" : "Apple iPhone 13 Pro",
+          "dateTaken" : "2025-09-15T15:46:58Z",
+          "fileSize" : 36331441,
+          "focalLength" : 5.699999809263318,
+          "height" : 3024,
+          "isRaw" : true,
+          "iso" : 50,
+          "keywords" : [
+
+          ],
+          "latitude" : 39.79309666666666,
+          "lens" : "iPhone 13 Pro back triple camera 5.7mm f\/1.5",
+          "locationName" : "39.7931, 19.6721",
+          "longitude" : 19.672095,
+          "shutterSpeed" : 0.00010599957600169599,
+          "width" : 4032
+        },
+        "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Corfu 2025\/2025-09-15T13:46:58+01:00.dng",
+        "relativePath" : "Corfu 2025\/2025-09-15T13:46:58+01:00.dng"
+      },
+      {
+        "fileName" : "2025-09-16T14:53:55+01:00.dng",
+        "id" : "2025-09-16T14:53:55+01:00",
+        "metadata" : {
+          "aperture" : 1.5,
+          "camera" : "Apple iPhone 13 Pro",
+          "dateTaken" : "2025-09-16T16:53:55Z",
+          "fileSize" : 33419397,
+          "focalLength" : 5.699999809263318,
+          "height" : 3024,
+          "isRaw" : true,
+          "iso" : 50,
+          "keywords" : [
+
+          ],
+          "latitude" : 39.67513833333334,
+          "lens" : "iPhone 13 Pro back triple camera 5.7mm f\/1.5",
+          "locationName" : "39.6751, 19.7226",
+          "longitude" : 19.722646666666666,
+          "shutterSpeed" : 0.000125,
+          "width" : 4032
+        },
+        "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Corfu 2025\/2025-09-16T14:53:55+01:00.dng",
+        "relativePath" : "Corfu 2025\/2025-09-16T14:53:55+01:00.dng"
+      },
+      {
+        "fileName" : "2025-09-16T14:56:54+01:00.dng",
+        "id" : "2025-09-16T14:56:54+01:00",
+        "metadata" : {
+          "aperture" : 1.5,
+          "camera" : "Apple iPhone 13 Pro",
+          "dateTaken" : "2025-09-16T16:56:54Z",
+          "fileSize" : 38047072,
+          "focalLength" : 5.699999809263318,
+          "height" : 3024,
+          "isRaw" : true,
+          "iso" : 50,
+          "keywords" : [
+
+          ],
+          "latitude" : 39.674505,
+          "lens" : "iPhone 13 Pro back triple camera 5.7mm f\/1.5",
+          "locationName" : "39.6745, 19.7206",
+          "longitude" : 19.720603333333333,
+          "shutterSpeed" : 0.00024301336088655264,
+          "width" : 4032
+        },
+        "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Corfu 2025\/2025-09-16T14:56:54+01:00.dng",
+        "relativePath" : "Corfu 2025\/2025-09-16T14:56:54+01:00.dng"
+      },
+      {
+        "fileName" : "2025-09-17T11:20:12+01:00.dng",
+        "id" : "2025-09-17T11:20:12+01:00",
+        "metadata" : {
+          "aperture" : 1.5,
+          "camera" : "Apple iPhone 13 Pro",
+          "dateTaken" : "2025-09-17T13:20:12Z",
+          "fileSize" : 39810839,
+          "focalLength" : 5.699999809263318,
+          "height" : 3024,
+          "isRaw" : true,
+          "iso" : 50,
+          "keywords" : [
+
+          ],
+          "latitude" : 39.671321666666664,
+          "lens" : "iPhone 13 Pro back triple camera 5.7mm f\/1.5",
+          "locationName" : "39.6713, 19.7282",
+          "longitude" : 19.728155,
+          "shutterSpeed" : 0.00046189376443418013,
+          "width" : 4032
+        },
+        "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Corfu 2025\/2025-09-17T11:20:12+01:00.dng",
+        "relativePath" : "Corfu 2025\/2025-09-17T11:20:12+01:00.dng"
+      },
+      {
+        "fileName" : "2025-09-18T17:42:13+01:00.dng",
+        "id" : "2025-09-18T17:42:13+01:00",
+        "metadata" : {
+          "aperture" : 1.5,
+          "camera" : "Apple iPhone 13 Pro",
+          "dateTaken" : "2025-09-18T19:42:13Z",
+          "fileSize" : 33732549,
+          "focalLength" : 5.699999809263318,
+          "height" : 3024,
+          "isRaw" : true,
+          "iso" : 40,
+          "keywords" : [
+
+          ],
+          "latitude" : 39.67432,
+          "lens" : "iPhone 13 Pro back triple camera 5.7mm f\/1.5",
+          "locationName" : "39.6743, 19.7271",
+          "longitude" : 19.727053333333334,
+          "shutterSpeed" : 0.004098360426723905,
+          "width" : 4032
+        },
+        "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Corfu 2025\/2025-09-18T17:42:13+01:00.dng",
+        "relativePath" : "Corfu 2025\/2025-09-18T17:42:13+01:00.dng"
+      },
+      {
+        "fileName" : "2025-09-22T01:59:50+01:00.dng",
+        "id" : "2025-09-22T01:59:50+01:00",
+        "metadata" : {
+          "aperture" : 1.5,
+          "camera" : "Apple iPhone 13 Pro",
+          "dateTaken" : "2025-09-22T03:59:50Z",
+          "fileSize" : 26749108,
+          "focalLength" : 5.699999809263318,
+          "height" : 3024,
+          "isRaw" : true,
+          "iso" : 400,
+          "keywords" : [
+
+          ],
+          "latitude" : 39.621386666666666,
+          "lens" : "iPhone 13 Pro back triple camera 5.7mm f\/1.5",
+          "locationName" : "39.6214, 19.9156",
+          "longitude" : 19.915596666666666,
+          "shutterSpeed" : 0.025,
+          "width" : 4032
+        },
+        "path" : "\/Users\/runner\/work\/portfolio\/portfolio\/Photos\/Corfu 2025\/2025-09-22T01:59:50+01:00.dng",
+        "relativePath" : "Corfu 2025\/2025-09-22T01:59:50+01:00.dng"
+      }
+    ],
+    "slug" : "corfu-2025"
+  }
+]
